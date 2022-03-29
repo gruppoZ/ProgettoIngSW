@@ -1,6 +1,7 @@
 package gestioneParametri;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import main.JsonIO;
 
@@ -147,17 +148,17 @@ public class GestioneParametri {
  	 * @return TRUE se intervalloOrario è stato rimosso dalla lista, FALSE se non è stato rimosso
  	 */
  	protected boolean checkRimozioneIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) {
- 		boolean trovato = false;
- 		
  		for (IntervalloOrario intervallo : orari) {
 			if(orarioMinDaEliminare.equals(intervallo.getOrarioMin())) {
-				trovato = true;
+		
 				piazza.rimuoviIntervallo(intervallo);
 				salvaPiazza();
+				
+				return true;
 			}
 		}
- 		
- 		return trovato;
+
+ 		return false;
  	} 	
  	
  	/**

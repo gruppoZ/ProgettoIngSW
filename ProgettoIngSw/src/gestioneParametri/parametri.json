@@ -3,8 +3,8 @@
   "luoghi" : [ "nord", "sud" ],
   "giorni" : [ "LUNEDI", "MERCOLEDI", "SABATO" ],
   "intervalliOrari" : [ {
-    "orarioMin" : [ 12, 0 ],
-    "orarioMax" : [ 12, 30 ]
+    "orarioMin" : [ 15, 0 ],
+    "orarioMax" : [ 16, 0 ]
   } ],
   "scadenza" : 4
 }
