@@ -8,7 +8,6 @@ import it.unibs.fp.mylib.MyMenu;
 public class ViewParametroPiazza extends ViewParametri {
 
 	private static final String ASK_CITTA = "Inserisci il nome della citta': ";
-	private static final String ASK_SCADENZA = "Inserisci la scadenza: ";
 	
 	private static final String MSG_PIAZZA_INESISTENTE = "\nNessuna Piazza presente!\n";
 	private static final String MSG_PIAZZA_GIA_PRESENTE = "\nPiazza già presente!\n";
@@ -44,8 +43,8 @@ public class ViewParametroPiazza extends ViewParametri {
 				view.menu();
 				break;
 			case 4:
-//				gestoreParametri.showScadenza();
-//				gestoreParametri.modificaScadenza(leggiScadenza());
+				view = new ViewParametroScadenza();
+				view.menu();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -85,7 +84,6 @@ public class ViewParametroPiazza extends ViewParametri {
 				
 			}
 		} while(!fine);
-		
 	}
 	
 	@Override
@@ -101,17 +99,17 @@ public class ViewParametroPiazza extends ViewParametri {
 		view = new ViewParametroGiorno();
 		view.aggiungi();
 		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
-		//List<GiorniDellaSettimana> giorniOrdinati = ordinaListaGiorni(giorni); //ordinare la lista dei giorni presenti in piazza
 		
 		//listaIntervalli
 		view = new ViewParametroIntervalloOrario();
 		view.aggiungi();
 		List<IntervalloOrario> intervalliOrari = getGestoreParametri().getIntervalli();
 		
-		int scadenza = inserisciScadenza();
+		view = new ViewParametroScadenza();
+		view.aggiungi();
+		int scadenza = getGestoreParametri().getScadenza();
 		
-		getGestoreParametri().creaPiazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);
-		
+		getGestoreParametri().creaPiazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);	
 	}
 
 	@Override
@@ -121,11 +119,7 @@ public class ViewParametroPiazza extends ViewParametri {
 	private void showPiazza() {
 		System.out.println(getGestoreParametri().getPiazza().toString());
 	}
-	
-	private int inserisciScadenza() {
-		return InputDati.leggiInteroConMinimo(ASK_SCADENZA, 0);
-	}
-	
+		
 	private String inserisciCitta() {
 		return InputDati.leggiStringaNonVuota(ASK_CITTA);
 	}

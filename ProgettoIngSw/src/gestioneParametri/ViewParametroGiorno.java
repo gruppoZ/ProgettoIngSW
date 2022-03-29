@@ -41,8 +41,11 @@ public class ViewParametroGiorno extends ViewParametri{
 
 	@Override
 	public void aggiungi() {
-		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 		boolean presente = false;
+		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
+		
+		showGiorni();
+		
 		do {
 			GiorniDellaSettimana giorno = leggiGiorno();
 
@@ -76,7 +79,6 @@ public class ViewParametroGiorno extends ViewParametri{
 	}
 	
 	private GiorniDellaSettimana leggiGiorno() {
-		showGiorni();
 		int id = InputDati.leggiIntero(ASK_GIORNO_DESIDERATO, 0, 6);
 		return GiorniDellaSettimana.getById(id);
 	}

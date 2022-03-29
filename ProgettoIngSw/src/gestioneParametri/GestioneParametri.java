@@ -42,6 +42,10 @@ public class GestioneParametri {
  	protected int getNumeroIntervalliOrari() {
  		return piazza.getIntervalliOrari().size();
  	}
+ 	
+ 	protected int getScadenza() {
+ 		return piazza.getScadenza();
+ 	}
 
  	/**
  	 * 
@@ -95,6 +99,8 @@ public class GestioneParametri {
  			return false;
  		} else {
  			giorni.add(giorno);
+ 			piazza.setGiorni(ordinaListaGiorni(giorni));
+ 			
  			salvaPiazza();
  			return true;
  		}		
@@ -109,6 +115,8 @@ public class GestioneParametri {
  	protected boolean checkRimozioneGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) {
  		if(checkPresenzaGiorno(piazza.getGiorni() ,giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
+			piazza.setGiorni(ordinaListaGiorni(giorni));
+			
 			salvaPiazza();
 			return true;
 		} else {
@@ -148,6 +156,7 @@ public class GestioneParametri {
 				salvaPiazza();
 			}
 		}
+ 		
  		return trovato;
  	} 	
  	
@@ -177,7 +186,7 @@ public class GestioneParametri {
 		
 		return true;
 	}
- 	
+
 	public void salvaPiazza() {
 		JsonIO.salvaOggettoSuJson(PATH_PIAZZA, this.piazza);
 	}
@@ -189,7 +198,7 @@ public class GestioneParametri {
 	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogo) {
 		return listaLuoghi.contains(luogo);
 	}
-	
+		
 	boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
 		return giorni.contains(giorno);
 	}
@@ -204,7 +213,9 @@ public class GestioneParametri {
 	
 	protected void modificaScadenza(int scadenza) {
 		piazza.setScadenza(scadenza);
+		salvaPiazza();
 	}
+	
 	public boolean isPiazzaCreata() {
 		return this.piazza.getCitta() != null;
 	}
