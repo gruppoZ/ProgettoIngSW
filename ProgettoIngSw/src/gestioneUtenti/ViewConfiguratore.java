@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import gestioneParametri.ViewParametri;
+import gestioneParametri.ViewParametroPiazza;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewConfiguratore extends ViewUtente{
@@ -16,9 +18,7 @@ public class ViewConfiguratore extends ViewUtente{
 	
 	@Override
 	public void menu() {
-		GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();
-		gestoreConfiguratore.init();
-		
+		GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();		
 		
 		MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
@@ -33,10 +33,11 @@ public class ViewConfiguratore extends ViewUtente{
 				gestoreConfiguratore.creaGerarchia();		       
 				break;
 			case 2:
-				gestoreConfiguratore.mostraGerarchie(); //TODO: sarebbe meglio se lo mostrasse questa classe
+				System.out.println(gestoreConfiguratore.getGerarchie());
 				break;
 			case 3:
-				gestoreConfiguratore.gestisciPiazza(); //TODO: chi si occupa di mostrare gli errori?
+				ViewParametri viewPiazza = new ViewParametroPiazza();
+				viewPiazza.menu();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	

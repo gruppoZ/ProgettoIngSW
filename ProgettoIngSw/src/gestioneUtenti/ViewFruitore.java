@@ -4,6 +4,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
 
+	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile. Creane prima una.";
 	private static final String MSG_ASSENSA_GERARCHIE = "NESSUNA GERARCHIA PRESENTE";
 	
 	//costanti per menu
@@ -29,13 +30,16 @@ public class ViewFruitore extends ViewUtente{
 				fine = true;
 				break;
 			case 1:
-				if(!gestoreFruitore.isGerarchiePresenti())
+				if(!gestoreFruitore.isGerarchieCreate())
 					System.out.println(MSG_ASSENSA_GERARCHIE);
 				else
-					gestoreFruitore.mostraGerarchie();				
+					System.out.println(gestoreFruitore.getGerarchie());				
 				break;
 			case 2:
-				gestoreFruitore.mostraPiazza();
+				if(!gestoreFruitore.isPiazzaCreata())
+					System.out.println(MSG_NESSUNA_PIAZZA);
+				else
+					System.out.println(gestoreFruitore.getPiazza());
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -44,5 +48,4 @@ public class ViewFruitore extends ViewUtente{
 		} while(!fine);
 		
 	}
-
 }

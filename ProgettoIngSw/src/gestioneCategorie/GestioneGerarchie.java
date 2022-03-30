@@ -37,6 +37,20 @@ public class GestioneGerarchie {
         JsonIO.salvaOggettoSuJson(PATH_GERARCHIE, this.gerarchie);
 	}
 	
+	public boolean isGerarchiePresenti() {
+		leggiDaFileGerarchie();
+		
+		if(gerarchie.size() == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	public HashMap<String, Gerarchia> getGerarchie(){
+		leggiDaFileGerarchie();
+		return this.gerarchie;
+	}
+	
 	/**
 	 * Gestisce tutte le operazioni per la creazione di una gerarchia
 	 * @return TRUE se la gerarchia e' stata creata correttamente FALSE se e' stata eliminata
