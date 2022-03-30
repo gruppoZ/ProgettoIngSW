@@ -6,5 +6,4 @@ public class Main {
 		SchermataPrincipale mainView = new SchermataPrincipale();
 		mainView.init();
 	}
-	
 }
