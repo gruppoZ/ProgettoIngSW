@@ -1,11 +1,8 @@
 package gestioneParametri;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import main.JsonIO;
-
-//TODO : ordinare gli intervalli (ordine crescente)
 
 public class GestioneParametri {
 	

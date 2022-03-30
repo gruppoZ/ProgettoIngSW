@@ -140,8 +140,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 	private LocalTime creaOrarioMax(LocalTime min, LocalTime max) {
 		int ora;
 		int minuti;
-		//check
-		//get -> ora = InputDati.leggiIntero(ASK_ORA, get..., max.getHour());
+		
 		if(min.getMinute() == 30) {
 			LocalTime newMin = LocalTime.of(min.getHour() + 1, 0);
 			ora = InputDati.leggiIntero(ASK_ORA, newMin.getHour(), max.getHour());
