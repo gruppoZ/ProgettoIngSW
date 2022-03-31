@@ -59,7 +59,7 @@ public class Gerarchia {
 		return elencoCategorie.containsKey(formattaNome(nomeCategoria));
 	}
 	
-	protected Categoria _getCategoriaByName(String nome) {
+	public Categoria _getCategoriaByName(String nome) {
 		return elencoCategorie.get(formattaNome(nome));
 	}
 	
