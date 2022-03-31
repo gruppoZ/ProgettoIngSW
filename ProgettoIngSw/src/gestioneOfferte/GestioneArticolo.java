@@ -10,32 +10,33 @@ import gestioneCategorie.GestioneGerarchie;
 import main.JsonIO;
 
 public class GestioneArticolo {
-	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
-
-	
 	private Articolo articolo;
 	
 	//TODO: al posto di gerarchie si usa GestioneGerarchie e si risolve la lettura e la formattazione
 	HashMap<String, Gerarchia> gerarchie;
-	GestioneGerarchie gestoreGerarchie = new GestioneGerarchie(); // da creare e fare init blabla
+	GestioneGerarchie gestoreGerarchie;
+	
+	public GestioneArticolo() {
+		gestoreGerarchie = new GestioneGerarchie();
+	}
 	
 	public void creaArticolo(Categoria foglia, HashMap<CampoCategoria, String> valoriCampi) {
 		this.articolo = new Articolo(foglia, valoriCampi);
 	}
 	
-	public void mostraGerarchie() {
-		 gerarchie = JsonIO.leggiGerarchieDaJson(PATH_GERARCHIE);
-		 
-		 
-		 
-		 
-		for (Gerarchia gerarchia : gerarchie.values()) {
-			System.out.println(gerarchia.showGerarchia());
-		}
+	//sarebbe meglio far si che gestionegerarchia legga il file json nel suo costruttore
+	public void caricaGerarchie() {
+		gestoreGerarchie.leggiDaFileGerarchie();
 	}
 	
+	public HashMap<String, Gerarchia> getGerarchie() {
+		caricaGerarchie();
+		return gestoreGerarchie.getGerarchie();
+	}
+
+	
 	public boolean checkEsistenzaCategoria(String nome) {		
-		return gerarchie.containsKey(nome);
+		return gestoreGerarchie.gerarchiaPresente(nome);
 	}
 	
 	public Gerarchia getGerarchiaByName(String nomeRoot) {

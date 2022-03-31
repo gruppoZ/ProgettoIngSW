@@ -120,11 +120,15 @@ public class GestioneGerarchie {
 		String nome;
 		nome = InputDati.leggiStringaNonVuota("Nome Categoria Radice: ");
 		
-		while((gerarchie.containsKey(this.formattaNome(nome)))) {
+		while(gerarchiaPresente(nome)) {
 			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
 		}
 		
 		return nome;
+	}
+	
+	public boolean gerarchiaPresente(String nome) {
+		return gerarchie.containsKey(this.formattaNome(nome));
 	}
 	
 	private String formattaNome(String nome) {

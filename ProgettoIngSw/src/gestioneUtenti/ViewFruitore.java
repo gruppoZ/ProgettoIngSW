@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import gestioneOfferte.ViewArticolo;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
@@ -11,9 +12,11 @@ public class ViewFruitore extends ViewUtente{
 	private static final String TXT_TITOLO = "Benvenuto Fruitore";
 	
 	private static final String MSG_VISUALIZZA_PIAZZA = "Visualizza Piazza";
+	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
 	private static final String [] TXT_VOCI = {
 			MSG_VISUALIZZA_GERARCHIE,
 			MSG_VISUALIZZA_PIAZZA,
+			MSG_PUBBLICA_ARTICOLO
 	};
 	
 	@Override
@@ -40,6 +43,10 @@ public class ViewFruitore extends ViewUtente{
 					System.out.println(MSG_NESSUNA_PIAZZA);
 				else
 					System.out.println(gestoreFruitore.getPiazza());
+				break;
+			case 3:
+				ViewArticolo viewArticolo = new ViewArticolo();
+				viewArticolo.aggiungiArticolo();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);

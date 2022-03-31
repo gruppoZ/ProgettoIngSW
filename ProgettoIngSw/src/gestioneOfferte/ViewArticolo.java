@@ -57,8 +57,16 @@ public class ViewArticolo {
 //		return false;
 //	}
 	
+	private void stampaGerarchie() {
+		for (Gerarchia gerarchia : gestoreArticolo.getGerarchie().values()) {
+			System.out.println(gerarchia.showGerarchia());
+		}
+	}
+	
 	private Categoria scegliFoglia() {
-		gestoreArticolo.mostraGerarchie();
+		
+		stampaGerarchie();
+		
 		String nomeRootSelezionata = InputDati.leggiStringaNonVuota("Inserisci il nome della root relativa"
 				+ " alla gerarchia che si vuole scegliere: ");
 		//problema che il nome c'è in gerarchie è in to upper case, chi deve richiamare il metodo?
