@@ -131,6 +131,15 @@ public class GestioneGerarchie {
 		return nome.toUpperCase();
 	}
 	
+	/**
+	 * Permette di ricreare la hashmap ElencoCategoria di ogni Gerarchia salvata su JSON
+	 */
+	public void popolaGerarchie() {
+		for (Gerarchia gerarchia : gerarchie.values()) {
+			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
+		}
+	}
+	
 	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer();

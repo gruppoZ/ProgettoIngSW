@@ -1,6 +1,8 @@
 package gestioneCategorie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Gerarchia {
 	
@@ -85,6 +87,24 @@ public class Gerarchia {
 		this.getRoot().eliminaCategorieNonValide();
 	}
 
+	public List<Categoria> _getListaFoglie() {
+		List<Categoria> listaFoglie = new ArrayList<Categoria>();
+		
+		for (Categoria categoria : elencoCategorie.values()) {
+			if(categoria.getSottoCategorie() == null || categoria.getSottoCategorie().size() == 0)
+				listaFoglie.add(categoria);
+		}
+		return listaFoglie;
+	}
+	
+	public void popolaElencoCategorie(Categoria categoriaPassata){
+		addCategoriaInElenco(categoriaPassata.getNome(), categoriaPassata);
+		for (Categoria categoria : categoriaPassata.getSottoCategorie()) {
+			popolaElencoCategorie(categoria);
+		}
+		
+	}
+	
 
 	private String formattaNome(String nome) {
 		return nome.toUpperCase();
