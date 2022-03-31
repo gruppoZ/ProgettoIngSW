@@ -9,7 +9,6 @@ public abstract class ViewAuth {
 	protected static final String INTESTAZIONE_REGISTRAZIONE = "Registrazione %s";
 	private static final String MSG_RIPETI_LOGIN = "Vuoi rifare il login?";
 	protected static final String MSG_ERRORE_CREDENZIALI_DEFAULT = "ATTENZIONE: CREDENZIALI ERRATE";
-	private static final String MSG_USERNAME_INESISTENTE ="ATTENZIONE: USERNAME NON ESISTE";
 	protected static final String MSG_USERNAME_ESISTENTE ="ATTENZIONE: USERNAME GIA' ESISTENTE";
 	protected static final String MSG_PASSWORD_ERRATA ="ATTENZIONE: PASSWORD ERRATA";
 	protected static final String MSG_LOGIN_EFFETTUATO = "Login avvenuto con successo";
@@ -17,6 +16,7 @@ public abstract class ViewAuth {
 	private static final String MSG_PASSWORD ="Inserisci la password desiderata:";
 	protected static final String MSG_USERNAME_LOGIN ="Inserisci lo username:";
 	protected static final String MSG_PASSWORD_LOGIN ="Inserisci la password:";
+	protected static final String MSG_CREDENZIALI_ERRATE = "\nCredenziali errate!";
 	
 	private GestioneAutenticazione gestoreAuth;
 	
@@ -36,7 +36,7 @@ public abstract class ViewAuth {
 			return true;
 		}
 		else {
-			System.out.println(MSG_USERNAME_INESISTENTE);
+			System.out.println(MSG_CREDENZIALI_ERRATE);
 			return false;
 		}
 	}
@@ -61,8 +61,6 @@ public abstract class ViewAuth {
 		System.out.println("Lo username e': " + username + " la password e': " + password);
 
 		this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
-		
-		login(utente);
 	}
 	
 	public void checkLogin(Utente utente) {

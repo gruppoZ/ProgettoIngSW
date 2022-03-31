@@ -29,6 +29,12 @@
   }, {
     "username" : "a",
     "password" : "b"
+  }, {
+    "username" : "aa",
+    "password" : "bb"
+  }, {
+    "username" : "aaa",
+    "password" : "bbb"
   } ],
   "Fruitore" : [ {
     "username" : "fruitore1",
