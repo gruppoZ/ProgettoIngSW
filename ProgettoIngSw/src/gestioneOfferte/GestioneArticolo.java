@@ -1,5 +1,6 @@
 package gestioneOfferte;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,16 +11,32 @@ import gestioneCategorie.GestioneGerarchie;
 import main.JsonIO;
 
 public class GestioneArticolo {
-	private Articolo articolo;
 	
-	GestioneGerarchie gestoreGerarchie;
+	private static final String PATH_PUBBLICAZIONI = "src/gestioneOfferte/pubblicazioni.json";
+
+	private ArrayList<Pubblicazione> listaPubblicazioni; 
+	private Pubblicazione pubblicazione;
+	private Articolo articolo;
+	private GestioneGerarchie gestoreGerarchie;
 	
 	public GestioneArticolo() {
+		listaPubblicazioni = new ArrayList<Pubblicazione>(); 
+		articolo = new Articolo();
 		gestoreGerarchie = new GestioneGerarchie();
 		gestoreGerarchie.initGestioneArticolo(); //serve per popolare la hashmap all'interno di ogni singola gerarchia
 	}
 	
-	public void creaArticolo(Categoria foglia, HashMap<CampoCategoria, String> valoriCampi) {
+	public void init() {
+		listaPubblicazioni = leggiListaPubblicazioni(); 
+		this.articolo = new Articolo();
+		this.pubblicazione = new Pubblicazione();
+	}
+	
+	private ArrayList<Pubblicazione> leggiListaPubblicazioni(){
+		return (ArrayList<Pubblicazione>) JsonIO.leggiListaDaJson(PATH_PUBBLICAZIONI, Pubblicazione.class);
+	}
+	
+	public void creaArticolo(Categoria foglia, HashMap<String, String> valoriCampi) {
 		this.articolo = new Articolo(foglia, valoriCampi);
 	}
 	
@@ -45,6 +62,33 @@ public class GestioneArticolo {
 	
 	public List<Categoria> getListaFoglie(Gerarchia gerarchia) {
 		return gerarchia._getListaFoglie();
+	}
+	
+	public List<CampoCategoria> getListaCampi(){
+		return this.articolo.getFoglia()._getCampiNativiEreditati();
+	}
+	
+	public void addFoglia(Categoria foglia) {
+		this.articolo.setFoglia(foglia);
+	}
+	
+	public void addValoreCampo(CampoCategoria campo, String valore) {
+		this.articolo.addValoreCampo(campo.getDescrizione(), valore);
+	}
+	
+	
+	//gestione offerta
+	
+	public void creaPubblicazione(String username) {
+		this.pubblicazione = new Pubblicazione(articolo, username, new OffertaAperta());
+	}
+	
+	public void addPubblicazione() {
+		this.listaPubblicazioni.add(pubblicazione);
+	}
+	
+	public void salvaPubblicazioni() {
+		JsonIO.salvaOggettoSuJson(PATH_PUBBLICAZIONI, listaPubblicazioni);
 	}
 	
 	

@@ -1,6 +1,6 @@
 package gestioneOfferte;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import gestioneCategorie.CampoCategoria;
@@ -12,40 +12,71 @@ public class ViewArticolo {
 
 	GestioneArticolo gestoreArticolo = new GestioneArticolo();
 
-	
-	
 	public void aggiungiArticolo() {
-		Categoria foglia = scegliFoglia(); //controllo return null
-		HashMap<CampoCategoria, String> valoriCampi = inserisciValoriCampi(foglia);
-		
-		gestoreArticolo.creaArticolo(foglia, valoriCampi);
+		gestoreArticolo.init();
+		//forse bisogna reinizializzare articolo
+		if(scegliFoglia()){
+			if(inserisciValoriCampi()) {
+				System.out.println("La pubblicazione e' stata accettata");
+				gestoreArticolo.creaPubblicazione("NomeFruitore");
+				gestoreArticolo.addPubblicazione();
+				gestoreArticolo.salvaPubblicazioni();
+			}
+		}
 	}
 	
-	private HashMap<CampoCategoria, String> inserisciValoriCampi(Categoria foglia) {
-		HashMap<CampoCategoria, String> valoriCampi = new HashMap<CampoCategoria, String>();
+	private boolean compilaCampiObbligatori(List<CampoCategoria> campi) {
+		List<CampoCategoria> campiObbligatori = new ArrayList<>();
 		
-		for (CampoCategoria campo: foglia._getCampiNativiEreditati()) {
-			System.out.println(campo.getDescrizione());
+		for (CampoCategoria campo : campi) {
 			if(campo.isObbligatorio()) {
-				System.out.println("Se non si compila il campo la pubblicazione dell'articolo verra' annullata");
-				if(InputDati.yesOrNo("Vuoi compilare il campo? ")) {
-					String valoreCampo = InputDati.leggiStringaNonVuota("Inserire il valore del campo");
-					valoriCampi.put(campo, valoreCampo);//gestoreArticoli.aggiungiValoreCampo()
-				} else {
-					//finire la creazione del articolo
-					//possibile return null
-					
-					//oppure qua non si fa niente e il controllo relativo all'obbligatorieta' dei campi lo si fa fuori
-				}
-			} else {
-				if(InputDati.yesOrNo("Vuoi compilare il campo? ")) {
-					String valoreCampo = InputDati.leggiStringaNonVuota("Inserire il valore del campo");
-					valoriCampi.put(campo, valoreCampo);
-				}
+				campiObbligatori.add(campo);
 			}
 		}
 		
-		return valoriCampi;
+		for (CampoCategoria campo : campiObbligatori) {
+			System.out.println(campo.getDescrizione());
+			System.out.println("Se non si compila il campo la pubblicazione dell'articolo verra' annullata");
+			if(InputDati.yesOrNo("Vuoi compilare il campo? ")) {
+				String valoreCampo = InputDati.leggiStringaNonVuota("Inserire il valore del campo: ");
+				gestoreArticolo.addValoreCampo(campo, valoreCampo);
+			} else {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	private void compilaCampiFacoltativi(List<CampoCategoria> campi) {
+		List<CampoCategoria> campiFacoltativi = new ArrayList<>();
+		
+		for (CampoCategoria campo : campi) {
+			if(!campo.isObbligatorio()) {
+				campiFacoltativi.add(campo);
+			}
+		}
+		
+		for (CampoCategoria campo : campiFacoltativi) {
+			System.out.println(campo.getDescrizione());
+			if(InputDati.yesOrNo("Vuoi compilare il campo? ")) {
+				String valoreCampo = InputDati.leggiStringaNonVuota("Inserire il valore del campo: ");
+				gestoreArticolo.addValoreCampo(campo, valoreCampo);
+			}
+		}
+	}
+	
+	
+	private boolean inserisciValoriCampi() {
+		List<CampoCategoria> campi = gestoreArticolo.getListaCampi();
+		
+		if(compilaCampiObbligatori(campi)) {
+			compilaCampiFacoltativi(campi);
+			//TODO: dire al gestore che la creazione e' terminata con successo
+			return true;
+		}  else {
+			System.out.println("La compilazione del articolo non e' andata a buon fine");
+			return false;
+		}
 	}
 	
 //	public boolean compilaCampo(HashMap<CampoCategoria, String> valoriCampi, CampoCategoria campo) {
@@ -63,7 +94,7 @@ public class ViewArticolo {
 		}
 	}
 	
-	private Categoria scegliFoglia() {
+	private boolean scegliFoglia() {
 		
 		stampaGerarchie();
 		
@@ -77,20 +108,21 @@ public class ViewArticolo {
 			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
 			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
 			List<Categoria> listaFoglie = gestoreArticolo.getListaFoglie(gerarchia); 
+ 
 			for (Categoria categoria : listaFoglie) {
 				System.out.println(categoria);
 			}
 			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota("Inserire il nome della foglia desiderata: ");
 			if(gestoreArticolo.checkEsistenzaCategoria(gerarchia, nomeFogliaSelezionata)) {
-				return gestoreArticolo.getCategoriaByName(gerarchia, nomeFogliaSelezionata);
-				
+				Categoria foglia = gestoreArticolo.getCategoriaByName(gerarchia, nomeFogliaSelezionata);
+				gestoreArticolo.addFoglia(foglia);
+				return true;
 			} else {
 				System.out.println("Attenzione! Il nome della foglia inserito non e' presente");
-			}
-			
+			}	
 		} else {
 			System.out.println("Attenzione! Il nome della root non fa riferimento a nessuna gerarchia");
 		}
-		return null;
+		return false;
 	}
 }

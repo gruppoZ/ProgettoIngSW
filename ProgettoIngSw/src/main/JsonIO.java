@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import gestioneCategorie.Gerarchia;
 import gestioneLogin.Credenziali;
+import gestioneOfferte.Pubblicazione;
 import gestioneParametri.Piazza;
 
 /**
@@ -64,10 +65,10 @@ public class JsonIO {
 	
 	
 	public static HashMap<String, ArrayList<Credenziali>> leggiCredenzialiHashMapDaJson(String path) {
-		
 		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
+	
 	/**
 	 * lettura di una hashmap generica attraverso i javatype
 	 * @param <K>
@@ -77,7 +78,7 @@ public class JsonIO {
 	 * @param elementClassValue
 	 * @return
 	 */
-	public static <K, V> HashMap<K, V> leggiHashMapDaJson(String path, JavaType elementClassKey, JavaType elementClassValue) {
+	private static <K, V> HashMap<K, V> leggiHashMapDaJson(String path, JavaType elementClassKey, JavaType elementClassValue) {
 		HashMap<K, V> mappa = null;
 		
 		MapType listType;
@@ -95,7 +96,7 @@ public class JsonIO {
 		CollectionType listType ;
 		listType  = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
 		try {
-			listaCredenziali = mapper.readValue(path, listType);		
+			listaCredenziali = mapper.readValue(new File(path), listType);		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
