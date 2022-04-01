@@ -51,9 +51,7 @@ public class GestioneGerarchie {
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
-	//commento che non dovremme sparire di Giorgio
 	//-----------------------------------------------------------------
-	//COmmento di prova test di git
 	//private Categoria currentRoot;
 	private Gerarchia currentGerarchia;
 	
