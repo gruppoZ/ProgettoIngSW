@@ -7,6 +7,9 @@ import main.JsonIO;
 
 public class GestioneGerarchie {
 	
+	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
+	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
+	
 	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
 
 	private static final String TXT_TITOLO = "Menu creazione gerarchia";
@@ -26,7 +29,6 @@ public class GestioneGerarchie {
 	private HashMap<String, Gerarchia> gerarchie; 
 	
 	public GestioneGerarchie() {
-		gerarchie = new HashMap<>();
 	}
 	
 	public void leggiDaFileGerarchie() {
@@ -34,35 +36,97 @@ public class GestioneGerarchie {
 	}
 	
 	public void salvaGerarchie() {
-        JsonIO.salvaOggettoSuJson(PATH_GERARCHIE, this.gerarchie);
+        JsonIO.salvaOggettoSuJson(PATH_GERARCHIE, this.getGerarchie());
 	}
 	
 	public boolean isGerarchiePresenti() {
-		leggiDaFileGerarchie();
-		
-		if(gerarchie.size() == 0)
+		if(this.getGerarchie().size() == 0)
 			return false;
 		else
 			return true;
 	}
 	
 	public HashMap<String, Gerarchia> getGerarchie(){
-		leggiDaFileGerarchie();
+		if(gerarchie == null)
+			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
 	
+	//-----------------------------------------------------------------
+
+	//private Categoria currentRoot;
+	private Gerarchia currentGerarchia;
+	
+	public void creaRoot(Categoria root) {
+		int depth = 0;
+		
+		root.setProfondita(depth);
+		currentGerarchia = new Gerarchia(root);
+		
+		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
+	}
+	
+	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
+		int depth = categoriaPadre.getProfondita() + 1;
+		
+		categoriaFiglia.setProfondita(depth);
+		this.currentGerarchia.addCategoriaInElenco(categoriaFiglia.getNome(),categoriaFiglia);
+	}
+	
+	public void addCampiDefaultRoot(List<CampoCategoria> campiNativi) {
+		campiNativi.add(new CampoCategoria("Stato di conservazione", true));
+		campiNativi.add(new CampoCategoria("Descrizione libera", false));
+	}
+	
+	public void fineCreazioneGerarchia() {
+		this.getGerarchie().put(this.currentGerarchia._getNomeFormattato(), currentGerarchia);
+		salvaGerarchie();
+	}
+	
+	/**
+	 * 
+	 * @param campi
+	 * @param descrizione
+	 * @return TRUE se descrizione non e' gia' presente in campi FALSE altrimenti
+	 */
+	public boolean checkUnicitaCampo(List<CampoCategoria> campi, String descrizione) {
+		if(campi == null)
+			return true;
+		
+		for (CampoCategoria campo : campi) {
+			if(campo.getDescrizione().equalsIgnoreCase(descrizione)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean checkNomeCategoriaEsiste(String categoriaDaRamificare) {
+		return this.currentGerarchia.checkNomeCategoriaEsiste(categoriaDaRamificare);
+	}
+	
+	public Categoria getCategoriaByName(String nome) {
+		return this.currentGerarchia._getCategoriaByName(nome);
+	}
+	
+	public boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
+		return nSottoCategorie >= NUM_MIN_SOTTOCATEGORIE;
+	}
+	
+	public int getNumSottoCatDaInserire(Categoria categoriaDaRamificare) {
+		if(checkNumMinimoSottoCategorie(categoriaDaRamificare.getSottoCategorie().size()) )
+			return NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO;
+		else
+			return NUM_MIN_SOTTOCATEGORIE;
+	}
+		
+	//TODO: try catch -> nel caso currentRoot è null
 	/**
 	 * Gestisce tutte le operazioni per la creazione di una gerarchia
 	 * @return TRUE se la gerarchia e' stata creata correttamente FALSE se e' stata eliminata
 	 */
 	public boolean creaGerarchia() {
-		Categoria currentRoot;
-		Gerarchia currentGerarchia = new Gerarchia();
 		boolean eliminaRoot = false;
-		
-		String nomeRoot = askNomeRoot();
-		currentRoot = RepositoryGerarchia.creaRoot(currentGerarchia, nomeRoot);	
-		currentGerarchia.setRoot(currentRoot);
 		
 		MyMenu menuGerarchia = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
@@ -75,10 +139,9 @@ public class GestioneGerarchie {
 						+ "Se no, non sarà più possibile modificarla");
 				break;
 			case 1:
-				RepositoryGerarchia.creaSottoCategorie(currentGerarchia);
 				break;
 			case 2:
-				RepositoryGerarchia.checkEliminaSottocategoria(currentGerarchia);
+				//RepositoryGerarchia.checkEliminaSottocategoria(currentGerarchia);
 				break;
 			case 3:
 				boolean confermaCancellazione = InputDati.yesOrNo("Sei sicuro di eliminare la gerarchia?");
@@ -105,30 +168,14 @@ public class GestioneGerarchie {
 			currentGerarchia = null;
 			return false;
 		} else {
-			gerarchie.put(currentGerarchia._getNomeFormattato(), currentGerarchia);
+			getGerarchie().put(currentGerarchia._getNomeFormattato(), currentGerarchia);
 			return true;
 		}
-		
 	}
 	
-	/**
-	 * Chiede che nome utilizzare per il root.
-	 * Verifica se il nome e' già in uso. Nel caso lo fosse viene richiesto di usare un altro nome
-	 * @return nome utilizzabile
-	 */
-	private String askNomeRoot() {
-		String nome;
-		nome = InputDati.leggiStringaNonVuota("Nome Categoria Radice: ");
-		
-		while(gerarchiaPresente(nome)) {
-			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
-		}
-		
-		return nome;
-	}
 	
 	public boolean gerarchiaPresente(String nome) {
-		return gerarchie.containsKey(this.formattaNome(nome));
+		return getGerarchie().containsKey(this.formattaNome(nome));
 	}
 	
 	private String formattaNome(String nome) {
@@ -139,7 +186,7 @@ public class GestioneGerarchie {
 	 * Permette di ricreare la hashmap ElencoCategoria di ogni Gerarchia salvata su JSON
 	 */
 	public void popolaGerarchie() {
-		for (Gerarchia gerarchia : gerarchie.values()) {
+		for (Gerarchia gerarchia : getGerarchie().values()) {
 			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
 		}
 	}
@@ -148,11 +195,11 @@ public class GestioneGerarchie {
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		
-		if(this.gerarchie.size() == 0) {
+		if(this.getGerarchie().size() == 0) {
 			result.append("\nNESSUNA GERARCHIA PRESENTE\n");
 		} else {
 			result.append("---------------------------\n");
-			for (Gerarchia gerarchia : gerarchie.values()) {
+			for (Gerarchia gerarchia : getGerarchie().values()) {
 				result.append(gerarchia.toString());
 			}
 		}

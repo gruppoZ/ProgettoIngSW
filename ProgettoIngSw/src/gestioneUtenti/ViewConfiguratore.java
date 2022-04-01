@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import gestioneCategorie.ViewGerarchia;
 import gestioneParametri.ViewParametri;
 import gestioneParametri.ViewParametroPiazza;
 import it.unibs.fp.mylib.MyMenu;
@@ -30,7 +31,8 @@ public class ViewConfiguratore extends ViewUtente{
 				fine = true;
 				break;
 			case 1:
-				gestoreConfiguratore.creaGerarchia();		       
+				ViewGerarchia view = new ViewGerarchia();
+				view.menu();
 				break;
 			case 2:
 				System.out.println(gestoreConfiguratore.getGerarchie());
