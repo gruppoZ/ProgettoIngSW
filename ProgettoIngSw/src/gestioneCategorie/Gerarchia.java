@@ -55,7 +55,7 @@ public class Gerarchia {
 		return padre;
 	}
 	
-	protected boolean checkNomeCategoriaEsiste(String nomeCategoria) {
+	public boolean checkNomeCategoriaEsiste(String nomeCategoria) {
 		return elencoCategorie.containsKey(formattaNome(nomeCategoria));
 	}
 	

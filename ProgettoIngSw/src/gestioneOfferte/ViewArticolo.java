@@ -69,12 +69,10 @@ public class ViewArticolo {
 		
 		String nomeRootSelezionata = InputDati.leggiStringaNonVuota("Inserisci il nome della root relativa"
 				+ " alla gerarchia che si vuole scegliere: ");
-		//problema che il nome c'è in gerarchie è in to upper case, chi deve richiamare il metodo?
-		nomeRootSelezionata = nomeRootSelezionata.toUpperCase();//non va bene farlo qua
 		
 		//possibile evitare di fare i due passaggi e fare solo get, se ritorna null => non esiste (pero' dovrei fare un controllo nella view)
 		//cosa che faccio gia' con checkEsistenzaCategoria quindi a sto punto
-		if(gestoreArticolo.checkEsistenzaCategoria(nomeRootSelezionata)) {
+		if(gestoreArticolo.checkEsistenzaGerarchia(nomeRootSelezionata)) {
 			Gerarchia gerarchia = gestoreArticolo.getGerarchiaByName(nomeRootSelezionata);
 			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
 			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
@@ -82,8 +80,8 @@ public class ViewArticolo {
 			for (Categoria categoria : listaFoglie) {
 				System.out.println(categoria);
 			}
-			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota("Inserire il nome della foglia desiderata");
-			if(gestoreArticolo.checkEsistenzaCategoria(nomeFogliaSelezionata)) {
+			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota("Inserire il nome della foglia desiderata: ");
+			if(gestoreArticolo.checkEsistenzaCategoria(gerarchia, nomeFogliaSelezionata)) {
 				return gestoreArticolo.getCategoriaByName(gerarchia, nomeFogliaSelezionata);
 				
 			} else {

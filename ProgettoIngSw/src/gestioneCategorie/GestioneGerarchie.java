@@ -31,6 +31,10 @@ public class GestioneGerarchie {
 	public GestioneGerarchie() {
 	}
 	
+	public void initGestioneArticolo() {
+		this.popolaGerarchie();
+	}
+	
 	public void leggiDaFileGerarchie() {
 		this.gerarchie = JsonIO.leggiGerarchieDaJson(PATH_GERARCHIE);
 	}
@@ -46,22 +50,24 @@ public class GestioneGerarchie {
 			return true;
 	}
 	
-	public HashMap<String, Gerarchia> getGerarchie(){
+	public HashMap<String, Gerarchia> getGerarchie() {
 		if(gerarchie == null)
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
+	
 	//-----------------------------------------------------------------
-	//private Categoria currentRoot;
+	private Categoria currentRoot;
 	private Gerarchia currentGerarchia;
 	
 	public void creaRoot(Categoria root) {
+		currentRoot = root;
 		int depth = 0;
 		
-		root.setProfondita(depth);
-		currentGerarchia = new Gerarchia(root);
+		currentRoot.setProfondita(depth);
+		currentGerarchia = new Gerarchia(currentRoot);
 		
-		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
+		currentGerarchia.addCategoriaInElenco(currentRoot.getNome(), currentRoot);	
 	}
 	
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
@@ -172,7 +178,7 @@ public class GestioneGerarchie {
 	}
 	
 	
-	public boolean gerarchiaPresente(String nome) {
+	public boolean checkGerarchiaPresente(String nome) {
 		return getGerarchie().containsKey(this.formattaNome(nome));
 	}
 	
@@ -187,6 +193,10 @@ public class GestioneGerarchie {
 		for (Gerarchia gerarchia : getGerarchie().values()) {
 			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
 		}
+	}
+	
+	public Gerarchia getGerarchiaByName(String nomeRoot) {
+		return getGerarchie().get(this.formattaNome(nomeRoot));
 	}
 	
 	@Override

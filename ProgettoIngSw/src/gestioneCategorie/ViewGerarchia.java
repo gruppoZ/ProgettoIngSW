@@ -48,7 +48,7 @@ public class ViewGerarchia {
 		String nome;
 		nome = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT);
 		
-		while(gestoreGerarchie.gerarchiaPresente(nome)) {
+		while(gestoreGerarchie.checkGerarchiaPresente(nome)) {
 			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
 		}
 		
