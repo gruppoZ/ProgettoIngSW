@@ -46,22 +46,27 @@ public class GestioneGerarchie {
 			return true;
 	}
 	
+	public void initGestioneArticolo() {
+		this.popolaGerarchie();
+	}
+	
 	public HashMap<String, Gerarchia> getGerarchie(){
 		if(gerarchie == null)
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
 	//-----------------------------------------------------------------
-	//private Categoria currentRoot;
+	private Categoria currentRoot;
 	private Gerarchia currentGerarchia;
 	
 	public void creaRoot(Categoria root) {
+		currentRoot = root;
 		int depth = 0;
 		
-		root.setProfondita(depth);
-		currentGerarchia = new Gerarchia(root);
+		currentRoot.setProfondita(depth);
+		currentGerarchia = new Gerarchia(currentRoot);
 		
-		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
+		currentGerarchia.addCategoriaInElenco(currentRoot.getNome(), currentRoot);	
 	}
 	
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
@@ -99,24 +104,38 @@ public class GestioneGerarchie {
 		return true;
 	}
 	
-	public boolean checkNomeCategoriaEsiste(String categoriaDaRamificare) {
-		return this.currentGerarchia.checkNomeCategoriaEsiste(categoriaDaRamificare);
+	protected boolean checkNomeCategoriaEsiste(String nomeCategoria) {
+		return this.currentGerarchia.checkNomeCategoriaEsiste(nomeCategoria);
 	}
 	
-	public Categoria getCategoriaByName(String nome) {
+	protected Categoria getCategoriaByName(String nome) {
 		return this.currentGerarchia._getCategoriaByName(nome);
 	}
 	
-	public boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
+	protected boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
 		return nSottoCategorie >= NUM_MIN_SOTTOCATEGORIE;
 	}
 	
-	public int getNumSottoCatDaInserire(Categoria categoriaDaRamificare) {
+	protected int getNumSottoCatDaInserire(Categoria categoriaDaRamificare) {
 		if(checkNumMinimoSottoCategorie(categoriaDaRamificare.getSottoCategorie().size()) )
 			return NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO;
 		else
 			return NUM_MIN_SOTTOCATEGORIE;
 	}
+	
+	protected int getNumMinSottoCategorie() {
+		return NUM_MIN_SOTTOCATEGORIE;
+	}
+	
+	protected boolean checkCategoriaDaEliminare(String nomeCategoriaDaEliminare) {
+		Categoria categoriaDaEliminare = this.currentGerarchia._getCategoriaByName(nomeCategoriaDaEliminare);
+		return this.currentGerarchia.cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
+	}
+	
+	protected void eliminaCategoria(String nome) {
+		this.currentGerarchia.eliminaCategoria(nome);
+	}
+	
 		
 	//TODO: try catch -> nel caso currentRoot è null
 	/**
@@ -171,10 +190,18 @@ public class GestioneGerarchie {
 		}
 	}
 	
+	protected boolean checkNomeIsNomeRoot(String nomeDaEliminare) {
+		return this.currentGerarchia.getRoot().getNome().equalsIgnoreCase(nomeDaEliminare);
+	}
 	
-	public boolean gerarchiaPresente(String nome) {
+	
+	public boolean checkGerarchiaPresente(String nome) {
 		return getGerarchie().containsKey(this.formattaNome(nome));
 	}
+	
+	public Gerarchia getGerarchiaByName(String nomeRoot) {
+		return getGerarchie().get(this.formattaNome(nomeRoot));
+	} 
 	
 	private String formattaNome(String nome) {
 		return nome.toUpperCase();

@@ -7,6 +7,11 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
+	
+	private static final String GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE = "La categoria: %s e' stata eliminata correttamente.\n";
+	private static final String MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT = "\nStai cercando di eliminare una sottocategoria di una categoria che ne ha soltanto %s."
+			+ "																						\nProcedi quindi a creare prima almeno un' altra sottocategoria.\n";
+	private static final String ASK_NOME_CATEGORIA_DA_ELIMINARE = "Inserisci nome categoria da eliminare";
 	private static final String ASK_CATEGORIA_DA_RAMIFICARE = "Quale categoria desideri ramificare?";
 	private static final String ASK_NOME_ROOT = "Nome Categoria Radice: ";
 	private static final String ASK_CONTINUARE_MODIFICA_GERARCHIA = "Continuare a modificare la Gerarchia? "
@@ -16,6 +21,8 @@ public class ViewGerarchia {
 	private static final String ASK_CAMPO_NATIVO_DESCRIZIONE = "\tCampo Nativo -> Descrizione: ";
 	private static final String ASK_CAMPO_NATIVO = "Inserire Campo Nativo?";
 	private static final String ASK_DESCRIZIONE_CATEGORIA = "Descrizione Categoria: ";
+	private static final String MSG_ATTENZIONE_TENTATIVO_RIMOZIONE_ROOT = "Stai provando ad eliminare la radice della gerarchia!";
+	private static final String MSG_CATEGORIA_INESISTENTE = "La categoria cercata non esiste";
 	private static final String MSG_CATEGORIA_INESISTENE_ASK_AGAIN = "Categoria non trovata. Scegliere una categoria esistente:";
 	private static final String MSG_CAMPO_GIA_ESISTENTE_ASK_DESCRIZIONE_DIVERSA = "Campo gia' esistente. Scegli una descrizione diversa\n";
 	
@@ -33,10 +40,10 @@ public class ViewGerarchia {
 			MSG_VISUALIZZA_GERARCHIA,
 	};
 	
-	private GestioneGerarchie gestoreGerarchie;
+	private GestioneGerarchie gestoreGerarchia;
 	
 	public ViewGerarchia() {
-		gestoreGerarchie = new GestioneGerarchie();
+		gestoreGerarchia = new GestioneGerarchie();
 	}
 
 	/**
@@ -48,7 +55,7 @@ public class ViewGerarchia {
 		String nome;
 		nome = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT);
 		
-		while(gestoreGerarchie.gerarchiaPresente(nome)) {
+		while(gestoreGerarchia.checkGerarchiaPresente(nome)) {
 			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
 		}
 		
@@ -59,7 +66,7 @@ public class ViewGerarchia {
 		String nome;
 		nome = InputDati.leggiStringaNonVuota(nome_padre + "->Nome Categoria: ");
 		
-		while(gestoreGerarchie.checkNomeCategoriaEsiste(nome)) {
+		while(gestoreGerarchia.checkNomeCategoriaEsiste(nome)) {
 			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra categoria! Scegli un nome univoco per la categoria: ");
 		}
 		
@@ -76,7 +83,7 @@ public class ViewGerarchia {
         categoriaDaRamificare = scegliCategoriaDaRamificare();
         nSottoCategorie = categoriaDaRamificare.numeriDiSottocategorie();
         	
-        int numSottoCategorieMinime = gestoreGerarchie.getNumSottoCatDaInserire(categoriaDaRamificare);
+        int numSottoCategorieMinime = gestoreGerarchia.getNumSottoCatDaInserire(categoriaDaRamificare);
         
         nSottocategorieDaInserire = InputDati.leggiInteroConMinimo("Quante sottoCategorie vuoi inserire? (minimo " + numSottoCategorieMinime +"): ", numSottoCategorieMinime);
             
@@ -97,11 +104,11 @@ public class ViewGerarchia {
 		nomeCategoriaDaRamificare = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_DA_RAMIFICARE);
 		
 		
-		while(!gestoreGerarchie.checkNomeCategoriaEsiste(nomeCategoriaDaRamificare)) {
+		while(!gestoreGerarchia.checkNomeCategoriaEsiste(nomeCategoriaDaRamificare)) {
 			nomeCategoriaDaRamificare = InputDati.leggiStringaNonVuota(MSG_CATEGORIA_INESISTENE_ASK_AGAIN);
 		}
 		
-		return gestoreGerarchie.getCategoriaByName(nomeCategoriaDaRamificare);
+		return gestoreGerarchia.getCategoriaByName(nomeCategoriaDaRamificare);
 	}
 	
 	private void creaRoot() {					
@@ -115,7 +122,7 @@ public class ViewGerarchia {
 
 		nome = askNomeRoot();
 		
-		gestoreGerarchie.addCampiDefaultRoot(campiNativi);
+		gestoreGerarchia.addCampiDefaultRoot(campiNativi);
 		
 		descrizione = InputDati.leggiStringaNonVuota(ASK_DESCRIZIONE_CATEGORIA);
 		ask_campoNativo = InputDati.yesOrNo(ASK_CAMPO_NATIVO);
@@ -128,7 +135,7 @@ public class ViewGerarchia {
 		
 		categoria_result = new Categoria(nome, descrizione, isRoot, campiNativi, campiEreditati);
 		
-		gestoreGerarchie.creaRoot(categoria_result);
+		gestoreGerarchia.creaRoot(categoria_result);
 	}
 	
 	/**
@@ -160,7 +167,7 @@ public class ViewGerarchia {
 			
 		categoriaResult = new Categoria(nome, descrizione, isRoot, campiNativi, campiEreditati);
 		
-		gestoreGerarchie.creaSottoCategoria(categoriaPadre, categoriaResult);
+		gestoreGerarchia.creaSottoCategoria(categoriaPadre, categoriaResult);
 		
 		return categoriaResult;
 	}
@@ -176,7 +183,7 @@ public class ViewGerarchia {
 		
 		do {
 			descrizione = InputDati.leggiStringaNonVuota(ASK_CAMPO_NATIVO_DESCRIZIONE);
-			while(!(gestoreGerarchie.checkUnicitaCampo(campiEreditati, descrizione) && gestoreGerarchie.checkUnicitaCampo(campi, descrizione))) {
+			while(!(gestoreGerarchia.checkUnicitaCampo(campiEreditati, descrizione) && gestoreGerarchia.checkUnicitaCampo(campi, descrizione))) {
 				descrizione = InputDati.leggiStringaNonVuota(MSG_CAMPO_GIA_ESISTENTE_ASK_DESCRIZIONE_DIVERSA
 						+ ASK_CAMPO_NATIVO_DESCRIZIONE);
 			}
@@ -190,6 +197,25 @@ public class ViewGerarchia {
 		}while(aggiungereAltriCampi);
 
 		return campi;
+	}
+	
+	private void eliminaSottoCategoria() {
+		String nomeDaEliminare = InputDati.leggiStringaNonVuota(ASK_NOME_CATEGORIA_DA_ELIMINARE);
+		
+		if(gestoreGerarchia.checkNomeCategoriaEsiste(nomeDaEliminare)) {
+			if(gestoreGerarchia.checkNomeIsNomeRoot(nomeDaEliminare)) {
+				System.out.println(MSG_ATTENZIONE_TENTATIVO_RIMOZIONE_ROOT);
+			} else {
+				if(gestoreGerarchia.checkCategoriaDaEliminare(nomeDaEliminare)) {
+					System.out.printf(MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT, gestoreGerarchia.getNumMinSottoCategorie());
+				} else {
+					gestoreGerarchia.eliminaCategoria(nomeDaEliminare);
+					System.out.printf(GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE, nomeDaEliminare);
+				}
+			}
+		} else {
+			System.out.println(MSG_CATEGORIA_INESISTENTE);
+		}				 
 	}
 	
 	public void menu() {
@@ -208,11 +234,14 @@ public class ViewGerarchia {
 			case 1:
 				this.creaSottoCategorie();
 				break;
+			case 2:
+				this.eliminaSottoCategoria();
+				break;
 			default:
 				System.out.println(TXT_ERRORE);
 			}
 		} while(!fine);
 		
-		gestoreGerarchie.fineCreazioneGerarchia();
+		gestoreGerarchia.fineCreazioneGerarchia();
 	}		
 }

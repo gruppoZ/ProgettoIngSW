@@ -36,7 +36,7 @@ public class GestioneArticolo {
 
 	
 	public boolean checkEsistenzaCategoria(String nome) {		
-		return gestoreGerarchie.gerarchiaPresente(nome);
+		return gestoreGerarchie.checkGerarchiaPresente(nome);
 	}
 	
 	public Gerarchia getGerarchiaByName(String nomeRoot) {
