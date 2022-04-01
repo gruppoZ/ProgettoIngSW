@@ -1,8 +1,6 @@
 package gestioneCategorie;
 
 import java.util.*;
-import it.unibs.fp.mylib.InputDati;
-import it.unibs.fp.mylib.MyMenu;
 import main.JsonIO;
 
 public class GestioneGerarchie {
@@ -11,19 +9,6 @@ public class GestioneGerarchie {
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
 	
 	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
-
-	private static final String TXT_TITOLO = "Menu creazione gerarchia";
-	private static final String TXT_ERRORE = "ERRORE";
-	private static final String MSG_AGGIUNGI_SOTTOCATEGORIA = "Aggiungi sottocategoria";
-	private static final String MSG_ELIMINA_SOTTOCATEGORIA = "Elimina sottocategoria";
-	private static final String MSG_ELIMINA_GERARCHIA = "Elimina gerarchia";
-	private static final String MSG_VISUALIZZA_GERARCHIA = "Visualizza gerarchia";
-	private static final String [] TXT_VOCI = {
-			MSG_AGGIUNGI_SOTTOCATEGORIA,
-			MSG_ELIMINA_SOTTOCATEGORIA,
-			MSG_ELIMINA_GERARCHIA,
-			MSG_VISUALIZZA_GERARCHIA,
-	};
 		
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
 	private HashMap<String, Gerarchia> gerarchie; 
@@ -58,17 +43,15 @@ public class GestioneGerarchie {
 
 	
 	//-----------------------------------------------------------------
-	private Categoria currentRoot;
 	private Gerarchia currentGerarchia;
 	
 	public void creaRoot(Categoria root) {
-		currentRoot = root;
 		int depth = 0;
 		
-		currentRoot.setProfondita(depth);
-		currentGerarchia = new Gerarchia(currentRoot);
+		root.setProfondita(depth);
+		currentGerarchia = new Gerarchia(root);
 		
-		currentGerarchia.addCategoriaInElenco(currentRoot.getNome(), currentRoot);	
+		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
 	}
 	
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
@@ -136,49 +119,6 @@ public class GestioneGerarchie {
 	
 	public void eliminaCategoria(String nome) {
 		this.currentGerarchia.eliminaCategoria(nome);
-	}
-	
-		
-	//TODO: try catch -> nel caso currentRoot è null
-	/**
-	 * Gestisce tutte le operazioni per la creazione di una gerarchia
-	 * @return TRUE se la gerarchia e' stata creata correttamente FALSE se e' stata eliminata
-	 */
-	public boolean creaGerarchia() {
-		boolean eliminaRoot = false;
-		
-		MyMenu menuGerarchia = new MyMenu(TXT_TITOLO, TXT_VOCI);
-		int scelta = 0;
-		boolean fine = false;
-		do {
-			scelta = menuGerarchia.scegli();
-			switch(scelta) {
-			case 0:
-				fine = !InputDati.yesOrNo("Continuare a modificare la Gerarchia? "
-						+ "Se no, non sarà più possibile modificarla");
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:				
-				break;
-			case 4:
-				//RepositoryGerarchia.showGerarchia(currentGerarchia);
-				break;
-			default:
-				System.out.println(TXT_ERRORE);
-			}
-		} while(!fine);
-		
-		if(eliminaRoot) {
-			currentRoot = null;
-			currentGerarchia = null;
-			return false;
-		} else {
-			getGerarchie().put(currentGerarchia._getNomeFormattato(), currentGerarchia);
-			return true;
-		}
 	}
 	
 	protected boolean checkNomeIsNomeRoot(String nomeDaEliminare) {
