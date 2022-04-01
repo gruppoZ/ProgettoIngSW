@@ -51,7 +51,7 @@ public class GestioneGerarchie {
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
-	
+	//commento che non dovremme sparire di Giorgio
 	//-----------------------------------------------------------------
 
 	//private Categoria currentRoot;
