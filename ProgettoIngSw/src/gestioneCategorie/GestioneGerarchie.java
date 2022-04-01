@@ -53,7 +53,7 @@ public class GestioneGerarchie {
 	}
 	
 	//-----------------------------------------------------------------
-
+	//COmmento di prova test di git
 	//private Categoria currentRoot;
 	private Gerarchia currentGerarchia;
 	
