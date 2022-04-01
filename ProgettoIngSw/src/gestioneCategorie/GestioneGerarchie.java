@@ -110,7 +110,7 @@ public class GestioneGerarchie {
 		return this.currentGerarchia.checkNomeCategoriaEsiste(nomeCategoria);
 	}
 	
-	protected Categoria getCategoriaByName(String nome) {
+	public Categoria getCategoriaByName(String nome) {
 		return this.currentGerarchia._getCategoriaByName(nome);
 	}
 	
@@ -134,7 +134,7 @@ public class GestioneGerarchie {
 		return this.currentGerarchia.cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
 	}
 	
-	protected void eliminaCategoria(String nome) {
+	public void eliminaCategoria(String nome) {
 		this.currentGerarchia.eliminaCategoria(nome);
 	}
 	
@@ -160,25 +160,14 @@ public class GestioneGerarchie {
 			case 1:
 				break;
 			case 2:
-				//RepositoryGerarchia.checkEliminaSottocategoria(currentGerarchia);
 				break;
-			case 3:
-				boolean confermaCancellazione = InputDati.yesOrNo("Sei sicuro di eliminare la gerarchia?");
-				if(confermaCancellazione) {
-					System.out.println("\nGerarchia eliminata con successo");
-					eliminaRoot = true;
-					fine = true;
-				} else {
-					System.out.println("\nGerarchia non eliminata");
-				}
-				
+			case 3:				
 				break;
 			case 4:
-				RepositoryGerarchia.showGerarchia(currentGerarchia);
+				//RepositoryGerarchia.showGerarchia(currentGerarchia);
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
-				
 			}
 		} while(!fine);
 		
@@ -216,6 +205,11 @@ public class GestioneGerarchie {
 			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
 		}
 	}
+	
+	public String showGerarchia() {
+		return this.currentGerarchia.toString();
+	}
+	
 	
 	@Override
 	public String toString() {

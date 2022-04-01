@@ -9,8 +9,7 @@ import it.unibs.fp.mylib.MyMenu;
 public class ViewGerarchia {
 	
 	private static final String GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE = "La categoria: %s e' stata eliminata correttamente.\n";
-	private static final String MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT = "\nStai cercando di eliminare una sottocategoria di una categoria che ne ha soltanto %s."
-			+ "																						\nProcedi quindi a creare prima almeno un' altra sottocategoria.\n";
+	
 	private static final String ASK_NOME_CATEGORIA_DA_ELIMINARE = "Inserisci nome categoria da eliminare";
 	private static final String ASK_CATEGORIA_DA_RAMIFICARE = "Quale categoria desideri ramificare?";
 	private static final String ASK_NOME_ROOT = "Nome Categoria Radice: ";
@@ -21,11 +20,13 @@ public class ViewGerarchia {
 	private static final String ASK_CAMPO_NATIVO_DESCRIZIONE = "\tCampo Nativo -> Descrizione: ";
 	private static final String ASK_CAMPO_NATIVO = "Inserire Campo Nativo?";
 	private static final String ASK_DESCRIZIONE_CATEGORIA = "Descrizione Categoria: ";
+	
 	private static final String MSG_ATTENZIONE_TENTATIVO_RIMOZIONE_ROOT = "Stai provando ad eliminare la radice della gerarchia!";
 	private static final String MSG_CATEGORIA_INESISTENTE = "La categoria cercata non esiste";
 	private static final String MSG_CATEGORIA_INESISTENE_ASK_AGAIN = "Categoria non trovata. Scegliere una categoria esistente:";
 	private static final String MSG_CAMPO_GIA_ESISTENTE_ASK_DESCRIZIONE_DIVERSA = "Campo gia' esistente. Scegli una descrizione diversa\n";
-	
+	private static final String MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT = "\nStai cercando di eliminare una sottocategoria di una categoria che ne ha soltanto %s."
+			+ "																						\nProcedi quindi a creare prima almeno un' altra sottocategoria.\n";
 	//costanti per menu
 	private static final String TXT_TITOLO = "Menu creazione gerarchia";
 	private static final String TXT_ERRORE = "ERRORE";
@@ -183,7 +184,7 @@ public class ViewGerarchia {
 		
 		do {
 			descrizione = InputDati.leggiStringaNonVuota(ASK_CAMPO_NATIVO_DESCRIZIONE);
-			while(!(gestoreGerarchia.checkUnicitaCampo(campiEreditati, descrizione) && gestoreGerarchia.checkUnicitaCampo(campi, descrizione))) {
+			while(!(gestoreGerarchia.checkUnicitaCampo(campiEreditati, descrizione) && 						gestoreGerarchia.checkUnicitaCampo(campi, descrizione))) {
 				descrizione = InputDati.leggiStringaNonVuota(MSG_CAMPO_GIA_ESISTENTE_ASK_DESCRIZIONE_DIVERSA
 						+ ASK_CAMPO_NATIVO_DESCRIZIONE);
 			}
@@ -207,7 +208,7 @@ public class ViewGerarchia {
 				System.out.println(MSG_ATTENZIONE_TENTATIVO_RIMOZIONE_ROOT);
 			} else {
 				if(gestoreGerarchia.checkCategoriaDaEliminare(nomeDaEliminare)) {
-					System.out.printf(MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT, gestoreGerarchia.getNumMinSottoCategorie());
+					System.out.printf(MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT, 							gestoreGerarchia.getNumMinSottoCategorie());
 				} else {
 					gestoreGerarchia.eliminaCategoria(nomeDaEliminare);
 					System.out.printf(GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE, nomeDaEliminare);
@@ -218,11 +219,21 @@ public class ViewGerarchia {
 		}				 
 	}
 	
+	private boolean askEliminaGerarchia() {
+		boolean confermaCancellazione = InputDati.yesOrNo("Sei sicuro di eliminare la gerarchia?");
+		if(confermaCancellazione) {
+			System.out.println("\nGerarchia eliminata con successo");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void menu() {
 		MyMenu menuModificaGiorni = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
-		
+		boolean gerarchiaEliminata = false;
 		creaRoot();		
 		
 		do {
@@ -237,11 +248,21 @@ public class ViewGerarchia {
 			case 2:
 				this.eliminaSottoCategoria();
 				break;
+			case 3:
+				if(this.askEliminaGerarchia()) {
+					fine = true;
+					gerarchiaEliminata = true;
+				}
+				break;
+			case 4:
+				System.out.println(gestoreGerarchia.showGerarchia());
+				break;
 			default:
 				System.out.println(TXT_ERRORE);
 			}
 		} while(!fine);
 		
-		gestoreGerarchia.fineCreazioneGerarchia();
+		if(!gerarchiaEliminata)
+			gestoreGerarchia.fineCreazioneGerarchia();
 	}		
 }
