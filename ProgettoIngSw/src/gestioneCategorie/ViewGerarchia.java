@@ -8,6 +8,10 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
 	
+	private static final String MSG_GERARCHIA_RIMOSSA_SUCCESSO = "\nGerarchia eliminata con successo";
+
+	private static final String ASK_CONFERNA_RIMOZIONE_GERARCHIA = "Sei sicuro di eliminare la gerarchia?";
+
 	private static final String GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE = "La categoria: %s e' stata eliminata correttamente.\n";
 	
 	private static final String ASK_NOME_CATEGORIA_DA_ELIMINARE = "Inserisci nome categoria da eliminare";
@@ -220,9 +224,9 @@ public class ViewGerarchia {
 	}
 	
 	private boolean askEliminaGerarchia() {
-		boolean confermaCancellazione = InputDati.yesOrNo("Sei sicuro di eliminare la gerarchia?");
+		boolean confermaCancellazione = InputDati.yesOrNo(ASK_CONFERNA_RIMOZIONE_GERARCHIA);
 		if(confermaCancellazione) {
-			System.out.println("\nGerarchia eliminata con successo");
+			System.out.println(MSG_GERARCHIA_RIMOSSA_SUCCESSO);
 			return true;
 		} else {
 			return false;
