@@ -26,8 +26,8 @@ public class Fruitore extends Utente {
 	}
 
 	@Override
-	public void menu() {
-		(new ViewFruitore()).menu();				
+	public void menu(String username) {
+		(new ViewFruitore()).menu(username);				
 	}
 	
 	@Override

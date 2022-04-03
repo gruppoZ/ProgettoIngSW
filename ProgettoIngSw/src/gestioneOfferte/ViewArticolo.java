@@ -6,19 +6,25 @@ import java.util.List;
 import gestioneCategorie.CampoCategoria;
 import gestioneCategorie.Categoria;
 import gestioneCategorie.Gerarchia;
+import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
 
 public class ViewArticolo {
 
+	private GestioneFruitore gestoreFruitore;
+	
+	public ViewArticolo(GestioneFruitore gestoreFruitore) {
+		this.gestoreFruitore = gestoreFruitore;
+	}
 	GestioneArticolo gestoreArticolo = new GestioneArticolo();
-
+	
 	public void aggiungiArticolo() {
 		gestoreArticolo.init();
 		//forse bisogna reinizializzare articolo
 		if(scegliFoglia()){
 			if(inserisciValoriCampi()) {
 				System.out.println("La pubblicazione e' stata accettata");
-				gestoreArticolo.creaPubblicazione("NomeFruitore");
+				gestoreArticolo.creaPubblicazione(gestoreFruitore.getUsername());
 				gestoreArticolo.addPubblicazione();
 				gestoreArticolo.salvaPubblicazioni();
 			}

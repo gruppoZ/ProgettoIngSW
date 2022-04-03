@@ -6,10 +6,12 @@ import gestioneParametri.Piazza;
 public class GestioneFruitore extends GestioneUtente{
 	
 	private GestioneParametri gestoreParametri;
+	private String username;
 	
-	public GestioneFruitore() {
+	public GestioneFruitore(String username) {
 		super();
 		gestoreParametri = new GestioneParametri();
+		this.username = username;
 	}
 	
 	public boolean isPiazzaCreata() {
@@ -18,6 +20,10 @@ public class GestioneFruitore extends GestioneUtente{
 	
 	public Piazza getPiazza() {
 		return gestoreParametri.leggiPiazza();
+	}
+	
+	public String getUsername() {
+		return this.username;
 	}
 	
 }

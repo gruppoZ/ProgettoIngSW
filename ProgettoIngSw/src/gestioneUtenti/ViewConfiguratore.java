@@ -18,7 +18,7 @@ public class ViewConfiguratore extends ViewUtente{
 	};
 	
 	@Override
-	public void menu() {
+	public void menu(String username) {
 		GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();		
 		
 		MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);

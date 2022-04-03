@@ -33,9 +33,10 @@ public class GestioneAutenticazione {
 	 * @return TRUE se il login e' avvenuto con successo FALSE se ho avuto qualche problema (es passwrod errata)
 	 */
 	protected boolean login(Utente utente, Credenziali credenziali) {		
-		if(checkCredenziali(utente, PATH_CREDENZIALI, credenziali))
+		if(checkCredenziali(utente, PATH_CREDENZIALI, credenziali)) {
+			utente.setCredenziali(credenziali);
 			return true;
-		else
+		} else
 			return false;
 	}
 	

@@ -20,8 +20,8 @@ public class ViewFruitore extends ViewUtente{
 	};
 	
 	@Override
-	public void menu() {
-		GestioneFruitore gestoreFruitore = new GestioneFruitore();
+	public void menu(String username) {
+		GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
 		
 		MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
@@ -45,7 +45,7 @@ public class ViewFruitore extends ViewUtente{
 					System.out.println(gestoreFruitore.getPiazza());
 				break;
 			case 3:
-				ViewArticolo viewArticolo = new ViewArticolo();
+				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore);
 				viewArticolo.aggiungiArticolo();
 				break;
 			default:

@@ -67,7 +67,7 @@ public abstract class ViewAuth {
 		boolean ritenta;
 		do {
 			if(login(utente)) {
-				utente.menu();
+				utente.menu(utente.getCredenziali().getUsername());
 				ritenta = false;
 			} else {
 				ritenta = InputDati.yesOrNo(MSG_RIPETI_LOGIN);

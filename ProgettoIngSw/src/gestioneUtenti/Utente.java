@@ -27,6 +27,6 @@ public abstract class Utente {
 	
 	public abstract void registrati();
 	public abstract void accedi();
-	public abstract void menu();
+	public abstract void menu(String username);
 	
 }

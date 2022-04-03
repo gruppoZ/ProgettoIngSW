@@ -23,7 +23,7 @@ public class GestioneArticolo {
 		listaPubblicazioni = new ArrayList<Pubblicazione>(); 
 		articolo = new Articolo();
 		gestoreGerarchie = new GestioneGerarchie();
-		gestoreGerarchie.initGestioneArticolo(); //serve per popolare la hashmap all'interno di ogni singola gerarchia
+		gestoreGerarchie.initGestioneArticolo(); //serve per popolare la hashmap all'interno di ogni singola gerarchia, potrebbe essere spostato in init
 	}
 	
 	public void init() {
@@ -76,8 +76,7 @@ public class GestioneArticolo {
 		this.articolo.addValoreCampo(campo.getDescrizione(), valore);
 	}
 	
-	
-	//gestione offerta
+	//gestione offerta/pubblicazione
 	
 	public void creaPubblicazione(String username) {
 		this.pubblicazione = new Pubblicazione(articolo, username, new OffertaAperta());

@@ -2,8 +2,8 @@ package gestioneOfferte;
 
 public class Pubblicazione {
 	private Articolo articolo;
-	private String username; //forse meglio lasciare lo username alla hashmap e non salvarlo qua
-	private Offerta tipoOfferta;
+	private String username; 
+	private Offerta tipoOfferta; //ora come ora la classe offerta sembra inutile, forse meglio una string?
 	
 	//costruttore vuoto per poter salvare un oggetto Pubblicazione nel file json
 	public Pubblicazione() {

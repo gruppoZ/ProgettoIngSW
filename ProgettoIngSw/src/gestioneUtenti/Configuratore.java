@@ -25,8 +25,8 @@ public class Configuratore extends Utente {
 	}
 
 	@Override
-	public void menu() {
-		(new ViewConfiguratore()).menu();
+	public void menu(String username) {
+		(new ViewConfiguratore()).menu(username);
 	}
 	
 	@Override
