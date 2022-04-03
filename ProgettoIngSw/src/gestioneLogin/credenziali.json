@@ -35,6 +35,9 @@
   }, {
     "username" : "aaa",
     "password" : "bbb"
+  }, {
+    "username" : "c1",
+    "password" : "c1"
   } ],
   "Fruitore" : [ {
     "username" : "fruitore1",
@@ -51,5 +54,17 @@
   }, {
     "username" : "raul2",
     "password" : "raul2"
+  }, {
+    "username" : "g",
+    "password" : "g"
+  }, {
+    "username" : "1",
+    "password" : "1"
+  }, {
+    "username" : "2",
+    "password" : "2"
+  }, {
+    "username" : "3",
+    "password" : "3"
   } ]
 }
