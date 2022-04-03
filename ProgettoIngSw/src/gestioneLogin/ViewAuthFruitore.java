@@ -23,5 +23,7 @@ public class ViewAuthFruitore extends ViewAuth {
 	public void registrati() {
 		System.out.printf(INTESTAZIONE_REGISTRAZIONE, TIPOLOGIA_UTENTE);
 		super.registrati(fruitore);
+		//Una volta avvenuta la registrazione viene richiesto direttamente di fare il login
+		login();
 	}
 }

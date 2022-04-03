@@ -5,7 +5,7 @@ import it.unibs.fp.mylib.InputDati;
 
 public abstract class ViewAuth {
 
-	protected static final String INTESTAZIONE_LOGIN = "Login %s";
+	protected static final String INTESTAZIONE_LOGIN = "\nLogin %s";
 	protected static final String INTESTAZIONE_REGISTRAZIONE = "Registrazione %s";
 	private static final String MSG_RIPETI_LOGIN = "Vuoi rifare il login?";
 	protected static final String MSG_ERRORE_CREDENZIALI_DEFAULT = "ATTENZIONE: CREDENZIALI ERRATE";
@@ -17,6 +17,7 @@ public abstract class ViewAuth {
 	protected static final String MSG_USERNAME_LOGIN ="Inserisci lo username:";
 	protected static final String MSG_PASSWORD_LOGIN ="Inserisci la password:";
 	protected static final String MSG_CREDENZIALI_ERRATE = "\nCredenziali errate!";
+	protected static final String MSG_RESISTRAZIONE_SUCCESSO_GIVE_CREDENZIALI = "Registrazione avvenuta con successo!\nLo username e': %s la password e': %s \n";
 	
 	private GestioneAutenticazione gestoreAuth;
 	
@@ -57,8 +58,7 @@ public abstract class ViewAuth {
 		
 		credenziali = new Credenziali(username, password);
 		
-		System.out.println("Registrazione avvenuta con successo");
-		System.out.println("Lo username e': " + username + " la password e': " + password);
+		System.out.printf(MSG_RESISTRAZIONE_SUCCESSO_GIVE_CREDENZIALI, username, password);
 
 		this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
 	}
