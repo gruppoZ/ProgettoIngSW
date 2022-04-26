@@ -36,7 +36,7 @@ public class ViewFruitore extends ViewUtente{
 				if(!gestoreFruitore.isGerarchieCreate())
 					System.out.println(MSG_ASSENSA_GERARCHIE);
 				else
-					System.out.println(gestoreFruitore.getGerarchie());				
+					System.out.println(gestoreFruitore.getDescrizioneSinteticaGerarchie());				
 				break;
 			case 2:
 				if(!gestoreFruitore.isPiazzaCreata())

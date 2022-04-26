@@ -150,6 +150,20 @@ public class GestioneGerarchie {
 		return this.currentGerarchia.toString();
 	}
 	
+	public String getToStringSintetico() {
+		StringBuffer result = new StringBuffer();
+		
+		if(this.gerarchie.size() == 0) {
+			result.append("\nNESSUNA GERARCHIA PRESENTE\n");
+		} else {
+			result.append("---------------------------\n");
+			for (Gerarchia gerarchia : gerarchie.values()) {
+				result.append(gerarchia.showGerarchiaSintetica());
+			}
+		}
+				
+		return result.toString();
+	}
 	
 	@Override
 	public String toString() {

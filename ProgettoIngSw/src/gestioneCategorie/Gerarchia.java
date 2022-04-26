@@ -113,6 +113,10 @@ public class Gerarchia {
 		return "Nome: " + root.getNome() + " Descrizione: " + root.getDescrizione() + "\n";
 	}
 	
+	public String showGerarchiaSintetica() {
+		return "Nome: " + root.getNome() + " Descrizione: " + root.getDescrizione() + "\n";
+	}
+	
 	@Override
 	public String toString() {
 		return "Gerarchia con Radice:  " + root.getNome() + "\n"
