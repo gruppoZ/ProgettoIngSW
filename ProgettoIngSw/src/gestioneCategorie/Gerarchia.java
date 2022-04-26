@@ -90,7 +90,7 @@ public class Gerarchia {
 		return nome.toUpperCase();
 	}
 	
-	public String showGerarchia() {
+	public String showGerarchiaSintetica() {
 		return "Nome: " + root.getNome() + " Descrizione: " + root.getDescrizione() + "\n";
 	}
 	

@@ -20,6 +20,10 @@ public abstract class GestioneUtente {
 		return gestoreGerarchie.getGerarchie();
 	}
 	
+	public String getDescrizioneSinteticaGerarchie() {
+		return gestoreGerarchie.getToStringSintetico();
+	}
+	
 	public boolean isGerarchieCreate() {
 		return gestoreGerarchie.isGerarchiePresenti();
 	}	
