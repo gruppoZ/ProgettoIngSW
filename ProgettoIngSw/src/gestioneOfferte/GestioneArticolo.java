@@ -21,7 +21,7 @@ public class GestioneArticolo {
 	private Offerta offerta;
 	private Articolo articolo;
 	private GestioneGerarchie gestoreGerarchie;
-	
+
 	public GestioneArticolo() {
 		listaOfferte = leggiListaOfferte(); 
 		articolo = new Articolo();
@@ -79,12 +79,40 @@ public class GestioneArticolo {
 		return gerarchia._getCategoriaByName(nome);
 	}
 	
-	public List<Categoria> getListaFoglie(Gerarchia gerarchia) {
+	public List<Categoria> getListaFoglieByGerarchia(Gerarchia gerarchia) {
 		return gerarchia._getListaFoglie();
 	}
 	
 	public List<CampoCategoria> getListaCampi(){
 		return this.articolo.getFoglia()._getCampiNativiEreditati();
+	}
+	
+	public GestioneGerarchie getGestoreGerarchie() {
+		return gestoreGerarchie;
+	}
+	
+	public List<CampoCategoria> getListaCampiObbligatori(){
+		List<CampoCategoria> campiObbligatori = new ArrayList<>();
+		
+		for (CampoCategoria campo : getListaCampi()) {
+			if(campo.isObbligatorio()) {
+				campiObbligatori.add(campo);
+			}
+		}
+		
+		return campiObbligatori;
+	}
+	
+	public List<CampoCategoria> getListaCampiFacoltativi(){
+		List<CampoCategoria> campiFacoltativi = new ArrayList<>();
+		
+		for (CampoCategoria campo : getListaCampi()) {
+			if(!campo.isObbligatorio()) {
+				campiFacoltativi.add(campo);
+			}
+		}
+		
+		return campiFacoltativi;
 	}
 	
 	public void addFoglia(Categoria foglia) {
@@ -96,16 +124,22 @@ public class GestioneArticolo {
 	}
 	
 	//gestione offerta/pubblicazione
+	//TODO: cambia nomi
+	protected void manageAggiuntaPubblicazione(String username) {
+		creaPubblicazione(username);
+		addPubblicazione();
+		salvaPubblicazioni();
+	}
 	
-	public void creaPubblicazione(String username) {
+	private void creaPubblicazione(String username) {
 		this.offerta = new OffertaAperta(articolo, username);
 	}
 	
-	public void addPubblicazione() {
+	private void addPubblicazione() {
 		this.listaOfferte.add(offerta);
 	}
 	
-	public void salvaPubblicazioni() {
+	private void salvaPubblicazioni() {
 		JsonIO.salvaOfferteSuJson(PATH_OFFERTE, listaOfferte);
 	}
 	

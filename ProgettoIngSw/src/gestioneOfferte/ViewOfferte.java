@@ -1,6 +1,5 @@
 package gestioneOfferte;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import gestioneCategorie.Categoria;
@@ -16,9 +15,7 @@ public class ViewOfferte {
 	}
 	
 	private void stampaGerarchie() {
-		for (Gerarchia gerarchia : gestoreArticolo.getGerarchie().values()) {
-			System.out.println(gerarchia.showGerarchia());
-		}
+		System.out.println(gestoreArticolo.getGestoreGerarchie().getToStringSintetico());
 	}
 	
 	//metodo presente già in viewArticolo
@@ -35,7 +32,7 @@ public class ViewOfferte {
 			Gerarchia gerarchia = gestoreArticolo.getGerarchiaByName(nomeRootSelezionata);
 			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
 			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
-			List<Categoria> listaFoglie = gestoreArticolo.getListaFoglie(gerarchia); 
+			List<Categoria> listaFoglie = gestoreArticolo.getListaFoglieByGerarchia(gerarchia); 
  
 			for (Categoria categoria : listaFoglie) {
 				System.out.println(categoria);

@@ -5,6 +5,9 @@
   "intervalliOrari" : [ {
     "orarioMin" : [ 15, 0 ],
     "orarioMax" : [ 16, 0 ]
+  }, {
+    "orarioMin" : [ 18, 0 ],
+    "orarioMax" : [ 19, 30 ]
   } ],
   "scadenza" : 4
 }

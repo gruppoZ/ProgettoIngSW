@@ -178,7 +178,6 @@ public class GestioneGerarchie {
 			}
 		}
 				
-		
 		return result.toString();		
 	}
 }
