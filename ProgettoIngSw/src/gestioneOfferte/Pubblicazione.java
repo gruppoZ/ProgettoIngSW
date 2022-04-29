@@ -30,6 +30,12 @@ public class Pubblicazione {
 	public Offerta getTipoOfferta() {
 		return tipoOfferta;
 	}
+
+	@Override
+	public String toString() {
+		return "Pubblicazione [articolo=" + articolo + ", username=" + username + ", tipoOfferta=" + tipoOfferta + "]";
+	}
+	
 	
 	
 }

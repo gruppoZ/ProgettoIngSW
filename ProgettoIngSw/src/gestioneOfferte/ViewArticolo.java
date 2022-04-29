@@ -100,6 +100,9 @@ public class ViewArticolo {
 		}
 	}
 	
+	/*TODO: forse metodo che va spostato in viewGerarchia?
+		al posto di return boolean è void e si ritornano throw
+	*/
 	private boolean scegliFoglia() {
 		
 		stampaGerarchie();
@@ -131,4 +134,21 @@ public class ViewArticolo {
 		}
 		return false;
 	}
+	
+	public void showOfferteAperteByCategoria() {
+		stampaGerarchie();
+		//da fare tutti i controlli
+		String nomeCategoria = InputDati.leggiStringaNonVuota("Inserire nome foglia");
+		ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaPubblicazioni();
+		
+		for (Pubblicazione pubblicazione : listaPubblicazioni) {
+			if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
+				if(pubblicazione.getArticolo().getFoglia().getNome().equals(nomeCategoria))
+					System.out.println(pubblicazione);
+			}
+			
+		}
+		
+	}
+	
 }

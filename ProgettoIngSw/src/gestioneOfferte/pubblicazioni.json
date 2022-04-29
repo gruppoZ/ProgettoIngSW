@@ -76,4 +76,31 @@
   "tipoOfferta" : {
     "tipoOfferta" : "aperta"
   }
+}, {
+  "articolo" : {
+    "foglia" : {
+      "nome" : "root2",
+      "descrizione" : "sono rut2",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "ok",
+      "Descrizione libera" : "bellissimo"
+    }
+  },
+  "username" : "f",
+  "tipoOfferta" : {
+    "tipoOfferta" : "aperta"
+  }
 } ]

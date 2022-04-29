@@ -2,6 +2,7 @@ package gestioneCategorie;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import it.unibs.fp.mylib.BelleStringhe;
 
@@ -209,7 +210,17 @@ public class Categoria {
 		
 		return result.toString();
 	}
-	
+
+	/**
+	 * Metodo per sapere quando due categorie sono uguali
+	 * @param categoria
+	 * @return
+	 */
+	public boolean equals(Categoria categoria) {
+		return this.nome.equals(categoria.getNome()); 
+	}
+
+
 	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer();

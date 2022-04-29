@@ -10,6 +10,8 @@ import gestioneCategorie.Gerarchia;
 import gestioneCategorie.GestioneGerarchie;
 import main.JsonIO;
 
+
+//TODO: serve un gestore a livello più alto che fa cose comuni sia per l'articolo che per le offerte
 public class GestioneArticolo {
 	
 	private static final String PATH_PUBBLICAZIONI = "src/gestioneOfferte/pubblicazioni.json";
@@ -32,7 +34,7 @@ public class GestioneArticolo {
 		this.pubblicazione = new Pubblicazione();
 	}
 	
-	private ArrayList<Pubblicazione> leggiListaPubblicazioni(){
+	ArrayList<Pubblicazione> leggiListaPubblicazioni(){
 		return (ArrayList<Pubblicazione>) JsonIO.leggiListaDaJson(PATH_PUBBLICAZIONI, Pubblicazione.class);
 	}
 	

@@ -1,6 +1,7 @@
 package gestioneUtenti;
 
 import gestioneCategorie.ViewGerarchia;
+import gestioneOfferte.ViewOfferte;
 import gestioneParametri.ViewParametri;
 import gestioneParametri.ViewParametroPiazza;
 import it.unibs.fp.mylib.MyMenu;
@@ -10,11 +11,13 @@ public class ViewConfiguratore extends ViewUtente{
 	private static final String TXT_TITOLO = "Benvenuto Configuratore";
 	private static final String MSG_CREA_GERARCHIA = "Crea gerarchia";
 	private static final String MSG_IMPOSTA_PARAMETRI = "Gestisci Piazza";
+	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_CREA_GERARCHIA,
 			MSG_VISUALIZZA_GERARCHIE,
 			MSG_IMPOSTA_PARAMETRI,
+			MSG_OFFERTE_APERTE
 	};
 	
 	@Override
@@ -40,6 +43,10 @@ public class ViewConfiguratore extends ViewUtente{
 			case 3:
 				ViewParametri viewPiazza = new ViewParametroPiazza();
 				viewPiazza.menu();
+				break;
+			case 4:
+				ViewOfferte viewOfferte = new ViewOfferte();
+				viewOfferte.showOfferteAperteByCategoria();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	

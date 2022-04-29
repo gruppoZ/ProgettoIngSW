@@ -18,6 +18,8 @@ public class Offerta {
 		return tipoOfferta;
 	}
 	
-	
+	public boolean equals(Offerta offerta) {
+		return this.tipoOfferta.equals(offerta.tipoOfferta);
+	}
 	
 }
