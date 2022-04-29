@@ -56,7 +56,7 @@ public class ViewOfferte {
 	
 	public void showOfferteAperteByCategoria() {
 		Categoria foglia = scegliFoglia();
-		
+		 
 //		if(foglia != null) {
 //			ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaOfferte(); //andrebbe richiamato gestore offerte
 //			
