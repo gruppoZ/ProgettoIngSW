@@ -1,8 +1,12 @@
 package gestioneOfferte;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OffertaAperta extends Offerta {
 	
-	public OffertaAperta() {
-		super("aperta");
+	@JsonCreator
+	public OffertaAperta(@JsonProperty("articolo")Articolo articolo, @JsonProperty("username")String username) {
+		super(articolo, username, "OffertaAperta");
 	}
 }

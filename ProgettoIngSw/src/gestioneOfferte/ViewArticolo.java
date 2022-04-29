@@ -12,19 +12,21 @@ import it.unibs.fp.mylib.InputDati;
 public class ViewArticolo {
 
 	private GestioneFruitore gestoreFruitore;
+	private GestioneArticolo gestoreArticolo;
 	
 	public ViewArticolo(GestioneFruitore gestoreFruitore) {
 		this.gestoreFruitore = gestoreFruitore;
+		gestoreArticolo = new GestioneArticolo();
 	}
-	GestioneArticolo gestoreArticolo = new GestioneArticolo();
+	
 	
 	public void aggiungiArticolo() {
-		gestoreArticolo.init();
+//		gestoreArticolo.init();
 		//forse bisogna reinizializzare articolo
 		if(scegliFoglia()){
 			if(inserisciValoriCampi()) {
 				System.out.println("La pubblicazione e' stata accettata");
-				gestoreArticolo.creaPubblicazione(gestoreFruitore.getUsername());
+				gestoreArticolo.creaPubblicazione(gestoreFruitore.getUsername()); //TODO: cambia nomi
 				gestoreArticolo.addPubblicazione();
 				gestoreArticolo.salvaPubblicazioni();
 			}
@@ -139,16 +141,17 @@ public class ViewArticolo {
 		stampaGerarchie();
 		//da fare tutti i controlli
 		String nomeCategoria = InputDati.leggiStringaNonVuota("Inserire nome foglia");
-		ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaPubblicazioni();
+		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();
 		
-		for (Pubblicazione pubblicazione : listaPubblicazioni) {
+		/*
+		for (Offerta offerta : listaOfferte) {
 			if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
 				if(pubblicazione.getArticolo().getFoglia().getNome().equals(nomeCategoria))
 					System.out.println(pubblicazione);
 			}
 			
 		}
-		
+		*/
 	}
 	
 }

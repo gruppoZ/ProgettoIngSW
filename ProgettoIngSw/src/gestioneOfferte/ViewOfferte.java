@@ -57,17 +57,17 @@ public class ViewOfferte {
 	public void showOfferteAperteByCategoria() {
 		Categoria foglia = scegliFoglia();
 		
-		if(foglia != null) {
-			ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaPubblicazioni(); //andrebbe richiamato gestore offerte
-			
-			for (Pubblicazione pubblicazione : listaPubblicazioni) {
-				if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
-					if(pubblicazione.getArticolo().getFoglia().equals(foglia))
-						System.out.println(pubblicazione);
-				}
-				
-			}
-		}
+//		if(foglia != null) {
+//			ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaOfferte(); //andrebbe richiamato gestore offerte
+//			
+//			for (Pubblicazione pubblicazione : listaPubblicazioni) {
+//				if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
+//					if(pubblicazione.getArticolo().getFoglia().equals(foglia))
+//						System.out.println(pubblicazione);
+//				}
+//				
+//			}
+//		}
 	}
 	
 }

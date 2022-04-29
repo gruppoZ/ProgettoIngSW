@@ -2,6 +2,7 @@ package gestioneOfferte;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import gestioneCategorie.CampoCategoria;
@@ -14,28 +15,44 @@ import main.JsonIO;
 //TODO: serve un gestore a livello più alto che fa cose comuni sia per l'articolo che per le offerte
 public class GestioneArticolo {
 	
-	private static final String PATH_PUBBLICAZIONI = "src/gestioneOfferte/pubblicazioni.json";
+	private static final String PATH_OFFERTE = "src/gestioneOfferte/offerte.json";
 
-	private ArrayList<Pubblicazione> listaPubblicazioni; 
-	private Pubblicazione pubblicazione;
+	private ArrayList<Offerta> listaOfferte; 
+	private Offerta offerta;
 	private Articolo articolo;
 	private GestioneGerarchie gestoreGerarchie;
 	
 	public GestioneArticolo() {
-		listaPubblicazioni = new ArrayList<Pubblicazione>(); 
+		listaOfferte = leggiListaOfferte(); 
 		articolo = new Articolo();
 		gestoreGerarchie = new GestioneGerarchie();
 		gestoreGerarchie.initGestioneArticolo(); //serve per popolare la hashmap all'interno di ogni singola gerarchia, potrebbe essere spostato in init
 	}
 	
-	public void init() {
-		listaPubblicazioni = leggiListaPubblicazioni(); 
-		this.articolo = new Articolo();
-		this.pubblicazione = new Pubblicazione();
-	}
+//	public void init() {
+//		listaPubblicazioni = leggiListaPubblicazioni(); 
+//		this.articolo = new Articolo();
+//		this.offerta = new Offerta();
+//	}
 	
-	ArrayList<Pubblicazione> leggiListaPubblicazioni(){
-		return (ArrayList<Pubblicazione>) JsonIO.leggiListaDaJson(PATH_PUBBLICAZIONI, Pubblicazione.class);
+	ArrayList<Offerta> leggiListaOfferte() {
+		ArrayList<Offerta> listaLetta = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
+		ArrayList<Offerta> listaDaRitornare = new ArrayList<Offerta>();
+		
+		for(Offerta offerta : listaLetta) {
+			switch (offerta.getTipoOfferta()) {
+			case "OffertaAperta":
+				listaDaRitornare.add(new OffertaAperta(offerta.getArticolo(), offerta.getUsername()));
+				break;
+			case "OffertaRitirata":
+				listaDaRitornare.add(new OffertaRitirata(offerta.getArticolo(), offerta.getUsername()));
+				break;
+			default:
+				break;
+			}
+		}
+		
+		return listaDaRitornare;
 	}
 	
 	public void creaArticolo(Categoria foglia, HashMap<String, String> valoriCampi) {
@@ -81,15 +98,15 @@ public class GestioneArticolo {
 	//gestione offerta/pubblicazione
 	
 	public void creaPubblicazione(String username) {
-		this.pubblicazione = new Pubblicazione(articolo, username, new OffertaAperta());
+		this.offerta = new OffertaAperta(articolo, username);
 	}
 	
 	public void addPubblicazione() {
-		this.listaPubblicazioni.add(pubblicazione);
+		this.listaOfferte.add(offerta);
 	}
 	
 	public void salvaPubblicazioni() {
-		JsonIO.salvaOggettoSuJson(PATH_PUBBLICAZIONI, listaPubblicazioni);
+		JsonIO.salvaOfferteSuJson(PATH_OFFERTE, listaOfferte);
 	}
 	
 	

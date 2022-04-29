@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -19,7 +21,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import gestioneCategorie.Gerarchia;
 import gestioneLogin.Credenziali;
-import gestioneOfferte.Pubblicazione;
+import gestioneOfferte.Offerta;
 import gestioneParametri.Piazza;
 
 /**
@@ -35,6 +37,8 @@ public class JsonIO {
 	private static ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 	private static TypeFactory typeFactory = mapper.getTypeFactory();
 	
+	
+
 	/**
 	 * 
 	 * @param path
@@ -43,6 +47,18 @@ public class JsonIO {
 	public static void salvaOggettoSuJson(String path, Object oggetto) {
 		try { 
 			writer.writeValue(Paths.get(path).toFile(), oggetto);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Metodo apposito per leggere le offerte necessario perchè Offerta è abstract
+	 * @param path
+	 * @param oggetto
+	 */
+	public static void salvaOfferteSuJson(String path, Object oggetto) {
+		try { 
+			mapper.writerFor(new TypeReference<List<Offerta>>() {}).withDefaultPrettyPrinter().writeValue(Paths.get(path).toFile(), oggetto);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -92,15 +108,24 @@ public class JsonIO {
 	}
 	
 	public static <T> List<T> leggiListaDaJson(String path, Class<T> elementClass) {
-		List<T> listaCredenziali = null;
+		List<T> lista = null;
 		CollectionType listType ;
 		listType  = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
 		try {
-			listaCredenziali = mapper.readValue(new File(path), listType);		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return listaCredenziali;
+			lista = mapper.readValue(new File(path), listType);		
+		} catch (JsonParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		return lista;
 	}
 	
 	public static Piazza leggiPiazzaDaJson(String path) {
