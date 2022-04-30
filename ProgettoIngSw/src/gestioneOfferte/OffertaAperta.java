@@ -9,4 +9,9 @@ public class OffertaAperta extends Offerta {
 	public OffertaAperta(@JsonProperty("articolo")Articolo articolo, @JsonProperty("username")String username) {
 		super(articolo, username, "OffertaAperta");
 	}
+	
+	public OffertaRitirata ritiraOfferta() {
+		return new OffertaRitirata(this.getArticolo(), this.getUsername());
+	}
 }
+

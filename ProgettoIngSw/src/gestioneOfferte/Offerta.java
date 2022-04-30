@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
+/**
+ * JsonTypeInfo e JsonSubTypes servono per la serializzazione e deserializzazione di una classe abstract (Offerta)
+ */
 @JsonTypeInfo(use = Id.NAME,
 include = JsonTypeInfo.As.PROPERTY,
 property = "type")
@@ -39,10 +42,6 @@ public abstract class Offerta {
 	
 	public String getTipoOfferta() {
 		return tipoOfferta;
-	}
-	
-	public boolean equals(Offerta offerta) {
-		return this.tipoOfferta.equals(offerta.tipoOfferta);
 	}
 
 	@Override

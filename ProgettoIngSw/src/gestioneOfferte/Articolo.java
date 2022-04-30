@@ -45,6 +45,7 @@ public class Articolo {
 		this.valoreCampi.put(descrizioneCampo, valore);
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Articolo [foglia=" + foglia + ", valoreCampi=" + valoreCampi + "]";

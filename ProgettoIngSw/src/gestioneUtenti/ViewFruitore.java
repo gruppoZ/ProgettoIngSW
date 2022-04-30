@@ -14,19 +14,25 @@ public class ViewFruitore extends ViewUtente{
 	
 	private static final String MSG_VISUALIZZA_PIAZZA = "Visualizza Piazza";
 	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
+	private static final String MSG_OFFERTA_RITIRATA = "Ritira un offerta";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
+	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le tue Offerte aperte e ritirate ";
 
 	private static final String [] TXT_VOCI = {
 			MSG_VISUALIZZA_GERARCHIE,
 			MSG_VISUALIZZA_PIAZZA,
 			MSG_PUBBLICA_ARTICOLO,
-			MSG_OFFERTE_APERTE
+			MSG_OFFERTA_RITIRATA,
+			MSG_OFFERTE_APERTE,
+			MSG_OFFERTE_AUTORE
 	};
 	
 	@Override
 	public void menu(String username) {
 		GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
 		
+		ViewOfferte viewOfferte;//per ora qua perchè tre case lo usano
+
 		MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
@@ -52,9 +58,18 @@ public class ViewFruitore extends ViewUtente{
 				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore);
 				viewArticolo.aggiungiArticolo();
 				break;
+			//possibile raggrupare case 4,5,6 in un unico menu(?)
 			case 4:
-				ViewOfferte viewOfferte = new ViewOfferte();
+				viewOfferte = new ViewOfferte();
+				viewOfferte.ritiraOfferta(gestoreFruitore);
+				break;
+			case 5:
+				viewOfferte = new ViewOfferte();
 				viewOfferte.showOfferteAperteByCategoria();
+				break;
+			case 6:
+				viewOfferte = new ViewOfferte();
+				viewOfferte.showOfferteByName(gestoreFruitore);
 				break;
 			default:
 				System.out.println(TXT_ERRORE);

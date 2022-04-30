@@ -139,21 +139,21 @@ public class ViewArticolo {
 		return false;
 	}
 	
-	public void showOfferteAperteByCategoria() {
-		stampaGerarchie();
-		//da fare tutti i controlli
-		String nomeCategoria = InputDati.leggiStringaNonVuota("Inserire nome foglia");
-		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();
-		
-		/*
-		for (Offerta offerta : listaOfferte) {
-			if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
-				if(pubblicazione.getArticolo().getFoglia().getNome().equals(nomeCategoria))
-					System.out.println(pubblicazione);
-			}
-			
-		}
-		*/
-	}
+//	public void showOfferteAperteByCategoria() {
+//		stampaGerarchie();
+//		//da fare tutti i controlli
+//		String nomeCategoria = InputDati.leggiStringaNonVuota("Inserire nome foglia");
+//		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();
+//		
+//		/*
+//		for (Offerta offerta : listaOfferte) {
+//			if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
+//				if(pubblicazione.getArticolo().getFoglia().getNome().equals(nomeCategoria))
+//					System.out.println(pubblicazione);
+//			}
+//			
+//		}
+//		*/
+//	}
 	
 }

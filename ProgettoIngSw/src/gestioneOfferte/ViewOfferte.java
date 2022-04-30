@@ -1,9 +1,12 @@
 package gestioneOfferte;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import gestioneCategorie.Categoria;
 import gestioneCategorie.Gerarchia;
+import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
 
 public class ViewOfferte {
@@ -12,6 +15,47 @@ public class ViewOfferte {
 	
 	public ViewOfferte() {
 		gestoreArticolo = new GestioneArticolo();
+	}
+	
+	private int numeroOfferteAperte(ArrayList<Offerta> listaOfferte) {
+		int n = 0;
+		
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getTipoOfferta().equals("OffertaAperta")) {
+				n++;
+			}
+		}
+		
+		return n;
+	}
+	
+	public void ritiraOfferta(GestioneFruitore gestoreFruitore) {
+		ArrayList<Offerta> listaOfferte = gestoreArticolo.getListaOfferte();//andrebbe richiamato gestore offerte
+		
+		if(numeroOfferteAperte(listaOfferte) > 0) {
+			for (Offerta offerta : listaOfferte) {
+				if(offerta.getTipoOfferta().equals("OffertaAperta") && offerta.getUsername().equals(gestoreFruitore.getUsername())) {
+					System.out.println(offerta);
+					boolean scelta = InputDati.yesOrNo("Vuoi ritirare questa offerta?");
+					if(scelta) {						
+						OffertaAperta offertaAperta = (OffertaAperta) offerta;
+						OffertaRitirata offertaRitirata = offertaAperta.ritiraOfferta();
+						
+						gestoreArticolo.rimuoviOfferta(offerta); 
+						gestoreArticolo.aggiungiOfferta(offertaRitirata);
+						gestoreArticolo.salvaOfferte();
+						
+						System.out.println("L'offerta e' stata rimossa");
+					}
+						
+				}	
+			}
+		} else {
+			System.out.println("Non ci sono offerte da ritirare");
+		}
+		
+		
+		
 	}
 	
 	private void stampaGerarchie() {
@@ -54,17 +98,34 @@ public class ViewOfferte {
 	public void showOfferteAperteByCategoria() {
 		Categoria foglia = scegliFoglia();
 		 
-//		if(foglia != null) {
-//			ArrayList<Pubblicazione> listaPubblicazioni = gestoreArticolo.leggiListaOfferte(); //andrebbe richiamato gestore offerte
-//			
-//			for (Pubblicazione pubblicazione : listaPubblicazioni) {
-//				if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
-//					if(pubblicazione.getArticolo().getFoglia().equals(foglia))
-//						System.out.println(pubblicazione);
-//				}
-//				
-//			}
-//		}
+		if(foglia != null) {
+			ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();//TODO: andrebbe richiamato gestore offerte e andrebbe usato il getListaOfferte
+			
+			for (Offerta offerta : listaOfferte) {
+				if(offerta.getTipoOfferta().equals("OffertaAperta")) { //equals da modificare
+					if(offerta.getArticolo().getFoglia().equals(foglia))
+						System.out.println(offerta);
+				}
+				
+			}
+		}
+	}
+	
+	/**
+	 * Un fruitore può vedere tutte le sue offerte
+	 * @param gestoreFruitore
+	 */
+	public void showOfferteByName(GestioneFruitore gestoreFruitore) {
+		String username = gestoreFruitore.getUsername();
+		
+		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();//andrebbe richiamato gestore offerte
+		
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getUsername().equals(username)) 
+				System.out.println(offerta);
+			
+		}
+		
 	}
 	
 }

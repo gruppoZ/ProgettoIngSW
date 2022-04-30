@@ -1,5 +1,5 @@
 [ {
-  "type" : "OffertaAperta",
+  "type" : "OffertaRitirata",
   "articolo" : {
     "foglia" : {
       "nome" : "a",
@@ -14,90 +14,39 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "ottimo",
-      "Descrizione libera" : "ok"
+      "Stato di conservazione" : "ottimo"
     }
   },
   "username" : "f",
-  "tipoOfferta" : "OffertaAperta"
+  "tipoOfferta" : "OffertaRitirata"
 }, {
-  "type" : "OffertaAperta",
+  "type" : "OffertaRitirata",
   "articolo" : {
     "foglia" : {
-      "nome" : "figlio2",
-      "descrizione" : "sono figlio2",
+      "nome" : "root2",
+      "descrizione" : "sono rut2",
       "sottoCategorie" : [ ],
-      "campiNativi" : [ ],
-      "campiEreditati" : [ {
+      "campiNativi" : [ {
         "descrizione" : "Stato di conservazione",
         "obbligatorio" : true
       }, {
         "descrizione" : "Descrizione libera",
         "obbligatorio" : false
       } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "ooooook"
+      "Stato di conservazione" : "mmmm",
+      "Descrizione libera" : "sssium"
     }
   },
   "username" : "f",
-  "tipoOfferta" : "OffertaAperta"
-}, {
-  "type" : "OffertaAperta",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "a",
-      "descrizione" : "a",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "buono",
-      "Descrizione libera" : "vediamo se funge"
-    }
-  },
-  "username" : "f1",
-  "tipoOfferta" : "OffertaAperta"
-}, {
-  "type" : "OffertaAperta",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "a",
-      "descrizione" : "a",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "scarso"
-    }
-  },
-  "username" : "f1",
-  "tipoOfferta" : "OffertaAperta"
+  "tipoOfferta" : "OffertaRitirata"
 } ]
