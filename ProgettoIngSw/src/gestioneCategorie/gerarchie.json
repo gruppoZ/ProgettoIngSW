@@ -98,24 +98,6 @@
       "radice" : true
     }
   },
-  "ROOT2" : {
-    "root" : {
-      "nome" : "root2",
-      "descrizione" : "sono rut2",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ ],
-      "profondita" : 0,
-      "valida" : true,
-      "radice" : true
-    }
-  },
   "ROOT_4" : {
     "root" : {
       "nome" : "root_4",

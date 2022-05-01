@@ -14,6 +14,7 @@ public class GestioneGerarchie {
 	private HashMap<String, Gerarchia> gerarchie; 
 	
 	public GestioneGerarchie() {
+		popolaGerarchie();
 	}
 	
 	public void leggiDaFileGerarchie() {
@@ -36,11 +37,6 @@ public class GestioneGerarchie {
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
-	
-	public void initGestioneArticolo() {
-		this.popolaGerarchie();
-	}
-
 	
 	//-----------------------------------------------------------------
 	private Gerarchia currentGerarchia;

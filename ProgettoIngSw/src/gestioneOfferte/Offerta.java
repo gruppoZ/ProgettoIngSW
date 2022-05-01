@@ -1,33 +1,20 @@
 package gestioneOfferte;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
-/**
- * JsonTypeInfo e JsonSubTypes servono per la serializzazione e deserializzazione di una classe abstract (Offerta)
- */
-@JsonTypeInfo(use = Id.NAME,
-include = JsonTypeInfo.As.PROPERTY,
-property = "type")
-@JsonSubTypes({
-@Type(value = OffertaAperta.class),
-@Type(value = OffertaRitirata.class),
-})
-
-public abstract class Offerta {
+public class Offerta {
 	
 	private Articolo articolo;
 	private String username; 
-	private String tipoOfferta;
+	private StatoOfferta tipoOfferta;
 	
 	//TODO: il problema di tenere tutto in offerta e' che quando salvo la lista di offerte come faccio a capire se era un offertaAperta o
 	//offertaRitirata?
 	//o si tiene una string tipoOfferta in offerta e quindi niente più sottoclassi?(possibile) => a pensarci molto caruccio
 
+	public Offerta() {
+		
+	}
 	
-	public Offerta(Articolo articolo, String username, String tipoOfferta) {
+	public Offerta(Articolo articolo, String username, StatoOfferta tipoOfferta) {
 		this.articolo = articolo;
 		this.username = username;
 		this.tipoOfferta = tipoOfferta;
@@ -40,10 +27,14 @@ public abstract class Offerta {
 		return articolo;
 	}
 	
-	public String getTipoOfferta() {
+	public StatoOfferta getTipoOfferta() {
 		return tipoOfferta;
 	}
 
+	public void setTipoOfferta(StatoOfferta tipoOfferta) {
+		this.tipoOfferta = tipoOfferta;
+	}
+	
 	@Override
 	public String toString() {
 		return "Offerta [articolo=" + articolo + ", username=" + username + ", tipoOfferta=" + tipoOfferta + "]";

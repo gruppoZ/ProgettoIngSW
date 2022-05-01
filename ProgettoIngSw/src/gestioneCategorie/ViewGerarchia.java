@@ -8,12 +8,17 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
 	
+	private static final String MSG_ERROR_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
+	private static final String MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
+	
 	private static final String MSG_GERARCHIA_RIMOSSA_SUCCESSO = "\nGerarchia eliminata con successo";
 
 	private static final String ASK_CONFERNA_RIMOZIONE_GERARCHIA = "Sei sicuro di eliminare la gerarchia?";
 
 	private static final String GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE = "La categoria: %s e' stata eliminata correttamente.\n";
 	
+	private static final String ASK_CATEGORIA_FOGLIA = "Inserire il nome della foglia desiderata: ";
+	private static final String ASK_NOME_ROOT_CATEGORIA_SCELTA = "Inserisci il nome della root relativa alla gerarchia che si vuole scegliere: ";
 	private static final String ASK_NOME_CATEGORIA_DA_ELIMINARE = "Inserisci nome categoria da eliminare";
 	private static final String ASK_CATEGORIA_DA_RAMIFICARE = "Quale categoria desideri ramificare?";
 	private static final String ASK_NOME_ROOT = "Nome Categoria Radice: ";
@@ -232,6 +237,40 @@ public class ViewGerarchia {
 			return false;
 		}
 	}
+	
+	public Categoria scegliFoglia() {
+		
+		System.out.println(gestoreGerarchia.getToStringSintetico());
+		
+		String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
+		
+		//possibile evitare di fare i due passaggi e fare solo get, se ritorna null => non esiste (pero' dovrei fare un controllo nella view)
+		//cosa che faccio gia' con checkEsistenzaCategoria quindi a sto punto
+		if(gestoreGerarchia.checkGerarchiaPresente(nomeRootSelezionata)) {
+			Gerarchia gerarchia = gestoreGerarchia.getGerarchiaByName(nomeRootSelezionata);
+			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
+			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
+			List<Categoria> listaFoglie = gerarchia._getListaFoglie(); 
+ 
+			for (Categoria categoria : listaFoglie) {
+				System.out.println(categoria);
+			}
+			
+			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
+			
+			if(gerarchia.checkNomeCategoriaEsiste(nomeFogliaSelezionata)) {
+				Categoria foglia = gerarchia._getCategoriaByName(nomeFogliaSelezionata);
+				
+				return foglia;
+			} else {
+				System.out.println(MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE);
+			}	
+		} else {
+			System.out.println(MSG_ERROR_NOME_ROOT_INESISTENTE);
+		}
+		
+		return null;
+	}	
 	
 	public void menu() {
 		MyMenu menuModificaGiorni = new MyMenu(TXT_TITOLO, TXT_VOCI);

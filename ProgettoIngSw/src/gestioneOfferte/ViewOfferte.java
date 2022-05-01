@@ -1,113 +1,69 @@
 package gestioneOfferte;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import gestioneCategorie.Categoria;
-import gestioneCategorie.Gerarchia;
+import gestioneCategorie.ViewGerarchia;
 import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
 
 public class ViewOfferte {
 
-	private GestioneArticolo gestoreArticolo; //gestore articolo fa troppe cose, da creare più gestori
+	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
+	private static final String MSG_OFFERTE_ATTIVE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti offerte ATTIVE per la categoria selezionata.";
+	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "Non ci sono offerte da ritirare";
+	private static final String MSG_OFFERTA_RITIRATA = "L'offerta e' stata rimossa";
+	private static final String MSG_ASK_RITIRARE_OFFERTA = "Vuoi ritirare questa offerta?";
+	//TODO: se non ci sono offerte => view "non sono presenti offerte"
+	//private GestioneArticolo gestoreArticolo; //gestore articolo fa troppe cose, da creare più gestori
+	private GestioneOfferta gestoreOfferta;
 	
 	public ViewOfferte() {
-		gestoreArticolo = new GestioneArticolo();
+		//gestoreArticolo = new GestioneArticolo();
+		gestoreOfferta = new GestioneOfferta();
 	}
-	
-	private int numeroOfferteAperte(ArrayList<Offerta> listaOfferte) {
-		int n = 0;
 		
-		for (Offerta offerta : listaOfferte) {
-			if(offerta.getTipoOfferta().equals("OffertaAperta")) {
-				n++;
-			}
-		}
-		
-		return n;
-	}
-	
+	/**
+	 * Mostra, se disponibli altrimenti viene detto che non ci sono, uno ad uno le offerte attive che fanno a capo l'username/utente loggato
+	 * Per ogni offerta viene chiesto se la si vuole ritirare
+	 * @param gestoreFruitore
+	 */
 	public void ritiraOfferta(GestioneFruitore gestoreFruitore) {
-		ArrayList<Offerta> listaOfferte = gestoreArticolo.getListaOfferte();//andrebbe richiamato gestore offerte
+		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAttiveByUtente(gestoreFruitore.getUsername());
 		
-		if(numeroOfferteAperte(listaOfferte) > 0) {
-			for (Offerta offerta : listaOfferte) {
-				if(offerta.getTipoOfferta().equals("OffertaAperta") && offerta.getUsername().equals(gestoreFruitore.getUsername())) {
-					System.out.println(offerta);
-					boolean scelta = InputDati.yesOrNo("Vuoi ritirare questa offerta?");
-					if(scelta) {						
-						OffertaAperta offertaAperta = (OffertaAperta) offerta;
-						OffertaRitirata offertaRitirata = offertaAperta.ritiraOfferta();
-						
-						gestoreArticolo.rimuoviOfferta(offerta); 
-						gestoreArticolo.aggiungiOfferta(offertaRitirata);
-						gestoreArticolo.salvaOfferte();
-						
-						System.out.println("L'offerta e' stata rimossa");
-					}
-						
-				}	
+		if(listaOfferteAttiveByUtente.size() > 0) {
+			for (Offerta offerta : listaOfferteAttiveByUtente) {
+				System.out.println(offerta);
+				
+				boolean scelta = InputDati.yesOrNo(MSG_ASK_RITIRARE_OFFERTA);
+				if(scelta) {					
+					gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta);
+					
+					System.out.println(MSG_OFFERTA_RITIRATA);
+				}
 			}
 		} else {
-			System.out.println("Non ci sono offerte da ritirare");
-		}
-		
-		
-		
+			System.out.println(MSG_OFFERTE_RITIRABILI_INESISTENTI);
+		}	
 	}
 	
-	private void stampaGerarchie() {
-		System.out.println(gestoreArticolo.getGestoreGerarchie().getToStringSintetico());
-	}
-	
-	//metodo presente già in viewArticolo
-	private Categoria scegliFoglia() {
-		
-		stampaGerarchie();
-		
-		String nomeRootSelezionata = InputDati.leggiStringaNonVuota("Inserisci il nome della root relativa"
-				+ " alla gerarchia che si vuole scegliere: ");
-		
-		//possibile evitare di fare i due passaggi e fare solo get, se ritorna null => non esiste (pero' dovrei fare un controllo nella view)
-		//cosa che faccio gia' con checkEsistenzaCategoria quindi a sto punto
-		if(gestoreArticolo.checkEsistenzaGerarchia(nomeRootSelezionata)) {
-			Gerarchia gerarchia = gestoreArticolo.getGerarchiaByName(nomeRootSelezionata);
-			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
-			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
-			List<Categoria> listaFoglie = gestoreArticolo.getListaFoglieByGerarchia(gerarchia); 
- 
-			for (Categoria categoria : listaFoglie) {
-				System.out.println(categoria);
-			}
-			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota("Inserire il nome della foglia desiderata: ");
-			if(gestoreArticolo.checkEsistenzaCategoria(gerarchia, nomeFogliaSelezionata)) {
-				Categoria foglia = gestoreArticolo.getCategoriaByName(gerarchia, nomeFogliaSelezionata);
-				return foglia;
-			} else {
-				System.out.println("Attenzione! Il nome della foglia inserito non e' presente");
-			}	
-		} else {
-			System.out.println("Attenzione! Il nome della root non fa riferimento a nessuna gerarchia");
-		}
-		return null;
-	}
-
-	
+	/**
+	 * Mostra se disponibili le offerte attive dopo aver scelto una Categoria Foglia.
+	 * Se non presenti lo viene detto a video
+	 */
 	public void showOfferteAperteByCategoria() {
-		Categoria foglia = scegliFoglia();
+		ViewGerarchia viewGerarchia = new ViewGerarchia();
+		Categoria foglia = viewGerarchia.scegliFoglia();
 		 
 		if(foglia != null) {
-			ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();//TODO: andrebbe richiamato gestore offerte e andrebbe usato il getListaOfferte
 			
-			for (Offerta offerta : listaOfferte) {
-				if(offerta.getTipoOfferta().equals("OffertaAperta")) { //equals da modificare
-					if(offerta.getArticolo().getFoglia().equals(foglia))
-						System.out.println(offerta);
+			ArrayList<Offerta> listaOfferteAttiveByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByCategoria(foglia);
+			
+			if(listaOfferteAttiveByCategoria.size() > 0) {
+				for (Offerta offerta : listaOfferteAttiveByCategoria) {
+					System.out.println(offerta);
 				}
-				
-			}
+			} else
+				System.out.println(MSG_OFFERTE_ATTIVE_BY_CATEGORIA_INESISTENTI);
 		}
 	}
 	
@@ -118,14 +74,14 @@ public class ViewOfferte {
 	public void showOfferteByName(GestioneFruitore gestoreFruitore) {
 		String username = gestoreFruitore.getUsername();
 		
-		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();//andrebbe richiamato gestore offerte
-		
-		for (Offerta offerta : listaOfferte) {
-			if(offerta.getUsername().equals(username)) 
+		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteByUtente(username);
+				
+		if(listaOfferteByUtente.size() > 0) {
+			for (Offerta offerta : listaOfferteByUtente) {
 				System.out.println(offerta);
-			
-		}
-		
+			}
+		} else
+			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
 	}
 	
 }

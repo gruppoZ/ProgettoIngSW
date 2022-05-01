@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import gestioneCategorie.Gerarchia;
 import gestioneLogin.Credenziali;
 import gestioneOfferte.Offerta;
+import gestioneOfferte.PassaggioTraStati;
 import gestioneParametri.Piazza;
 
 /**
@@ -51,18 +52,6 @@ public class JsonIO {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * Metodo apposito per leggere le offerte necessario perchè Offerta è abstract
-	 * @param path
-	 * @param oggetto
-	 */
-	public static void salvaOfferteSuJson(String path, Object oggetto) {
-		try { 
-			mapper.writerFor(new TypeReference<List<Offerta>>() {}).withDefaultPrettyPrinter().writeValue(Paths.get(path).toFile(), oggetto);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Legge da un file le gerarchie scritte in formato JSON e le salva in una HashMap
@@ -79,12 +68,15 @@ public class JsonIO {
 		return result;
 	}
 	
-	
 	public static HashMap<String, ArrayList<Credenziali>> leggiCredenzialiHashMapDaJson(String path) {
 		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
 	
+	public static HashMap<Offerta, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) {
+		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Offerta.class.getName()),
+				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
+	}
 	/**
 	 * lettura di una hashmap generica attraverso i javatype
 	 * @param <K>

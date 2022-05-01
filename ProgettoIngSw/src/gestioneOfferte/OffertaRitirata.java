@@ -1,12 +1,21 @@
 package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OffertaRitirata extends Offerta {
-	
+public class OffertaRitirata implements StatoOfferta {
+	String identificativo; //serve esplicitarlo per jackson
+
 	@JsonCreator
-	public OffertaRitirata(@JsonProperty("articolo")Articolo articolo, @JsonProperty("username")String username) {
-		super(articolo, username, "OffertaRitirata");
+	public OffertaRitirata() {
+		identificativo = StatiOfferta.OFFERTA_RITIRATA.getNome();
+	}
+	
+	@Override
+	public String getIdentificativo() {
+		return this.identificativo;
+	}
+
+	@Override
+	public void changeState(Offerta offerta) {		
 	}
 }

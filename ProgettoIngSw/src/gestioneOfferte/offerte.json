@@ -1,5 +1,4 @@
 [ {
-  "type" : "OffertaRitirata",
   "articolo" : {
     "foglia" : {
       "nome" : "a",
@@ -18,35 +17,94 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "ottimo"
+      "Stato di conservazione" : "discreto"
     }
   },
   "username" : "f",
-  "tipoOfferta" : "OffertaRitirata"
+  "tipoOfferta" : {
+    "type" : "OffertaRitirata",
+    "identificativo" : "OffertaRitirata"
+  }
 }, {
-  "type" : "OffertaRitirata",
   "articolo" : {
     "foglia" : {
-      "nome" : "root2",
-      "descrizione" : "sono rut2",
+      "nome" : "b",
+      "descrizione" : "n",
       "sottoCategorie" : [ ],
-      "campiNativi" : [ {
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
         "descrizione" : "Stato di conservazione",
         "obbligatorio" : true
       }, {
         "descrizione" : "Descrizione libera",
         "obbligatorio" : false
       } ],
-      "campiEreditati" : [ ],
-      "profondita" : 0,
-      "radice" : true,
+      "profondita" : 1,
+      "radice" : false,
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "mmmm",
-      "Descrizione libera" : "sssium"
+      "Stato di conservazione" : "buono",
+      "Descrizione libera" : "sempre più bug"
     }
   },
   "username" : "f",
-  "tipoOfferta" : "OffertaRitirata"
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "identificativo" : "OffertaAperta"
+  }
+}, {
+  "articolo" : {
+    "foglia" : {
+      "nome" : "figlio2_r13",
+      "descrizione" : "sono figlio2 di 13",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "radice" : false,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "Discreto"
+    }
+  },
+  "username" : "f1",
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "identificativo" : "OffertaAperta"
+  }
+}, {
+  "articolo" : {
+    "foglia" : {
+      "nome" : "figlio1",
+      "descrizione" : "sono figlio1",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "radice" : false,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "perfetto"
+    }
+  },
+  "username" : "f1",
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "identificativo" : "OffertaAperta"
+  }
 } ]

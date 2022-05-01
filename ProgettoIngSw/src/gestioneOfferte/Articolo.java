@@ -1,14 +1,11 @@
 package gestioneOfferte;
 
 import java.util.HashMap;
-
-import gestioneCategorie.CampoCategoria;
 import gestioneCategorie.Categoria;
 
 public class Articolo {
 	private Categoria foglia;
 	private HashMap<String, String> valoreCampi;
-	
 	
 	public Articolo() {
 		foglia = new Categoria();
@@ -20,7 +17,6 @@ public class Articolo {
 	 * @param valoreCampi
 	 */
 	public Articolo(Categoria foglia, HashMap<String, String> valoreCampi) {
-		super();
 		this.foglia = foglia;
 		this.valoreCampi = valoreCampi;
 	}
@@ -44,11 +40,9 @@ public class Articolo {
 	public void addValoreCampo(String descrizioneCampo, String valore) {
 		this.valoreCampi.put(descrizioneCampo, valore);
 	}
-
 	
 	@Override
 	public String toString() {
 		return "Articolo [foglia=" + foglia + ", valoreCampi=" + valoreCampi + "]";
 	}
-	
 }
