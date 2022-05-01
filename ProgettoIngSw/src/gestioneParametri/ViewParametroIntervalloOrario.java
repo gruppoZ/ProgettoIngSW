@@ -65,8 +65,8 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 			
 			if(!getGestoreParametri().checkAggiuntaIntervalloOrario(listaIntervalli, daAggiungere))
 				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
-			
-			System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
+			else
+				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
 		} while(InputDati.yesOrNo(ASK_ALTRI_INTERVALLI));
 		
 		showIntervalli();
