@@ -73,8 +73,8 @@ public class JsonIO {
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
 	
-	public static HashMap<Offerta, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) {
-		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Offerta.class.getName()),
+	public static HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) {
+		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Integer.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
 	}
 	/**

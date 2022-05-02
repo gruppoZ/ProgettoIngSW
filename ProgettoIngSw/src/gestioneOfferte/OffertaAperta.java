@@ -19,5 +19,12 @@ public class OffertaAperta implements StatoOfferta {
 	public void changeState(Offerta offerta) {
 		offerta.setTipoOfferta(new OffertaRitirata());	
 	}
+
+	@Override
+	public String toString() {
+		return "OffertaAperta [identificativo=" + identificativo + "]";
+	}
+	
+	
 }
 

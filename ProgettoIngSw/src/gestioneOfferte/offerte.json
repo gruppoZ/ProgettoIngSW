@@ -1,4 +1,5 @@
 [ {
+  "id" : 1,
   "articolo" : {
     "foglia" : {
       "nome" : "a",
@@ -17,15 +18,16 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "discreto"
+      "Stato di conservazione" : "ottimo"
     }
   },
   "username" : "f",
   "tipoOfferta" : {
-    "type" : "OffertaRitirata",
-    "identificativo" : "OffertaRitirata"
+    "type" : "OffertaAperta",
+    "identificativo" : "OffertaAperta"
   }
 }, {
+  "id" : 2,
   "articolo" : {
     "foglia" : {
       "nome" : "b",
@@ -44,8 +46,7 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "buono",
-      "Descrizione libera" : "sempre più bug"
+      "Stato di conservazione" : "ok"
     }
   },
   "username" : "f",
@@ -54,10 +55,11 @@
     "identificativo" : "OffertaAperta"
   }
 }, {
+  "id" : 3,
   "articolo" : {
     "foglia" : {
-      "nome" : "figlio2_r13",
-      "descrizione" : "sono figlio2 di 13",
+      "nome" : "figlio2",
+      "descrizione" : "sono figlio2",
       "sottoCategorie" : [ ],
       "campiNativi" : [ ],
       "campiEreditati" : [ {
@@ -72,37 +74,10 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "Discreto"
+      "Stato di conservazione" : "oooke"
     }
   },
-  "username" : "f1",
-  "tipoOfferta" : {
-    "type" : "OffertaAperta",
-    "identificativo" : "OffertaAperta"
-  }
-}, {
-  "articolo" : {
-    "foglia" : {
-      "nome" : "figlio1",
-      "descrizione" : "sono figlio1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "radice" : false,
-      "valida" : true
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "perfetto"
-    }
-  },
-  "username" : "f1",
+  "username" : "f",
   "tipoOfferta" : {
     "type" : "OffertaAperta",
     "identificativo" : "OffertaAperta"

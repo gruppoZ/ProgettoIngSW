@@ -2,6 +2,7 @@ package gestioneOfferte;
 
 import java.util.*;
 
+
 import gestioneCategorie.Categoria;
 import main.JsonIO;
 
@@ -11,7 +12,8 @@ public class GestioneOfferta {
 	private static final String PATH_STORICO_CAMBIO_STATI = "src/gestioneOfferte/storico_cambio_stati.json";
 	
 	private List<Offerta> listaOfferte; 
-	HashMap<Offerta, ArrayList<PassaggioTraStati>> movimentazioniPerOfferta;
+	
+	HashMap<Integer, ArrayList<PassaggioTraStati>> movimentazioniPerOfferta;
 	
 	public GestioneOfferta() {
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
@@ -23,6 +25,7 @@ public class GestioneOfferta {
 	}
 
 	protected void gestisciCambiamentoStatoOfferta(Offerta offerta) {
+		int id = offerta.getId();
 		StatoOfferta oldState, newState;
 		oldState = offerta.getTipoOfferta();
 		
@@ -32,13 +35,14 @@ public class GestioneOfferta {
 		
 		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
 		
-		if(movimentazioniPerOfferta.containsKey(offerta)) {
-			movimentazioniPerOfferta.get(offerta).add(cambio);
+		if(movimentazioniPerOfferta.containsKey(id)) {
+			movimentazioniPerOfferta.get(id).add(cambio);
 		} else {
 			ArrayList<PassaggioTraStati> passaggi = new ArrayList<PassaggioTraStati>();
 			passaggi.add(cambio);
-			movimentazioniPerOfferta.put(offerta, passaggi);
+			movimentazioniPerOfferta.put(id, passaggi);
 		}
+		
 		
 		salvaStoricoCambioStati();
 		salvaOfferte();
@@ -86,7 +90,8 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected HashMap<Offerta, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() {
+	//TODO: il return non serve a niente
+	protected HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() {
 		this.movimentazioniPerOfferta = JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
 		
 		return this.movimentazioniPerOfferta;
@@ -97,7 +102,7 @@ public class GestioneOfferta {
 	}
 	
 	protected void salvaStoricoCambioStati() {
-		JsonIO.salvaOggettoSuJson(PATH_OFFERTE, movimentazioniPerOfferta);
+		JsonIO.salvaOggettoSuJson(PATH_STORICO_CAMBIO_STATI, movimentazioniPerOfferta);
 	}
 	
 	protected int numeroOfferteAperte() {
@@ -116,16 +121,25 @@ public class GestioneOfferta {
 		return numeroOfferteAperte() > 0;
 	}
 	
+	private int getIdMax() {
+		int idMax = 0;
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getId() > idMax) idMax = offerta.getId();
+		}
+		return idMax;
+	}
+	
 	//gestione offerta/pubblicazione
 	//TODO: cambia nomi
 	protected void manageAggiuntaPubblicazione(Articolo articolo, String username) {
-		Offerta offerta = creaOfferta(articolo, username);
+		int id = getIdMax() + 1;
+		Offerta offerta = creaOfferta(id, articolo, username);
 		aggiungiOfferta(offerta);
 		salvaOfferte();
 	}
 	
-	private Offerta creaOfferta(Articolo articolo, String username) {
-		return new Offerta(articolo, username, new OffertaAperta());
+	private Offerta creaOfferta(int id, Articolo articolo, String username) {
+		return new Offerta(id, articolo, username, new OffertaAperta());
 	}
 	
 	protected void aggiungiOfferta(Offerta offerta) {

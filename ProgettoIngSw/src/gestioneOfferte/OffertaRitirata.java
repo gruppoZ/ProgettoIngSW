@@ -18,4 +18,9 @@ public class OffertaRitirata implements StatoOfferta {
 	@Override
 	public void changeState(Offerta offerta) {		
 	}
+
+	@Override
+	public String toString() {
+		return "OffertaRitirata [identificativo=" + identificativo + "]";
+	}
 }

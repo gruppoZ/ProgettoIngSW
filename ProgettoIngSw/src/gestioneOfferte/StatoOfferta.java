@@ -20,4 +20,6 @@ public interface StatoOfferta {
 	default void changeState(Offerta offerta, StatoOfferta newState) {
 		offerta.setTipoOfferta(newState);	
 	}
+	
+	
 }
