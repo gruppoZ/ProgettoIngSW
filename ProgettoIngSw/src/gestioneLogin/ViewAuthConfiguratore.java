@@ -4,6 +4,7 @@ import gestioneUtenti.Configuratore;
 
 public class ViewAuthConfiguratore extends ViewAuth{
 
+	private static final String MSG_GIVE_CREDENZIALI_DEFAULT = "Credenziali Default: \n\tUsername: %s \tPassword: %s\n";
 	private static final String MSG_PRE_REGISTRAZIONE = "Le credenziali da utilizzare per il primo accesso sono:";
 	private static final String TIPOLOGIA_UTENTE = "CONFIGURATORE\n";
 	
@@ -50,6 +51,9 @@ public class ViewAuthConfiguratore extends ViewAuth{
 	}
 	
 	private void showCredenzialiDefault() {
-		System.out.println(getGestoreAuth().getCredenzialiDefault());
+		String usernameDefault = getGestoreAuth().getCredenzialiDefault().getUsername();
+		String passwordDefault = getGestoreAuth().getCredenzialiDefault().getPassword();
+		
+		System.out.printf(MSG_GIVE_CREDENZIALI_DEFAULT, usernameDefault, passwordDefault);
 	}
 }

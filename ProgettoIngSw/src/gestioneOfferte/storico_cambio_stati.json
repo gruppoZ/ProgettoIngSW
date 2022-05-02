@@ -1,2 +1,22 @@
 {
-}
+    "1" : [ {
+      "oldState" : {
+        "type" : "OffertaAperta",
+        "identificativo" : "OffertaAperta"
+      },
+      "newState" : {
+        "type" : "OffertaRitirata",
+        "identificativo" : "OffertaRitirata"
+      }
+    } ],
+    "2" : [ {
+      "oldState" : {
+        "type" : "OffertaAperta",
+        "identificativo" : "OffertaAperta"
+      },
+      "newState" : {
+        "type" : "OffertaRitirata",
+        "identificativo" : "OffertaRitirata"
+      }
+    } ]
+  }

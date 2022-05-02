@@ -2,19 +2,26 @@ package gestioneOfferte;
 
 public class Offerta {
 	
+	private int id;
 	private Articolo articolo;
 	private String username; 
 	private StatoOfferta statoOfferta;
+	
 
 	public Offerta() {		
 	}
 	
-	public Offerta(Articolo articolo, String username, StatoOfferta statoOfferta) {
+	public Offerta(int id, Articolo articolo, String username, StatoOfferta tipoOfferta) {
+		this.id = id;
 		this.articolo = articolo;
 		this.username = username;
-		this.statoOfferta = statoOfferta;
+		this.statoOfferta = tipoOfferta;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -29,10 +36,13 @@ public class Offerta {
 	public void setTipoOfferta(StatoOfferta tipoOfferta) {
 		this.statoOfferta = tipoOfferta;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Offerta [articolo=" + articolo + ", username=" + username + ", tipoOfferta=" + statoOfferta + "]";
+		return "Offerta [id=" + id + ", articolo=" + articolo + ", username=" + username + ", tipoOfferta="
+				+ statoOfferta + "]";
 	}
+	
+	
 	
 }
