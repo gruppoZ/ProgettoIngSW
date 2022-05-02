@@ -168,7 +168,7 @@ public class ViewGerarchia {
 		descrizione = InputDati.leggiStringaNonVuota(categoriaPadre.getNome() + "->"+nome+"->Descrizione Categoria: ");
 		
 		
-		campiEreditati = categoriaPadre._getCampiNativiEreditati();
+		campiEreditati = categoriaPadre.getCampiNativiEreditati();
 		
 		ask_campoNativo = InputDati.yesOrNo(categoriaPadre.getNome() + "->"+nome+"->Inserire Campo Nativo?");
 		
@@ -250,7 +250,7 @@ public class ViewGerarchia {
 			Gerarchia gerarchia = gestoreGerarchia.getGerarchiaByName(nomeRootSelezionata);
 			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
 			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
-			List<Categoria> listaFoglie = gerarchia._getListaFoglie(); 
+			List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
  
 			for (Categoria categoria : listaFoglie) {
 				System.out.println(categoria);
@@ -259,7 +259,7 @@ public class ViewGerarchia {
 			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
 			
 			if(gerarchia.checkNomeCategoriaEsiste(nomeFogliaSelezionata)) {
-				Categoria foglia = gerarchia._getCategoriaByName(nomeFogliaSelezionata);
+				Categoria foglia = gerarchia.getCategoriaByName(nomeFogliaSelezionata);
 				
 				return foglia;
 			} else {

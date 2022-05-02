@@ -9,4 +9,20 @@ public class PassaggioTraStati {
 		this.oldState = oldState;
 		this.newState = newState;
 	}
+	
+	public StatoOfferta getOldState() {
+		return oldState;
+	}
+
+	public void setOldState(StatoOfferta oldState) {
+		this.oldState = oldState;
+	}
+
+	public StatoOfferta getNewState() {
+		return newState;
+	}
+
+	public void setNewState(StatoOfferta newState) {
+		this.newState = newState;
+	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Gerarchia {
 	
 	private Categoria root;
@@ -18,7 +20,8 @@ public class Gerarchia {
 		elencoCategorie = new HashMap<>();
 	}
 
-	public HashMap<String, Categoria> _getElencoCategorie() {
+	@JsonIgnore
+	public HashMap<String, Categoria> getElencoCategorie() {
 		return elencoCategorie;
 	}
 
@@ -59,16 +62,19 @@ public class Gerarchia {
 		return elencoCategorie.containsKey(formattaNome(nomeCategoria));
 	}
 	
-	public Categoria _getCategoriaByName(String nome) {
+	@JsonIgnore
+	public Categoria getCategoriaByName(String nome) {
 		return elencoCategorie.get(formattaNome(nome));
 	}
 	
-	protected String _getNomeGerarchia() {
+	@JsonIgnore
+	protected String getNomeGerarchia() {
 		return root.getNome();
 	}
 	
-	protected String _getNomeFormattato() {
-		return formattaNome(this._getNomeGerarchia());
+	@JsonIgnore
+	protected String getNomeFormattato() {
+		return formattaNome(this.getNomeGerarchia());
 	}
 	
 	/**
@@ -78,16 +84,17 @@ public class Gerarchia {
 	 * @param nomeDaEliminare della categoria
 	 */
 	protected void eliminaCategoria(String nomeDaEliminare) {
-		for (Categoria c : this._getCategoriaByName(nomeDaEliminare).getSottoCategorie()) {
+		for (Categoria c : this.getCategoriaByName(nomeDaEliminare).getSottoCategorie()) {
 			eliminaCategoria(c.getNome());
 		}
-		this._getCategoriaByName(nomeDaEliminare).setValida(false);
+		this.getCategoriaByName(nomeDaEliminare).setValida(false);
 		this.elencoCategorie.remove(formattaNome(nomeDaEliminare));
 		
 		this.getRoot().eliminaCategorieNonValide();
 	}
 
-	public List<Categoria> _getListaFoglie() {
+	@JsonIgnore
+	public List<Categoria> getListaFoglie() {
 		List<Categoria> listaFoglie = new ArrayList<Categoria>();
 		
 		for (Categoria categoria : elencoCategorie.values()) {

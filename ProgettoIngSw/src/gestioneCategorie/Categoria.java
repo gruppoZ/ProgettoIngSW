@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.unibs.fp.mylib.BelleStringhe;
 
 public class Categoria {
@@ -111,7 +113,8 @@ public class Categoria {
 	 * 
 	 * @return lista completa contenente sia campi nativi che ereditati, vuota se non presenti (e non null)
 	 */
-	public List<CampoCategoria> _getCampiNativiEreditati() {
+	@JsonIgnore
+	public List<CampoCategoria> getCampiNativiEreditati() {
 		if(isRadice)
 			return campiNativi;
 		else {
@@ -177,7 +180,7 @@ public class Categoria {
 	 * @return
 	 */
 	private String showCampi(String nTab) {
-		List<CampoCategoria> campi = _getCampiNativiEreditati();
+		List<CampoCategoria> campi = getCampiNativiEreditati();
 		StringBuffer result = new StringBuffer();
 		result.append(nTab + "CAMPI: \n");
 		

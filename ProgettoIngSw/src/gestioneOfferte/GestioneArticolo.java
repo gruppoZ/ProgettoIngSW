@@ -21,7 +21,7 @@ public class GestioneArticolo {
 	}
 	
 	public List<CampoCategoria> getListaCampi(){
-		return this.articolo.getFoglia()._getCampiNativiEreditati();
+		return this.articolo.getFoglia().getCampiNativiEreditati();
 	}
 	
 	public Articolo getArticolo() {

@@ -51,7 +51,7 @@ class testGestioneGerarchia {
 	}
 	
 	Categoria creaCategoria(Categoria padre, String id,int i) {
-		Categoria result = new Categoria(id + i, "desc_f#" + i, false, new ArrayList<>(), padre._getCampiNativiEreditati());
+		Categoria result = new Categoria(id + i, "desc_f#" + i, false, new ArrayList<>(), padre.getCampiNativiEreditati());
 		gestoreGerarchia.creaSottoCategoria(padre, result);
 		return result;
 	}

@@ -63,7 +63,7 @@ public class GestioneGerarchie {
 	}
 	
 	public void fineCreazioneGerarchia() {
-		this.getGerarchie().put(this.currentGerarchia._getNomeFormattato(), currentGerarchia);
+		this.getGerarchie().put(this.currentGerarchia.getNomeFormattato(), currentGerarchia);
 		salvaGerarchie();
 	}
 	
@@ -90,7 +90,7 @@ public class GestioneGerarchie {
 	}
 	
 	public Categoria getCategoriaByName(String nome) {
-		return this.currentGerarchia._getCategoriaByName(nome);
+		return this.currentGerarchia.getCategoriaByName(nome);
 	}
 	
 	protected boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
@@ -109,7 +109,7 @@ public class GestioneGerarchie {
 	}
 	
 	protected boolean checkCategoriaDaEliminare(String nomeCategoriaDaEliminare) {
-		Categoria categoriaDaEliminare = this.currentGerarchia._getCategoriaByName(nomeCategoriaDaEliminare);
+		Categoria categoriaDaEliminare = this.currentGerarchia.getCategoriaByName(nomeCategoriaDaEliminare);
 		return this.currentGerarchia.cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
 	}
 	
