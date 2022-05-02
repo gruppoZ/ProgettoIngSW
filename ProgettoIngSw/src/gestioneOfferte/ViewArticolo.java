@@ -10,6 +10,8 @@ import it.unibs.fp.mylib.InputDati;
 
 public class ViewArticolo {
 	
+	private static final String MSG_CAMPI_NON_COMPILATI_ARTICOLO = "Nessun Campo compilato per questo articolo!";
+
 	private static final String MSG_ERROR_COMPILAZIONE_CAMPO = "La compilazione dell'articolo non e' andata a buon fine";
 	
 	private static final String MSG_ASK_COMPILAZIONE_CAMPO = "Vuoi compilare il campo? ";
@@ -22,6 +24,9 @@ public class ViewArticolo {
 	private GestioneFruitore gestoreFruitore;
 	private GestioneArticolo gestoreArticolo;
 	private GestioneOfferta gestoreOfferte;
+	
+	public ViewArticolo() {
+	}
 	
 	public ViewArticolo(GestioneFruitore gestoreFruitore) {
 		this.gestoreFruitore = gestoreFruitore;
@@ -88,30 +93,17 @@ public class ViewArticolo {
 		}
 	}
 	
-//	public boolean compilaCampo(HashMap<CampoCategoria, String> valoriCampi, CampoCategoria campo) {
-//		if(InputDati.yesOrNo("Vuoi compilare il campo? ")) {
-//			String valoreCampo = InputDati.leggiStringaNonVuota("Inserire il valore del campo");
-//			valoriCampi.put(campo, valoreCampo);
-//			return true;
-//		}
-//		return false;
-//	}
-	
-//	public void showOfferteAperteByCategoria() {
-//		stampaGerarchie();
-//		//da fare tutti i controlli
-//		String nomeCategoria = InputDati.leggiStringaNonVuota("Inserire nome foglia");
-//		ArrayList<Offerta> listaOfferte = gestoreArticolo.leggiListaOfferte();
-//		
-//		/*
-//		for (Offerta offerta : listaOfferte) {
-//			if(pubblicazione.getTipoOfferta().equals(new OffertaAperta())) { //equals da modificare
-//				if(pubblicazione.getArticolo().getFoglia().getNome().equals(nomeCategoria))
-//					System.out.println(pubblicazione);
-//			}
-//			
-//		}
-//		*/
-//	}
-	
+	protected void showArticolo(Articolo articolo) {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("Articolo appartenente alla categoria: " + articolo.getFoglia().getNome() + "\n");
+		if(articolo.getValoreCampi().size() == 0)
+			sb.append(MSG_CAMPI_NON_COMPILATI_ARTICOLO);
+		else {
+			sb.append("\tCampi:");
+			articolo.getValoreCampi().forEach( (k,v) -> sb.append("\n\t\t" + k + ": " + v));
+		}
+		
+		System.out.println(sb.toString());
+	}
 }

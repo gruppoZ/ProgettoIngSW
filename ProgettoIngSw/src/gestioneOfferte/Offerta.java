@@ -4,15 +4,15 @@ public class Offerta {
 	
 	private Articolo articolo;
 	private String username; 
-	private StatoOfferta tipoOfferta;
+	private StatoOfferta statoOfferta;
 
 	public Offerta() {		
 	}
 	
-	public Offerta(Articolo articolo, String username, StatoOfferta tipoOfferta) {
+	public Offerta(Articolo articolo, String username, StatoOfferta statoOfferta) {
 		this.articolo = articolo;
 		this.username = username;
-		this.tipoOfferta = tipoOfferta;
+		this.statoOfferta = statoOfferta;
 	}
 	
 	public String getUsername() {
@@ -23,16 +23,16 @@ public class Offerta {
 	}
 	
 	public StatoOfferta getTipoOfferta() {
-		return tipoOfferta;
+		return statoOfferta;
 	}
 
 	public void setTipoOfferta(StatoOfferta tipoOfferta) {
-		this.tipoOfferta = tipoOfferta;
+		this.statoOfferta = tipoOfferta;
 	}
 	
 	@Override
 	public String toString() {
-		return "Offerta [articolo=" + articolo + ", username=" + username + ", tipoOfferta=" + tipoOfferta + "]";
+		return "Offerta [articolo=" + articolo + ", username=" + username + ", tipoOfferta=" + statoOfferta + "]";
 	}
 	
 }
