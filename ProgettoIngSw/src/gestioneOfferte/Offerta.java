@@ -5,7 +5,7 @@ public class Offerta {
 	private int id;
 	private Articolo articolo;
 	private String username; 
-	private StatoOfferta tipoOfferta;
+	private StatoOfferta statoOfferta;
 	
 
 	public Offerta() {		
@@ -15,7 +15,7 @@ public class Offerta {
 		this.id = id;
 		this.articolo = articolo;
 		this.username = username;
-		this.tipoOfferta = tipoOfferta;
+		this.statoOfferta = tipoOfferta;
 	}
 	
 	public int getId() {
@@ -30,17 +30,17 @@ public class Offerta {
 	}
 	
 	public StatoOfferta getTipoOfferta() {
-		return tipoOfferta;
+		return statoOfferta;
 	}
 
 	public void setTipoOfferta(StatoOfferta tipoOfferta) {
-		this.tipoOfferta = tipoOfferta;
+		this.statoOfferta = tipoOfferta;
 	}
 
 	@Override
 	public String toString() {
 		return "Offerta [id=" + id + ", articolo=" + articolo + ", username=" + username + ", tipoOfferta="
-				+ tipoOfferta + "]";
+				+ statoOfferta + "]";
 	}
 	
 	
