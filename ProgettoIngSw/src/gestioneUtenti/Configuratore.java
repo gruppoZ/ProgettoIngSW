@@ -15,16 +15,6 @@ public class Configuratore extends Utente {
 	}
 
 	@Override
-	public void registrati() {
-		//(new GestioneConfiguratore()).registrati(this);
-	}
-
-	@Override
-	public void accedi() {
-		//(new GestioneConfiguratore()).accedi(this);
-	}
-
-	@Override
 	public void menu(String username) {
 		(new ViewConfiguratore()).menu(username);
 	}

@@ -14,11 +14,9 @@ public class ViewOfferte {
 	private static final String MSG_OFFERTA_RITIRATA = "L'offerta e' stata rimossa";
 	private static final String MSG_ASK_RITIRARE_OFFERTA = "Vuoi ritirare questa offerta?";
 	//TODO: se non ci sono offerte => view "non sono presenti offerte"
-	//private GestioneArticolo gestoreArticolo; //gestore articolo fa troppe cose, da creare più gestori
 	private GestioneOfferta gestoreOfferta;
 	
 	public ViewOfferte() {
-		//gestoreArticolo = new GestioneArticolo();
 		gestoreOfferta = new GestioneOfferta();
 	}
 		
@@ -32,7 +30,7 @@ public class ViewOfferte {
 		
 		if(listaOfferteAttiveByUtente.size() > 0) {
 			for (Offerta offerta : listaOfferteAttiveByUtente) {
-				System.out.println(offerta);
+				showOfferta(offerta);
 				
 				boolean scelta = InputDati.yesOrNo(MSG_ASK_RITIRARE_OFFERTA);
 				if(scelta) {					
@@ -60,7 +58,7 @@ public class ViewOfferte {
 			
 			if(listaOfferteAttiveByCategoria.size() > 0) {
 				for (Offerta offerta : listaOfferteAttiveByCategoria) {
-					System.out.println(offerta);
+					showOfferta(offerta);
 				}
 			} else
 				System.out.println(MSG_OFFERTE_ATTIVE_BY_CATEGORIA_INESISTENTI);
@@ -78,10 +76,21 @@ public class ViewOfferte {
 				
 		if(listaOfferteByUtente.size() > 0) {
 			for (Offerta offerta : listaOfferteByUtente) {
-				System.out.println(offerta);
+				showOfferta(offerta);
 			}
 		} else
 			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
 	}
 	
+	protected void showOfferta(Offerta offerta) {
+		StringBuffer sb = new StringBuffer();
+		ViewArticolo viewArticolo = new ViewArticolo();
+		
+		sb.append("Offerta di " + offerta.getUsername() +".\n"
+				+ "->Stato Offerta: " + offerta.getTipoOfferta().getIdentificativo() + "\n"
+				+ "->" );
+		
+		System.out.print(sb.toString());
+		viewArticolo.showArticolo(offerta.getArticolo());
+	}
 }

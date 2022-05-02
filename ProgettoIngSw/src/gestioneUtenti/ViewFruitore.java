@@ -58,7 +58,7 @@ public class ViewFruitore extends ViewUtente{
 				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore);
 				viewArticolo.aggiungiArticolo();
 				break;
-			//possibile raggrupare case 4,5,6 in un unico menu(?)
+			//TODO: possibile raggrupare case 4,5,6 in un unico menu(?)
 			case 4:
 				viewOfferte = new ViewOfferte();
 				viewOfferte.ritiraOfferta(gestoreFruitore);

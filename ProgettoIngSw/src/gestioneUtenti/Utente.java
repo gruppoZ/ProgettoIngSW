@@ -25,8 +25,5 @@ public abstract class Utente {
 		this.credenziali = credenziali;
 	}	
 	
-	public abstract void registrati();
-	public abstract void accedi();
 	public abstract void menu(String username);
-	
 }
