@@ -308,8 +308,4 @@ public class ViewGerarchia {
 		if(!gerarchiaEliminata)
 			gestoreGerarchia.fineCreazioneGerarchia();
 	}		
-	
-	public void showGerarchia() {
-		
-	}
 }
