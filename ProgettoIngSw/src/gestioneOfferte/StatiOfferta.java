@@ -1,8 +1,8 @@
 package gestioneOfferte;
 
 public enum StatiOfferta {
-	OFFERTA_APERTA("Offerta Aperta"),
-	OFFERTA_RITIRATA("Offerta Ritirata");
+	OFFERTA_APERTA("OffertaAperta"),
+	OFFERTA_RITIRATA("OffertaRitirata");
 	
 	private String nome;
 	

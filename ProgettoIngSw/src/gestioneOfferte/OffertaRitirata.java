@@ -3,24 +3,24 @@ package gestioneOfferte;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class OffertaRitirata implements StatoOfferta {
-	String identificativo; //serve esplicitarlo per jackson
+	String stato; //serve esplicitarlo per jackson
 
 	@JsonCreator
 	public OffertaRitirata() {
-		identificativo = StatiOfferta.OFFERTA_RITIRATA.getNome();
+		stato = StatiOfferta.OFFERTA_RITIRATA.getNome();
 	}
 	
 	@Override
-	public String getIdentificativo() {
-		return this.identificativo;
+	public String getStato() {
+		return this.stato;
 	}
 
 	@Override
-	public void changeState(Offerta offerta) {		
+	public void changeState(Offerta offerta) {
 	}
 
 	@Override
 	public String toString() {
-		return "OffertaRitirata [identificativo=" + identificativo + "]";
+		return "OffertaRitirata [stato=" + stato + "]";
 	}
 }

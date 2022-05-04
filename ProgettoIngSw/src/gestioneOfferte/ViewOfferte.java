@@ -87,7 +87,7 @@ public class ViewOfferte {
 		ViewArticolo viewArticolo = new ViewArticolo();
 		
 		sb.append("Offerta di " + offerta.getUsername() +".\n"
-				+ "->Stato Offerta: " + offerta.getTipoOfferta().getIdentificativo() + "\n"
+				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
 				+ "->" );
 		
 		System.out.print(sb.toString());

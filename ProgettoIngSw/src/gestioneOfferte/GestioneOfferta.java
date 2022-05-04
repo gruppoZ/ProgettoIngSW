@@ -21,7 +21,7 @@ public class GestioneOfferta {
 	}
 	
 	protected boolean isOffertaAperta(Offerta offerta) {
-		return offerta.getTipoOfferta().getIdentificativo().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
+		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
 
 	protected void gestisciCambiamentoStatoOfferta(Offerta offerta) {
@@ -58,9 +58,9 @@ public class GestioneOfferta {
 		return listaLetta;
 	}
 	
-	protected List<Offerta> getOfferteByUtente(String username){
+	protected List<Offerta> getOfferteByUtente(String username) {
 		List<Offerta> result = new ArrayList<>();
-		for (Offerta offerta : leggiListaOfferte()) {
+		for (Offerta offerta : listaOfferte) {
 			if(offerta.getUsername().equalsIgnoreCase(username))
 				result.add(offerta);
 		}
@@ -68,9 +68,9 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected List<Offerta> getOfferteAttiveByUtente(String username){
+	protected List<Offerta> getOfferteAttiveByUtente(String username) {
 		List<Offerta> result = new ArrayList<>();
-		for (Offerta offerta : leggiListaOfferte()) {
+		for (Offerta offerta : listaOfferte) {
 			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaAperta(offerta))
 				result.add(offerta);
 		}
@@ -78,9 +78,9 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected List<Offerta> getOfferteAperteByCategoria(Categoria foglia){
+	protected List<Offerta> getOfferteAperteByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
-		for (Offerta offerta : leggiListaOfferte()) {
+		for (Offerta offerta : listaOfferte) {
 			if(isOffertaAperta(offerta)) {
 				if(offerta.getArticolo().getFoglia().equals(foglia))
 					result.add(offerta);		

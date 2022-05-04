@@ -14,8 +14,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -23,8 +23,8 @@
   },
   "username" : "f",
   "tipoOfferta" : {
-    "type" : "OffertaAperta",
-    "identificativo" : "OffertaAperta"
+    "type" : "OffertaRitirata",
+    "identificativo" : "OffertaRitirata"
   }
 }, {
   "id" : 2,
@@ -42,8 +42,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ok"
@@ -70,14 +70,42 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "oooke"
     }
   },
   "username" : "f",
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "identificativo" : "OffertaAperta"
+  }
+}, {
+  "id" : 4,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "a",
+      "descrizione" : "a",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "valida" : true,
+      "radice" : false
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "ottimo"
+    }
+  },
+  "username" : "r",
   "tipoOfferta" : {
     "type" : "OffertaAperta",
     "identificativo" : "OffertaAperta"

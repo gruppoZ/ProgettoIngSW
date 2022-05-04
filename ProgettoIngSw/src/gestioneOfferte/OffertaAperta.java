@@ -3,16 +3,16 @@ package gestioneOfferte;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class OffertaAperta implements StatoOfferta {
-	String identificativo; //serve esplicitarlo per jackson
+	String stato; //serve esplicitarlo per jackson
 	
 	@JsonCreator
 	public OffertaAperta() {
-		identificativo = StatiOfferta.OFFERTA_APERTA.getNome();
+		stato = StatiOfferta.OFFERTA_APERTA.getNome();
 	}
 	
 	@Override
-	public String getIdentificativo() {
-		return identificativo;
+	public String getStato() {
+		return stato;
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class OffertaAperta implements StatoOfferta {
 
 	@Override
 	public String toString() {
-		return "OffertaAperta [identificativo=" + identificativo + "]";
+		return "OffertaAperta [identificativo=" + stato + "]";
 	}
 	
 	

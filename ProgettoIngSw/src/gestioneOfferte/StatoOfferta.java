@@ -14,7 +14,7 @@ property = "type")
 })
 public interface StatoOfferta {
 	
-	String getIdentificativo();
+	String getStato();
 	void changeState(Offerta offerta);
 	
 	default void changeState(Offerta offerta, StatoOfferta newState) {

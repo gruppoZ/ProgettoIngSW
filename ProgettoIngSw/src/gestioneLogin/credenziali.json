@@ -57,5 +57,8 @@
   }, {
     "username" : "f1",
     "password" : "f1"
+  }, {
+    "username" : "r",
+    "password" : "r"
   } ]
 }
