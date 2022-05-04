@@ -31,19 +31,19 @@ public class ViewParametroPiazza extends ViewParametri {
 				fine = true;
 				break;
 			case 1:
-				view = new ViewParametroLuogo();
+				view = new ViewParametroLuogo(getGestoreParametri());
 				view.menu();
 				break;
 			case 2:
-				view = new ViewParametroGiorno();
+				view = new ViewParametroGiorno(getGestoreParametri());
 				view.menu();
 				break;
 			case 3:
-				view = new ViewParametroIntervalloOrario();
+				view = new ViewParametroIntervalloOrario(getGestoreParametri());
 				view.menu();
 				break;
 			case 4:
-				view = new ViewParametroScadenza();
+				view = new ViewParametroScadenza(getGestoreParametri());
 				view.menu();
 				break;
 			default:
@@ -89,23 +89,24 @@ public class ViewParametroPiazza extends ViewParametri {
 	@Override
 	public void aggiungi() {
 		String citta = inserisciCitta();
+		getGestoreParametri().setCitta(citta);
 		
-		view = new ViewParametroLuogo();
+		view = new ViewParametroLuogo(getGestoreParametri());
 		view.aggiungi();
 		//lista luoghi
 		List<String> listaLuoghi = getGestoreParametri().getLuoghi();
 		
 		//lista di giorni
-		view = new ViewParametroGiorno();
+		view = new ViewParametroGiorno(getGestoreParametri());
 		view.aggiungi();
 		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 		
 		//listaIntervalli
-		view = new ViewParametroIntervalloOrario();
+		view = new ViewParametroIntervalloOrario(getGestoreParametri());
 		view.aggiungi();
 		List<IntervalloOrario> intervalliOrari = getGestoreParametri().getIntervalli();
 		
-		view = new ViewParametroScadenza();
+		view = new ViewParametroScadenza(getGestoreParametri());
 		view.aggiungi();
 		int scadenza = getGestoreParametri().getScadenza();
 		

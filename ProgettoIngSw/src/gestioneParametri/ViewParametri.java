@@ -29,6 +29,10 @@ public abstract class ViewParametri {
 		gestoreParametri = new GestioneParametri();
 	}
 	
+	public ViewParametri(GestioneParametri gestoreParametri) {
+		this.gestoreParametri = gestoreParametri;
+	}
+	
 	public GestioneParametri getGestoreParametri() {
 		return this.gestoreParametri;
 	}

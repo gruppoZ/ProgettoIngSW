@@ -15,8 +15,8 @@ public class ViewParametroLuogo extends ViewParametri{
 	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
 	private static final String TIPOLOGIA_PARAMETRO = "Luoghi";	
 	
-	public ViewParametroLuogo() {
-		super();
+	public ViewParametroLuogo(GestioneParametri gestoreParametri) {
+		super(gestoreParametri);
 	}
 	
 	@Override

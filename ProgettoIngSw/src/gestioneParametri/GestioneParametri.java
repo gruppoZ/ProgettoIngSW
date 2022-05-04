@@ -25,6 +25,10 @@ public class GestioneParametri {
  		return this.piazza;
  	}
  	
+ 	protected void setCitta(String citta) {
+ 		this.piazza.setCitta(citta);
+ 	}
+ 	
  	protected List<String> getLuoghi(){
  		return piazza.getLuoghi();
  	}
