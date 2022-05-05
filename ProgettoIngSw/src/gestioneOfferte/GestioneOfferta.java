@@ -13,17 +13,21 @@ public class GestioneOfferta {
 	
 	private List<Offerta> listaOfferte; 
 	
-	HashMap<Integer, ArrayList<PassaggioTraStati>> movimentazioniPerOfferta;
+	HashMap<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
 	
 	public GestioneOfferta() {
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
-		leggiStoricoCambioStati();
+		this.storicoMovimentazioni = leggiStoricoCambioStati();
 	}
 	
 	protected boolean isOffertaAperta(Offerta offerta) {
 		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
 
+	/**
+	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
+	 * @param offerta
+	 */
 	protected void gestisciCambiamentoStatoOfferta(Offerta offerta) {
 		int id = offerta.getId();
 		StatoOfferta oldState, newState;
@@ -35,12 +39,12 @@ public class GestioneOfferta {
 		
 		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
 		
-		if(movimentazioniPerOfferta.containsKey(id)) {
-			movimentazioniPerOfferta.get(id).add(cambio);
+		if(storicoMovimentazioni.containsKey(id)) {
+			storicoMovimentazioni.get(id).add(cambio);
 		} else {
 			ArrayList<PassaggioTraStati> passaggi = new ArrayList<PassaggioTraStati>();
 			passaggi.add(cambio);
-			movimentazioniPerOfferta.put(id, passaggi);
+			storicoMovimentazioni.put(id, passaggi);
 		}
 		
 		
@@ -58,6 +62,13 @@ public class GestioneOfferta {
 		return listaLetta;
 	}
 	
+	protected Offerta getOffertaById(int id, List<Offerta> listaOfferte) {
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getId() == id) return offerta;
+		}
+		return null;
+	}
+	
 	protected List<Offerta> getOfferteByUtente(String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -68,7 +79,7 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected List<Offerta> getOfferteAttiveByUtente(String username) {
+	protected List<Offerta> getOfferteAperteByUtente(String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaAperta(offerta))
@@ -90,11 +101,8 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	//TODO: il return non serve a niente
 	protected HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() {
-		this.movimentazioniPerOfferta = JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
-		
-		return this.movimentazioniPerOfferta;
+		return JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
 	}
 	
 	protected void salvaOfferte() {
@@ -102,16 +110,14 @@ public class GestioneOfferta {
 	}
 	
 	protected void salvaStoricoCambioStati() {
-		JsonIO.salvaOggettoSuJson(PATH_STORICO_CAMBIO_STATI, movimentazioniPerOfferta);
+		JsonIO.salvaOggettoSuJson(PATH_STORICO_CAMBIO_STATI, storicoMovimentazioni);
 	}
 	
 	protected int numeroOfferteAperte() {
 		int n = 0;
 		
 		for (Offerta offerta : this.listaOfferte) {
-			if(isOffertaAperta(offerta)) {
-				n++;
-			}
+			if(isOffertaAperta(offerta)) n++;
 		}
 		
 		return n;
@@ -121,7 +127,7 @@ public class GestioneOfferta {
 		return numeroOfferteAperte() > 0;
 	}
 	
-	private int getIdMax() {
+	protected int getIdMax() {
 		int idMax = 0;
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() > idMax) idMax = offerta.getId();
@@ -129,9 +135,7 @@ public class GestioneOfferta {
 		return idMax;
 	}
 	
-	//gestione offerta/pubblicazione
-	//TODO: cambia nomi
-	protected void manageAggiuntaPubblicazione(Articolo articolo, String username) {
+	protected void manageAggiuntaOfferta(Articolo articolo, String username) {
 		int id = getIdMax() + 1;
 		Offerta offerta = creaOfferta(id, articolo, username);
 		aggiungiOfferta(offerta);

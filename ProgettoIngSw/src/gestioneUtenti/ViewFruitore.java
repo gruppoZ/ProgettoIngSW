@@ -14,9 +14,9 @@ public class ViewFruitore extends ViewUtente{
 	
 	private static final String MSG_VISUALIZZA_PIAZZA = "Visualizza Piazza";
 	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
-	private static final String MSG_OFFERTA_RITIRATA = "Ritira un offerta";
+	private static final String MSG_OFFERTA_RITIRATA = "Ritira un'offerta";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
-	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le tue Offerte aperte e ritirate ";
+	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le proprie Offerte aperte e ritirate ";
 
 	private static final String [] TXT_VOCI = {
 			MSG_VISUALIZZA_GERARCHIE,

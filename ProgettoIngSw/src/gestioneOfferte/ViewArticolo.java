@@ -44,7 +44,7 @@ public class ViewArticolo {
 			if(inserisciValoriCampi()) {
 				System.out.println(MSG_PUBBLICAZIONE_ACCETTATA);
 				
-				gestoreOfferte.manageAggiuntaPubblicazione(gestoreArticolo.getArticolo(), gestoreFruitore.getUsername());
+				gestoreOfferte.manageAggiuntaOfferta(gestoreArticolo.getArticolo(), gestoreFruitore.getUsername());
 			}
 		}
 	}
@@ -85,7 +85,6 @@ public class ViewArticolo {
 	private boolean inserisciValoriCampi() {		
 		if(compilaCampiObbligatori()) {
 			compilaCampiFacoltativi();
-			//TODO: dire al gestore che la creazione e' terminata con successo
 			return true;
 		}  else {
 			System.out.println(MSG_ERROR_COMPILAZIONE_CAMPO);

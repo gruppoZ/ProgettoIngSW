@@ -7,7 +7,6 @@ import java.util.List;
 import gestioneCategorie.CampoCategoria;
 import gestioneCategorie.Categoria;
 
-//TODO: serve un gestore a livello più alto che fa cose comuni sia per l'articolo che per le offerte e che abbia la lista delle offerte
 public class GestioneArticolo {
 	
 	private Articolo articolo;

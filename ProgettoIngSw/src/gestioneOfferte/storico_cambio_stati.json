@@ -2,11 +2,69 @@
   "1" : [ {
     "oldState" : {
       "type" : "OffertaAperta",
-      "identificativo" : "OffertaAperta"
+      "stato" : "OffertaAperta"
     },
     "newState" : {
       "type" : "OffertaRitirata",
-      "identificativo" : "OffertaRitirata"
+      "stato" : "OffertaRitirata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
+  } ],
+  "2" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
+  } ],
+  "3" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
+  } ],
+  "4" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
+  } ],
+  "5" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
     }
   } ]
 }

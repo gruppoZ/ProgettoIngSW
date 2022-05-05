@@ -8,40 +8,44 @@ import it.unibs.fp.mylib.InputDati;
 
 public class ViewOfferte {
 
+	private static final String MSG_ID_NON_VALIDO = "\nL'id selezionato non fa riferimento a nessun'offerta aperta del fruitore";
+	private static final String MSG_RICHIESTA_ID = "\nInserire l'id dell'offerta da ritirare: ";
 	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
-	private static final String MSG_OFFERTE_ATTIVE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti offerte ATTIVE per la categoria selezionata.";
-	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "Non ci sono offerte da ritirare";
-	private static final String MSG_OFFERTA_RITIRATA = "L'offerta e' stata rimossa";
-	private static final String MSG_ASK_RITIRARE_OFFERTA = "Vuoi ritirare questa offerta?";
-	//TODO: se non ci sono offerte => view "non sono presenti offerte"
+	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti offerte per la categoria selezionata.";
+	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
+	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
+	
 	private GestioneOfferta gestoreOfferta;
 	
 	public ViewOfferte() {
 		gestoreOfferta = new GestioneOfferta();
 	}
-		
+	
 	/**
-	 * Mostra, se disponibli altrimenti viene detto che non ci sono, uno ad uno le offerte attive che fanno a capo l'username/utente loggato
-	 * Per ogni offerta viene chiesto se la si vuole ritirare
+	 * Permette di ritirare un offerta selezionandola tramite l'id
 	 * @param gestoreFruitore
 	 */
 	public void ritiraOfferta(GestioneFruitore gestoreFruitore) {
-		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAttiveByUtente(gestoreFruitore.getUsername());
+		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteAttiveByUtente.size() > 0) {
-			for (Offerta offerta : listaOfferteAttiveByUtente) {
-				showOfferta(offerta);
-				
-				boolean scelta = InputDati.yesOrNo(MSG_ASK_RITIRARE_OFFERTA);
-				if(scelta) {					
-					gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta);
-					
-					System.out.println(MSG_OFFERTA_RITIRATA);
-				}
+			showOfferteAperteByName(gestoreFruitore);
+			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
+			
+			Offerta offerta = gestoreOfferta.getOffertaById(id, listaOfferteAttiveByUtente);
+			
+			if(offerta != null) {
+				gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta);
+				System.out.println(MSG_OFFERTA_RITIRATA);
+			} else {
+				System.out.println(MSG_ID_NON_VALIDO);
 			}
 		} else {
 			System.out.println(MSG_OFFERTE_RITIRABILI_INESISTENTI);
-		}	
+		}
+		
+		
+		
 	}
 	
 	/**
@@ -61,7 +65,7 @@ public class ViewOfferte {
 					showOfferta(offerta);
 				}
 			} else
-				System.out.println(MSG_OFFERTE_ATTIVE_BY_CATEGORIA_INESISTENTI);
+				System.out.println(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI);
 		}
 	}
 	
@@ -82,13 +86,32 @@ public class ViewOfferte {
 			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
 	}
 	
+	public void showOfferteAperteByName(GestioneFruitore gestoreFruitore) {
+		String username = gestoreFruitore.getUsername();
+		
+		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByUtente(username);
+				
+		if(listaOfferteByUtente.size() > 0) {
+			for (Offerta offerta : listaOfferteByUtente) {
+				showOfferta(offerta);
+			}
+		} else
+			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+	}
+	
 	protected void showOfferta(Offerta offerta) {
 		StringBuffer sb = new StringBuffer();
 		ViewArticolo viewArticolo = new ViewArticolo();
 		
-		sb.append("Offerta di " + offerta.getUsername() +".\n"
+		sb.append("Offerta ID: " + offerta.getId() + "\n"
+				+"->Autore: " + offerta.getUsername() + "\n"
 				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
 				+ "->" );
+		
+//		sb.append("Offerta di " + offerta.getUsername() +".\n"
+//				+"->ID: " + offerta.getId() + "\n"
+//				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
+//				+ "->" );
 		
 		System.out.print(sb.toString());
 		viewArticolo.showArticolo(offerta.getArticolo());
