@@ -16,6 +16,10 @@ public class ViewParametroScadenza extends ViewParametri{
 			MSG_MODIFICA,
 	};
 	
+	public ViewParametroScadenza(GestioneParametri gestoreParametri) {
+		super(gestoreParametri);
+	}
+	
 	@Override
 	public void menu() {
 		MyMenu menuModificaPiazza = new MyMenu(TXT_TITOLO, TXT_VOCI_MODIFICA);

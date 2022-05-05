@@ -34,18 +34,20 @@ public class IntervalloOrario {
 		this.orarioMax = orarioMax;
 	}
 	
-	public boolean parzialmenteInclude(IntervalloOrario intervallo) {
-		if(this.include(intervallo.getOrarioMin()) || this.include(intervallo.getOrarioMax()))
-			return true;
-		
-		return false;
+	public boolean minIsBefore(LocalTime orario) {
+		return this.orarioMin.isBefore(orario);
 	}
 	
-	private boolean include(LocalTime orario) {
-		if(orario.isAfter(this.getOrarioMin()) && orario.isBefore(this.getOrarioMax()))
-			return true;
-		else
-			return false;
+	public boolean parzialmenteInclude(IntervalloOrario intervallo) {
+		return this.includeMin(intervallo.getOrarioMin()) || this.includeMax(intervallo.getOrarioMax());
+	}
+	
+	private boolean includeMin(LocalTime orarioMin) {
+		return (orarioMin.isAfter(this.orarioMin) && orarioMin.isBefore(this.orarioMax)) || (orarioMin.equals(this.orarioMin));
+	}
+	
+	private boolean includeMax(LocalTime orarioMax) {
+		return (orarioMax.isAfter(this.orarioMin) && orarioMax.isBefore(this.orarioMax)) || (orarioMax.equals(this.orarioMax));
 	}
 
 	@Override

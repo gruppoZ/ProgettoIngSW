@@ -15,6 +15,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI = "Impossibile rimuovere l'Intervallo Orario. Ricorda che almeno un intervallo orario deve rimanere fissato.";
 	private static final String MSG_INTERVALLO_RIMOSSO = "\nIntervallo rimosso!\n";
 	private static final String MSG_INTERVALLI_SOVRAPPOSTI = "\nImpossibile inserire l'intervallo. L'intervallo inserito si sovrappone con gli intervalli gia' presenti\n";
+	private static final String MSG_NESSUN_INTERVALLO_PRESENTE = "\nNessun intervallo presente\n";
 	
 	private static final String ASK_ORA_INIZIALE_INTERVALLO_RIMUOVERE = "Inserire l'orario iniziale dell'intervallo da rimuovere";
 	private static final String ASK_OPERAZIONE_DESIDERATA = "\n\nDigita il numero dell'opzione desiderata > ";
@@ -30,6 +31,10 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 	private static final String GIVE_ORA_INIZIALE_INTERVALLO_RIMUOVERE = "Orario iniziale dell'intervallo da eliminare: %s\n";
 	
 	private static final String TIPOLOGIA_PARAMETRO = "Intervalli";
+	
+	public ViewParametroIntervalloOrario(GestioneParametri gestoreParametri) {
+		super(gestoreParametri);
+	}
 	
 	@Override
 	public void menu() {
@@ -56,17 +61,16 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 
 	@Override
 	public void aggiungi() {
-		List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
-		
-		showIntervalli();
 		
 		do {
+			List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
+			showIntervalli();
 			IntervalloOrario daAggiungere = creaIntervalloOrario();
 			
 			if(!getGestoreParametri().checkAggiuntaIntervalloOrario(listaIntervalli, daAggiungere))
 				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
-			
-			System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
+			else
+				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
 		} while(InputDati.yesOrNo(ASK_ALTRI_INTERVALLI));
 		
 		showIntervalli();
@@ -96,7 +100,10 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 
 	private void showIntervalli() {
 		System.out.print(GIVE_INTERVALLI_PRESENTI);
-		System.out.println(getGestoreParametri().getIntervalli().toString());
+		if(getGestoreParametri().getIntervalli().size() > 0)
+			System.out.println(getGestoreParametri().getIntervalli().toString());
+		else
+			System.out.println(MSG_NESSUN_INTERVALLO_PRESENTE);
 	}
 	
 	private IntervalloOrario creaIntervalloOrario() {

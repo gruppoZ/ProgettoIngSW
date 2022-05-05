@@ -14,6 +14,10 @@ public class ViewParametroGiorno extends ViewParametri{
 	private static final String MSG_GIORNO_GIA_PRESENTE = "Il giorno selezionato e' gia' presente";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
 	
+	public ViewParametroGiorno(GestioneParametri gestoreParametri) {
+		super(gestoreParametri);
+	}
+	
 	@Override
 	public void menu() {
 		MyMenu menuModificaGiorni = new MyMenu(TIPOLOGIA_PARAMETRO, TXT_VOCI_MODIFICA);

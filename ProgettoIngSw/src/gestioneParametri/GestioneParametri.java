@@ -1,6 +1,7 @@
 package gestioneParametri;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import main.JsonIO;
 
@@ -25,6 +26,10 @@ public class GestioneParametri {
  		return this.piazza;
  	}
  	
+ 	protected void setCitta(String citta) {
+ 		this.piazza.setCitta(citta);
+ 	}
+ 	
  	protected List<String> getLuoghi(){
  		return piazza.getLuoghi();
  	}
@@ -35,6 +40,10 @@ public class GestioneParametri {
  	
  	protected List<IntervalloOrario> getIntervalli(){
  		return piazza.getIntervalliOrari();
+ 	}
+ 	
+ 	protected void setIntervalli(List<IntervalloOrario> intervalli) {
+ 		this.piazza.setIntervalliOrari(intervalli);
  	}
  	
  	protected int getNumeroIntervalliOrari() {
@@ -122,6 +131,29 @@ public class GestioneParametri {
 		}
  	}
  	
+ 	
+ 	private IntervalloOrario estraiIntervalloMin(List<IntervalloOrario> orari) {
+ 		IntervalloOrario intervalloMin = orari.get(0);
+ 		
+ 		for (IntervalloOrario intervallo : orari) {
+			if(intervallo.minIsBefore(intervalloMin.getOrarioMin())) intervalloMin = intervallo;
+		}
+ 		
+ 		return intervalloMin;
+ 	}
+ 	
+ 	private List<IntervalloOrario> ordinaListaIntervalliOrari(List<IntervalloOrario> orari) {
+ 		List<IntervalloOrario> ordinata = new ArrayList<IntervalloOrario>();
+ 		
+ 		do {
+	 		IntervalloOrario intervalloMin = estraiIntervalloMin(orari);
+	 		orari.remove(intervalloMin);
+	 		ordinata.add(intervalloMin);
+ 		} while(orari.size() > 0);
+ 		
+ 		return ordinata;
+ 	}
+ 	
  	/**
  	 * 
  	 * @param orari
@@ -131,6 +163,8 @@ public class GestioneParametri {
  	protected boolean checkAggiuntaIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) {
  		if(checkValiditaIntervallo(orari, orarioDaAggiungere)) {
  			orari.add(orarioDaAggiungere);
+ 			if(orari.size() > 1)
+ 				setIntervalli(ordinaListaIntervalliOrari(orari));
  			salvaPiazza();
  			return true;
  		} else {
