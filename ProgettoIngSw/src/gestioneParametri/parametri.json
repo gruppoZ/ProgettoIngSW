@@ -1,10 +1,13 @@
 {
   "citta" : "brescia",
   "luoghi" : [ "nord" ],
-  "giorni" : [ "LUNEDI" ],
+  "giorni" : [ "SABATO" ],
   "intervalliOrari" : [ {
-    "orarioMin" : [ 23, 0 ],
-    "orarioMax" : [ 23, 30 ]
+    "orarioMin" : [ 9, 0 ],
+    "orarioMax" : [ 10, 0 ]
+  }, {
+    "orarioMin" : [ 11, 0 ],
+    "orarioMax" : [ 12, 0 ]
   } ],
-  "scadenza" : 22
+  "scadenza" : 1
 }

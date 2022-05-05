@@ -66,9 +66,10 @@ public class ViewParametroPiazza extends ViewParametri {
 				fine = true;
 				break;
 			case 1:
-				if(!getGestoreParametri().isPiazzaCreata())
+				if(!getGestoreParametri().isPiazzaCreata()) {
 					aggiungi();
-				else {
+					fine = true;
+				} else {
 					System.out.println(MSG_PIAZZA_GIA_PRESENTE);
 					showPiazza();
 				}
