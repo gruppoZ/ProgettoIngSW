@@ -3,11 +3,20 @@
   "luoghi" : [ "nord" ],
   "giorni" : [ "SABATO" ],
   "intervalliOrari" : [ {
+    "orarioMin" : [ 0, 0 ],
+    "orarioMax" : [ 0, 30 ]
+  }, {
+    "orarioMin" : [ 1, 0 ],
+    "orarioMax" : [ 2, 0 ]
+  }, {
     "orarioMin" : [ 9, 0 ],
     "orarioMax" : [ 10, 0 ]
   }, {
     "orarioMin" : [ 11, 0 ],
     "orarioMax" : [ 12, 0 ]
+  }, {
+    "orarioMin" : [ 15, 0 ],
+    "orarioMax" : [ 16, 0 ]
   } ],
   "scadenza" : 1
 }

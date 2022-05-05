@@ -61,11 +61,10 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 
 	@Override
 	public void aggiungi() {
-		List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
-		
-		showIntervalli();
 		
 		do {
+			List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
+			showIntervalli();
 			IntervalloOrario daAggiungere = creaIntervalloOrario();
 			
 			if(!getGestoreParametri().checkAggiuntaIntervalloOrario(listaIntervalli, daAggiungere))
