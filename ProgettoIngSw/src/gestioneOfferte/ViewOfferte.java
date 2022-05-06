@@ -44,8 +44,6 @@ public class ViewOfferte {
 			System.out.println(MSG_OFFERTE_RITIRABILI_INESISTENTI);
 		}
 		
-		
-		
 	}
 	
 	/**
@@ -107,11 +105,6 @@ public class ViewOfferte {
 				+"->Autore: " + offerta.getUsername() + "\n"
 				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
 				+ "->" );
-		
-//		sb.append("Offerta di " + offerta.getUsername() +".\n"
-//				+"->ID: " + offerta.getId() + "\n"
-//				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
-//				+ "->" );
 		
 		System.out.print(sb.toString());
 		viewArticolo.showArticolo(offerta.getArticolo());
