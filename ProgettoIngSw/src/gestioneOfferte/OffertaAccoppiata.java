@@ -2,12 +2,12 @@ package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class OffertaAperta implements StatoOfferta {
+public class OffertaAccoppiata implements StatoOfferta{
 	String stato; //serve esplicitarlo per jackson
 	
 	@JsonCreator
-	public OffertaAperta() {
-		stato = StatiOfferta.OFFERTA_APERTA.getNome();
+	public OffertaAccoppiata() {
+		stato = StatiOfferta.OFFERTA_ACCOPPIATA.getNome();
 	}
 	
 	@Override
@@ -17,12 +17,10 @@ public class OffertaAperta implements StatoOfferta {
 
 	@Override
 	public void changeState(Offerta offerta) {
-		offerta.setTipoOfferta(new OffertaRitirata());	
 	}
 
 	@Override
 	public String toString() {
-		return "OffertaAperta [identificativo=" + stato + "]";
+		return "OffertaAccoppiata [identificativo=" + stato + "]";
 	}
 }
-

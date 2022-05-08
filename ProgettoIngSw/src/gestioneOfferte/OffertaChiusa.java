@@ -2,27 +2,25 @@ package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class OffertaAperta implements StatoOfferta {
+public class OffertaChiusa implements StatoOfferta{
 	String stato; //serve esplicitarlo per jackson
-	
+
 	@JsonCreator
-	public OffertaAperta() {
-		stato = StatiOfferta.OFFERTA_APERTA.getNome();
+	public OffertaChiusa() {
+		stato = StatiOfferta.OFFERTA_CHIUSA.getNome();
 	}
 	
 	@Override
 	public String getStato() {
-		return stato;
+		return this.stato;
 	}
 
 	@Override
 	public void changeState(Offerta offerta) {
-		offerta.setTipoOfferta(new OffertaRitirata());	
 	}
 
 	@Override
 	public String toString() {
-		return "OffertaAperta [identificativo=" + stato + "]";
+		return "OffertaChiusa [stato=" + stato + "]";
 	}
 }
-
