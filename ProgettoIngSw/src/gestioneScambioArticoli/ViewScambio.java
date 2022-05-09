@@ -9,6 +9,7 @@ import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
 import gestioneOfferte.OffertaSelezionata;
+import gestioneOfferte.ViewArticolo;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
 import gestioneUtenti.GestioneFruitore;
@@ -28,6 +29,7 @@ public class ViewScambio {
 			MSG_MESSAGGI_RICEVUTI
 	};
 	
+	private GestioneBaratto gestoreBaratto;
 	
 	private GestioneOfferta gestoreOfferta;
 	private GestioneFruitore gestoreFruitore;
@@ -39,6 +41,7 @@ public class ViewScambio {
 	public ViewScambio(GestioneOfferta gestoreOfferta, GestioneFruitore gestoreFruitore) {
 		this.gestoreOfferta = gestoreOfferta;
 		this.gestoreFruitore = gestoreFruitore;
+		this.gestoreBaratto = new GestioneBaratto();
 		this.gestorePiazza = new GestioneParametri();
 	}
 	
@@ -75,26 +78,39 @@ public class ViewScambio {
 		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
 		try {
-			System.out.println("\nSeleziona una offerta tra le tue: ");
+			System.out.println("\nSeleziona una delle tue offerte: ");
 			offertaA = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
 			
 			System.out.println("---------------------------------");
 			System.out.println("\nSeleziona un'offerta tra le offerte degli altri fruitori: ");
 			offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
+
+			gestoreBaratto.creaCollegamento(offertaA, offertaB);
 			
-			//Non è View
-			offertaA.getTipoOfferta().changeState(offertaA, new OffertaAccoppiata());
-			offertaB.getTipoOfferta().changeState(offertaB, new OffertaSelezionata());
+			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
-			//da spostare
-			LocalDate dataScadenza = LocalDate.now();
-			dataScadenza = dataScadenza.plusDays(gestorePiazza.getScadenza()); //errore
-			
-			Scambio scambio = new Scambio(offertaA, offertaB, dataScadenza);
-			
-			System.out.println(scambio);
+			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}		
+	}
+	
+	private void showBaratto(Baratto baratto) {
+		StringBuffer sb = new StringBuffer();
+		ViewOfferte viewOfferta = new ViewOfferte();
+		sb.append("Baratto:\n"
+				+ "->Scadenza: " + baratto.getScadenza() + "\n"
+				+ "-> Appuntamento\n"
+				+ "\t Luogo: " + baratto.getAppuntamento().getLuogo() + "\n"
+				+ "\t Data: " + baratto.getAppuntamento().getData() + "\n"
+				+ "\t Ora: " + baratto.getAppuntamento().getOra() + "\n\n"
+ 				);
+		
+		System.out.print(sb.toString());
+		
+		Offerta offertaA = baratto.getOffertaA();
+		Offerta offertaB = baratto.getOffertaB();
+		viewOfferta.showOfferta(offertaA);
+		viewOfferta.showOfferta(offertaB);
 	}
 }

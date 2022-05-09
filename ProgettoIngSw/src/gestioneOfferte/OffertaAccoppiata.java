@@ -21,6 +21,6 @@ public class OffertaAccoppiata implements StatoOfferta{
 
 	@Override
 	public String toString() {
-		return "OffertaAccoppiata [identificativo=" + stato + "]";
+		return "OffertaAccoppiata [stato=" + stato + "]";
 	}
 }

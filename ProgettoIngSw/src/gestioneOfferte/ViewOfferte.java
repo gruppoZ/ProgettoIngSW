@@ -173,7 +173,7 @@ public class ViewOfferte {
 			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
 	}
 	
-	protected void showOfferta(Offerta offerta) {
+	public void showOfferta(Offerta offerta) {
 		StringBuffer sb = new StringBuffer();
 		ViewArticolo viewArticolo = new ViewArticolo();
 		

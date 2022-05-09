@@ -22,7 +22,7 @@ public class OffertaAperta implements StatoOfferta {
 
 	@Override
 	public String toString() {
-		return "OffertaAperta [identificativo=" + stato + "]";
+		return "OffertaAperta [stato=" + stato + "]";
 	}
 }
 
