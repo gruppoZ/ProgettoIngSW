@@ -66,5 +66,15 @@
       "type" : "OffertaRitirata",
       "stato" : "OffertaRitirata"
     }
+  } ],
+  "8" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaRitirata",
+      "stato" : "OffertaRitirata"
+    }
   } ]
 }

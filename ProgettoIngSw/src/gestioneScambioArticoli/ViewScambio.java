@@ -1,7 +1,18 @@
 package gestioneScambioArticoli;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
+import gestioneCategorie.Categoria;
+import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.GestioneOfferta;
+import gestioneOfferte.Offerta;
+import gestioneOfferte.OffertaAccoppiata;
+import gestioneOfferte.OffertaSelezionata;
+import gestioneOfferte.ViewOfferte;
+import gestioneParametri.GestioneParametri;
 import gestioneUtenti.GestioneFruitore;
+import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewScambio {
@@ -20,6 +31,7 @@ public class ViewScambio {
 	
 	private GestioneOfferta gestoreOfferta;
 	private GestioneFruitore gestoreFruitore;
+	private GestioneParametri gestorePiazza;
 	
 	public ViewScambio() {
 	}
@@ -50,7 +62,7 @@ public class ViewScambio {
 	
 	private void scambiaArticolo() {
 		/**
-		 * Scegli un'articolo di tua proprietà da scambiare
+		 * Scegli un'offerta di tua proprietà
 		 * visualizza tutte le offerte aperte appartenenti alla stessa categoria di un'altro fruitore
 		 * Scegli offerta desiderata
 		 * Conferma
@@ -59,5 +71,20 @@ public class ViewScambio {
 		 * 	-> Collega le 2 offerte
 		 * 
 		 */
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
+		
+		Offerta offertaA = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
+		Offerta offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNotUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
+		
+		offertaA.getTipoOfferta().changeState(offertaA, new OffertaAccoppiata());
+		offertaB.getTipoOfferta().changeState(offertaB, new OffertaSelezionata());
+		
+		//da spostare
+		LocalDate dataScadenza = LocalDate.now();
+		dataScadenza.plusDays(gestorePiazza.getScadenza()); //errore
+		
+		Scambio scambio = new Scambio(offertaA, offertaB, dataScadenza);
+		
+		System.out.println(scambio);
 	}
 }

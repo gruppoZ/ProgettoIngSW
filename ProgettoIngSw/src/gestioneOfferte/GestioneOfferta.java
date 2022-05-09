@@ -66,7 +66,7 @@ public class GestioneOfferta {
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() == id) return offerta;
 		}
-		return null;
+		return null; //TODO: meglio return null o throw null pointer?
 	}
 	
 	protected List<Offerta> getOfferteByUtente(String username) {
@@ -79,7 +79,7 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected List<Offerta> getOfferteAperteByUtente(String username) {
+	public List<Offerta> getOfferteAperteByUtente(String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaAperta(offerta))
@@ -89,10 +89,22 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected List<Offerta> getOfferteAperteByCategoria(Categoria foglia) {
+	public List<Offerta> getOfferteAperteByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
 			if(isOffertaAperta(offerta)) {
+				if(offerta.getArticolo().getFoglia().equals(foglia))
+					result.add(offerta);		
+			}
+		}
+		
+		return result;
+	}
+	
+	public List<Offerta> getOfferteAperteByCategoriaNotUsername(Categoria foglia, String username) {
+		List<Offerta> result = new ArrayList<>();
+		for (Offerta offerta : listaOfferte) {
+			if(isOffertaAperta(offerta) && !offerta.getUsername().equals(username)) {
 				if(offerta.getArticolo().getFoglia().equals(foglia))
 					result.add(offerta);		
 			}

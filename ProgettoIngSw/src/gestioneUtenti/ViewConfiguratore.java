@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import gestioneCategorie.Categoria;
 import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.ViewParametri;
@@ -46,7 +47,10 @@ public class ViewConfiguratore extends ViewUtente{
 				break;
 			case 4:
 				ViewOfferte viewOfferte = new ViewOfferte();
-				viewOfferte.showOfferteAperteByCategoria();
+				ViewGerarchia viewGerarchia = new ViewGerarchia();
+				
+				Categoria foglia = viewGerarchia.scegliFoglia();
+				viewOfferte.showOfferteAperteByCategoria(foglia);
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	
