@@ -7,12 +7,12 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroLuogo extends ViewParametri{
 
-	private static final String MSG_ERRORE_RIMOZIONE_LUOGHI_INSUFFICIENTI = "Impossibile rimuovere il luogo. Ricorda che almeno un luogo deve rimanere fissato.";
+	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
 	private static final String MSG_ERRORE_RIMOZIONE_LUOGO = "Impossibile rimuovere il luogo. Nome non valido";
+	private static final String MSG_ERRORE_RIMOZIONE_LUOGHI_INSUFFICIENTI = "Impossibile rimuovere il luogo. Ricorda che almeno un luogo deve rimanere fissato.";
 	private static final String ASK_LUOGO_RIMOZIONE = "Inserisci il luogo da rimuovere: ";
 	private static final String ASK_ALTRI_LUOGHI = "Vuoi inserire altri luoghi? ";
 	private static final String ASK_LUOGO = "Inserisci un luogo: ";
-	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
 	private static final String TIPOLOGIA_PARAMETRO = "Luoghi";	
 	
 	public ViewParametroLuogo(GestioneParametri gestoreParametri) {
@@ -50,8 +50,11 @@ public class ViewParametroLuogo extends ViewParametri{
 		do {
 			String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO);
 			
-			if(!getGestoreParametri().checkAggiuntaLuogo(listaLuoghi, luogo))
-				System.out.println(MSG_LUOGO_GIA_PRESNTE);			
+			try {
+				getGestoreParametri().aggiungiLuogo(listaLuoghi, luogo);
+			} catch(RuntimeException e) {
+				System.out.println(MSG_LUOGO_GIA_PRESNTE);
+			}		
 		} while(InputDati.yesOrNo(ASK_ALTRI_LUOGHI));
 	}
 
@@ -66,8 +69,11 @@ public class ViewParametroLuogo extends ViewParametri{
 		if(!getGestoreParametri().checkVincoloLuoghiMinimi())
 			System.out.println(MSG_ERRORE_RIMOZIONE_LUOGHI_INSUFFICIENTI);
 		else {
-			if(!getGestoreParametri().checkRimozioneLuogo(listaLuoghi, luogoDaEliminare))
-				System.out.println(MSG_ERRORE_RIMOZIONE_LUOGO);
+			try {
+				getGestoreParametri().rimuoviLuogo(listaLuoghi, luogoDaEliminare);
+			} catch(RuntimeException e) {
+				System.out.println(MSG_ERRORE_RIMOZIONE_LUOGO); 
+			}
 		}
 	}
 	

@@ -50,7 +50,7 @@ public class GestioneParametri {
  		return piazza.getIntervalliOrari().size();
  	}
  	
- 	public int getScadenza() {
+ 	protected int getScadenza() {
  		return piazza.getScadenza();
  	}
 
@@ -58,15 +58,13 @@ public class GestioneParametri {
  	 * 
  	 * @param listaLuoghi
  	 * @param luogo
- 	 * @return TRUE se luogo è stato aggiunto alla lista, FALSE se non è stato aggiunto a causa di duplicati
  	 */
- 	protected boolean checkAggiuntaLuogo(List<String> listaLuoghi, String luogo) {
+ 	protected void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException {
  		if(checkPresenzaLuogo(listaLuoghi, luogo)) {
- 			return false;
+ 			throw new RuntimeException();
  		} else {
  			listaLuoghi.add(luogo);	
  			salvaPiazza();
- 			return true;
  		}		
  	}
  	
@@ -76,13 +74,12 @@ public class GestioneParametri {
  	 * @param luogoDaEliminare
  	 * @return TRUE se luogo è stato rimosso dalla lista, FALSE se non è stato rimosso
  	 */
- 	protected boolean checkRimozioneLuogo(List<String> listaLuoghi, String luogoDaEliminare) {
+ 	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
  		if(checkPresenzaLuogo(piazza.getLuoghi(), luogoDaEliminare)) {
 			piazza.rimuoviLuogo(luogoDaEliminare);
 			salvaPiazza();
-			return true;
 		} else {
-			return false;
+			throw new RuntimeException();
 		}
  	}
  	
@@ -99,17 +96,15 @@ public class GestioneParametri {
  	 * 
  	 * @param giorni
  	 * @param giorno
- 	 * @return TRUE se giorno è stato aggiunto alla lista, FALSE se non è stato aggiunto a causa di duplicati
  	 */
- 	protected boolean checkAggiuntaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
+ 	protected void aggiungiGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) throws RuntimeException {
  		if(checkPresenzaGiorno(giorni, giorno)) {
- 			return false;
+ 			throw new RuntimeException();
  		} else {
  			giorni.add(giorno);
  			piazza.setGiorni(ordinaListaGiorni(giorni));
  			
  			salvaPiazza();
- 			return true;
  		}		
  	}
  	
@@ -117,17 +112,15 @@ public class GestioneParametri {
  	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
- 	 * @return TRUE se giorno è stato rimosso dalla lista, FALSE se non è stato rimosso
  	 */
- 	protected boolean checkRimozioneGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) {
+ 	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException {
  		if(checkPresenzaGiorno(piazza.getGiorni() ,giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
 			piazza.setGiorni(ordinaListaGiorni(giorni));
 			
 			salvaPiazza();
-			return true;
 		} else {
-			return false;
+ 			throw new RuntimeException();
 		}
  	}
  	
@@ -158,17 +151,15 @@ public class GestioneParametri {
  	 * 
  	 * @param orari
  	 * @param orarioDaAggiungere
- 	 * @return TRUE se intervalloOrario è stato aggiunto alla lista, FALSE se non è stato aggiunto a causa di incongruenze con altri intervalli
  	 */
- 	protected boolean checkAggiuntaIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) {
+ 	protected void aggiungiIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) throws RuntimeException {
  		if(checkValiditaIntervallo(orari, orarioDaAggiungere)) {
  			orari.add(orarioDaAggiungere);
  			if(orari.size() > 1)
  				setIntervalli(ordinaListaIntervalliOrari(orari));
  			salvaPiazza();
- 			return true;
  		} else {
- 			return false;
+ 			throw new RuntimeException();
  		}		
  	}
  	
@@ -176,20 +167,16 @@ public class GestioneParametri {
  	 *
  	 * @param giorni
  	 * @param giornoDaEliminare
- 	 * @return TRUE se intervalloOrario è stato rimosso dalla lista, FALSE se non è stato rimosso
  	 */
- 	protected boolean checkRimozioneIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) {
+ 	protected void rimuoviIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) throws RuntimeException {
  		for (IntervalloOrario intervallo : orari) {
 			if(orarioMinDaEliminare.equals(intervallo.getOrarioMin())) {
-		
 				piazza.rimuoviIntervallo(intervallo);
 				salvaPiazza();
-				
-				return true;
 			}
 		}
-
- 		return false;
+ 		
+		throw new RuntimeException();
  	} 	
  	
  	/**
