@@ -8,15 +8,16 @@ import it.unibs.fp.mylib.MyMenu;
 public class ViewParametroIntervalloOrario extends ViewParametri{
 
 	private static final String GIVE_INTERVALLI_PRESENTI = "\nIntervalli presenti: ";
-	private static final String MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE = "\nIntervallo aggiunto correttamente!\n";
+	private static final String MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE = "\nIntervallo aggiunto correttamente!";
 	private static final String MSG_TITOLO_ORARIO_FINALE = "\n------Inserimento Orario Finale------";
 	private static final String MSG_TITOLO_ORARIO_INIZIALE = "\n------Inserimento Orario Iniziale------";
-	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLO_NON_VALIDO = "Impossibile rimuovere l'intervallo. Intervallo non valido";
 	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI = "Impossibile rimuovere l'Intervallo Orario. Ricorda che almeno un intervallo orario deve rimanere fissato.";
 	private static final String MSG_INTERVALLO_RIMOSSO = "\nIntervallo rimosso!\n";
-	private static final String MSG_INTERVALLI_SOVRAPPOSTI = "\nImpossibile inserire l'intervallo. L'intervallo inserito si sovrappone con gli intervalli gia' presenti\n";
 	private static final String MSG_NESSUN_INTERVALLO_PRESENTE = "\nNessun intervallo presente\n";
+	private static final String MSG_INTERVALLI_SOVRAPPOSTI = "\nImpossibile inserire l'intervallo. L'intervallo inserito si sovrappone con gli intervalli gia' presenti\n";
+	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLO_NON_VALIDO = "Impossibile rimuovere l'intervallo. Intervallo non valido";
 	
+
 	private static final String ASK_ORA_INIZIALE_INTERVALLO_RIMUOVERE = "Inserire l'orario iniziale dell'intervallo da rimuovere";
 	private static final String ASK_OPERAZIONE_DESIDERATA = "\n\nDigita il numero dell'opzione desiderata > ";
 	private static final String ASK_ORARIO_FINALE = "Inserire l'orario finale dell'intervallo";
@@ -67,13 +68,15 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 			showIntervalli();
 			IntervalloOrario daAggiungere = creaIntervalloOrario();
 			
-			if(!getGestoreParametri().checkAggiuntaIntervalloOrario(listaIntervalli, daAggiungere))
-				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
-			else
+			try {
+				getGestoreParametri().aggiungiIntervalloOrario(listaIntervalli, daAggiungere);
 				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
+				showIntervalli();
+			} catch(RuntimeException e) {
+				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
+			}
 		} while(InputDati.yesOrNo(ASK_ALTRI_INTERVALLI));
 		
-		showIntervalli();
 	}
 
 	@Override
@@ -89,12 +92,13 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		if(!getGestoreParametri().checkVincolIntervalliMinimi())
 			System.out.println(MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI);
 		else {
-			if(getGestoreParametri().checkRimozioneIntervalloOrario(listaIntervalli, orarioMinDaEliminare)) {
+			try {
+				getGestoreParametri().rimuoviIntervalloOrario(listaIntervalli, orarioMinDaEliminare);
 				System.out.println(MSG_INTERVALLO_RIMOSSO);
 				showIntervalli();
-			}	
-			else
+			} catch (RuntimeException e) {
 				System.out.println(MSG_ERRORE_RIMOZIONE_INTERVALLO_NON_VALIDO);
+			}
 		}
 	}
 
