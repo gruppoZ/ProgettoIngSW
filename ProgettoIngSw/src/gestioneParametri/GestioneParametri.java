@@ -50,7 +50,7 @@ public class GestioneParametri {
  		return piazza.getIntervalliOrari().size();
  	}
  	
- 	protected int getScadenza() {
+ 	public int getScadenza() {
  		return piazza.getScadenza();
  	}
 
