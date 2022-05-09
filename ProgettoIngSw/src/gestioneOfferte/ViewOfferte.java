@@ -14,9 +14,7 @@ public class ViewOfferte {
 	//costanti per menu
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Gestisci Offerte";
-	
-	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
-	
+		
 	private static final String MSG_RITIRA_OFFERTA = "Ritira un'offerta";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
 	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le proprie Offerte aperte e ritirate ";

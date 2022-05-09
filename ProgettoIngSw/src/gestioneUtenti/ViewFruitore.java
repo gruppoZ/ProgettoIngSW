@@ -29,7 +29,6 @@ public class ViewFruitore extends ViewUtente{
 		GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
 		
 		ViewOfferte viewOfferte;//per ora qua perchè tre case lo usano
-		ViewScambio viewScambio;
 		
 		MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
