@@ -7,11 +7,11 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroGiorno extends ViewParametri{
 	
+	private static final String MSG_GIORNO_GIA_PRESENTE = "Il giorno selezionato e' gia' presente";
+	private static final String MSG_GIORNO_NON_VALIDO = "Giorno non valido";
 	private static final String MSG_GIORNI_PRESENTI = "Giorni per ora presenti: ";
 	private static final String ASK_GIORNO_DESIDERATO = "Seleziona il giorno desiderato: ";
-	private static final String MSG_GIORNO_NON_VALIDO = "Giorno non valido";
 	private static final String ASK_INSERIRE_ALTRI_GIORNI = "Vuoi inserire altri giorni? ";
-	private static final String MSG_GIORNO_GIA_PRESENTE = "Il giorno selezionato e' gia' presente";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
 	
 	public ViewParametroGiorno(GestioneParametri gestoreParametri) {
@@ -52,11 +52,14 @@ public class ViewParametroGiorno extends ViewParametri{
 		
 		do {
 			GiorniDellaSettimana giorno = leggiGiorno();
-
-			presente = !getGestoreParametri().checkAggiuntaGiorno(giorni, giorno);
 			
-			if(presente)
+			try {
+				getGestoreParametri().aggiungiGiorno(giorni, giorno);
+				presente = false;
+			} catch (RuntimeException e) {
 				System.out.println(MSG_GIORNO_GIA_PRESENTE);
+				presente = true;
+			}
 			
 		} while(presente || InputDati.yesOrNo(ASK_INSERIRE_ALTRI_GIORNI));	
 	}
@@ -69,8 +72,11 @@ public class ViewParametroGiorno extends ViewParametri{
 
 		GiorniDellaSettimana giornoDaEliminare = leggiGiorno();
 		
-		if(!getGestoreParametri().checkRimozioneGiorno(giorni, giornoDaEliminare))
+		try {
+			getGestoreParametri().rimuoviGiorno(giorni, giornoDaEliminare);
+		} catch (RuntimeException e) {
 			System.out.println(MSG_GIORNO_NON_VALIDO);
+		}
 	}
 	
 	private void showGiorniPresenti() {
