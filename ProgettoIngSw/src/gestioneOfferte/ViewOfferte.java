@@ -82,11 +82,16 @@ public class ViewOfferte {
 		} while(!fine);
 	}
 	
-	public Offerta getOffertaById(List<Offerta> listaOfferte) {
-		showOfferte(listaOfferte); //TODO: da mettere fuori questo show
-		int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
-		
-		 return gestoreOfferta.getOffertaById(id, listaOfferte);
+	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException {
+		try {
+			showOfferte(listaOfferte); //TODO: da mettere fuori questo show
+			
+			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
+			
+			return gestoreOfferta.getOffertaById(id, listaOfferte);
+		} catch (Exception e) {
+			throw new NullPointerException(MSG_OFFERTE_INESISTENTI);
+		}
 	}
 	
 	/**
@@ -111,13 +116,14 @@ public class ViewOfferte {
 		
 	}
 	
-	public void showOfferte(List<Offerta> listaOfferte) {
+	public void showOfferte(List<Offerta> listaOfferte) throws RuntimeException {
 		if(listaOfferte.size() > 0) {
 			for (Offerta offerta : listaOfferte) {
 				showOfferta(offerta);
 			}
 		} else
-			System.out.println(MSG_OFFERTE_INESISTENTI);
+			throw new RuntimeException();
+			//System.out.println(MSG_OFFERTE_INESISTENTI);
 	}
 	
 	/**

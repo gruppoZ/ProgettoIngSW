@@ -101,7 +101,7 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	public List<Offerta> getOfferteAperteByCategoriaNotUsername(Categoria foglia, String username) {
+	public List<Offerta> getOfferteAperteByCategoriaNonDiPoprietaDiUsername(Categoria foglia, String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
 			if(isOffertaAperta(offerta) && !offerta.getUsername().equals(username)) {

@@ -21,7 +21,7 @@ public class ViewScambio {
 	private static final String TXT_TITOLO = "Scambio Articoli";
 	
 	private static final String MSG_SCEGLI_OFFERTE_APERTE = "Scambia Articolo";
-	private static final String MSG_MESSAGGI_RICEVUTI = "Visualizza messaggi ricevuiti";
+	private static final String MSG_MESSAGGI_RICEVUTI = "Visualizza messaggi ricevuti";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_SCEGLI_OFFERTE_APERTE,
@@ -39,6 +39,7 @@ public class ViewScambio {
 	public ViewScambio(GestioneOfferta gestoreOfferta, GestioneFruitore gestoreFruitore) {
 		this.gestoreOfferta = gestoreOfferta;
 		this.gestoreFruitore = gestoreFruitore;
+		this.gestorePiazza = new GestioneParametri();
 	}
 	
 	public void menu() {	
@@ -72,19 +73,28 @@ public class ViewScambio {
 		 * 
 		 */
 		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
-		
-		Offerta offertaA = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
-		Offerta offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNotUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
-		
-		offertaA.getTipoOfferta().changeState(offertaA, new OffertaAccoppiata());
-		offertaB.getTipoOfferta().changeState(offertaB, new OffertaSelezionata());
-		
-		//da spostare
-		LocalDate dataScadenza = LocalDate.now();
-		dataScadenza.plusDays(gestorePiazza.getScadenza()); //errore
-		
-		Scambio scambio = new Scambio(offertaA, offertaB, dataScadenza);
-		
-		System.out.println(scambio);
+		Offerta offertaA = new Offerta(), offertaB = new Offerta();
+		try {
+			System.out.println("\nSeleziona una offerta tra le tue: ");
+			offertaA = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
+			
+			System.out.println("---------------------------------");
+			System.out.println("\nSeleziona un'offerta tra le offerte degli altri fruitori: ");
+			offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
+			
+			//Non è View
+			offertaA.getTipoOfferta().changeState(offertaA, new OffertaAccoppiata());
+			offertaB.getTipoOfferta().changeState(offertaB, new OffertaSelezionata());
+			
+			//da spostare
+			LocalDate dataScadenza = LocalDate.now();
+			dataScadenza = dataScadenza.plusDays(gestorePiazza.getScadenza()); //errore
+			
+			Scambio scambio = new Scambio(offertaA, offertaB, dataScadenza);
+			
+			System.out.println(scambio);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}		
 	}
 }
