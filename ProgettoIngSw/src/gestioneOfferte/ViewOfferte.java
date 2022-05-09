@@ -3,11 +3,32 @@ package gestioneOfferte;
 import java.util.ArrayList;
 import gestioneCategorie.Categoria;
 import gestioneCategorie.ViewGerarchia;
+import gestioneScambioArticoli.ViewScambio;
 import gestioneUtenti.GestioneFruitore;
+import gestioneUtenti.GestioneUtente;
 import it.unibs.fp.mylib.InputDati;
+import it.unibs.fp.mylib.MyMenu;
 
 public class ViewOfferte {
 
+	//costanti per menu
+	protected static final String TXT_ERRORE = "ERRORE";
+	private static final String TXT_TITOLO = "Gestisci Offerte";
+	
+	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
+	
+	private static final String MSG_RITIRA_OFFERTA = "Ritira un'offerta";
+	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
+	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le proprie Offerte aperte e ritirate ";
+	private static final String MSG_SCAMBIA_ARTICOLI = "Scambia Articoli";
+	
+	private static final String [] TXT_VOCI = {
+			MSG_RITIRA_OFFERTA,
+			MSG_OFFERTE_APERTE,
+			MSG_OFFERTE_AUTORE,
+			MSG_SCAMBIA_ARTICOLI			
+	};
+	
 	private static final String MSG_ID_NON_VALIDO = "\nL'id selezionato non fa riferimento a nessun'offerta aperta del fruitore";
 	private static final String MSG_RICHIESTA_ID = "\nInserire l'id dell'offerta da ritirare: ";
 	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
@@ -16,9 +37,45 @@ public class ViewOfferte {
 	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
 	
 	private GestioneOfferta gestoreOfferta;
+	private GestioneFruitore gestoreFruitore;
 	
 	public ViewOfferte() {
 		gestoreOfferta = new GestioneOfferta();
+	}
+	public ViewOfferte(GestioneFruitore gestoreFruitore) {
+		this.gestoreFruitore = gestoreFruitore;
+		gestoreOfferta = new GestioneOfferta();
+	}
+	
+	public void menu() {
+		MyMenu menuOfferte = new MyMenu(TXT_TITOLO, TXT_VOCI);
+		ViewScambio viewScambio;
+		
+		int scelta = 0;
+		boolean fine = false;
+		do {
+			scelta = menuOfferte.scegli();
+			switch(scelta) {
+			case 0:
+				fine = true;
+				break;
+			case 1:
+				ritiraOfferta(gestoreFruitore);				
+				break;
+			case 2:
+				showOfferteAperteByCategoria();		
+				break;
+			case 3:
+				showOfferteByName(gestoreFruitore);			
+				break;
+			case 4:
+				viewScambio = new ViewScambio(gestoreOfferta, gestoreFruitore);	
+				viewScambio.menu();
+				break;
+			default:
+				System.out.println(TXT_ERRORE);
+			}
+		} while(!fine);
 	}
 	
 	/**
