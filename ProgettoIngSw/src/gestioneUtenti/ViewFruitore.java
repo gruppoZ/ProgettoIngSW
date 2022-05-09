@@ -2,7 +2,7 @@ package gestioneUtenti;
 
 import gestioneOfferte.ViewArticolo;
 import gestioneOfferte.ViewOfferte;
-import gestioneScambioArticoli.ViewScambio;
+import gestioneScambioArticoli.ViewBaratto;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{

@@ -57,7 +57,7 @@
       "stato" : "OffertaSelezionata"
     }
   },
-  "scadenza" : [ 2022, 5, 10 ],
+  "scadenza" : [ 2022, 12, 17 ],
   "appuntamento" : {
     "luogo" : null,
     "data" : null,

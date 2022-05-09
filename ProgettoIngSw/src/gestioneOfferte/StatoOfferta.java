@@ -11,6 +11,9 @@ property = "type")
 @JsonSubTypes({
 @Type(value = OffertaAperta.class),
 @Type(value = OffertaRitirata.class),
+@Type(value = OffertaAccoppiata.class),
+@Type(value = OffertaSelezionata.class),
+@Type(value = OffertaInScambio.class)
 })
 public interface StatoOfferta {
 	

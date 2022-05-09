@@ -163,8 +163,8 @@
   },
   "username" : "f",
   "tipoOfferta" : {
-    "type" : "OffertaAperta",
-    "stato" : "OffertaAperta"
+    "type" : "OffertaAccoppiata",
+    "stato" : "OffertaAccoppiata"
   }
 }, {
   "id" : 7,
@@ -245,7 +245,7 @@
   },
   "username" : "wewe",
   "tipoOfferta" : {
-    "type" : "OffertaAperta",
-    "stato" : "OffertaAperta"
+    "type" : "OffertaSelezionata",
+    "stato" : "OffertaSelezionata"
   }
 } ]

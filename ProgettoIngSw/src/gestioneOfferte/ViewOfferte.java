@@ -5,7 +5,7 @@ import java.util.List;
 
 import gestioneCategorie.Categoria;
 import gestioneCategorie.ViewGerarchia;
-import gestioneScambioArticoli.ViewScambio;
+import gestioneScambioArticoli.ViewBaratto;
 import gestioneUtenti.GestioneFruitore;
 import gestioneUtenti.GestioneUtente;
 import it.unibs.fp.mylib.InputDati;
@@ -51,7 +51,7 @@ public class ViewOfferte {
 	
 	public void menu() {
 		MyMenu menuOfferte = new MyMenu(TXT_TITOLO, TXT_VOCI);
-		ViewScambio viewScambio;
+		ViewBaratto viewScambio;
 		
 		int scelta = 0;
 		boolean fine = false;
@@ -73,7 +73,7 @@ public class ViewOfferte {
 				showOfferteByName();			
 				break;
 			case 4:
-				viewScambio = new ViewScambio(gestoreOfferta, gestoreFruitore);	
+				viewScambio = new ViewBaratto(gestoreOfferta, gestoreFruitore);	
 				viewScambio.menu();
 				break;
 			default:
@@ -84,7 +84,7 @@ public class ViewOfferte {
 	
 	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException {
 		try {
-			showOfferte(listaOfferte); //TODO: da mettere fuori questo show
+			showOfferte(listaOfferte);
 			
 			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
 			
@@ -105,7 +105,7 @@ public class ViewOfferte {
 			Offerta offerta = this.getOffertaById(listaOfferteAttiveByUtente);
 			
 			if(offerta != null) {
-				gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta);
+				gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
 				System.out.println(MSG_OFFERTA_RITIRATA);
 			} else {
 				System.out.println(MSG_ID_NON_VALIDO);

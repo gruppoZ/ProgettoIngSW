@@ -23,17 +23,17 @@ public class GestioneOfferta {
 	protected boolean isOffertaAperta(Offerta offerta) {
 		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
-
+	
 	/**
 	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
 	 * @param offerta
 	 */
-	protected void gestisciCambiamentoStatoOfferta(Offerta offerta) {
+	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) {
 		int id = offerta.getId();
 		StatoOfferta oldState, newState;
 		oldState = offerta.getTipoOfferta();
 		
-		offerta.getTipoOfferta().changeState(offerta);
+		offerta.getTipoOfferta().changeState(offerta, stato);
 		
 		newState = offerta.getTipoOfferta();
 		
@@ -46,7 +46,6 @@ public class GestioneOfferta {
 			passaggi.add(cambio);
 			storicoMovimentazioni.put(id, passaggi);
 		}
-		
 		
 		salvaStoricoCambioStati();
 		salvaOfferte();

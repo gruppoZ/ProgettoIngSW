@@ -16,7 +16,7 @@ import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
-public class ViewScambio {
+public class ViewBaratto {
 	//costanti per menu
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Scambio Articoli";
@@ -35,10 +35,10 @@ public class ViewScambio {
 	private GestioneFruitore gestoreFruitore;
 	private GestioneParametri gestorePiazza;
 	
-	public ViewScambio() {
+	public ViewBaratto() {
 	}
 	
-	public ViewScambio(GestioneOfferta gestoreOfferta, GestioneFruitore gestoreFruitore) {
+	public ViewBaratto(GestioneOfferta gestoreOfferta, GestioneFruitore gestoreFruitore) {
 		this.gestoreOfferta = gestoreOfferta;
 		this.gestoreFruitore = gestoreFruitore;
 		this.gestoreBaratto = new GestioneBaratto();
@@ -85,7 +85,7 @@ public class ViewScambio {
 			System.out.println("\nSeleziona un'offerta tra le offerte degli altri fruitori: ");
 			offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
-			gestoreBaratto.creaCollegamento(offertaA, offertaB);
+			gestoreBaratto.creaCollegamento(gestoreOfferta, offertaA, offertaB);
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			

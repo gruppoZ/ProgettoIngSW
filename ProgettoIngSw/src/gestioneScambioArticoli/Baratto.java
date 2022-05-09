@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import gestioneOfferte.Offerta;
 
+//TODO: questi dati potrebbero essere salvati in Offera in Scambio
 public class Baratto {
 	Offerta offertaA;
 	Offerta offertaB;

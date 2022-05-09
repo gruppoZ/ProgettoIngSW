@@ -67,6 +67,16 @@
       "stato" : "OffertaRitirata"
     }
   } ],
+  "6" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  } ],
   "8" : [ {
     "oldState" : {
       "type" : "OffertaAperta",
@@ -75,6 +85,16 @@
     "newState" : {
       "type" : "OffertaRitirata",
       "stato" : "OffertaRitirata"
+    }
+  } ],
+  "9" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
     }
   } ]
 }

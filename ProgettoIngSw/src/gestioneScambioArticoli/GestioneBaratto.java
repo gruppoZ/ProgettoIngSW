@@ -3,6 +3,7 @@ package gestioneScambioArticoli;
 import java.time.LocalDate;
 import java.util.List;
 
+import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
 import gestioneOfferte.OffertaSelezionata;
@@ -32,9 +33,9 @@ public class GestioneBaratto {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
 	}
 	
-	protected void creaCollegamento(Offerta offertaA, Offerta offertaB) {
-		offertaA.getTipoOfferta().changeState(offertaA, new OffertaAccoppiata());
-		offertaB.getTipoOfferta().changeState(offertaB, new OffertaSelezionata());
+	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
 	}
 	
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {
