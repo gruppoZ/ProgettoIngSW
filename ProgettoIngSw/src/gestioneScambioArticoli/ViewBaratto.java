@@ -76,11 +76,14 @@ public class ViewBaratto {
 			
 			System.out.println("---------------------------------");
 			System.out.println("\nSeleziona un'offerta tra le offerte degli altri fruitori: ");
+			
 			offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
 			gestoreBaratto.creaCollegamento(gestoreOfferta, offertaA, offertaB);
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
+			
+			creaAppuntamento();
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -90,8 +93,8 @@ public class ViewBaratto {
 	
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
-		viewParametroLuogo.showLuoghi();
 		
+		String luogo = viewParametroLuogo.scegliLuogo();
 		
 		
 		return null;
@@ -101,7 +104,7 @@ public class ViewBaratto {
 		StringBuffer sb = new StringBuffer();
 		ViewOfferte viewOfferta = new ViewOfferte();
 		
-		sb.append("##############################\n");
+		sb.append("**************************************\n");
 		sb.append("Baratto:\n"
 				+ "->Scadenza: " + baratto.getScadenza() + "\n"
 				+ "-> Appuntamento\n"

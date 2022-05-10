@@ -7,6 +7,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroLuogo extends ViewParametri{
 
+	private static final String MSG_LUOGO_NON_PRESENTE = "il luogo scelto non è stato trovato. Scegli un luogo valido: ";
 	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
 	private static final String MSG_ERRORE_RIMOZIONE_LUOGO = "Impossibile rimuovere il luogo. Nome non valido";
 	private static final String MSG_ERRORE_RIMOZIONE_LUOGHI_INSUFFICIENTI = "Impossibile rimuovere il luogo. Ricorda che almeno un luogo deve rimanere fissato.";
@@ -75,6 +76,18 @@ public class ViewParametroLuogo extends ViewParametri{
 				System.out.println(MSG_ERRORE_RIMOZIONE_LUOGO); 
 			}
 		}
+	}
+	
+	public String scegliLuogo() {
+		showLuoghi();
+		
+		String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO + "(CASE-SENSITIVE)");
+	
+		while(!getGestoreParametri().checkPresenzaLuogo(getGestoreParametri().getLuoghi(), luogo)) {
+			luogo = InputDati.leggiStringaNonVuota(MSG_LUOGO_NON_PRESENTE);
+		}
+		
+		return luogo;
 	}
 	
 	public void showLuoghi() {
