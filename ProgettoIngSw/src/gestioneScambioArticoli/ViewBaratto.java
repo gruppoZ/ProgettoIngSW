@@ -4,6 +4,8 @@ import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
+import gestioneParametri.ViewParametroGiorno;
+import gestioneParametri.ViewParametroLuogo;
 import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -84,6 +86,15 @@ public class ViewBaratto {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}		
+	}
+	
+	private Appuntamento creaAppuntamento() {
+		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
+		viewParametroLuogo.showLuoghi();
+		
+		
+		
+		return null;
 	}
 	
 	private void showBaratto(Baratto baratto) {

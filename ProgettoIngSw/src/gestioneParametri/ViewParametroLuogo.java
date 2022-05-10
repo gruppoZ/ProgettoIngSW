@@ -77,7 +77,7 @@ public class ViewParametroLuogo extends ViewParametri{
 		}
 	}
 	
-	private void showLuoghi() {
+	public void showLuoghi() {
 		System.out.println(getGestoreParametri().getLuoghi().toString());
 	}
 }

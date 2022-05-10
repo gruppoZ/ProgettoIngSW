@@ -55,7 +55,8 @@ public class GestioneParametri {
  	}
 
  	/**
- 	 * 
+ 	 * Aggiunge luogo alla lista se non e' gia' presente inoltre salva su Json
+ 	 * Se luogo e' gia' presente throw new RuntimeException()
  	 * @param listaLuoghi
  	 * @param luogo
  	 */
@@ -72,7 +73,6 @@ public class GestioneParametri {
  	 *
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
- 	 * @return TRUE se luogo è stato rimosso dalla lista, FALSE se non è stato rimosso
  	 */
  	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
  		if(checkPresenzaLuogo(piazza.getLuoghi(), luogoDaEliminare)) {
