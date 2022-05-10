@@ -218,7 +218,7 @@ public class GestioneParametri {
 		return listaLuoghi.contains(luogo);
 	}
 		
-	boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
+	public boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
 		return giorni.contains(giorno);
 	}
 	

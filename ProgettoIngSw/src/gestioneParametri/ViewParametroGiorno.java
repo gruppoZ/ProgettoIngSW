@@ -9,7 +9,7 @@ public class ViewParametroGiorno extends ViewParametri{
 	
 	private static final String MSG_GIORNO_GIA_PRESENTE = "Il giorno selezionato e' gia' presente";
 	private static final String MSG_GIORNO_NON_VALIDO = "Giorno non valido";
-	private static final String MSG_GIORNI_PRESENTI = "Giorni per ora presenti: ";
+	private static final String MSG_GIORNI_PRESENTI = "Giorni presenti: ";
 	private static final String ASK_GIORNO_DESIDERATO = "Seleziona il giorno desiderato: ";
 	private static final String ASK_INSERIRE_ALTRI_GIORNI = "Vuoi inserire altri giorni? ";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
@@ -77,6 +77,20 @@ public class ViewParametroGiorno extends ViewParametri{
 		} catch (RuntimeException e) {
 			System.out.println(MSG_GIORNO_NON_VALIDO);
 		}
+	}
+	
+	public GiorniDellaSettimana scegliGiorno() {
+		showGiorniPresenti();
+		
+		GiorniDellaSettimana giorno = leggiGiorno();
+		
+		while(!getGestoreParametri().checkPresenzaGiorno(getGestoreParametri().getGiorni(), giorno)) {
+			System.out.println(MSG_GIORNO_NON_VALIDO);
+			giorno = leggiGiorno();
+		}
+		
+		
+		return giorno;
 	}
 	
 	private void showGiorniPresenti() {

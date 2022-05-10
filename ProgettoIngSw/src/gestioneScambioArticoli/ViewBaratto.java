@@ -4,6 +4,7 @@ import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
+import gestioneParametri.GiorniDellaSettimana;
 import gestioneParametri.ViewParametroGiorno;
 import gestioneParametri.ViewParametroLuogo;
 import gestioneUtenti.GestioneFruitore;
@@ -93,10 +94,22 @@ public class ViewBaratto {
 	
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
+		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
 		
 		String luogo = viewParametroLuogo.scegliLuogo();
+		GiorniDellaSettimana giorno = viewParametroGiorno.scegliGiorno(); 
 		
-		
+		/**TODO:
+		 * Data è LocalDate => bisogna gestire il fatto che la data scelta abbia come giorno della settimana uno valido
+		 * Es. 11/05/2022 -> Mercoledi -> Mercoledì è uno dei giorni della settimana prefissato? Se si, ok.
+		 * Altrimenti giorno non valido -> Scegli un'altro giorno
+		 * ----------------
+		 * Per Orario invece:
+		 * “Intervalli orari”: 17.00-19.30
+		 * "Si noti che l’intervallo orario sopra esemplificato implica che gli appuntamenti possano
+		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
+		 */
+		//Appuntamento appuntamento = new Appuntamento(luogo, null, null)
 		return null;
 	}
 	
