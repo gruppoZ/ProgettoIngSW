@@ -32,9 +32,5 @@ public class Appuntamento {
 
 	public LocalTime getOra() {
 		return ora;
-	}
-	
-	
-	
-	
+	}	
 }

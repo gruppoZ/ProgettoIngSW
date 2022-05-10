@@ -7,7 +7,6 @@ import gestioneCategorie.Categoria;
 import gestioneCategorie.ViewGerarchia;
 import gestioneScambioArticoli.ViewBaratto;
 import gestioneUtenti.GestioneFruitore;
-import gestioneUtenti.GestioneUtente;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -19,7 +18,7 @@ public class ViewOfferte {
 		
 	private static final String MSG_RITIRA_OFFERTA = "Ritira un'offerta";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
-	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le proprie Offerte aperte e ritirate ";
+	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le tue Offerte";
 	private static final String MSG_SCAMBIA_ARTICOLI = "Scambia Articoli";
 	
 	private static final String [] TXT_VOCI = {
@@ -176,7 +175,7 @@ public class ViewOfferte {
 	public void showOfferta(Offerta offerta) {
 		StringBuffer sb = new StringBuffer();
 		ViewArticolo viewArticolo = new ViewArticolo();
-		
+		sb.append("##############################\n");
 		sb.append("Offerta ID: " + offerta.getId() + "\n"
 				+"->Autore: " + offerta.getUsername() + "\n"
 				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"

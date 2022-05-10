@@ -1,19 +1,10 @@
 package gestioneScambioArticoli;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
-import gestioneCategorie.Categoria;
-import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
-import gestioneOfferte.OffertaAccoppiata;
-import gestioneOfferte.OffertaSelezionata;
-import gestioneOfferte.ViewArticolo;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
 import gestioneUtenti.GestioneFruitore;
-import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
@@ -98,6 +89,8 @@ public class ViewBaratto {
 	private void showBaratto(Baratto baratto) {
 		StringBuffer sb = new StringBuffer();
 		ViewOfferte viewOfferta = new ViewOfferte();
+		
+		sb.append("##############################\n");
 		sb.append("Baratto:\n"
 				+ "->Scadenza: " + baratto.getScadenza() + "\n"
 				+ "-> Appuntamento\n"

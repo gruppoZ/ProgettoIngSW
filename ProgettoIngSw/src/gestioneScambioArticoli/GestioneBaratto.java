@@ -47,6 +47,4 @@ public class GestioneBaratto {
 		listaBaratti.add(baratto);
 		salvaBaratti();
 	}
-	
-	
 }

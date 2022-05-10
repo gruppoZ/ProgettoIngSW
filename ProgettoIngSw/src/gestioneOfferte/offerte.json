@@ -185,7 +185,9 @@
       "valida" : true,
       "radice" : false
     },
-    "valoreCampi" : { }
+    "valoreCampi" : { 
+      "Stato di conservazione" : "decente"
+    }
   },
   "username" : "f",
   "tipoOfferta" : {

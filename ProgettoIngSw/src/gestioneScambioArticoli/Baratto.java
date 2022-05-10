@@ -46,6 +46,4 @@ public class Baratto {
 	public String toString() {
 		return "Scambio [offertaA=" + offertaA + ", offertaB=" + offertaB + ", scadenza=" + scadenza + "]";
 	}
-	
-	
 }
