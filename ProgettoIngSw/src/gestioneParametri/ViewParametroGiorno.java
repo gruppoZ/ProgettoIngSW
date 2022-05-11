@@ -89,7 +89,6 @@ public class ViewParametroGiorno extends ViewParametri{
 			giorno = leggiGiorno();
 		}
 		
-		
 		return giorno;
 	}
 	

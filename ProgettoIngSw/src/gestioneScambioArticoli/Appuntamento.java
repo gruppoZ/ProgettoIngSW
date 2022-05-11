@@ -7,6 +7,7 @@ public class Appuntamento {
 	String luogo;
 	LocalDate data;
 	LocalTime ora;
+	boolean rifiutato;
 	
 	public Appuntamento() {
 		
@@ -15,11 +16,13 @@ public class Appuntamento {
 	 * @param luogo
 	 * @param data
 	 * @param ora
+	 * @param rifiutato
 	 */
 	public Appuntamento(String luogo, LocalDate data, LocalTime ora) {
 		this.luogo = luogo;
 		this.data = data;
 		this.ora = ora;
+		this.rifiutato = false;
 	}
 
 	public String getLuogo() {
@@ -32,5 +35,13 @@ public class Appuntamento {
 
 	public LocalTime getOra() {
 		return ora;
+	}
+	
+	public boolean isRifiutato() {
+		return rifiutato;
+	}
+	public void setRifiutato(boolean rifiutato) {
+		this.rifiutato = rifiutato;
 	}	
+	
 }

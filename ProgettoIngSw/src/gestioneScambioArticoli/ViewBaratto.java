@@ -1,13 +1,14 @@
 package gestioneScambioArticoli;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
+import gestioneOfferte.OffertaSelezionata;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
-import gestioneParametri.GiorniDellaSettimana;
-import gestioneParametri.ViewParametroGiorno;
+import gestioneParametri.ViewParametroIntervalloOrario;
 import gestioneParametri.ViewParametroLuogo;
 import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
@@ -19,11 +20,11 @@ public class ViewBaratto {
 	private static final String TXT_TITOLO = "Scambio Articoli";
 	
 	private static final String MSG_SCEGLI_OFFERTE_APERTE = "Scambia Articolo";
-	private static final String MSG_MESSAGGI_RICEVUTI = "Visualizza messaggi ricevuti";
+	private static final String MSG_OFFERTA_SELEZIONATA = "Controlla eventuali offerte selezionate";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_SCEGLI_OFFERTE_APERTE,
-			MSG_MESSAGGI_RICEVUTI
+			MSG_OFFERTA_SELEZIONATA
 	};
 	
 	private GestioneBaratto gestoreBaratto;
@@ -55,6 +56,8 @@ public class ViewBaratto {
 			case 1:
 				scambiaArticolo();
 				break;
+			case 2:
+				break;
 			default:
 				System.out.println(TXT_ERRORE);
 			}
@@ -72,7 +75,7 @@ public class ViewBaratto {
 		 * 	-> Collega le 2 offerte
 		 * 
 		 */
-		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore); //TODO: va creata a livello di classe (?)
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
 		try {
 			System.out.println("\nSeleziona una delle tue offerte: ");
@@ -87,14 +90,36 @@ public class ViewBaratto {
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
-			//TODO: da finire manca la scelta dell'ora. Appuntamento non va creato qui!
-			Appuntamento appuntamento = creaAppuntamento();
-			gestoreBaratto.getBaratto().setAppuntamento(appuntamento);
-			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}		
+	}
+	
+	private void gestioneOfferteSelezionate() {
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
+		
+		try {
+			System.out.println("\nSeleziona una delle tue offerte selezionate: ");
+			Offerta offertaSelezionata = viewOfferta.getOffertaById(gestoreOfferta.getOfferteSelezionateByUtente(gestoreFruitore.getUsername()));
+			Baratto baratto = gestoreBaratto.getBarattoByOffertaSelezionata(offertaSelezionata);
+			
+			showBaratto(baratto);
+			
+			boolean scelta = InputDati.yesOrNo("Vuoi fissare un appuntamento?");
+			if(scelta) {
+				Appuntamento appuntamento = creaAppuntamento();
+				gestoreBaratto.creaScambio(gestoreOfferta, offertaSelezionata, offertaSelezionata, appuntamento);
+				
+			} else {
+				System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra cancellato");
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+		
+		
 	}
 	
 	private Appuntamento creaAppuntamento() {
@@ -116,6 +141,9 @@ public class ViewBaratto {
 			date = gestorePiazza.dateInput(dateTesto);
 		}
 		
+		ViewParametroIntervalloOrario viewParametroIntervalloOrario = new ViewParametroIntervalloOrario(gestorePiazza);
+
+		LocalTime orario = viewParametroIntervalloOrario.scegliOra();
 		/**TODO:
 		 * Data è LocalDate => bisogna gestire il fatto che la data scelta abbia come giorno della settimana uno valido
 		 * Es. 11/05/2022 -> Mercoledi -> Mercoledì è uno dei giorni della settimana prefissato? Se si, ok.
@@ -126,7 +154,7 @@ public class ViewBaratto {
 		 * "Si noti che l’intervallo orario sopra esemplificato implica che gli appuntamenti possano
 		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
 		 */
-		Appuntamento appuntamento = new Appuntamento(luogo, date, null);
+		Appuntamento appuntamento = new Appuntamento(luogo, date, orario);
 		
 		return appuntamento;
 	}
@@ -138,10 +166,10 @@ public class ViewBaratto {
 		sb.append("**************************************\n");
 		sb.append("Baratto:\n"
 				+ "->Scadenza: " + baratto.getScadenza() + "\n"
-				+ "-> Appuntamento\n"
-				+ "\t Luogo: " + baratto.getAppuntamento().getLuogo() + "\n"
-				+ "\t Data: " + baratto.getAppuntamento().getData() + "\n"
-				+ "\t Ora: " + baratto.getAppuntamento().getOra() + "\n\n"
+//				+ "-> Appuntamento\n"
+//				+ "\t Luogo: " + baratto.getAppuntamento().getLuogo() + "\n"
+//				+ "\t Data: " + baratto.getAppuntamento().getData() + "\n"
+//				+ "\t Ora: " + baratto.getAppuntamento().getOra() + "\n\n"
  				);
 		
 		System.out.print(sb.toString());

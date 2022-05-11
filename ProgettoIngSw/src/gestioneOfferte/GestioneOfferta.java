@@ -1,9 +1,12 @@
 package gestioneOfferte;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
 import gestioneCategorie.Categoria;
+import gestioneScambioArticoli.Baratto;
+import gestioneScambioArticoli.GestioneBaratto;
 import main.JsonIO;
 
 public class GestioneOfferta {
@@ -22,6 +25,10 @@ public class GestioneOfferta {
 	
 	protected boolean isOffertaAperta(Offerta offerta) {
 		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
+	}
+	
+	private boolean isOffertaSelezionata(Offerta offerta) {
+		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
 	}
 	
 	/**
@@ -55,10 +62,30 @@ public class GestioneOfferta {
 		return listaOfferte;
 	}
 	
+	public void setListaOfferte(List<Offerta> listaOfferte) {
+		this.listaOfferte = listaOfferte;
+	}
+
 	protected List<Offerta> leggiListaOfferte() {
-		List<Offerta> listaLetta = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
+		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
+		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
+		return listaOfferte;
+	}
+	
+	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte){
+		List<Offerta> listaOfferteAggiornata= new ArrayList<Offerta>();
 		
-		return listaLetta;
+		for (Offerta offerta : listaOfferte) {
+			if(gestoreBaratto.isOffertaInBaratto(offerta)) {
+				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offerta);
+				if(baratto.getScadenza().isAfter(LocalDate.now())) listaOfferteAggiornata.add(offerta);
+				//TODO: else "faccio scadere" l'offerta (la metto in aperta)
+			} else {
+				listaOfferteAggiornata.add(offerta);
+			}
+		}
+		return listaOfferteAggiornata;
+		
 	}
 	
 	protected Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
@@ -82,6 +109,16 @@ public class GestioneOfferta {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaAperta(offerta))
+				result.add(offerta);
+		}
+		
+		return result;
+	}
+	
+	public List<Offerta> getOfferteSelezionateByUtente(String username) {
+		List<Offerta> result = new ArrayList<>();
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaSelezionata(offerta))
 				result.add(offerta);
 		}
 		

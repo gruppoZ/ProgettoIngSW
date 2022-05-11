@@ -101,6 +101,19 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 			}
 		}
 	}
+	
+	public LocalTime scegliOra() {
+		showIntervalli();
+		System.out.println("Inserisci un orario: ");
+		LocalTime orario = creaOrario();
+		
+		while(!getGestoreParametri().checkValiditaOrario(getGestoreParametri().getIntervalli(), orario)) {
+			System.out.println("L'orario che hai inserito non e' accettabile.\nInserisci un altro orario: ");
+			orario = creaOrario();
+		}
+		
+		return orario;
+	}
 
 	private void showIntervalli() {
 		System.out.print(GIVE_INTERVALLI_PRESENTI);
@@ -134,6 +147,15 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		System.out.printf(GIVE_ORARIO_FINALE, orarioMax.toString());
 		
 		return new IntervalloOrario(orarioMin, orarioMax);
+	}
+	
+	private LocalTime creaOrario() {
+		int ora = InputDati.leggiIntero(ASK_ORA, 0, 23);
+		int minuti;
+		
+		minuti = scegliMinuti(ora);
+		
+		return LocalTime.of(ora, minuti);
 	}
 	
 	private LocalTime creaOrarioMin(LocalTime min, LocalTime max) {

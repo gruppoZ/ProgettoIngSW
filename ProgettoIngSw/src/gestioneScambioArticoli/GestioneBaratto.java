@@ -6,6 +6,7 @@ import java.util.List;
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
+import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
 import main.JsonIO;
 
@@ -25,6 +26,27 @@ public class GestioneBaratto {
 		return this.baratto;
 	}
 	
+	public boolean isOffertaInBaratto(Offerta offerta) {
+		for (Baratto baratto : listaBaratti) {
+			if(baratto.getOffertaA().equals(offerta) || baratto.getOffertaB().equals(offerta)) return true;
+		}
+		return false;
+	}
+	
+	public Baratto getBarattoByOfferta(Offerta offerta) {
+		for (Baratto baratto : listaBaratti) {
+			if(baratto.getOffertaA().equals(offerta) || baratto.getOffertaB().equals(offerta)) return baratto;
+		}
+		return null;
+	}
+	
+	protected Baratto getBarattoByOffertaSelezionata(Offerta offertaSelezionata) {
+		for (Baratto baratto : listaBaratti) {
+			if(baratto.getOffertaB().equals(offertaSelezionata)) return baratto;
+		}
+		return null;
+	}
+	
 	private List<Baratto> leggiBaratti(){
 		return JsonIO.leggiListaDaJson(PATH_BARATTI, Baratto.class);
 	}
@@ -36,6 +58,11 @@ public class GestioneBaratto {
 	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
+	}
+	
+	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB, Appuntamento appuntamento) {
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio(appuntamento));
 	}
 	
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {

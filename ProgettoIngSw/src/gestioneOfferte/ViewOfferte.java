@@ -83,7 +83,7 @@ public class ViewOfferte {
 	
 	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException {
 		try {
-			showOfferte(listaOfferte);
+			showOfferte(listaOfferte); //TODO: giusto che questo metodo faccia show o meglio farlo prima di ogni chiamata al metodo?
 			
 			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
 			
@@ -166,6 +166,19 @@ public class ViewOfferte {
 				
 		if(listaOfferteByUtente.size() > 0) {
 			for (Offerta offerta : listaOfferteByUtente) {
+				showOfferta(offerta);
+			}
+		} else
+			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+	}
+	
+	public void showOfferteSelezionateByName() {
+		String username = gestoreFruitore.getUsername();
+		
+		ArrayList<Offerta> listaSelezionateByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteSelezionateByUtente(username);
+				
+		if(listaSelezionateByUtente.size() > 0) {
+			for (Offerta offerta : listaSelezionateByUtente) {
 				showOfferta(offerta);
 			}
 		} else

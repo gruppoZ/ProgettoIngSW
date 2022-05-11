@@ -9,7 +9,7 @@ public class Baratto {
 	Offerta offertaA;
 	Offerta offertaB;
 	LocalDate scadenza;
-	Appuntamento appuntamento;
+//	Appuntamento appuntamento;
 	
 	public Baratto() {
 		
@@ -19,16 +19,16 @@ public class Baratto {
 		this.offertaA = offertaA;
 		this.offertaB = offertaB;
 		this.scadenza = scadenza;
-		this.appuntamento = new Appuntamento();
+//		this.appuntamento = new Appuntamento();
 	}
 
-	public Appuntamento getAppuntamento() {
-		return appuntamento;
-	}
-
-	public void setAppuntamento(Appuntamento appuntamento) {
-		this.appuntamento = appuntamento;
-	}
+//	public Appuntamento getAppuntamento() {
+//		return appuntamento;
+//	}
+//
+//	public void setAppuntamento(Appuntamento appuntamento) {
+//		this.appuntamento = appuntamento;
+//	}
 
 	public Offerta getOffertaA() {
 		return offertaA;

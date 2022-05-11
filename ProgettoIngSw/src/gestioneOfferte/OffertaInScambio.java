@@ -2,12 +2,20 @@ package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import gestioneScambioArticoli.Appuntamento;
+
 public class OffertaInScambio implements StatoOfferta{
 	String stato; //serve esplicitarlo per jackson
+	Appuntamento appuntamento;
 
-	@JsonCreator
 	public OffertaInScambio() {
 		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
+		this.appuntamento = null;
+	}
+	@JsonCreator
+	public OffertaInScambio(Appuntamento appuntamento) {
+		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
+		this.appuntamento = appuntamento;
 	}
 	
 	@Override

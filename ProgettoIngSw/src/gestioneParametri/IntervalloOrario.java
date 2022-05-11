@@ -49,6 +49,10 @@ public class IntervalloOrario {
 	private boolean includeMax(LocalTime orarioMax) {
 		return (orarioMax.isAfter(this.orarioMin) && orarioMax.isBefore(this.orarioMax)) || (orarioMax.equals(this.orarioMax));
 	}
+	
+	protected boolean includeOrario(LocalTime orario) {
+		return (orario.isAfter(this.orarioMin) && orario.isBefore(this.orarioMax)) || (orario.equals(this.orarioMin)) || (orario.equals(this.orarioMax));
+	}
 
 	@Override
 	public String toString() {

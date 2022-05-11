@@ -1,1 +1,22 @@
-{}
+{
+  "1" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  } ],
+  "2" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  } ]
+}

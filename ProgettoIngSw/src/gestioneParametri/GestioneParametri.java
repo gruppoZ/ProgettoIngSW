@@ -210,6 +210,17 @@ public class GestioneParametri {
 		
 		return true;
 	}
+	
+	protected boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
+		if(intervalliOrari.size() == 0) return false;
+		
+		for (IntervalloOrario intervalloOrario : intervalliOrari) {
+			if(intervalloOrario.includeOrario(orario))
+				return true;
+		}
+		
+		return false;
+	}
 
 	/**
 	 * Prende il parametro di tipo String nel formato d/M/yyyy e restituisce il relativo LocalDate

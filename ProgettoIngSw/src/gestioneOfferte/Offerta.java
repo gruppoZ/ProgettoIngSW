@@ -1,5 +1,7 @@
 package gestioneOfferte;
 
+import java.util.Objects;
+
 public class Offerta {
 	
 	private int id;
@@ -36,13 +38,14 @@ public class Offerta {
 	public void setTipoOfferta(StatoOfferta tipoOfferta) {
 		this.statoOfferta = tipoOfferta;
 	}
+	
+	public boolean equals(Offerta offerta) {
+		return this.id == offerta.id;
+	}
 
 	@Override
 	public String toString() {
 		return "Offerta [id=" + id + ", articolo=" + articolo + ", username=" + username + ", tipoOfferta="
 				+ statoOfferta + "]";
 	}
-	
-	
-	
 }
