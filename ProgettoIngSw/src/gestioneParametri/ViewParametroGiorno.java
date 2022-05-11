@@ -48,7 +48,7 @@ public class ViewParametroGiorno extends ViewParametri{
 		boolean presente = false;
 		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 		
-		showGiorni();
+		showTuttiGiorniDellaSettimana();
 		
 		do {
 			GiorniDellaSettimana giorno = leggiGiorno();
@@ -68,7 +68,7 @@ public class ViewParametroGiorno extends ViewParametri{
 	public void rimuovi() {
 		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 
-		showGiorni();
+		showTuttiGiorniDellaSettimana();
 
 		GiorniDellaSettimana giornoDaEliminare = leggiGiorno();
 		
@@ -98,7 +98,7 @@ public class ViewParametroGiorno extends ViewParametri{
 		System.out.println(getGestoreParametri().getGiorni());
 	}
 	
-	private void showGiorni() {
+	private void showTuttiGiorniDellaSettimana() {
 		GiorniDellaSettimana.showGiorniSettimana();
 	}
 	

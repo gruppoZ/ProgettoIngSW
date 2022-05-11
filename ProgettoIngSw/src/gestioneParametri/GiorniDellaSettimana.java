@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum GiorniDellaSettimana {
-	LUNEDI(0, "Lunedi"),
-	MARTEDI(1, "Martedi"),
-	MERCOLEDI(2, "Mercoledi"),
-	GIOVEDI(3, "Giovedi"),
-	VENERDI(4, "Venerdi"),
+	LUNEDI(0, "Lunedì"),
+	MARTEDI(1, "Martedì"),
+	MERCOLEDI(2, "Mercoledì"),
+	GIOVEDI(3, "Giovedì"),
+	VENERDI(4, "Venerdì"),
 	SABATO(5, "Sabato"),
 	DOMENICA(6, "Domenica");
 	

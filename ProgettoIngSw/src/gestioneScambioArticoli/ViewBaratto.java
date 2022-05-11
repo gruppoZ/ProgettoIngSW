@@ -1,5 +1,7 @@
 package gestioneScambioArticoli;
 
+import java.time.LocalDate;
+
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.ViewOfferte;
@@ -8,6 +10,7 @@ import gestioneParametri.GiorniDellaSettimana;
 import gestioneParametri.ViewParametroGiorno;
 import gestioneParametri.ViewParametroLuogo;
 import gestioneUtenti.GestioneFruitore;
+import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
@@ -84,7 +87,9 @@ public class ViewBaratto {
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
-			creaAppuntamento();
+			//TODO: da finire manca la scelta dell'ora. Appuntamento non va creato qui!
+			Appuntamento appuntamento = creaAppuntamento();
+			gestoreBaratto.getBaratto().setAppuntamento(appuntamento);
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -94,10 +99,22 @@ public class ViewBaratto {
 	
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
-		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
 		
 		String luogo = viewParametroLuogo.scegliLuogo();
-		GiorniDellaSettimana giorno = viewParametroGiorno.scegliGiorno(); 
+		
+		System.out.println("Giorni: " + gestorePiazza.getGiorni()); 
+		String dateTesto = InputDati.leggiStringaNonVuota("Inserisci data nel formato d/m/yyyy:");
+		LocalDate date = gestorePiazza.dateInput(dateTesto);
+		
+		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date)) {
+			//TODO: da fare refactor
+			System.out.println("Giorni: " + gestorePiazza.getGiorni()); 
+			
+			dateTesto = InputDati.leggiStringaNonVuota("Giorno non accettato. Ricorda"
+					+ "di scegliere una data in un giorno della settimana fra quelli disponibili per gli appuntamenti."
+					+ "\n\nInserisci data nel formato d/m/yyyy:");
+			date = gestorePiazza.dateInput(dateTesto);
+		}
 		
 		/**TODO:
 		 * Data è LocalDate => bisogna gestire il fatto che la data scelta abbia come giorno della settimana uno valido
@@ -109,8 +126,9 @@ public class ViewBaratto {
 		 * "Si noti che l’intervallo orario sopra esemplificato implica che gli appuntamenti possano
 		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
 		 */
-		//Appuntamento appuntamento = new Appuntamento(luogo, null, null)
-		return null;
+		Appuntamento appuntamento = new Appuntamento(luogo, date, null);
+		
+		return appuntamento;
 	}
 	
 	private void showBaratto(Baratto baratto) {

@@ -1,12 +1,17 @@
 package gestioneParametri;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import main.JsonIO;
 
 public class GestioneParametri {
 	
+	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
 	private Piazza piazza;
 	
 	public GestioneParametri() {
@@ -34,7 +39,7 @@ public class GestioneParametri {
  		return piazza.getLuoghi();
  	}
  	
- 	protected List<GiorniDellaSettimana> getGiorni(){
+ 	public List<GiorniDellaSettimana> getGiorni(){
  		return piazza.getGiorni();
  	}
  	
@@ -206,6 +211,37 @@ public class GestioneParametri {
 		return true;
 	}
 
+	/**
+	 * Prende il parametro di tipo String nel formato d/M/yyyy e restituisce il relativo LocalDate
+	 * @param userInput
+	 * @return
+	 */
+	public LocalDate dateInput(String userInput) {
+
+	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(FORMATO_GIORNO_D_M_YYYY);
+	    LocalDate date = LocalDate.parse(userInput, dateFormat);
+
+	    return date ;
+	}
+	
+	/**
+	 * Prende il parametro LocalDate, e verifica che il relativo giorno della settimana sia fra quelli messi a 
+	 * dispozione della Piazza 
+	 * @param date
+	 * @return
+	 */
+	public boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date) {
+		String dateItalianoDayOfWeek = date.format(DateTimeFormatter.ofPattern("EEEE", Locale.ITALY));	
+	 
+		//TODO: potrebbe servire in altre occasioni => creare metodo a parte oppure spostare in GiorniDellaSettimana?
+		for (GiorniDellaSettimana giornoSettimana : getGiorni()) {
+			if(giornoSettimana.getNome().equalsIgnoreCase(dateItalianoDayOfWeek))
+				return true;
+		}
+	 
+		return false;
+	}
+	
 	public void salvaPiazza() {
 		JsonIO.salvaOggettoSuJson(PATH_PIAZZA, this.piazza);
 	}

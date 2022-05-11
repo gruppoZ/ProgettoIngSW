@@ -90,7 +90,8 @@ public class ViewParametroLuogo extends ViewParametri{
 		return luogo;
 	}
 	
-	public void showLuoghi() {
+	//TODO: da non utilizzare toString
+	private void showLuoghi() {
 		System.out.println(getGestoreParametri().getLuoghi().toString());
 	}
 }
