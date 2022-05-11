@@ -1,11 +1,13 @@
 package gestioneScambioArticoli;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
+import gestioneOfferte.OffertaAperta;
 import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
 import main.JsonIO;
@@ -53,6 +55,11 @@ public class GestioneBaratto {
 	
 	private void salvaBaratti() {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
+	}
+	
+	public void rimuoviBaratto(Baratto baratto) {
+		listaBaratti.remove(baratto);
+		salvaBaratti();
 	}
 	
 	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {

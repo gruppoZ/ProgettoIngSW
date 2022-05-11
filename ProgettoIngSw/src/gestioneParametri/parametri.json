@@ -15,5 +15,5 @@
     "orarioMin" : [ 23, 0 ],
     "orarioMax" : [ 23, 30 ]
   } ],
-  "scadenza" : 222
+  "scadenza" : 1
 }

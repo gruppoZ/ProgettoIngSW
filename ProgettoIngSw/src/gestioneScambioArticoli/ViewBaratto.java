@@ -112,7 +112,7 @@ public class ViewBaratto {
 				gestoreBaratto.creaScambio(gestoreOfferta, offertaSelezionata, offertaSelezionata, appuntamento);
 				
 			} else {
-				System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra cancellato");
+				System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra' cancellato");
 			}
 			
 		} catch (Exception e) {
@@ -143,7 +143,7 @@ public class ViewBaratto {
 		
 		ViewParametroIntervalloOrario viewParametroIntervalloOrario = new ViewParametroIntervalloOrario(gestorePiazza);
 
-		LocalTime orario = viewParametroIntervalloOrario.scegliOra();
+		LocalTime orario = viewParametroIntervalloOrario.scegliOrarioAppuntamento();
 		/**TODO:
 		 * Data è LocalDate => bisogna gestire il fatto che la data scelta abbia come giorno della settimana uno valido
 		 * Es. 11/05/2022 -> Mercoledi -> Mercoledì è uno dei giorni della settimana prefissato? Se si, ok.

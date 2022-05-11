@@ -19,8 +19,8 @@ public class GestioneOfferta {
 	HashMap<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
 	
 	public GestioneOfferta() {
-		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 		this.storicoMovimentazioni = leggiStoricoCambioStati();
+		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
 	
 	protected boolean isOffertaAperta(Offerta offerta) {
@@ -68,24 +68,39 @@ public class GestioneOfferta {
 
 	protected List<Offerta> leggiListaOfferte() {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
-		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
+//		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
+		//se ho fatto qualche cambio => salvo
+//		salvaOfferte();
 		return listaOfferte;
 	}
 	
-	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte){
+	/*
+	 * Per ora aggiorna le offerte di TUTTI
+	 * TODO: per aggiornare solo le MIE offerte ho bisogno del username (dovrei richiederlo nel costruttore)
+	 */
+	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
 		List<Offerta> listaOfferteAggiornata= new ArrayList<Offerta>();
-		
 		for (Offerta offerta : listaOfferte) {
 			if(gestoreBaratto.isOffertaInBaratto(offerta)) {
 				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offerta);
-				if(baratto.getScadenza().isAfter(LocalDate.now())) listaOfferteAggiornata.add(offerta);
-				//TODO: else "faccio scadere" l'offerta (la metto in aperta)
-			} else {
-				listaOfferteAggiornata.add(offerta);
+				if(baratto.getScadenza().isBefore(LocalDate.now())) {
+					System.out.println("Il baratto dell'offerta con ID: " + offerta.getId() + " e' scaduto");
+					cambioOffertaScaduta(offerta);
+					//TODO: bisogna cancellare il baratto solo dopo che entrambe le offerte sono state rimosse:
+					//			non ciclare sulle offerte ma solo sui baratti => rimuovere entrambe le offerte => rimuovi baratto
+//					gestoreBaratto.rimuoviBaratto(baratto);
+				}
 			}
+			listaOfferteAggiornata.add(offerta);
 		}
-		return listaOfferteAggiornata;
 		
+//		gestoreBaratto.aggiornaListaBaratti();
+		
+		return listaOfferteAggiornata;
+	}
+	
+	public void cambioOffertaScaduta(Offerta offerta) {
+		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
 	protected Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {

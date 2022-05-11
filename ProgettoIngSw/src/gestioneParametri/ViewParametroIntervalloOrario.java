@@ -102,7 +102,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		}
 	}
 	
-	public LocalTime scegliOra() {
+	public LocalTime scegliOrarioAppuntamento() {
 		showIntervalli();
 		System.out.println("Inserisci un orario: ");
 		LocalTime orario = creaOrario();
