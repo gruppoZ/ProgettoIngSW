@@ -61,11 +61,11 @@ public class GestioneOfferta {
 		return listaLetta;
 	}
 	
-	protected Offerta getOffertaById(int id, List<Offerta> listaOfferte) {
+	protected Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() == id) return offerta;
 		}
-		return null; //TODO: meglio return null o throw null pointer?
+		throw new NullPointerException();
 	}
 	
 	protected List<Offerta> getOfferteByUtente(String username) {
