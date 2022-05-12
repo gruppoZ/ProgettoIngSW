@@ -229,6 +229,12 @@ public class ViewOfferte {
 				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
 				+ "->" );
 		
+		//il seguente metodo NON va gestito in questo metodo ma da chi si occupa del case 3: showOfferteAperteByName()
+		//TODO: se offerta è IN SCAMBIO => Visualizzare ultima risposta fornita dall’autore
+		//dell’offerta a essa collegata
+		//Se offerta è Selezionata e visto che è di proprietà del corrente fruitore => bisogna farlo notare poichè 
+		//il fruitore dovrà allegare una risposta
+		
 		System.out.print(sb.toString());
 		viewArticolo.showArticolo(offerta.getArticolo());
 	}

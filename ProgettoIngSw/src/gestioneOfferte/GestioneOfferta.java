@@ -5,7 +5,6 @@ import java.util.*;
 
 
 import gestioneCategorie.Categoria;
-import gestioneScambioArticoli.Baratto;
 import gestioneScambioArticoli.GestioneBaratto;
 import main.JsonIO;
 
