@@ -116,7 +116,7 @@ public class ViewBaratto {
 				if(scelta) {
 					Appuntamento appuntamento = creaAppuntamento();
 					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata, appuntamento);
-					//TODO: aggiorna anche baratto!
+					//TODO: aggiorna anche baratto! NB: forse cambia anche la scadenza
 				} else {
 					System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra' cancellato");
 				}

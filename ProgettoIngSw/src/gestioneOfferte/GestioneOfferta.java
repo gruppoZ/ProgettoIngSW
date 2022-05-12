@@ -74,14 +74,11 @@ public class GestioneOfferta {
 		this.listaOfferte = listaOfferte;
 	}
 
-	/*
-	 * TODO: !! il GestioneOfferta viene creato troppo spesso e la lettura viene rifatta molte volte inutilmente
-	 */
 	protected List<Offerta> leggiListaOfferte() {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
 		if(listaOfferte == null) //per evitare di salvare "null" nel file offerte.json 
 			listaOfferte = new ArrayList<Offerta>();
-		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));//gestioneBaratto da creare o da chiedere al metodo?
+		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
 		//ora salva sempre, meglio salvare solo quando faccio un cambio
 		salvaOfferte();		
 		return listaOfferte;
@@ -91,32 +88,6 @@ public class GestioneOfferta {
 		gestoreBaratto.gestisciBarattiScaduti(this, listaOfferte);
 		return listaOfferte;
 	}
-
-	
-	/*
-	 * Per ora aggiorna le offerte di TUTTI
-	 * TODO: per aggiornare solo le MIE offerte ho bisogno del username (dovrei richiederlo nel costruttore)
-	 */
-//	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
-//		List<Offerta> listaOfferteAggiornata= new ArrayList<Offerta>();
-//		for (Offerta offerta : listaOfferte) {
-//			if(gestoreBaratto.isOffertaInBaratto(offerta)) {
-//				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offerta);
-//				if(baratto.getScadenza().isBefore(LocalDate.now())) {
-//					System.out.println("Il baratto dell'offerta con ID: " + offerta.getId() + " e' scaduto");
-//					cambioOffertaScaduta(offerta);
-//					//TODO: bisogna cancellare il baratto solo dopo che entrambe le offerte sono state rimosse:
-//					//			non ciclare sulle offerte ma solo sui baratti => rimuovere entrambe le offerte => rimuovi baratto
-////					gestoreBaratto.rimuoviBaratto(baratto);
-//				}
-//			}
-//			listaOfferteAggiornata.add(offerta);
-//		}
-//		
-////		gestoreBaratto.aggiornaListaBaratti();
-//		
-//		return listaOfferteAggiornata;
-//	}
 	
 	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
