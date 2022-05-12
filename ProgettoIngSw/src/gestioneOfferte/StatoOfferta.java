@@ -13,7 +13,8 @@ property = "type")
 @Type(value = OffertaRitirata.class),
 @Type(value = OffertaAccoppiata.class),
 @Type(value = OffertaSelezionata.class),
-@Type(value = OffertaInScambio.class)
+@Type(value = OffertaInScambio.class),
+@Type(value = OffertaChiusa.class)
 })
 public interface StatoOfferta {
 	

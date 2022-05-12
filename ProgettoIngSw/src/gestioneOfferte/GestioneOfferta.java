@@ -23,13 +23,22 @@ public class GestioneOfferta {
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
 	
-	protected boolean isOffertaAperta(Offerta offerta) {
+	private boolean isOffertaAperta(Offerta offerta) {
 		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
+	}
+	
+	private boolean isOffertaChiusa(Offerta offerta) {
+		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_CHIUSA.getNome());
 	}
 	
 	private boolean isOffertaSelezionata(Offerta offerta) {
 		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
 	}
+		
+	private boolean isOffertaInScambio(Offerta offerta) {
+		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
+	}
+	
 	
 	/**
 	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
@@ -152,6 +161,30 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+	public List<Offerta> getOfferteChiuseByCategoria(Categoria foglia) {
+		List<Offerta> result = new ArrayList<>();
+		for (Offerta offerta : listaOfferte) {
+			if(isOffertaChiusa(offerta)) {
+				if(offerta.getArticolo().getFoglia().equals(foglia))
+					result.add(offerta);		
+			}
+		}
+		
+		return result;
+	}
+	
+	public List<Offerta> getOfferteInScambioByCategoria(Categoria foglia) {
+		List<Offerta> result = new ArrayList<>();
+		for (Offerta offerta : listaOfferte) {
+			if(isOffertaInScambio(offerta)) {
+				if(offerta.getArticolo().getFoglia().equals(foglia))
+					result.add(offerta);		
+			}
+		}
+		
+		return result;
+	}
+	
 	public List<Offerta> getOfferteAperteByCategoriaNonDiPoprietaDiUsername(Categoria foglia, String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -184,10 +217,6 @@ public class GestioneOfferta {
 		}
 		
 		return n;
-	}
-	
-	protected boolean ciSonoOfferteAperte() {
-		return numeroOfferteAperte() > 0;
 	}
 	
 	protected int getIdMax() {

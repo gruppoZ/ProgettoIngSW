@@ -12,6 +12,10 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewOfferte {
 
+	private static final String MSG_OFFERTE = "offerte";
+	private static final String MSG_SHOW_OFFERTE_IN_SCAMBIO = "Offerte IN SCAMBIO";
+	private static final String MSG_SHOW_OFFERTE_CHIUSE = "Offerte CHIUSE";
+	private static final String MSG_SHOW_OFFERTE_APERTE = "Offerte APERTE";
 	//costanti per menu
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Gestisci Offerte";
@@ -31,7 +35,7 @@ public class ViewOfferte {
 	private static final String MSG_ID_NON_VALIDO = "\nL'id selezionato non fa riferimento a nessun'offerta aperta del fruitore";
 	private static final String MSG_RICHIESTA_ID = "\nInserire l'id dell'offerta da selezionare: ";
 	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
-	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti offerte per la categoria selezionata.";
+	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti %s per la categoria selezionata. \n";
 	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
 	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
 	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
@@ -135,11 +139,42 @@ public class ViewOfferte {
 			ArrayList<Offerta> listaOfferteAperteByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByCategoria(foglia);
 			
 			if(listaOfferteAperteByCategoria.size() > 0) {
+				System.out.println(MSG_SHOW_OFFERTE_APERTE);
 				for (Offerta offerta : listaOfferteAperteByCategoria) {
 					showOfferta(offerta);
 				}
 			} else
-				System.out.println(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI);
+				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_APERTE);
+		}
+	}
+	
+	public void showOfferteChiuseByCategoria(Categoria foglia) { 
+		if(foglia != null) {
+			
+			ArrayList<Offerta> listaOfferteChiuseByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteChiuseByCategoria(foglia);
+			
+			if(listaOfferteChiuseByCategoria.size() > 0) {
+				System.out.println(MSG_SHOW_OFFERTE_CHIUSE);
+				for (Offerta offerta : listaOfferteChiuseByCategoria) {
+					showOfferta(offerta);
+				}
+			} else
+				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_CHIUSE);
+		}
+	}
+	
+	public void showOfferteInScambioByCategoria(Categoria foglia) { 
+		if(foglia != null) {
+			
+			ArrayList<Offerta> listaOfferteInScambioByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteInScambioByCategoria(foglia);
+			
+			if(listaOfferteInScambioByCategoria.size() > 0) {
+				System.out.println(MSG_SHOW_OFFERTE_IN_SCAMBIO);
+				for (Offerta offerta : listaOfferteInScambioByCategoria) {
+					showOfferta(offerta);
+				}
+			} else
+				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_IN_SCAMBIO);
 		}
 	}
 	

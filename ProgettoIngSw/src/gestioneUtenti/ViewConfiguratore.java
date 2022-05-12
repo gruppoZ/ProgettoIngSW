@@ -13,17 +13,23 @@ public class ViewConfiguratore extends ViewUtente{
 	private static final String MSG_CREA_GERARCHIA = "Crea gerarchia";
 	private static final String MSG_IMPOSTA_PARAMETRI = "Gestisci Piazza";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
+	private static final String MSG_OFFERTE_IN_SCAMBIO_E_CHIUSE = "Visualizzare tutte le attuali Offerte In Scambio e Chiuse relative ad una categoria";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_CREA_GERARCHIA,
 			MSG_VISUALIZZA_GERARCHIE,
 			MSG_IMPOSTA_PARAMETRI,
-			MSG_OFFERTE_APERTE
+			MSG_OFFERTE_APERTE,
+			MSG_OFFERTE_IN_SCAMBIO_E_CHIUSE
 	};
 	
 	@Override
 	public void menu(String username) {
 		GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();		
+		
+		ViewOfferte viewOfferte = new ViewOfferte();
+		ViewGerarchia viewGerarchia = new ViewGerarchia();
+		Categoria foglia;
 		
 		MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
@@ -46,11 +52,15 @@ public class ViewConfiguratore extends ViewUtente{
 				viewPiazza.menu();
 				break;
 			case 4:
-				ViewOfferte viewOfferte = new ViewOfferte();
-				ViewGerarchia viewGerarchia = new ViewGerarchia();
+				foglia = viewGerarchia.scegliFoglia();
 				
-				Categoria foglia = viewGerarchia.scegliFoglia();
 				viewOfferte.showOfferteAperteByCategoria(foglia);
+				break;
+			case 5:
+				foglia = viewGerarchia.scegliFoglia();
+				
+				viewOfferte.showOfferteInScambioByCategoria(foglia);
+				viewOfferte.showOfferteChiuseByCategoria(foglia);
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	
