@@ -1,14 +1,4 @@
 {
-  "1" : [ {
-    "oldState" : {
-      "type" : "OffertaAperta",
-      "stato" : "OffertaAperta"
-    },
-    "newState" : {
-      "type" : "OffertaSelezionata",
-      "stato" : "OffertaSelezionata"
-    }
-  } ],
   "2" : [ {
     "oldState" : {
       "type" : "OffertaAperta",
@@ -17,6 +7,179 @@
     "newState" : {
       "type" : "OffertaAccoppiata",
       "stato" : "OffertaAccoppiata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  } ],
+  "3" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  } ],
+  "4" : [ {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
+    },
+    "newState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  }, {
+    "oldState" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    },
+    "newState" : {
+      "type" : "OffertaAperta",
+      "stato" : "OffertaAperta"
     }
   } ]
 }

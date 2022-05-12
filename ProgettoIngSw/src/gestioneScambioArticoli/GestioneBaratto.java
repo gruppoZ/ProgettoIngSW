@@ -1,6 +1,7 @@
 package gestioneScambioArticoli;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,6 +48,38 @@ public class GestioneBaratto {
 			if(baratto.getOffertaB().equals(offertaSelezionata)) return baratto;
 		}
 		return null;
+	}
+	
+	/*
+	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
+	 */
+	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
+		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
+		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
+		
+		for (Baratto baratto : listaBaratti) {
+			if(baratto.getScadenza().isBefore(LocalDate.now())) {
+				listaBarattiScaduti.add(baratto);
+				listaOfferteScadute.add(baratto.getOffertaA());
+				listaOfferteScadute.add(baratto.getOffertaB());
+			}
+		}
+		
+		aggiornaListaBaratti(listaBarattiScaduti);
+		
+		for (Offerta offerta : listaOfferteScadute) {
+			Offerta o = gestoreOfferte.getOffertaById(offerta.getId(), listaOfferte);
+			System.out.println("Il baratto dell'offerta con ID: " + offerta.getId() + " e' scaduto");
+			gestoreOfferte.cambioOffertaScaduta(o);
+		}	
+	}
+	
+	private void aggiornaListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
+		for (Baratto baratto : listaBarattiDaRimuovere) {
+			this.listaBaratti.remove(baratto);
+		}
+		
+		salvaBaratti();
 	}
 	
 	private List<Baratto> leggiBaratti(){
