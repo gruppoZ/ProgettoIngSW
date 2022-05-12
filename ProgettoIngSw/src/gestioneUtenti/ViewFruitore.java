@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.ViewArticolo;
 import gestioneOfferte.ViewOfferte;
 import gestioneScambioArticoli.ViewBaratto;
@@ -27,7 +28,7 @@ public class ViewFruitore extends ViewUtente{
 	@Override
 	public void menu(String username) {
 		GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
-		
+		GestioneOfferta gestoreOfferta = new GestioneOfferta();
 		ViewOfferte viewOfferte;//per ora qua perchè tre case lo usano
 		
 		MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
@@ -52,11 +53,11 @@ public class ViewFruitore extends ViewUtente{
 					System.out.println(gestoreFruitore.getPiazza());
 				break;
 			case 3:
-				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore);
+				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore, gestoreOfferta);
 				viewArticolo.aggiungiArticolo();
 				break;
 			case 4:
-				viewOfferte = new ViewOfferte(gestoreFruitore);
+				viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);
 				viewOfferte.menu();
 				break;
 			default:

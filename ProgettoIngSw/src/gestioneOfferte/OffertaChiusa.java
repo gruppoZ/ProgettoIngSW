@@ -2,7 +2,7 @@ package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class OffertaChiusa implements StatoOfferta{
+public class OffertaChiusa implements StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
 
 	@JsonCreator

@@ -41,15 +41,15 @@ public class ViewOfferte {
 	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
 	
 	
-	private GestioneOfferta gestoreOfferta;
+	private GestioneOfferta gestoreOfferte;
 	private GestioneFruitore gestoreFruitore;
 	
 	public ViewOfferte() {
-		gestoreOfferta = new GestioneOfferta();
+		gestoreOfferte = new GestioneOfferta();
 	}
-	public ViewOfferte(GestioneFruitore gestoreFruitore) {
+	public ViewOfferte(GestioneFruitore gestoreFruitore, GestioneOfferta gestoreOfferte) {
 		this.gestoreFruitore = gestoreFruitore;
-		gestoreOfferta = new GestioneOfferta();
+		this.gestoreOfferte = gestoreOfferte;
 	}
 	
 	public void menu() {
@@ -76,7 +76,7 @@ public class ViewOfferte {
 				showOfferteByName();			
 				break;
 			case 4:
-				viewScambio = new ViewBaratto(gestoreOfferta, gestoreFruitore);	
+				viewScambio = new ViewBaratto(gestoreOfferte, gestoreFruitore);	
 				viewScambio.menu();
 				break;
 			default:
@@ -91,7 +91,7 @@ public class ViewOfferte {
 			
 			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
 			
-			return gestoreOfferta.getOffertaById(id, listaOfferte);
+			return gestoreOfferte.getOffertaById(id, listaOfferte);
 		} catch (Exception e) {
 			throw new NullPointerException(MSG_OFFERTE_INESISTENTI);
 		}
@@ -101,14 +101,14 @@ public class ViewOfferte {
 	 * Permette di ritirare un offerta selezionandola tramite l'id
 	 */
 	public void ritiraOfferta() {
-		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername());
+		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteAttiveByUtente.size() > 0) {
 			
 			Offerta offerta = this.getOffertaById(listaOfferteAttiveByUtente);
 			
 			if(offerta != null) {
-				gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+				gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
 				System.out.println(MSG_OFFERTA_RITIRATA);
 			} else {
 				System.out.println(MSG_ID_NON_VALIDO);
@@ -136,7 +136,7 @@ public class ViewOfferte {
 	public void showOfferteAperteByCategoria(Categoria foglia) { 
 		if(foglia != null) {
 			
-			ArrayList<Offerta> listaOfferteAperteByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByCategoria(foglia);
+			ArrayList<Offerta> listaOfferteAperteByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByCategoria(foglia);
 			
 			if(listaOfferteAperteByCategoria.size() > 0) {
 				System.out.println(MSG_SHOW_OFFERTE_APERTE);
@@ -151,7 +151,7 @@ public class ViewOfferte {
 	public void showOfferteChiuseByCategoria(Categoria foglia) { 
 		if(foglia != null) {
 			
-			ArrayList<Offerta> listaOfferteChiuseByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteChiuseByCategoria(foglia);
+			ArrayList<Offerta> listaOfferteChiuseByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteChiuseByCategoria(foglia);
 			
 			if(listaOfferteChiuseByCategoria.size() > 0) {
 				System.out.println(MSG_SHOW_OFFERTE_CHIUSE);
@@ -166,7 +166,7 @@ public class ViewOfferte {
 	public void showOfferteInScambioByCategoria(Categoria foglia) { 
 		if(foglia != null) {
 			
-			ArrayList<Offerta> listaOfferteInScambioByCategoria = (ArrayList<Offerta>) gestoreOfferta.getOfferteInScambioByCategoria(foglia);
+			ArrayList<Offerta> listaOfferteInScambioByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteInScambioByCategoria(foglia);
 			
 			if(listaOfferteInScambioByCategoria.size() > 0) {
 				System.out.println(MSG_SHOW_OFFERTE_IN_SCAMBIO);
@@ -184,7 +184,7 @@ public class ViewOfferte {
 	public void showOfferteByName() { 
 		String username = gestoreFruitore.getUsername();
 		
-		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteByUtente(username);
+		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteByUtente(username);
 				
 		if(listaOfferteByUtente.size() > 0) {
 			for (Offerta offerta : listaOfferteByUtente) {
@@ -197,7 +197,7 @@ public class ViewOfferte {
 	public void showOfferteAperteByName() {
 		String username = gestoreFruitore.getUsername();
 		
-		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteAperteByUtente(username);
+		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByUtente(username);
 				
 		if(listaOfferteByUtente.size() > 0) {
 			for (Offerta offerta : listaOfferteByUtente) {
@@ -210,7 +210,7 @@ public class ViewOfferte {
 	public void showOfferteSelezionateByName() {
 		String username = gestoreFruitore.getUsername();
 		
-		ArrayList<Offerta> listaSelezionateByUtente = (ArrayList<Offerta>) gestoreOfferta.getOfferteSelezionateByUtente(username);
+		ArrayList<Offerta> listaSelezionateByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteSelezionateByUtente(username);
 				
 		if(listaSelezionateByUtente.size() > 0) {
 			for (Offerta offerta : listaSelezionateByUtente) {

@@ -28,10 +28,10 @@ public class ViewArticolo {
 	public ViewArticolo() {
 	}
 	
-	public ViewArticolo(GestioneFruitore gestoreFruitore) {
+	public ViewArticolo(GestioneFruitore gestoreFruitore, GestioneOfferta gestoreOfferte) {
 		this.gestoreFruitore = gestoreFruitore;
+		this.gestoreOfferte = gestoreOfferte;
 		gestoreArticolo = new GestioneArticolo();
-		gestoreOfferte = new GestioneOfferta();
 	}
 	
 	public void aggiungiArticolo() {

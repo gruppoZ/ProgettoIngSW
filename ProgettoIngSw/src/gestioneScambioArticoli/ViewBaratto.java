@@ -2,6 +2,7 @@ package gestioneScambioArticoli;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
@@ -29,15 +30,15 @@ public class ViewBaratto {
 	
 	private GestioneBaratto gestoreBaratto;
 	
-	private GestioneOfferta gestoreOfferta;
+	private GestioneOfferta gestoreOfferte;
 	private GestioneFruitore gestoreFruitore;
 	private GestioneParametri gestorePiazza;
 	
 	public ViewBaratto() {
 	}
 	
-	public ViewBaratto(GestioneOfferta gestoreOfferta, GestioneFruitore gestoreFruitore) {
-		this.gestoreOfferta = gestoreOfferta;
+	public ViewBaratto(GestioneOfferta gestoreOfferte, GestioneFruitore gestoreFruitore) {
+		this.gestoreOfferte = gestoreOfferte;
 		this.gestoreFruitore = gestoreFruitore;
 		this.gestoreBaratto = new GestioneBaratto();
 		this.gestorePiazza = new GestioneParametri();
@@ -57,6 +58,7 @@ public class ViewBaratto {
 				scambiaArticolo();
 				break;
 			case 2:
+				gestioneOfferteSelezionate();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -75,18 +77,18 @@ public class ViewBaratto {
 		 * 	-> Collega le 2 offerte
 		 * 
 		 */
-		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore); //TODO: va creata a livello di classe (?)
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte); //TODO: va creata a livello di classe (?)
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
 		try {
 			System.out.println("\nSeleziona una delle tue offerte: ");
-			offertaA = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
+			offertaA = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
 			
 			System.out.println("---------------------------------");
 			System.out.println("\nSeleziona un'offerta tra le offerte degli altri fruitori: ");
 			
-			offertaB = viewOfferta.getOffertaById(gestoreOfferta.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
+			offertaB = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
-			gestoreBaratto.creaCollegamento(gestoreOfferta, offertaA, offertaB);
+			gestoreBaratto.creaCollegamento(gestoreOfferte, offertaA, offertaB);
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
@@ -96,29 +98,35 @@ public class ViewBaratto {
 		}		
 	}
 	
+	
 	private void gestioneOfferteSelezionate() {
-		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore);
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
+		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(gestoreFruitore.getUsername());
 		
-		try {
-			System.out.println("\nSeleziona una delle tue offerte selezionate: ");
-			Offerta offertaSelezionata = viewOfferta.getOffertaById(gestoreOfferta.getOfferteSelezionateByUtente(gestoreFruitore.getUsername()));
-			Baratto baratto = gestoreBaratto.getBarattoByOffertaSelezionata(offertaSelezionata);
-			
-			showBaratto(baratto);
-			
-			boolean scelta = InputDati.yesOrNo("Vuoi fissare un appuntamento?");
-			if(scelta) {
-				Appuntamento appuntamento = creaAppuntamento();
-				gestoreBaratto.creaScambio(gestoreOfferta, offertaSelezionata, offertaSelezionata, appuntamento);
+		if(listaOfferteSelezionate.size() > 0) {
+			try {
+				System.out.println("\nSeleziona una delle tue offerte selezionate: ");
+				Offerta offertaSelezionata = viewOfferta.getOffertaById(listaOfferteSelezionate);
+				Baratto baratto = gestoreBaratto.getBarattoByOffertaSelezionata(offertaSelezionata);
+				Offerta offertaAccoppiata = gestoreOfferte.getOffertaById(baratto.getOffertaA().getId());
+
+				showBaratto(baratto);
 				
-			} else {
-				System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra' cancellato");
-			}
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}	
-		
+				boolean scelta = InputDati.yesOrNo("Vuoi fissare un appuntamento?");
+				if(scelta) {
+					Appuntamento appuntamento = creaAppuntamento();
+					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata, appuntamento);
+					//TODO: aggiorna anche baratto!
+				} else {
+					System.out.println("Attenzione! Se non viene fissato un apputnamento entro: " + baratto.getScadenza() + " il baratto verra' cancellato");
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}	
+		} else {
+			System.out.println("Non hai offerte selezionate");
+		}
 		
 	}
 	
@@ -155,6 +163,8 @@ public class ViewBaratto {
 		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
 		 */
 		Appuntamento appuntamento = new Appuntamento(luogo, date, orario);
+		
+		System.out.println();
 		
 		return appuntamento;
 	}

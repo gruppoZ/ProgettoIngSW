@@ -1,6 +1,6 @@
 [ {
   "offertaA" : {
-    "id" : 3,
+    "id" : 2,
     "articolo" : {
       "foglia" : {
         "nome" : "a",
@@ -15,11 +15,11 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       },
       "valoreCampi" : {
-        "Stato di conservazione" : "ook"
+        "Stato di conservazione" : "n"
       }
     },
     "username" : "f",
@@ -29,7 +29,7 @@
     }
   },
   "offertaB" : {
-    "id" : 4,
+    "id" : 1,
     "articolo" : {
       "foglia" : {
         "nome" : "a",
@@ -44,11 +44,11 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       },
       "valoreCampi" : {
-        "Stato di conservazione" : "ottimo"
+        "Stato di conservazione" : "aaa"
       }
     },
     "username" : "wewe",

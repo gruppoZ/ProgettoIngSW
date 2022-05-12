@@ -45,12 +45,12 @@ public class GestioneOfferta {
 	 */
 	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) {
 		int id = offerta.getId();
-		StatoOfferta oldState, newState;
-		oldState = offerta.getTipoOfferta();
+		String oldState, newState;
+		oldState = offerta.getTipoOfferta().getStato();
 		
 		offerta.getTipoOfferta().changeState(offerta, stato);
 		
-		newState = offerta.getTipoOfferta();
+		newState = offerta.getTipoOfferta().getStato();
 		
 		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
 		
@@ -79,6 +79,8 @@ public class GestioneOfferta {
 	 */
 	protected List<Offerta> leggiListaOfferte() {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
+		if(listaOfferte == null) //per evitare di salvare "null" nel file offerte.json 
+			listaOfferte = new ArrayList<Offerta>();
 		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));//gestioneBaratto da creare o da chiedere al metodo?
 		//ora salva sempre, meglio salvare solo quando faccio un cambio
 		salvaOfferte();		
@@ -116,11 +118,14 @@ public class GestioneOfferta {
 //		return listaOfferteAggiornata;
 //	}
 	
-	public void cambioOffertaScaduta(Offerta offerta) {
-		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
+	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getId() == id) return offerta;
+		}
+		throw new NullPointerException();
 	}
 	
-	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
+	public Offerta getOffertaById(int id) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() == id) return offerta;
 		}

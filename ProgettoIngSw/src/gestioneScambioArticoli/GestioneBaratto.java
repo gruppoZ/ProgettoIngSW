@@ -65,16 +65,15 @@ public class GestioneBaratto {
 			}
 		}
 		
-		aggiornaListaBaratti(listaBarattiScaduti);
+		rimuoviListaBaratti(listaBarattiScaduti);
 		
-		for (Offerta offerta : listaOfferteScadute) {
-			Offerta o = gestoreOfferte.getOffertaById(offerta.getId(), listaOfferte);
-			System.out.println("Il baratto dell'offerta con ID: " + offerta.getId() + " e' scaduto");
-			gestoreOfferte.cambioOffertaScaduta(o);
+		for (Offerta offertaScaduta : listaOfferteScadute) {
+			Offerta offerta = gestoreOfferte.getOffertaById(offertaScaduta.getId(), listaOfferte);
+			cambioOffertaScaduta(gestoreOfferte, offerta);
 		}	
 	}
 	
-	private void aggiornaListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
+	private void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
 		for (Baratto baratto : listaBarattiDaRimuovere) {
 			this.listaBaratti.remove(baratto);
 		}
@@ -103,6 +102,10 @@ public class GestioneBaratto {
 	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB, Appuntamento appuntamento) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio(appuntamento));
+	}
+	
+	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {
