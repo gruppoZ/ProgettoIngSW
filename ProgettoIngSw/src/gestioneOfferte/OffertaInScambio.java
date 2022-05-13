@@ -27,6 +27,7 @@ public class OffertaInScambio implements StatoOfferta {
 	public Appuntamento getAppuntamento() {
 		return appuntamento;
 	}
+	
 	@Override
 	public void changeState(Offerta offerta) {
 	}

@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Appuntamento {
-	String luogo;
-	LocalDate data;
-	LocalTime ora;
-	boolean rifiutato;
+	private String luogo;
+	private LocalDate data;
+	private LocalTime ora;
+	private boolean valido;
 	
 	public Appuntamento() {
 		
@@ -16,13 +16,13 @@ public class Appuntamento {
 	 * @param luogo
 	 * @param data
 	 * @param ora
-	 * @param rifiutato
+	 * @param valido
 	 */
 	public Appuntamento(String luogo, LocalDate data, LocalTime ora) {
 		this.luogo = luogo;
 		this.data = data;
 		this.ora = ora;
-		this.rifiutato = false;
+		this.valido = true;
 	}
 
 	public String getLuogo() {
@@ -37,11 +37,11 @@ public class Appuntamento {
 		return ora;
 	}
 	
-	public boolean isRifiutato() {
-		return rifiutato;
+	public boolean isValido() {
+		return valido;
 	}
-	public void setRifiutato(boolean rifiutato) {
-		this.rifiutato = rifiutato;
+	public void setValido(boolean valido) {
+		this.valido = valido;
 	}	
 	
 }

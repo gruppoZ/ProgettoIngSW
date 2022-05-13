@@ -6,7 +6,9 @@ import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
+import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
+import gestioneOfferte.StatoOfferta;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
 import gestioneParametri.ViewParametroIntervalloOrario;
@@ -21,11 +23,13 @@ public class ViewBaratto {
 	private static final String TXT_TITOLO = "Scambio Articoli";
 	
 	private static final String MSG_SCEGLI_OFFERTE_APERTE = "Scambia Articolo";
-	private static final String MSG_OFFERTA_SELEZIONATA = "Controlla eventuali offerte selezionate";
+	private static final String MSG_CHECK_OFFERTE_SELEZIONATE = "Controlla eventuali offerte selezionate";
+	private static final String MSG_CHECK_OFFERTE_IN_SCAMBIO = "Controlla eventuali offerte in scambio";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_SCEGLI_OFFERTE_APERTE,
-			MSG_OFFERTA_SELEZIONATA
+			MSG_CHECK_OFFERTE_SELEZIONATE,
+			MSG_CHECK_OFFERTE_IN_SCAMBIO
 	};
 	
 	private GestioneBaratto gestoreBaratto;
@@ -59,6 +63,9 @@ public class ViewBaratto {
 				break;
 			case 2:
 				gestioneOfferteSelezionate();
+				break;
+			case 3:
+				gestioneOfferteInScambio();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -116,7 +123,6 @@ public class ViewBaratto {
 				if(scelta) {
 					Appuntamento appuntamento = creaAppuntamento();
 					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata, appuntamento);
-					//TODO: aggiorna anche baratto! NB: forse cambia anche la scadenza
 					gestoreBaratto.rimuoviBaratto(baratto);
 					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza());
 				} else {
@@ -128,6 +134,51 @@ public class ViewBaratto {
 			}	
 		} else {
 			System.out.println("Non hai offerte selezionate");
+		}
+		
+	}
+	
+	private void gestioneOfferteInScambio() {
+		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
+		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(gestoreFruitore.getUsername());
+		
+		if(listaOfferteInScambio.size() > 0) {
+			try {				
+				System.out.println("\nSeleziona una delle tue offerte in scambio: ");
+				Offerta offertaInScambio1 = viewOfferta.getOffertaById(listaOfferteInScambio);
+				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offertaInScambio1);
+				int idOfferta2;
+				if(baratto.getOffertaA().getId() != offertaInScambio1.getId()) 
+					idOfferta2 = baratto.getOffertaA().getId();	
+				else
+					idOfferta2 = baratto.getOffertaB().getId();	
+				
+				Offerta offertaInScambio2 = gestoreOfferte.getOffertaById(idOfferta2);
+				//offertaInScambio2 ha l'appuntamento sbagliato
+				showBaratto(baratto);
+				//controllo devo accettare l'appuntamento
+				OffertaInScambio tipoOfferta2 = (OffertaInScambio) offertaInScambio2.getTipoOfferta();
+				if(tipoOfferta2.getAppuntamento().isValido()) {
+					//showAppuntamento();
+					if(InputDati.yesOrNo("Vuoi accettare l'appuntamento?")) {
+						//gestione offertaInScambio -> offertaChiusa
+						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambio1, offertaInScambio2);
+						gestoreBaratto.rimuoviBaratto(baratto);
+					} else {
+						Appuntamento appuntamento = creaAppuntamento();
+						gestoreBaratto.creaScambio(gestoreOfferte, offertaInScambio2, offertaInScambio1, appuntamento);
+						gestoreBaratto.rimuoviBaratto(baratto);
+						gestoreBaratto.creaBaratto(offertaInScambio2, offertaInScambio1, gestorePiazza.getScadenza());
+					}
+				} else {
+					System.out.println("\nDevi attendere una risposta dall'altro fruitore!");
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}	
+		} else {
+			System.out.println("Non hai offerte in scambio");
 		}
 		
 	}

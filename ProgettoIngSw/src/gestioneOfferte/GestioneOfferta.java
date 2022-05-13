@@ -133,6 +133,16 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+	public List<Offerta> getOfferteInScambioByUtente(String username) {
+		List<Offerta> result = new ArrayList<>();
+		for (Offerta offerta : listaOfferte) {
+			if(offerta.getUsername().equalsIgnoreCase(username) && isOffertaInScambio(offerta))
+				result.add(offerta);
+		}
+		
+		return result;
+	}
+	
 	public List<Offerta> getOfferteAperteByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {

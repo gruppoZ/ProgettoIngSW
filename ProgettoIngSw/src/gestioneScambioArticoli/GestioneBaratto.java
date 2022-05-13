@@ -9,6 +9,7 @@ import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
 import gestioneOfferte.OffertaAperta;
+import gestioneOfferte.OffertaChiusa;
 import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
 import main.JsonIO;
@@ -102,6 +103,11 @@ public class GestioneBaratto {
 	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB, Appuntamento appuntamento) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio(appuntamento));
+	}
+	
+	protected void cambioOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaChiusa());
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
 	
 	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
