@@ -151,35 +151,4 @@ public class GestioneGerarchie {
 	public String showGerarchia() {
 		return this.currentGerarchia.toString();
 	}
-	
-	public String getToStringSintetico() {
-		StringBuffer result = new StringBuffer();
-		
-		if(this.gerarchie.size() == 0) {
-			result.append("\nNESSUNA GERARCHIA PRESENTE\n");
-		} else {
-			result.append("---------------------------\n");
-			for (Gerarchia gerarchia : gerarchie.values()) {
-				result.append(gerarchia.showGerarchiaSintetica());
-			}
-		}
-				
-		return result.toString();
-	}
-	
-	@Override
-	public String toString() {
-		StringBuffer result = new StringBuffer();
-		
-		if(this.getGerarchie().size() == 0) {
-			result.append("\nNESSUNA GERARCHIA PRESENTE\n");
-		} else {
-			result.append("---------------------------\n");
-			for (Gerarchia gerarchia : getGerarchie().values()) {
-				result.append(gerarchia.toString());
-			}
-		}
-				
-		return result.toString();		
-	}
 }

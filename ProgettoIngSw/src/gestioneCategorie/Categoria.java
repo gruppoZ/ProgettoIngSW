@@ -2,11 +2,7 @@ package gestioneCategorie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import it.unibs.fp.mylib.BelleStringhe;
 
 public class Categoria {
 	private String nome;
@@ -107,7 +103,6 @@ public class Categoria {
 	public void setProfondita(int profondita) {
 		this.profondita = profondita;
 	}
-	
 
 	/**
 	 * 
@@ -135,8 +130,7 @@ public class Categoria {
 			return campi;
 		}
 	}
-	
-	
+		
 	public int numeriDiSottocategorie() {
 		return this.sottoCategorie.size();
 	}
@@ -173,46 +167,6 @@ public class Categoria {
 			}
 		}
 	}
-	
-	/**
-	 * 
-	 * @param nTab = utilizzato per la visualizzazione, in base alla profondita', della categoria
-	 * @return
-	 */
-	private String showCampi(String nTab) {
-		List<CampoCategoria> campi = getCampiNativiEreditati();
-		StringBuffer result = new StringBuffer();
-		result.append(nTab + "CAMPI: \n");
-		
-		if(campi.size() == 0) {
-			result.append(nTab + "\t" + "--- nessun Campo presente ---\n");
-		} else {
-			for (CampoCategoria campo_Categoria : campi) {			
-				result.append(nTab + "\t" + campo_Categoria.toString() + "\n");
-			}
-		}
-
-		result.append(nTab + "---- Fine Campi di " + nome + " ----\n\n");
-		return result.toString();
-	}
-	
-	/**
-	 * 
-	 * @return la stampa della categoria con tutti i suoi attributi che la caratterizzano come tale
-	 */
-	public String showCategoriaDettagliata() {
-		StringBuffer result = new StringBuffer();
-		String nTab = BelleStringhe.ripetiChar('\t', this.profondita);
-		
-		result.append(nTab+"->Nome: "+nome+"  |  Descrizione: "+descrizione+"\n");
-		result.append(showCampi(nTab));
-		
-		for (Categoria sotto_categoria : this.sottoCategorie) {
-			result.append(nTab+"\t" + sotto_categoria.showCategoriaDettagliata()+"\n");
-		}
-		
-		return result.toString();
-	}
 
 	/**
 	 * Metodo per sapere quando due categorie sono uguali
@@ -221,17 +175,5 @@ public class Categoria {
 	 */
 	public boolean equals(Categoria categoria) {
 		return this.nome.equals(categoria.getNome()); 
-	}
-
-
-	@Override
-	public String toString() {
-		StringBuffer result = new StringBuffer();
-		String nTab = BelleStringhe.ripetiChar('\t',  getProfondita());
-		result.append(nTab+"->"+nome+"\n");
-		for (Categoria sotto_categoria : this.sottoCategorie) {
-			result.append(nTab+"\t" + sotto_categoria.toString()+"\n");
-		}
-		return result.toString();
 	}
 }

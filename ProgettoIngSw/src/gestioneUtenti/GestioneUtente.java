@@ -19,11 +19,7 @@ public abstract class GestioneUtente {
 	public HashMap<String, Gerarchia> getGerarchie() {
 		return gestoreGerarchie.getGerarchie();
 	}
-	
-	public String getDescrizioneSinteticaGerarchie() {
-		return gestoreGerarchie.getToStringSintetico();
-	}
-	
+
 	public boolean isGerarchieCreate() {
 		return gestoreGerarchie.isGerarchiePresenti();
 	}	

@@ -115,14 +115,4 @@ public class Gerarchia {
 	private String formattaNome(String nome) {
 		return nome.toUpperCase();
 	}
-	
-	public String showGerarchiaSintetica() {
-		return "Nome: " + root.getNome() + " Descrizione: " + root.getDescrizione() + "\n";
-	}
-	
-	@Override
-	public String toString() {
-		return "Gerarchia con Radice:  " + root.getNome() + "\n"
-				+ root.showCategoriaDettagliata();
-	}
 }

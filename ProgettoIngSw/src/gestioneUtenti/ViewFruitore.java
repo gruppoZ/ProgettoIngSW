@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.ViewOfferte;
 import it.unibs.fp.mylib.MyMenu;
@@ -10,9 +11,7 @@ public class ViewFruitore extends ViewUtente{
 	
 	//costanti per menu
 	private static final String TXT_TITOLO = "Benvenuto Fruitore";
-	
 	private static final String MSG_VISUALIZZA_PIAZZA = "Visualizza Piazza";
-	
 	private static final String MSG_GESTISCI_OFFERTE = "Gestisci Offerte";
 	
 	private static final String [] TXT_VOCI = {
@@ -36,10 +35,15 @@ public class ViewFruitore extends ViewUtente{
 				fine = true;
 				break;
 			case 1:
+				ViewGerarchia viewGerarchia = new ViewGerarchia();
+				
 				if(!gestoreFruitore.isGerarchieCreate())
 					System.out.println(MSG_ASSENZA_GERARCHIE);
-				else
-					System.out.println(gestoreFruitore.getDescrizioneSinteticaGerarchie());				
+				else {
+					gestoreFruitore.getGerarchie().forEach((k,v) -> {
+						viewGerarchia.showGerarchiaSintetica(v);
+					});
+				}		
 				break;
 			case 2:
 				if(!gestoreFruitore.isPiazzaCreata())

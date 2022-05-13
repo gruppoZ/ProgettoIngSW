@@ -30,13 +30,4 @@ public class CampoCategoria {
 	public void setObbligatorio(boolean obbligatorio) {
 		this.obbligatorio = obbligatorio;
 	}
-
-	@Override
-	public String toString() {
-		StringBuffer result = new StringBuffer();
-		String msgObbligatorio = obbligatorio ? "Obbligatorio" : "Facolatativo";
-		result.append("Campo: " + descrizione + " - " + msgObbligatorio);
-		
-		return result.toString();
-	}
 }

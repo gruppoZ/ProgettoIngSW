@@ -241,7 +241,7 @@ public class ViewGerarchia {
 	
 	public Categoria scegliFoglia() {
 		
-		System.out.println(gestoreGerarchia.getToStringSintetico());
+		showGerarchiaSintetica(gestoreGerarchia.getGerarchiaInLavorazione());
 		
 		String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
 		
@@ -326,5 +326,14 @@ public class ViewGerarchia {
 		System.out.println(sb.toString());	
 		
 		System.out.println(viewCategoria.showCategoriaDettagliata(gerarchia.getRoot()));
+	}
+	
+	public void showGerarchiaSintetica(Gerarchia gerarchia) {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("******************************\n");
+		sb.append("Nome: " + gerarchia.getRoot().getNome() + " | Descrizione: " + gerarchia.getRoot().getDescrizione() + "\n");
+		
+		System.out.println(sb.toString());	
 	}
 }

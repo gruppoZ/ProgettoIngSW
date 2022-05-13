@@ -39,11 +39,19 @@ public class ViewCategoria {
 			result.append(nTab + "\t" + "--- nessun Campo presente ---\n");
 		} else {
 			for (CampoCategoria campo_Categoria : campi) {			
-				result.append(nTab + "\t" + campo_Categoria.toString() + "\n");
+				result.append(nTab + "\t" + showCampoCategoria(campo_Categoria) + "\n");
 			}
 		}
 
 		result.append(nTab + "---- Fine Campi di " + categoria.getNome() + " ----\n\n");
 		return result.toString();
+	}
+	
+	private String showCampoCategoria(CampoCategoria campo) {
+		StringBuffer sb = new StringBuffer();
+		String msgObbligatorio = campo.isObbligatorio() ? "Obbligatorio" : "Facolatativo";
+		sb.append("Campo: " + campo.getDescrizione() + " - " + msgObbligatorio);
+		
+		return sb.toString();
 	}
 }
