@@ -321,9 +321,9 @@ public class ViewGerarchia {
 		ViewCategoria viewCategoria = new ViewCategoria();
 		StringBuilder sb = new StringBuilder();
 		
+		sb.append("******************************\n");
 		sb.append("Gerarchia con Radice:  " + gerarchia.getRoot().getNome() + "\n");
-		System.out.println(sb.toString());
-		
+		System.out.println(sb.toString());	
 		
 		System.out.println(viewCategoria.showCategoriaDettagliata(gerarchia.getRoot()));
 	}
