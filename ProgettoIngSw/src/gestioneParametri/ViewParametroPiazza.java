@@ -118,8 +118,16 @@ public class ViewParametroPiazza extends ViewParametri {
 	public void rimuovi() {
 	}
 
-	private void showPiazza() {
-		System.out.println(getGestoreParametri().getPiazza().toString());
+	public void showPiazza() {
+		Piazza piazza = getGestoreParametri().getPiazza();
+		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(getGestoreParametri());
+		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(getGestoreParametri());
+		ViewParametroIntervalloOrario viewParamtroIntervalli = new ViewParametroIntervalloOrario(getGestoreParametri());
+		
+		System.out.println("Piazza " + piazza.getCitta());
+		viewParametroLuogo.showLuoghi();
+		viewParametroGiorno.showGiorniPresenti();
+		viewParamtroIntervalli.showIntervalli();
 	}
 		
 	private String inserisciCitta() {

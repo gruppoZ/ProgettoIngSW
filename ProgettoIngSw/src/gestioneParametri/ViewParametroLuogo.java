@@ -7,6 +7,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroLuogo extends ViewParametri{
 
+	private static final String MSG_LUOGHI_PRESENTI = "Luoghi presenti: ";
 	private static final String MSG_LUOGO_NON_PRESENTE = "il luogo scelto non è stato trovato. Scegli un luogo valido: ";
 	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
 	private static final String MSG_ERRORE_RIMOZIONE_LUOGO = "Impossibile rimuovere il luogo. Nome non valido";
@@ -90,8 +91,11 @@ public class ViewParametroLuogo extends ViewParametri{
 		return luogo;
 	}
 	
-	//TODO: da non utilizzare toString
-	private void showLuoghi() {
-		System.out.println(getGestoreParametri().getLuoghi().toString());
+	protected void showLuoghi() {
+		System.out.println(MSG_LUOGHI_PRESENTI);
+		
+		getGestoreParametri().getLuoghi().forEach(e -> {
+			System.out.println("-> " + e);
+		});
 	}
 }

@@ -272,11 +272,7 @@ public class GestioneParametri {
 	public List<GiorniDellaSettimana> ordinaListaGiorni(List<GiorniDellaSettimana> giorni) {
 		return GiorniDellaSettimana.ordinaLista(giorni); //ordinare la lista dei giorni presenti in piazza
 	}
-	
-	public void showScadenza() {
-		System.out.println(piazza.getScadenza());
-	}	
-	
+
 	protected void modificaScadenza(int scadenza) {
 		piazza.setScadenza(scadenza);
 		salvaPiazza();
@@ -285,10 +281,4 @@ public class GestioneParametri {
 	public boolean isPiazzaCreata() {
 		return this.piazza.getCitta() != null;
 	}
-
-	@Override
-	public String toString() {
-		return "[Piazza=" + piazza + "]";
-	}
-
 }

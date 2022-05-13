@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import gestioneCategorie.CampoCategoria;
 import gestioneCategorie.Categoria;
 import gestioneCategorie.GestioneGerarchie;
+import gestioneCategorie.ViewGerarchia;
 
 class testGestioneGerarchia {
 
@@ -43,11 +42,12 @@ class testGestioneGerarchia {
             
         }
 		
-		System.out.println(gestoreGerarchia.showGerarchia());
-		
+		ViewGerarchia viewGerarchia = new ViewGerarchia();
+		viewGerarchia.showGerarchia(gestoreGerarchia.getGerarchiaInLavorazione());
+				
 		gestoreGerarchia.eliminaCategoria("f#0");
 		System.out.println("\n eliminato f#0 \n");
-		System.out.println(gestoreGerarchia.showGerarchia());
+		viewGerarchia.showGerarchia(gestoreGerarchia.getGerarchiaInLavorazione());
 	}
 	
 	Categoria creaCategoria(Categoria padre, String id,int i) {

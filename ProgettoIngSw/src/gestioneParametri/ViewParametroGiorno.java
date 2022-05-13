@@ -1,5 +1,6 @@
 package gestioneParametri;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unibs.fp.mylib.InputDati;
@@ -10,7 +11,7 @@ public class ViewParametroGiorno extends ViewParametri{
 	private static final String MSG_GIORNO_GIA_PRESENTE = "Il giorno selezionato e' gia' presente";
 	private static final String MSG_GIORNO_NON_VALIDO = "Giorno non valido";
 	private static final String MSG_GIORNI_PRESENTI = "Giorni presenti: ";
-	private static final String ASK_GIORNO_DESIDERATO = "Seleziona il giorno desiderato: ";
+	private static final String ASK_GIORNO_DESIDERATO = "Seleziona il giorno desiderato tramite id: ";
 	private static final String ASK_INSERIRE_ALTRI_GIORNI = "Vuoi inserire altri giorni? ";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
 	
@@ -92,17 +93,30 @@ public class ViewParametroGiorno extends ViewParametri{
 		return giorno;
 	}
 	
-	private void showGiorniPresenti() {
+	protected void showGiorniPresenti() {
 		System.out.println(MSG_GIORNI_PRESENTI);
-		System.out.println(getGestoreParametri().getGiorni());
+		
+		showGiorni(getGestoreParametri().getGiorni());
 	}
 	
 	private void showTuttiGiorniDellaSettimana() {
-		GiorniDellaSettimana.showGiorniSettimana();
+		List<GiorniDellaSettimana> giorni = new ArrayList<>();
+		
+		for (GiorniDellaSettimana giorniDellaSettimana : GiorniDellaSettimana.values()) {
+			giorni.add(giorniDellaSettimana);
+		}
+		
+		showGiorni(giorni);
 	}
 	
 	public void showGiorni(List<GiorniDellaSettimana> giorni) {
 		StringBuilder sb = new StringBuilder();
+		
+		for (GiorniDellaSettimana giorniDellaSettimana : giorni) {
+			sb.append(giorniDellaSettimana.getOrdine() + " " + giorniDellaSettimana.getNome() + "\t");
+		}
+		
+		System.out.println(sb.toString());
 	}
 	private GiorniDellaSettimana leggiGiorno() {
 		int id = InputDati.leggiIntero(ASK_GIORNO_DESIDERATO, 0, 6);

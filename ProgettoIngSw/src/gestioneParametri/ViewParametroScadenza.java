@@ -8,7 +8,7 @@ public class ViewParametroScadenza extends ViewParametri{
 	private static final int MIN_SCADENZA = 0;
 	
 	private static final String GIVE_SCADENZA_ATTUALE = "Scadenza attuale: %s giorni\n";
-	private static final String ASK_SCADENZA = "Inserisci la scadenza: ";
+	private static final String ASK_SCADENZA = "\nInserisci la nuova scadenza: ";
 	
 	private static final String MSG_MODIFICA= "Modifica";
 	
@@ -44,7 +44,6 @@ public class ViewParametroScadenza extends ViewParametri{
 	@Override
 	public void aggiungi() {
 		showScadenza();
-		System.out.println("Modifica...");
 		
 		int scadenza = inserisciScadenza();
 	

@@ -71,6 +71,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 			try {
 				getGestoreParametri().aggiungiIntervalloOrario(listaIntervalli, daAggiungere);
 				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
+				
 				showIntervalli();
 			} catch(RuntimeException e) {
 				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
@@ -115,10 +116,16 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		return orario;
 	}
 
-	private void showIntervalli() {
-		System.out.print(GIVE_INTERVALLI_PRESENTI);
-		if(getGestoreParametri().getIntervalli().size() > 0)
-			System.out.println(getGestoreParametri().getIntervalli().toString());
+	protected void showIntervalli() {
+		System.out.println(GIVE_INTERVALLI_PRESENTI);
+		if(getGestoreParametri().getIntervalli().size() > 0) {
+			
+			getGestoreParametri().getIntervalli().forEach(e -> {
+				System.out.print(e.getOrarioMin() + " - " + e.getOrarioMax() + "\t");
+			});
+			
+			System.out.print("\n");
+		}
 		else
 			System.out.println(MSG_NESSUN_INTERVALLO_PRESENTE);
 	}

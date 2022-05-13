@@ -45,15 +45,4 @@ public enum GiorniDellaSettimana {
 		}
 		return null;
 	}
-	
-	public static void showGiorniSettimana() {
-		for(GiorniDellaSettimana giorno : GiorniDellaSettimana.values()) {
-			System.out.println(giorno.toString());
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return this.ordine + " " + this.nome;
-	}
 }

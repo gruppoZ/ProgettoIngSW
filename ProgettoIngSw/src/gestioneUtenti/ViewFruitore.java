@@ -3,6 +3,7 @@ package gestioneUtenti;
 import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.ViewOfferte;
+import gestioneParametri.ViewParametroPiazza;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
@@ -48,8 +49,10 @@ public class ViewFruitore extends ViewUtente{
 			case 2:
 				if(!gestoreFruitore.isPiazzaCreata())
 					System.out.println(MSG_NESSUNA_PIAZZA);
-				else
-					System.out.println(gestoreFruitore.getPiazza());
+				else {
+					ViewParametroPiazza viewPiazza = new ViewParametroPiazza();
+					viewPiazza.showPiazza();
+				}
 				break;
 			case 3:
 				ViewOfferte viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);

@@ -84,10 +84,4 @@ public class Piazza {
 	public void rimuoviIntervallo(IntervalloOrario intervalloDaRimuovere) {
 		this.intervalliOrari.remove(intervalloDaRimuovere);
 	}
-	
-	@Override
-	public String toString() {
-		return "Piazza [citta=" + citta + ", luoghi=" + luoghi + ", giorni=" + giorni + ", intervalliOrari="
-				+ intervalliOrari + "]";
-	}
 }
