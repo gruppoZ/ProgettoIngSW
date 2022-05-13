@@ -195,7 +195,7 @@ public class GestioneOfferta {
 		return JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
 	}
 	
-	protected void salvaOfferte() {
+	public void salvaOfferte() {
 		JsonIO.salvaOggettoSuJson(PATH_OFFERTE, listaOfferte);
 	}
 	

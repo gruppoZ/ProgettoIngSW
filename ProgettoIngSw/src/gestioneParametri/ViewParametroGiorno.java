@@ -93,7 +93,7 @@ public class ViewParametroGiorno extends ViewParametri{
 		return giorno;
 	}
 	
-	protected void showGiorniPresenti() {
+	public void showGiorniPresenti() {
 		System.out.println(MSG_GIORNI_PRESENTI);
 		
 		showGiorni(getGestoreParametri().getGiorni());

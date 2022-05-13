@@ -25,6 +25,19 @@ public class ViewCategoria {
 		return result.toString();
 	}
 	
+	public String showCategoriaSemplificata(Categoria categoria) {
+		StringBuffer result = new StringBuffer();
+		String nTab = BelleStringhe.ripetiChar('\t', categoria.getProfondita());
+
+		result.append(nTab+"->Nome: "+categoria.getNome()+"\n");
+		
+		for (Categoria sotto_categoria : categoria.getSottoCategorie()) {
+			result.append(nTab+"\t" + showCategoriaSemplificata(sotto_categoria)+"\n");
+		}
+		
+		return result.toString();
+	}
+	
 	/**
 	 * 
 	 * @param nTab = utilizzato per la visualizzazione, in base alla profondita', della categoria

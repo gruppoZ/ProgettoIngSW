@@ -110,6 +110,12 @@ public class GestioneBaratto {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
 	
+	protected void gestisciRifiutoAppuntamento(GestioneOfferta gestoreOfferte, OffertaInScambio tipoOfferta1, OffertaInScambio tipoOfferta2, Appuntamento appuntamento) {
+		tipoOfferta2.getAppuntamento().setValido(false); //oppure si fa setAppuntamento(new Appuntamento())
+		tipoOfferta1.setAppuntamento(appuntamento);
+		gestoreOfferte.salvaOfferte(); //da spostare
+	}
+	
 	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}

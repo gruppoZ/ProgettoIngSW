@@ -240,8 +240,8 @@ public class ViewGerarchia {
 	}
 	
 	public Categoria scegliFoglia() {
-		
-		showGerarchiaSintetica(gestoreGerarchia.getGerarchiaInLavorazione());
+		ViewCategoria viewCategoria = new ViewCategoria();
+		gestoreGerarchia.getGerarchie().forEach((k, v) -> showGerarchiaSintetica(v));
 		
 		String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
 		
@@ -254,8 +254,9 @@ public class ViewGerarchia {
 			List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
  
 			for (Categoria categoria : listaFoglie) {
-				System.out.println(categoria);
+				System.out.println(viewCategoria.showCategoriaSemplificata(categoria));
 			}
+			
 			
 			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
 			

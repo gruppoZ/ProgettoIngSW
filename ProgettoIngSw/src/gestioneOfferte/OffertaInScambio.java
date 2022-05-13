@@ -28,6 +28,10 @@ public class OffertaInScambio implements StatoOfferta {
 		return appuntamento;
 	}
 	
+	public void setAppuntamento(Appuntamento appuntamento) {
+		this.appuntamento = appuntamento;
+	}
+
 	@Override
 	public void changeState(Offerta offerta) {
 	}

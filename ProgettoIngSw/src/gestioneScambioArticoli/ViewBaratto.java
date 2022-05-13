@@ -11,6 +11,7 @@ import gestioneOfferte.OffertaSelezionata;
 import gestioneOfferte.StatoOfferta;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
+import gestioneParametri.ViewParametroGiorno;
 import gestioneParametri.ViewParametroIntervalloOrario;
 import gestioneParametri.ViewParametroLuogo;
 import gestioneUtenti.GestioneFruitore;
@@ -154,19 +155,23 @@ public class ViewBaratto {
 					idOfferta2 = baratto.getOffertaB().getId();	
 				
 				Offerta offertaInScambio2 = gestoreOfferte.getOffertaById(idOfferta2);
-				//offertaInScambio2 ha l'appuntamento sbagliato
 				showBaratto(baratto);
-				//controllo devo accettare l'appuntamento
 				OffertaInScambio tipoOfferta2 = (OffertaInScambio) offertaInScambio2.getTipoOfferta();
+				
 				if(tipoOfferta2.getAppuntamento().isValido()) {
-					//showAppuntamento();
+					//da fare showAppuntamento();
+					System.out.println(tipoOfferta2.getAppuntamento().getLuogo() + "\n"
+							+ tipoOfferta2.getAppuntamento().getData() + "\n"
+							+ tipoOfferta2.getAppuntamento().getOra() + "\n");
+					
 					if(InputDati.yesOrNo("Vuoi accettare l'appuntamento?")) {
-						//gestione offertaInScambio -> offertaChiusa
 						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambio1, offertaInScambio2);
 						gestoreBaratto.rimuoviBaratto(baratto);
 					} else {
 						Appuntamento appuntamento = creaAppuntamento();
-						gestoreBaratto.creaScambio(gestoreOfferte, offertaInScambio2, offertaInScambio1, appuntamento);
+						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambio1.getTipoOfferta();
+						
+						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, tipoOfferta2, appuntamento);
 						gestoreBaratto.rimuoviBaratto(baratto);
 						gestoreBaratto.creaBaratto(offertaInScambio2, offertaInScambio1, gestorePiazza.getScadenza());
 					}
@@ -185,16 +190,17 @@ public class ViewBaratto {
 	
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
+		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
 		
 		String luogo = viewParametroLuogo.scegliLuogo();
 		
-		System.out.println("Giorni: " + gestorePiazza.getGiorni()); 
+		viewParametroGiorno.showGiorniPresenti();
 		String dateTesto = InputDati.leggiStringaNonVuota("Inserisci data nel formato d/m/yyyy:");
 		LocalDate date = gestorePiazza.dateInput(dateTesto);
 		
 		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date)) {
 			//TODO: da fare refactor
-			System.out.println("Giorni: " + gestorePiazza.getGiorni()); 
+			viewParametroGiorno.showGiorniPresenti();
 			
 			dateTesto = InputDati.leggiStringaNonVuota("Giorno non accettato. Ricorda"
 					+ "di scegliere una data in un giorno della settimana fra quelli disponibili per gli appuntamenti."
