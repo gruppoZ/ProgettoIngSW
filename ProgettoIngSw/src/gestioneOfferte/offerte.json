@@ -14,8 +14,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -48,8 +48,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "b"
@@ -76,8 +76,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "aaaaa2"
@@ -110,8 +110,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "bbbbbbbbbbbbb2"

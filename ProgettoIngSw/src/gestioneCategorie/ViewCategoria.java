@@ -13,9 +13,10 @@ public class ViewCategoria {
 	public String showCategoriaDettagliata(Categoria categoria) {
 		StringBuffer result = new StringBuffer();
 		String nTab = BelleStringhe.ripetiChar('\t', categoria.getProfondita());
+		String nTabCampi = BelleStringhe.ripetiChar('\t', categoria.getProfondita() + 1);
 		
 		result.append(nTab+"->Nome: "+categoria.getNome()+"  |  Descrizione: "+categoria.getDescrizione()+"\n");
-		result.append(showCampi(categoria, nTab));
+		result.append(showCampi(categoria, nTab + nTabCampi));
 		
 		for (Categoria sotto_categoria : categoria.getSottoCategorie()) {
 			result.append(nTab+"\t" + showCategoriaDettagliata(sotto_categoria)+"\n");
