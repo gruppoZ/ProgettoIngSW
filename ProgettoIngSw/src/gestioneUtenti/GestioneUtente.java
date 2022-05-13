@@ -23,4 +23,8 @@ public abstract class GestioneUtente {
 	public boolean isGerarchieCreate() {
 		return gestoreGerarchie.isGerarchiePresenti();
 	}	
+	
+	protected void aggiornaGerarchie() {
+		gestoreGerarchie.leggiDaFileGerarchie();
+	}
 }

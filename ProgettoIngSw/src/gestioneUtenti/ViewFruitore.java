@@ -60,6 +60,5 @@ public class ViewFruitore extends ViewUtente{
 				
 			}
 		} while(!fine);
-		
 	}
 }

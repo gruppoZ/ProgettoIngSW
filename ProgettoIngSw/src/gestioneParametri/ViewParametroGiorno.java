@@ -101,6 +101,9 @@ public class ViewParametroGiorno extends ViewParametri{
 		GiorniDellaSettimana.showGiorniSettimana();
 	}
 	
+	public void showGiorni(List<GiorniDellaSettimana> giorni) {
+		StringBuilder sb = new StringBuilder();
+	}
 	private GiorniDellaSettimana leggiGiorno() {
 		int id = InputDati.leggiIntero(ASK_GIORNO_DESIDERATO, 0, 6);
 		return GiorniDellaSettimana.getById(id);

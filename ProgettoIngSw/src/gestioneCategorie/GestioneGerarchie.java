@@ -147,8 +147,4 @@ public class GestioneGerarchie {
 			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
 		}
 	}
-	
-	public String showGerarchia() {
-		return this.currentGerarchia.toString();
-	}
 }

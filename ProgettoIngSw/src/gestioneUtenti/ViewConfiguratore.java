@@ -43,6 +43,8 @@ public class ViewConfiguratore extends ViewUtente{
 			case 1:
 				ViewGerarchia view = new ViewGerarchia();
 				view.menu();
+				
+				gestoreConfiguratore.aggiornaGerarchie();				
 				break;
 			case 2:
 				if(!gestoreConfiguratore.isGerarchieCreate())
