@@ -3,6 +3,7 @@ package gestioneCategorie;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibs.fp.mylib.BelleStringhe;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -298,7 +299,14 @@ public class ViewGerarchia {
 				}
 				break;
 			case 4:
-				System.out.println(gestoreGerarchia.showGerarchia());
+				try {
+					Gerarchia gerarchiaInLavorazione = gestoreGerarchia.getGerarchiaInLavorazione();
+					showGerarchia(gerarchiaInLavorazione);
+				} catch (NullPointerException e) {
+					System.out.println(e.getMessage());
+					//Per come è strutturato il programma, l'utente potrà accedere a questo menù soltanto dopo
+					//aver inizializzato la gerarchia creando la categoria radice => gerarchiaInLavorazione != null.
+				}
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -307,5 +315,16 @@ public class ViewGerarchia {
 		
 		if(!gerarchiaEliminata)
 			gestoreGerarchia.fineCreazioneGerarchia();
-	}		
+	}
+	
+	public void showGerarchia(Gerarchia gerarchia) {
+		ViewCategoria viewCategoria = new ViewCategoria();
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Gerarchia con Radice:  " + gerarchia.getRoot().getNome() + "\n");
+		System.out.println(sb.toString());
+		
+		
+		System.out.println(viewCategoria.showCategoriaDettagliata(gerarchia.getRoot()));
+	}
 }

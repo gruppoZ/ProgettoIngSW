@@ -20,12 +20,14 @@ public class ViewOfferte {
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Gestisci Offerte";
 		
+	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
 	private static final String MSG_RITIRA_OFFERTA = "Ritira un'offerta";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
 	private static final String MSG_OFFERTE_AUTORE = "Visualizzare tutte le tue Offerte";
 	private static final String MSG_SCAMBIA_ARTICOLI = "Scambia Articoli";
 	
 	private static final String [] TXT_VOCI = {
+			MSG_PUBBLICA_ARTICOLO,
 			MSG_RITIRA_OFFERTA,
 			MSG_OFFERTE_APERTE,
 			MSG_OFFERTE_AUTORE,
@@ -65,17 +67,21 @@ public class ViewOfferte {
 				fine = true;
 				break;
 			case 1:
-				ritiraOfferta();				
+				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore, gestoreOfferte);
+				viewArticolo.aggiungiArticolo();
 				break;
 			case 2:
+				ritiraOfferta();				
+				break;
+			case 3:
 				ViewGerarchia viewGerarchia = new ViewGerarchia();
 				Categoria foglia = viewGerarchia.scegliFoglia();
 				showOfferteAperteByCategoria(foglia);		
 				break;
-			case 3:
+			case 4:
 				showOfferteByName();			
 				break;
-			case 4:
+			case 5:
 				viewScambio = new ViewBaratto(gestoreOfferte, gestoreFruitore);	
 				viewScambio.menu();
 				break;

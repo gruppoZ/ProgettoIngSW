@@ -50,6 +50,12 @@ public class GestioneGerarchie {
 		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
 	}
 	
+	public Gerarchia getGerarchiaInLavorazione() throws NullPointerException{
+		if (currentGerarchia != null)
+			return currentGerarchia;
+		throw new NullPointerException();
+	}	
+	
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
 		int depth = categoriaPadre.getProfondita() + 1;
 		
