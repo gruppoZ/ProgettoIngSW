@@ -6,7 +6,7 @@
     "oldState" : "OffertaSelezionata",
     "newState" : "OffertaInScambio"
   } ],
-  "2" : [ {
+  "3" : [ {
     "oldState" : "OffertaAperta",
     "newState" : "OffertaAccoppiata"
   }, {

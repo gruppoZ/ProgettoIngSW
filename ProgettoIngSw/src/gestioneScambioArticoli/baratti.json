@@ -1,6 +1,6 @@
 [ {
   "offertaA" : {
-    "id" : 2,
+    "id" : 3,
     "articolo" : {
       "foglia" : {
         "nome" : "a",
@@ -19,13 +19,19 @@
         "valida" : true
       },
       "valoreCampi" : {
-        "Stato di conservazione" : "n"
+        "Stato di conservazione" : "aaaaa2"
       }
     },
-    "username" : "f",
+    "username" : "wewe",
     "tipoOfferta" : {
-      "type" : "OffertaAccoppiata",
-      "stato" : "OffertaAccoppiata"
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio",
+      "appuntamento" : {
+        "luogo" : null,
+        "data" : null,
+        "ora" : null,
+        "rifiutato" : false
+      }
     }
   },
   "offertaB" : {
@@ -48,14 +54,20 @@
         "valida" : true
       },
       "valoreCampi" : {
-        "Stato di conservazione" : "aaa"
+        "Stato di conservazione" : "ottimo"
       }
     },
-    "username" : "wewe",
+    "username" : "f",
     "tipoOfferta" : {
-      "type" : "OffertaSelezionata",
-      "stato" : "OffertaSelezionata"
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio",
+      "appuntamento" : {
+        "luogo" : "nord",
+        "data" : [ 2022, 5, 13 ],
+        "ora" : [ 0, 30 ],
+        "rifiutato" : false
+      }
     }
   },
-  "scadenza" : [ 2022, 5, 13 ]
+  "scadenza" : [ 2022, 5, 14 ]
 } ]

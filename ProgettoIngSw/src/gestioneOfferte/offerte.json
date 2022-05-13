@@ -18,10 +18,10 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "aaa"
+      "Stato di conservazione" : "ottimo"
     }
   },
-  "username" : "wewe",
+  "username" : "f",
   "tipoOfferta" : {
     "type" : "OffertaInScambio",
     "stato" : "OffertaInScambio",
@@ -34,6 +34,34 @@
   }
 }, {
   "id" : 2,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "b",
+      "descrizione" : "n",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "radice" : false,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "b"
+    }
+  },
+  "username" : "f",
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "stato" : "OffertaAperta"
+  }
+}, {
+  "id" : 3,
   "articolo" : {
     "foglia" : {
       "nome" : "a",
@@ -52,10 +80,10 @@
       "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "n"
+      "Stato di conservazione" : "aaaaa2"
     }
   },
-  "username" : "f",
+  "username" : "wewe",
   "tipoOfferta" : {
     "type" : "OffertaInScambio",
     "stato" : "OffertaInScambio",
@@ -65,5 +93,33 @@
       "ora" : null,
       "rifiutato" : false
     }
+  }
+}, {
+  "id" : 4,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "b",
+      "descrizione" : "n",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "radice" : false,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "bbbbbbbbbbbbb2"
+    }
+  },
+  "username" : "wewe",
+  "tipoOfferta" : {
+    "type" : "OffertaAperta",
+    "stato" : "OffertaAperta"
   }
 } ]
