@@ -14,8 +14,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo",
@@ -43,8 +43,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "oook"
@@ -71,8 +71,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ot"
@@ -99,8 +99,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ot"
@@ -127,8 +127,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "oiio"
@@ -155,8 +155,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ok"
@@ -183,11 +183,67 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ooootimo"
+    }
+  },
+  "username" : "wewe",
+  "tipoOfferta" : {
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
+  }
+}, {
+  "id" : 8,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "a",
+      "descrizione" : "a",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "valida" : true,
+      "radice" : false
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "ok"
+    }
+  },
+  "username" : "f",
+  "tipoOfferta" : {
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
+  }
+}, {
+  "id" : 9,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "a",
+      "descrizione" : "a",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "valida" : true,
+      "radice" : false
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "ok"
     }
   },
   "username" : "wewe",
