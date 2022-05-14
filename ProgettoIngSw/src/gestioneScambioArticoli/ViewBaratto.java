@@ -139,6 +139,7 @@ public class ViewBaratto {
 		
 	}
 	
+	//TODO: cambiare i nomi "offerta1 e offerta2" con tipo offertaCorrente e offertaAltroFruitore bo ma io che cazzo ne so
 	private void gestioneOfferteInScambio() {
 		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(gestoreFruitore.getUsername());
@@ -169,6 +170,11 @@ public class ViewBaratto {
 						gestoreBaratto.rimuoviBaratto(baratto);
 					} else {
 						Appuntamento appuntamento = creaAppuntamento();
+						while(gestoreBaratto.checkUguaglianzaAppuntamenti(appuntamento, tipoOfferta2.getAppuntamento())) {
+							System.out.println("Hai inserito un appuntamento uguale a quello proposto dall'altro fruitore.\n"
+									+ "Reinserire l'appuntamento");
+							appuntamento = creaAppuntamento();
+						}
 						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambio1.getTipoOfferta();
 						
 						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, tipoOfferta2, appuntamento);

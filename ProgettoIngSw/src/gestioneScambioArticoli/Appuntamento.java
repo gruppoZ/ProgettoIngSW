@@ -40,8 +40,14 @@ public class Appuntamento {
 	public boolean isValido() {
 		return valido;
 	}
+	
 	public void setValido(boolean valido) {
 		this.valido = valido;
-	}	
+	}
+	
+	public boolean equals(Appuntamento appuntamento) {
+		return this.luogo.equals(appuntamento.getLuogo()) && this.data.isEqual(appuntamento.getData()) && this.ora.compareTo(appuntamento.getOra()) == 0;
+	}
+	
 	
 }
