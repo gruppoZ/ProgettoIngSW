@@ -125,7 +125,6 @@ public class ViewBaratto {
 		}		
 	}
 	
-	
 	private void gestioneOfferteSelezionate() {
 		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(gestoreFruitore.getUsername());
@@ -141,9 +140,12 @@ public class ViewBaratto {
 				
 				boolean scelta = InputDati.yesOrNo(MSG_ASK_FISSARE_APPUNTAMENTO);
 				if(scelta) {
+					
 					Appuntamento appuntamento = creaAppuntamento();
+					LocalDate dataScadenza = gestoreBaratto.getDataScadenza(gestorePiazza, appuntamento);
+					
 					gestoreBaratto.switchToOfferteInScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
-					gestoreBaratto.aggiornaBaratto(baratto, offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
+					gestoreBaratto.aggiornaBaratto(baratto, offertaAccoppiata, offertaSelezionata, dataScadenza, appuntamento);
 //					gestoreBaratto.rimuoviBaratto(baratto);
 //					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
 					System.out.println(MSG_SUCCESS_DATI_INSERITI);
@@ -190,8 +192,7 @@ public class ViewBaratto {
 				String usernameCorrente = offertaInScambioFruitoreCorrente.getUsername();
 				
 				if(!usernameCorrente.equals(autoreAppuntamento)) {
-					viewAppuntamento.showAppuntamento(appuntamento);
-					
+//					viewAppuntamento.showAppuntamento(appuntamento);
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
 						gestoreBaratto.switchToOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
 						gestoreBaratto.rimuoviBaratto(baratto);
@@ -204,11 +205,11 @@ public class ViewBaratto {
 							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
 							nuovoAppuntamento = creaAppuntamento();
 						}
-						
+						LocalDate dataScadenza = gestoreBaratto.getDataScadenza(gestorePiazza, appuntamento);
 //						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();//inutile ?
 						
 						//gestoreBaratto.gestisciRifiutoAppuntamento(baratto, nuovoAppuntamento); inutile?
-						gestoreBaratto.aggiornaBaratto(baratto, gestorePiazza.getScadenza(), nuovoAppuntamento);
+						gestoreBaratto.aggiornaBaratto(baratto, dataScadenza, nuovoAppuntamento);
 						// fatto aggiorna e non solo riga 210 perche' cosi aggiorno anche la scadenza
 					
 						System.out.println(MSG_SUCCESS_DATI_INSERITI);
@@ -283,7 +284,6 @@ public class ViewBaratto {
 		LocalDate date = richiestaData(MSG_INSERISCI_DATA_D_M_YYYY);
 		
 		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date) || date.isBefore(LocalDate.now())) {
-			
 			date = richiestaData(MSG_GIORNO_SCELTO_NON_VALIDO);
 		}
 		
@@ -301,8 +301,6 @@ public class ViewBaratto {
 		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
 		 */
 		Appuntamento appuntamento = new Appuntamento(luogo, date, orario, gestoreFruitore.getUsername());
-		
-		System.out.println();
 		
 		return appuntamento;
 	}

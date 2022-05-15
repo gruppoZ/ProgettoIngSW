@@ -11,6 +11,7 @@ import gestioneOfferte.OffertaAperta;
 import gestioneOfferte.OffertaChiusa;
 import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
+import gestioneParametri.GestioneParametri;
 import main.JsonIO;
 
 public class GestioneBaratto {
@@ -95,18 +96,28 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
+	protected LocalDate calcolaDataScadenza(int scadenzaInGiorni) {
+		LocalDate dataScadenza = LocalDate.now();
+		return dataScadenza.plusDays(scadenzaInGiorni);
+	}
+	
+	protected LocalDate getDataScadenza(GestioneParametri gestorePiazza, Appuntamento appuntamento) {
+		LocalDate dataScadenza = calcolaDataScadenza(gestorePiazza.getScadenza());
+		if(dataScadenza.isAfter(appuntamento.getData())) dataScadenza = appuntamento.getData();
+		
+		return dataScadenza;
+	}
+	
 	/** 
 	 * Aggiorna il baratto da aggiornare settando tutti i suoi parametri
 	 * @param daAggiornare
 	 * @param offertaA
 	 * @param offertaB
-	 * @param scadenza
+	 * @param dataScadenza
 	 * @param appuntamento
 	 */
 	
-	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
-		LocalDate dataScadenza = LocalDate.now();
-		dataScadenza = dataScadenza.plusDays(scadenza);
+	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
 		
 		daAggiornare.setAppuntamento(appuntamento);
 		daAggiornare.setOffertaFruitorePromotore(offertaA);
@@ -119,13 +130,10 @@ public class GestioneBaratto {
 	/** 
 	 * Aggiorna il baratto da aggiornare settando soltanto il giorno della scadenza e l'appuntamento
 	 * @param daAggiornare
-	 * @param scadenza
+	 * @param dataScadenza
 	 * @param appuntamento
 	 */
-	protected void aggiornaBaratto(Baratto daAggiornare, int scadenza, Appuntamento appuntamento) {
-		LocalDate dataScadenza = LocalDate.now();
-		dataScadenza = dataScadenza.plusDays(scadenza);
-		
+	protected void aggiornaBaratto(Baratto daAggiornare, LocalDate dataScadenza, Appuntamento appuntamento) {		
 		daAggiornare.setAppuntamento(appuntamento);
 		daAggiornare.setScadenza(dataScadenza);
 		
@@ -165,9 +173,8 @@ public class GestioneBaratto {
 //		listaBaratti.add(baratto);
 //		salvaBaratti();
 //	}
-	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {
-		LocalDate dataScadenza = LocalDate.now();
-		dataScadenza = dataScadenza.plusDays(scadenza);
+	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) {
+		LocalDate dataScadenza = calcolaDataScadenza(scadenzaInGiorni);
 		
 		this.baratto = new Baratto(offertaA, offertaB, dataScadenza);
 		
