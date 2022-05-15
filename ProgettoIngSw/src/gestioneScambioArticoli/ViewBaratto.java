@@ -230,7 +230,7 @@ public class ViewBaratto {
 		String dateTesto = InputDati.leggiStringaNonVuota(MSG_INSERISCI_DATA_D_M_YYYY);
 		LocalDate date = gestorePiazza.dateInput(dateTesto);
 		
-		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date)) {
+		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date) || date.isBefore(LocalDate.now())) {
 			viewParametroGiorno.showGiorniPresenti();
 			
 			dateTesto = InputDati.leggiStringaNonVuota(MSG_GIORNO_SCELTO_NON_VALIDO);
