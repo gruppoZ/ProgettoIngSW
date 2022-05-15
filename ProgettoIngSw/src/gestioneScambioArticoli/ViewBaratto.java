@@ -115,7 +115,7 @@ public class ViewBaratto {
 			
 			offertaB = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
-			gestoreBaratto.creaCollegamento(gestoreOfferte, offertaA, offertaB);
+			gestoreBaratto.switchToOfferteAccoppiate(gestoreOfferte, offertaA, offertaB);
 			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
@@ -142,7 +142,7 @@ public class ViewBaratto {
 				boolean scelta = InputDati.yesOrNo(MSG_ASK_FISSARE_APPUNTAMENTO);
 				if(scelta) {
 					Appuntamento appuntamento = creaAppuntamento();
-					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
+					gestoreBaratto.switchToOfferteInScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
 					gestoreBaratto.aggiornaBaratto(baratto, offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
 //					gestoreBaratto.rimuoviBaratto(baratto);
 //					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
@@ -185,7 +185,7 @@ public class ViewBaratto {
 				
 				showBaratto(baratto);
 				
-				OffertaInScambio offertaInScambioAltroFruitore = (OffertaInScambio) offertaAltroFruitore.getStatoOfferta();//inutile ?
+//				OffertaInScambio offertaInScambioAltroFruitore = (OffertaInScambio) offertaAltroFruitore.getStatoOfferta();//inutile ?
 				String autoreAppuntamento = appuntamento.getUsername();
 				String usernameCorrente = offertaInScambioFruitoreCorrente.getUsername();
 				
@@ -193,7 +193,7 @@ public class ViewBaratto {
 					viewAppuntamento.showAppuntamento(appuntamento);
 					
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
+						gestoreBaratto.switchToOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
 						gestoreBaratto.rimuoviBaratto(baratto);
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
@@ -205,10 +205,10 @@ public class ViewBaratto {
 							nuovoAppuntamento = creaAppuntamento();
 						}
 						
-						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();//inutile ?
+//						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();//inutile ?
 						
 						//gestoreBaratto.gestisciRifiutoAppuntamento(baratto, nuovoAppuntamento); inutile?
-						gestoreBaratto.aggiornaBaratto(baratto, offertaInScambioFruitoreCorrente, offertaAltroFruitore, gestorePiazza.getScadenza(), nuovoAppuntamento);
+						gestoreBaratto.aggiornaBaratto(baratto, gestorePiazza.getScadenza(), nuovoAppuntamento);
 						// fatto aggiorna e non solo riga 210 perche' cosi aggiorno anche la scadenza
 					
 						System.out.println(MSG_SUCCESS_DATI_INSERITI);

@@ -95,6 +95,15 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
+	/** 
+	 * Aggiorna il baratto da aggiornare settando tutti i suoi parametri
+	 * @param daAggiornare
+	 * @param offertaA
+	 * @param offertaB
+	 * @param scadenza
+	 * @param appuntamento
+	 */
+	
 	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
 		LocalDate dataScadenza = LocalDate.now();
 		dataScadenza = dataScadenza.plusDays(scadenza);
@@ -107,17 +116,33 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
-	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	/** 
+	 * Aggiorna il baratto da aggiornare settando soltanto il giorno della scadenza e l'appuntamento
+	 * @param daAggiornare
+	 * @param scadenza
+	 * @param appuntamento
+	 */
+	protected void aggiornaBaratto(Baratto daAggiornare, int scadenza, Appuntamento appuntamento) {
+		LocalDate dataScadenza = LocalDate.now();
+		dataScadenza = dataScadenza.plusDays(scadenza);
+		
+		daAggiornare.setAppuntamento(appuntamento);
+		daAggiornare.setScadenza(dataScadenza);
+		
+		salvaBaratti();
+	}
+	
+	protected void switchToOfferteAccoppiate(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
 	}
 	
-	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	protected void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
 	}
 	
-	protected void cambioOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	protected void switchToOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaChiusa());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
@@ -135,7 +160,7 @@ public class GestioneBaratto {
 //		LocalDate dataScadenza = LocalDate.now();
 //		dataScadenza = dataScadenza.plusDays(scadenza);
 //		
-//		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);
+//		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);/
 //		
 //		listaBaratti.add(baratto);
 //		salvaBaratti();
