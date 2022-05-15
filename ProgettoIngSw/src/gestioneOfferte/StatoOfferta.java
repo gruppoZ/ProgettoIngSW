@@ -22,6 +22,6 @@ public interface StatoOfferta {
 	void changeState(Offerta offerta);
 	
 	default void changeState(Offerta offerta, StatoOfferta newState) {
-		offerta.setTipoOfferta(newState);	
+		offerta.setStatoOfferta(newState);	
 	}	
 }

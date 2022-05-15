@@ -23,7 +23,7 @@
     }
   },
   "username" : "f",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -51,7 +51,7 @@
     }
   },
   "username" : "wewe",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -79,7 +79,7 @@
     }
   },
   "username" : "f",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -107,7 +107,7 @@
     }
   },
   "username" : "wewe",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -135,9 +135,9 @@
     }
   },
   "username" : "f",
-  "tipoOfferta" : {
-    "type" : "OffertaAperta",
-    "stato" : "OffertaAperta"
+  "statoOfferta" : {
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
   }
 }, {
   "id" : 6,
@@ -163,7 +163,7 @@
     }
   },
   "username" : "f",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -191,7 +191,7 @@
     }
   },
   "username" : "wewe",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -219,7 +219,7 @@
     }
   },
   "username" : "f",
-  "tipoOfferta" : {
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }
@@ -247,7 +247,35 @@
     }
   },
   "username" : "wewe",
-  "tipoOfferta" : {
+  "statoOfferta" : {
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
+  }
+}, {
+  "id" : 10,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "a",
+      "descrizione" : "a",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ ],
+      "campiEreditati" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "profondita" : 1,
+      "valida" : true,
+      "radice" : false
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "buono"
+    }
+  },
+  "username" : "f1",
+  "statoOfferta" : {
     "type" : "OffertaChiusa",
     "stato" : "OffertaChiusa"
   }

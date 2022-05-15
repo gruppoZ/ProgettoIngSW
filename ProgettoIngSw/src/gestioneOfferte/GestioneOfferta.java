@@ -23,19 +23,19 @@ public class GestioneOfferta {
 	}
 	
 	private boolean isOffertaAperta(Offerta offerta) {
-		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
+		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
 	
 	private boolean isOffertaChiusa(Offerta offerta) {
-		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_CHIUSA.getNome());
+		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_CHIUSA.getNome());
 	}
 	
 	private boolean isOffertaSelezionata(Offerta offerta) {
-		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
+		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
 	}
 		
 	private boolean isOffertaInScambio(Offerta offerta) {
-		return offerta.getTipoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
+		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
 	}
 	
 	
@@ -46,11 +46,11 @@ public class GestioneOfferta {
 	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) {
 		int id = offerta.getId();
 		String oldState, newState;
-		oldState = offerta.getTipoOfferta().getStato();
+		oldState = offerta.getStatoOfferta().getStato();
 		
-		offerta.getTipoOfferta().changeState(offerta, stato);
+		offerta.getStatoOfferta().changeState(offerta, stato);
 		
-		newState = offerta.getTipoOfferta().getStato();
+		newState = offerta.getStatoOfferta().getStato();
 		
 		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
 		

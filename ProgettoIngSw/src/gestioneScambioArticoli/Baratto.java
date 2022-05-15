@@ -1,13 +1,12 @@
 package gestioneScambioArticoli;
 
 import java.time.LocalDate;
-
 import gestioneOfferte.Offerta;
 
 //TODO: questi dati potrebbero essere salvati in Offera in Scambio
 public class Baratto {
-	Offerta offertaA;
-	Offerta offertaB;
+	Offerta offertaFruitorePromotore;
+	Offerta offertaFruitoreRichiesta;
 	LocalDate scadenza;
 //	Appuntamento appuntamento;
 	
@@ -16,8 +15,8 @@ public class Baratto {
 	}
 	
 	public Baratto(Offerta offertaA, Offerta offertaB, LocalDate scadenza) {
-		this.offertaA = offertaA;
-		this.offertaB = offertaB;
+		this.offertaFruitorePromotore = offertaA;
+		this.offertaFruitoreRichiesta = offertaB;
 		this.scadenza = scadenza;
 //		this.appuntamento = new Appuntamento();
 	}
@@ -30,12 +29,12 @@ public class Baratto {
 //		this.appuntamento = appuntamento;
 //	}
 
-	public Offerta getOffertaA() {
-		return offertaA;
+	public Offerta getOffertaFruitorePromotore() {
+		return offertaFruitorePromotore;
 	}
 
-	public Offerta getOffertaB() {
-		return offertaB;
+	public Offerta getOffertaFruitoreRichiesta() {
+		return offertaFruitoreRichiesta;
 	}
 
 	public LocalDate getScadenza() {
@@ -44,6 +43,6 @@ public class Baratto {
 
 	@Override
 	public String toString() {
-		return "Scambio [offertaA=" + offertaA + ", offertaB=" + offertaB + ", scadenza=" + scadenza + "]";
+		return "Scambio [offertaA=" + offertaFruitorePromotore + ", offertaB=" + offertaFruitoreRichiesta + ", scadenza=" + scadenza + "]";
 	}
 }

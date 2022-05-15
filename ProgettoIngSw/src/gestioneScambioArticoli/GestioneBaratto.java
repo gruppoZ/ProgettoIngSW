@@ -2,7 +2,6 @@ package gestioneScambioArticoli;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
@@ -32,26 +31,27 @@ public class GestioneBaratto {
 	
 	public boolean isOffertaInBaratto(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
-			if(baratto.getOffertaA().equals(offerta) || baratto.getOffertaB().equals(offerta)) return true;
+			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return true;
 		}
 		return false;
 	}
 	
 	public Baratto getBarattoByOfferta(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
-			if(baratto.getOffertaA().equals(offerta) || baratto.getOffertaB().equals(offerta)) return baratto;
+			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return baratto;
 		}
 		return null;
 	}
 	
 	protected Baratto getBarattoByOffertaSelezionata(Offerta offertaSelezionata) {
 		for (Baratto baratto : listaBaratti) {
-			if(baratto.getOffertaB().equals(offertaSelezionata)) return baratto;
+			if(baratto.getOffertaFruitoreRichiesta().equals(offertaSelezionata)) return baratto;
 		}
 		return null;
 	}
 	
 	/*
+	 * TODO
 	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
 	 */
 	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
@@ -61,8 +61,8 @@ public class GestioneBaratto {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getScadenza().isBefore(LocalDate.now())) {
 				listaBarattiScaduti.add(baratto);
-				listaOfferteScadute.add(baratto.getOffertaA());
-				listaOfferteScadute.add(baratto.getOffertaB());
+				listaOfferteScadute.add(baratto.getOffertaFruitorePromotore());
+				listaOfferteScadute.add(baratto.getOffertaFruitoreRichiesta());
 			}
 		}
 		

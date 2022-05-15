@@ -17,7 +17,7 @@ public class OffertaAperta implements StatoOfferta {
 
 	@Override
 	public void changeState(Offerta offerta) {
-		offerta.setTipoOfferta(new OffertaRitirata());	
+		offerta.setStatoOfferta(new OffertaRitirata());	
 	}
 
 	@Override

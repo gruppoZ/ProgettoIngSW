@@ -12,6 +12,7 @@ public class Appuntamento {
 	public Appuntamento() {
 		
 	}
+	
 	/**
 	 * @param luogo
 	 * @param data
@@ -48,6 +49,4 @@ public class Appuntamento {
 	public boolean equals(Appuntamento appuntamento) {
 		return this.luogo.equals(appuntamento.getLuogo()) && this.data.isEqual(appuntamento.getData()) && this.ora.compareTo(appuntamento.getOra()) == 0;
 	}
-	
-	
 }

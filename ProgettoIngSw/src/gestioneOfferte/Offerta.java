@@ -1,7 +1,5 @@
 package gestioneOfferte;
 
-import java.util.Objects;
-
 public class Offerta {
 	
 	private int id;
@@ -31,11 +29,11 @@ public class Offerta {
 		return articolo;
 	}
 	
-	public StatoOfferta getTipoOfferta() {
+	public StatoOfferta getStatoOfferta() {
 		return statoOfferta;
 	}
 
-	public void setTipoOfferta(StatoOfferta tipoOfferta) {
+	public void setStatoOfferta(StatoOfferta tipoOfferta) {
 		this.statoOfferta = tipoOfferta;
 	}
 	

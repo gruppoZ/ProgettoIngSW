@@ -232,7 +232,7 @@ public class ViewOfferte {
 		sb.append("##############################\n");
 		sb.append("Offerta ID: " + offerta.getId() + "\n"
 				+"->Autore: " + offerta.getUsername() + "\n"
-				+ "->Stato Offerta: " + offerta.getTipoOfferta().getStato() + "\n"
+				+ "->Stato Offerta: " + offerta.getStatoOfferta().getStato() + "\n"
 				+ "->" );
 		
 		//il seguente metodo NON va gestito in questo metodo ma da chi si occupa del case 3: showOfferteAperteByName()
