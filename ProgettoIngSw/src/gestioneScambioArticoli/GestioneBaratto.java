@@ -95,14 +95,18 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
+	protected void aggiornaBaratto() {
+		
+	}
+	
 	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
 	}
 	
-	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB, Appuntamento appuntamento) {
+	protected void creaScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio(appuntamento));
+		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
 	}
 	
 	protected void cambioOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
@@ -120,7 +124,16 @@ public class GestioneBaratto {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
-	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {
+	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
+		LocalDate dataScadenza = LocalDate.now();
+		dataScadenza = dataScadenza.plusDays(scadenza);
+		
+		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);
+		
+		listaBaratti.add(baratto);
+		salvaBaratti();
+	}
+	protected void creaBarattoSenzaAppuntamento(Offerta offertaA, Offerta offertaB, int scadenza) {
 		LocalDate dataScadenza = LocalDate.now();
 		dataScadenza = dataScadenza.plusDays(scadenza);
 		

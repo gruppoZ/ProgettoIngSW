@@ -8,7 +8,7 @@ public class Baratto {
 	Offerta offertaFruitorePromotore;
 	Offerta offertaFruitoreRichiesta;
 	LocalDate scadenza;
-//	Appuntamento appuntamento;
+	Appuntamento appuntamento;
 	
 	public Baratto() {
 		
@@ -18,16 +18,23 @@ public class Baratto {
 		this.offertaFruitorePromotore = offertaA;
 		this.offertaFruitoreRichiesta = offertaB;
 		this.scadenza = scadenza;
-//		this.appuntamento = new Appuntamento();
+		this.appuntamento = new Appuntamento();
+	}
+	
+	public Baratto(Offerta offertaA, Offerta offertaB, LocalDate scadenza, Appuntamento appuntamento) {
+		this.offertaFruitorePromotore = offertaA;
+		this.offertaFruitoreRichiesta = offertaB;
+		this.scadenza = scadenza;
+		this.appuntamento = appuntamento;
 	}
 
-//	public Appuntamento getAppuntamento() {
-//		return appuntamento;
-//	}
-//
-//	public void setAppuntamento(Appuntamento appuntamento) {
-//		this.appuntamento = appuntamento;
-//	}
+	public Appuntamento getAppuntamento() {
+		return appuntamento;
+	}
+
+	public void setAppuntamento(Appuntamento appuntamento) {
+		this.appuntamento = appuntamento;
+	}
 
 	public Offerta getOffertaFruitorePromotore() {
 		return offertaFruitorePromotore;

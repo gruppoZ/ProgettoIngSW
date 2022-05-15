@@ -7,7 +7,8 @@ public class Appuntamento {
 	private String luogo;
 	private LocalDate data;
 	private LocalTime ora;
-	private boolean valido;
+//	private boolean valido;
+	private String username;
 	
 	public Appuntamento() {
 		
@@ -19,11 +20,11 @@ public class Appuntamento {
 	 * @param ora
 	 * @param valido
 	 */
-	public Appuntamento(String luogo, LocalDate data, LocalTime ora) {
+	public Appuntamento(String luogo, LocalDate data, LocalTime ora, String username) {
 		this.luogo = luogo;
 		this.data = data;
 		this.ora = ora;
-		this.valido = true;
+		this.username = username;
 	}
 
 	public String getLuogo() {
@@ -38,12 +39,20 @@ public class Appuntamento {
 		return ora;
 	}
 	
-	public boolean isValido() {
-		return valido;
-	}
+//	public boolean isValido() {
+//		return valido;
+//	}
+//	
+//	public void setValido(boolean valido) {
+//		this.valido = valido;
+//	}
 	
-	public void setValido(boolean valido) {
-		this.valido = valido;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public boolean equals(Appuntamento appuntamento) {

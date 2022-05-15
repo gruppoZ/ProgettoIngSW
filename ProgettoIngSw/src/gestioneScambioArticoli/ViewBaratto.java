@@ -117,7 +117,7 @@ public class ViewBaratto {
 
 			gestoreBaratto.creaCollegamento(gestoreOfferte, offertaA, offertaB);
 			
-			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
+			gestoreBaratto.creaBarattoSenzaAppuntamento(offertaA, offertaB, gestorePiazza.getScadenza());
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -142,9 +142,9 @@ public class ViewBaratto {
 				boolean scelta = InputDati.yesOrNo(MSG_ASK_FISSARE_APPUNTAMENTO);
 				if(scelta) {
 					Appuntamento appuntamento = creaAppuntamento();
-					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata, appuntamento);
+					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
 					gestoreBaratto.rimuoviBaratto(baratto);
-					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza());
+					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
 					System.out.println(MSG_SUCCESS_DATI_INSERITI);
 				} else {
 					System.out.printf(MSG_WARNING_FISSARE_APPUNTAMENTO_ENTRO_SCADENZA, baratto.getScadenza());
@@ -268,7 +268,7 @@ public class ViewBaratto {
 		 * "Si noti che l’intervallo orario sopra esemplificato implica che gli appuntamenti possano
 		 *	essere fissati (solo) alle ore 17.00, 17.30, 18.00, 18.30, 19.00 e 19.30."
 		 */
-		Appuntamento appuntamento = new Appuntamento(luogo, date, orario);
+		Appuntamento appuntamento = new Appuntamento(luogo, date, orario, gestoreFruitore.getUsername());
 		
 		System.out.println();
 		

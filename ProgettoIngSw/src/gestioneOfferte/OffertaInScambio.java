@@ -6,31 +6,31 @@ import gestioneScambioArticoli.Appuntamento;
 
 public class OffertaInScambio implements StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
-	Appuntamento appuntamento;
+//	Appuntamento appuntamento;
 
 	@JsonCreator
 	public OffertaInScambio() {
 		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
-		this.appuntamento = new Appuntamento();
+//		this.appuntamento = new Appuntamento();
 	}
 	
-	public OffertaInScambio(Appuntamento appuntamento) {
-		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
-		this.appuntamento = appuntamento;
-	}
+//	public OffertaInScambio(Appuntamento appuntamento) {
+//		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
+//		this.appuntamento = appuntamento;
+//	}
 	
 	@Override
 	public String getStato() {
 		return this.stato;
 	}
 
-	public Appuntamento getAppuntamento() {
-		return appuntamento;
-	}
-	
-	public void setAppuntamento(Appuntamento appuntamento) {
-		this.appuntamento = appuntamento;
-	}
+//	public Appuntamento getAppuntamento() {
+//		return appuntamento;
+//	}
+//	
+//	public void setAppuntamento(Appuntamento appuntamento) {
+//		this.appuntamento = appuntamento;
+//	}
 
 	@Override
 	public void changeState(Offerta offerta) {
