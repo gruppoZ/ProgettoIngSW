@@ -1,1 +1,67 @@
-[ ]
+[ {
+  "offertaFruitorePromotore" : {
+    "id" : 2,
+    "articolo" : {
+      "foglia" : {
+        "nome" : "a",
+        "descrizione" : "a",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "valida" : true,
+        "radice" : false
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "ottimo"
+      }
+    },
+    "username" : "f1",
+    "statoOfferta" : {
+      "type" : "OffertaAccoppiata",
+      "stato" : "OffertaAccoppiata"
+    }
+  },
+  "offertaFruitoreRichiesta" : {
+    "id" : 1,
+    "articolo" : {
+      "foglia" : {
+        "nome" : "a",
+        "descrizione" : "a",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "valida" : true,
+        "radice" : false
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "buono"
+      }
+    },
+    "username" : "f",
+    "statoOfferta" : {
+      "type" : "OffertaSelezionata",
+      "stato" : "OffertaSelezionata"
+    }
+  },
+  "scadenza" : [ 2022, 5, 16 ],
+  "appuntamento" : {
+    "luogo" : null,
+    "data" : null,
+    "ora" : null,
+    "username" : null
+  }
+} ]

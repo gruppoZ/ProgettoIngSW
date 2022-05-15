@@ -310,21 +310,19 @@ public class ViewBaratto {
 	private void showBaratto(Baratto baratto) {
 		StringBuffer sb = new StringBuffer();
 		ViewOfferte viewOfferta = new ViewOfferte();
+		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		
 		sb.append("**************************************\n");
 		sb.append("Baratto:\n"
-				+ "->Scadenza: " + baratto.getScadenza().format(DateTimeFormatter.ofPattern("dd MMMM uuuu")) + "\n"
-//				+ "-> Appuntamento\n"
-//				+ "\t Luogo: " + baratto.getAppuntamento().getLuogo() + "\n"
-//				+ "\t Data: " + baratto.getAppuntamento().getData() + "\n"
-//				+ "\t Ora: " + baratto.getAppuntamento().getOra() + "\n\n"
- 				);
+				+ "->Scadenza: " + baratto.getScadenza().format(DateTimeFormatter.ofPattern("dd MMMM uuuu")) + "\n");
 		
 		System.out.print(sb.toString());
-		
+				
 		Offerta offertaA = baratto.getOffertaFruitorePromotore();
 		Offerta offertaB = baratto.getOffertaFruitoreRichiesta();
 		viewOfferta.showOfferta(offertaA);
 		viewOfferta.showOfferta(offertaB);
+		
+		viewAppuntamento.showAppuntamento(baratto.getAppuntamento());
 	}
 }

@@ -18,13 +18,13 @@
       "radice" : false
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "prova"
+      "Stato di conservazione" : "buono"
     }
   },
   "username" : "f",
   "statoOfferta" : {
-    "type" : "OffertaChiusa",
-    "stato" : "OffertaChiusa"
+    "type" : "OffertaSelezionata",
+    "stato" : "OffertaSelezionata"
   }
 }, {
   "id" : 2,
@@ -46,12 +46,12 @@
       "radice" : false
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "PROVA123"
+      "Stato di conservazione" : "ottimo"
     }
   },
-  "username" : "prova123",
+  "username" : "f1",
   "statoOfferta" : {
-    "type" : "OffertaChiusa",
-    "stato" : "OffertaChiusa"
+    "type" : "OffertaAccoppiata",
+    "stato" : "OffertaAccoppiata"
   }
 } ]

@@ -82,7 +82,7 @@ public class ViewParametroLuogo extends ViewParametri{
 	public String scegliLuogo() {
 		showLuoghi();
 		
-		String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO + "(CASE-SENSITIVE)");
+		String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO);
 	
 		while(!getGestoreParametri().checkPresenzaLuogo(getGestoreParametri().getLuoghi(), luogo)) {
 			luogo = InputDati.leggiStringaNonVuota(MSG_LUOGO_NON_PRESENTE);

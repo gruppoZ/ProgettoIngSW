@@ -266,8 +266,12 @@ public class GestioneParametri {
 		return (Piazza) JsonIO.leggiOggettoDaJson(PATH_PIAZZA, Piazza.class);
 	}
 
-	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogo) {
-		return listaLuoghi.contains(luogo);
+	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogoDaIndividuare) {
+		for (String luogo : listaLuoghi) {
+			if(luogo.equalsIgnoreCase(luogoDaIndividuare))
+				return true;
+		}
+		return false;
 	}
 		
 	public boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
