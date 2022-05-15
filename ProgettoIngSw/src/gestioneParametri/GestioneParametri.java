@@ -1,8 +1,10 @@
 package gestioneParametri;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -227,12 +229,15 @@ public class GestioneParametri {
 	 * @param userInput
 	 * @return
 	 */
-	public LocalDate dateInput(String userInput) {
+	public LocalDate dateInput(String userInput) throws DateTimeException {
 
 	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(FORMATO_GIORNO_D_M_YYYY);
-	    LocalDate date = LocalDate.parse(userInput, dateFormat);
-
-	    return date ;
+	    try {
+	    	LocalDate date = LocalDate.parse(userInput, dateFormat);
+	    	return date;
+	    } catch (Exception e) {
+			throw new DateTimeException(e.getMessage());
+		}
 	}
 	
 	/**

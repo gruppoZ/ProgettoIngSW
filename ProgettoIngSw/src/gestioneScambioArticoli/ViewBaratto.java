@@ -1,5 +1,6 @@
 package gestioneScambioArticoli;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -18,13 +19,14 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
+	private static final String MSG_FORMATO_GIORNO_NON_VALIDO = "Formato giorno inserito non valido!";
 	private static final String MSG_SUCCESS_BARATTO_CONCLUSO = "*** Baratto concluso correttamente ***";
 	private static final String MSG_SUCCESS_DATI_INSERITI = "*** Dati inseriti correttamente ***";
 	private static final String MSG_ASK_ACCETTARE_APPUNTAMENTO = "Vuoi accettare l'appuntamento?";
 	private static final String MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI = "Hai inserito un appuntamento uguale a quello proposto dall'altro fruitore.\n"
 			+ "Reinserire l'appuntamento.";
 	private static final String MSG_INSERISCI_DATA_D_M_YYYY = "Inserisci data nel formato d/m/yyyy:";
-	private static final String MSG_GIORNO_SCELTO_NON_VALIDO = "Giorno non accettato. Ricorda"
+	private static final String MSG_GIORNO_SCELTO_NON_VALIDO = "Giorno non accettato. Ricorda "
 			+ "di scegliere una data in un giorno della settimana fra quelli disponibili per gli appuntamenti."
 			+ "\n\nInserisci data nel formato d/m/yyyy:";
 	private static final String MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE = "\nDevi attendere una risposta dall'altro fruitore!";
@@ -220,21 +222,37 @@ public class ViewBaratto {
 		
 	}
 	
+	private LocalDate richiestaData(String msg) {
+		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
+		boolean formatoDateValido = false;
+		String dateTesto = null;
+		LocalDate date = null;
+		
+		do {
+			try {
+				viewParametroGiorno.showGiorniPresenti();
+				dateTesto = InputDati.leggiStringaNonVuota(msg);
+				date = gestorePiazza.dateInput(dateTesto);
+				formatoDateValido = false;
+			} catch (DateTimeException e) {
+				System.out.println(MSG_FORMATO_GIORNO_NON_VALIDO);
+				formatoDateValido = true;
+			}
+		}while(formatoDateValido);
+		
+		return date;
+	}
+	
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
-		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
 		
 		String luogo = viewParametroLuogo.scegliLuogo();
 		
-		viewParametroGiorno.showGiorniPresenti();
-		String dateTesto = InputDati.leggiStringaNonVuota(MSG_INSERISCI_DATA_D_M_YYYY);
-		LocalDate date = gestorePiazza.dateInput(dateTesto);
+		LocalDate date = richiestaData(MSG_INSERISCI_DATA_D_M_YYYY);
 		
 		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date) || date.isBefore(LocalDate.now())) {
-			viewParametroGiorno.showGiorniPresenti();
 			
-			dateTesto = InputDati.leggiStringaNonVuota(MSG_GIORNO_SCELTO_NON_VALIDO);
-			date = gestorePiazza.dateInput(dateTesto);
+			date = richiestaData(MSG_GIORNO_SCELTO_NON_VALIDO);
 		}
 		
 		ViewParametroIntervalloOrario viewParametroIntervalloOrario = new ViewParametroIntervalloOrario(gestorePiazza);

@@ -98,5 +98,47 @@
   }, {
     "oldState" : "OffertaInScambio",
     "newState" : "OffertaChiusa"
+  } ],
+  "11" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaAccoppiata"
+  }, {
+    "oldState" : "OffertaAccoppiata",
+    "newState" : "OffertaInScambio"
+  } ],
+  "12" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaSelezionata"
+  }, {
+    "oldState" : "OffertaSelezionata",
+    "newState" : "OffertaInScambio"
+  } ],
+  "13" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaSelezionata"
+  }, {
+    "oldState" : "OffertaSelezionata",
+    "newState" : "OffertaInScambio"
+  } ],
+  "14" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaAccoppiata"
+  }, {
+    "oldState" : "OffertaAccoppiata",
+    "newState" : "OffertaInScambio"
+  } ],
+  "15" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaSelezionata"
+  }, {
+    "oldState" : "OffertaSelezionata",
+    "newState" : "OffertaInScambio"
+  } ],
+  "16" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaAccoppiata"
+  }, {
+    "oldState" : "OffertaAccoppiata",
+    "newState" : "OffertaInScambio"
   } ]
 }
