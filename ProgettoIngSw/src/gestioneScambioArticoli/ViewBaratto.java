@@ -117,7 +117,7 @@ public class ViewBaratto {
 
 			gestoreBaratto.creaCollegamento(gestoreOfferte, offertaA, offertaB);
 			
-			gestoreBaratto.creaBarattoSenzaAppuntamento(offertaA, offertaB, gestorePiazza.getScadenza());
+			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -143,8 +143,9 @@ public class ViewBaratto {
 				if(scelta) {
 					Appuntamento appuntamento = creaAppuntamento();
 					gestoreBaratto.creaScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
-					gestoreBaratto.rimuoviBaratto(baratto);
-					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
+					gestoreBaratto.aggiornaBaratto(baratto, offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
+//					gestoreBaratto.rimuoviBaratto(baratto);
+//					gestoreBaratto.creaBaratto(offertaAccoppiata, offertaSelezionata, gestorePiazza.getScadenza(), appuntamento);
 					System.out.println(MSG_SUCCESS_DATI_INSERITI);
 				} else {
 					System.out.printf(MSG_WARNING_FISSARE_APPUNTAMENTO_ENTRO_SCADENZA, baratto.getScadenza());
@@ -171,6 +172,7 @@ public class ViewBaratto {
 				
 				Offerta offertaInScambioFruitoreCorrente = viewOfferta.getOffertaById(listaOfferteInScambio);
 				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offertaInScambioFruitoreCorrente);
+				Appuntamento appuntamento = baratto.getAppuntamento(); //e se fosse null? (non dovrebbe visto che ci troviamo nel caso in cui le off. sono "in scambio"
 				
 				int idOfferta2;
 				
@@ -183,10 +185,12 @@ public class ViewBaratto {
 				
 				showBaratto(baratto);
 				
-				OffertaInScambio offertaInScambioAltroFruitore = (OffertaInScambio) offertaAltroFruitore.getStatoOfferta();
+				OffertaInScambio offertaInScambioAltroFruitore = (OffertaInScambio) offertaAltroFruitore.getStatoOfferta();//inutile ?
+				String autoreAppuntamento = appuntamento.getUsername();
+				String usernameCorrente = offertaInScambioFruitoreCorrente.getUsername();
 				
-				if(offertaInScambioAltroFruitore.getAppuntamento().isValido()) {
-					viewAppuntamento.showAppuntamento(offertaInScambioAltroFruitore.getAppuntamento());
+				if(!usernameCorrente.equals(autoreAppuntamento)) {
+					viewAppuntamento.showAppuntamento(appuntamento);
 					
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
 						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
@@ -194,24 +198,52 @@ public class ViewBaratto {
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
 					} else {
-						Appuntamento appuntamento = creaAppuntamento();
+						Appuntamento nuovoAppuntamento = creaAppuntamento();
 						
-						while(gestoreBaratto.checkUguaglianzaAppuntamenti(appuntamento, offertaInScambioAltroFruitore.getAppuntamento())) {
+						while(gestoreBaratto.checkUguaglianzaAppuntamenti(nuovoAppuntamento, appuntamento)) {
 							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
-							appuntamento = creaAppuntamento();
+							nuovoAppuntamento = creaAppuntamento();
 						}
 						
-						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();
+						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();//inutile ?
 						
-						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, offertaInScambioAltroFruitore, appuntamento);
-						gestoreBaratto.rimuoviBaratto(baratto);
-						gestoreBaratto.creaBaratto(offertaAltroFruitore, offertaInScambioFruitoreCorrente, gestorePiazza.getScadenza());
+						//gestoreBaratto.gestisciRifiutoAppuntamento(baratto, nuovoAppuntamento); inutile?
+						gestoreBaratto.aggiornaBaratto(baratto, offertaInScambioFruitoreCorrente, offertaAltroFruitore, gestorePiazza.getScadenza(), nuovoAppuntamento);
+						// fatto aggiorna e non solo riga 210 perche' cosi aggiorno anche la scadenza
 					
 						System.out.println(MSG_SUCCESS_DATI_INSERITI);
 					}
 				} else {
 					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
 				}
+				
+//				if(offertaInScambioAltroFruitore.getAppuntamento().isValido()) {
+//					viewAppuntamento.showAppuntamento(offertaInScambioAltroFruitore.getAppuntamento());
+//					
+//					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
+//						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
+//						gestoreBaratto.rimuoviBaratto(baratto);
+//						
+//						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
+//					} else {
+//						Appuntamento appuntamento = creaAppuntamento();
+//						
+//						while(gestoreBaratto.checkUguaglianzaAppuntamenti(appuntamento, offertaInScambioAltroFruitore.getAppuntamento())) {
+//							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
+//							appuntamento = creaAppuntamento();
+//						}
+//						
+//						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();
+//						
+//						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, offertaInScambioAltroFruitore, appuntamento);
+//						gestoreBaratto.rimuoviBaratto(baratto);
+//						gestoreBaratto.creaBaratto(offertaAltroFruitore, offertaInScambioFruitoreCorrente, gestorePiazza.getScadenza());
+//					
+//						System.out.println(MSG_SUCCESS_DATI_INSERITI);
+//					}
+//				} else {
+//					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
+//				}
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

@@ -40,12 +40,24 @@ public class Baratto {
 		return offertaFruitorePromotore;
 	}
 
+	public void setOffertaFruitorePromotore(Offerta offertaFruitorePromotore) {
+		this.offertaFruitorePromotore = offertaFruitorePromotore;
+	}
+
 	public Offerta getOffertaFruitoreRichiesta() {
 		return offertaFruitoreRichiesta;
 	}
 
+	public void setOffertaFruitoreRichiesta(Offerta offertaFruitoreRichiesta) {
+		this.offertaFruitoreRichiesta = offertaFruitoreRichiesta;
+	}
+	
 	public LocalDate getScadenza() {
 		return scadenza;
+	}
+	
+	public void setScadenza(LocalDate scadenza) {
+		this.scadenza = scadenza;
 	}
 
 	@Override

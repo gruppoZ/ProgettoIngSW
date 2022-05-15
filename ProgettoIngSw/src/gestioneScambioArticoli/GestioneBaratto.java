@@ -95,8 +95,16 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
-	protected void aggiornaBaratto() {
+	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
+		LocalDate dataScadenza = LocalDate.now();
+		dataScadenza = dataScadenza.plusDays(scadenza);
 		
+		daAggiornare.setAppuntamento(appuntamento);
+		daAggiornare.setOffertaFruitorePromotore(offertaA);
+		daAggiornare.setOffertaFruitoreRichiesta(offertaB);
+		daAggiornare.setScadenza(dataScadenza);
+		
+		salvaBaratti();
 	}
 	
 	protected void creaCollegamento(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
@@ -114,26 +122,25 @@ public class GestioneBaratto {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
 	
-	protected void gestisciRifiutoAppuntamento(GestioneOfferta gestoreOfferte, OffertaInScambio tipoOfferta1, OffertaInScambio tipoOfferta2, Appuntamento appuntamento) {
-		tipoOfferta2.getAppuntamento().setValido(false); //oppure si fa setAppuntamento(new Appuntamento())
-		tipoOfferta1.setAppuntamento(appuntamento);
-		gestoreOfferte.salvaOfferte(); //da spostare
+	protected void gestisciRifiutoAppuntamento(Baratto baratto, Appuntamento appuntamento) {
+		baratto.setAppuntamento(appuntamento);
+		salvaBaratti();
 	}
 	
 	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
-	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
-		LocalDate dataScadenza = LocalDate.now();
-		dataScadenza = dataScadenza.plusDays(scadenza);
-		
-		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);
-		
-		listaBaratti.add(baratto);
-		salvaBaratti();
-	}
-	protected void creaBarattoSenzaAppuntamento(Offerta offertaA, Offerta offertaB, int scadenza) {
+//	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
+//		LocalDate dataScadenza = LocalDate.now();
+//		dataScadenza = dataScadenza.plusDays(scadenza);
+//		
+//		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);
+//		
+//		listaBaratti.add(baratto);
+//		salvaBaratti();
+//	}
+	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza) {
 		LocalDate dataScadenza = LocalDate.now();
 		dataScadenza = dataScadenza.plusDays(scadenza);
 		
@@ -146,4 +153,5 @@ public class GestioneBaratto {
 	protected boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
 		return appuntamento1.equals(appuntamento2);
 	}
+
 }
