@@ -1,7 +1,11 @@
 package gestioneUtenti;
 
+import java.util.Iterator;
+
 import gestioneCategorie.Categoria;
+import gestioneCategorie.Gerarchia;
 import gestioneCategorie.ViewGerarchia;
+import gestioneInfoDiSistema.ViewInfoDiSistema;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.ViewParametri;
 import gestioneParametri.ViewParametroPiazza;
@@ -14,13 +18,15 @@ public class ViewConfiguratore extends ViewUtente{
 	private static final String MSG_IMPOSTA_PARAMETRI = "Gestisci Piazza";
 	private static final String MSG_OFFERTE_APERTE = "Visualizzare tutte le attuali Offerte aperte relative ad una categoria";
 	private static final String MSG_OFFERTE_IN_SCAMBIO_E_CHIUSE = "Visualizzare tutte le attuali Offerte In Scambio e Chiuse relative ad una categoria";
+	private static final String MSG_IMPORTA_DATI = "Importa Dati";
 	
 	private static final String [] TXT_VOCI = {
 			MSG_CREA_GERARCHIA,
 			MSG_VISUALIZZA_GERARCHIE,
 			MSG_IMPOSTA_PARAMETRI,
 			MSG_OFFERTE_APERTE,
-			MSG_OFFERTE_IN_SCAMBIO_E_CHIUSE
+			MSG_OFFERTE_IN_SCAMBIO_E_CHIUSE,
+			MSG_IMPORTA_DATI
 	};
 	
 	@Override
@@ -41,18 +47,20 @@ public class ViewConfiguratore extends ViewUtente{
 				fine = true;
 				break;
 			case 1:
-				ViewGerarchia view = new ViewGerarchia();
-				view.menu();
+				viewGerarchia = new ViewGerarchia();
+				viewGerarchia.menu();
 				
 				gestoreConfiguratore.aggiornaGerarchie();				
 				break;
 			case 2:
+				viewGerarchia = new ViewGerarchia();
+				
 				if(!gestoreConfiguratore.isGerarchieCreate())
 					System.out.println(MSG_ASSENZA_GERARCHIE);
 				else {				
-					gestoreConfiguratore.getGerarchie().forEach((k,v) -> {
-						viewGerarchia.showGerarchia(v);
-					});
+					for (Gerarchia gerarchia : gestoreConfiguratore.getGerarchie().values()) {
+						viewGerarchia.showGerarchia(gerarchia);
+					}
 				}
 				break;
 			case 3:
@@ -60,15 +68,26 @@ public class ViewConfiguratore extends ViewUtente{
 				viewPiazza.menu();
 				break;
 			case 4:
+				viewGerarchia = new ViewGerarchia();
+				viewOfferte = new ViewOfferte();
+				
 				foglia = viewGerarchia.scegliFoglia();
 				
 				viewOfferte.showOfferteAperteByCategoria(foglia);
 				break;
 			case 5:
+				viewGerarchia = new ViewGerarchia();
+				viewOfferte = new ViewOfferte();
+				
 				foglia = viewGerarchia.scegliFoglia();
 				
 				viewOfferte.showOfferteInScambioByCategoria(foglia);
 				viewOfferte.showOfferteChiuseByCategoria(foglia);
+				break;
+			case 6:
+				ViewInfoDiSistema viewInfo = new ViewInfoDiSistema();
+				
+				viewInfo.menu();				
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	

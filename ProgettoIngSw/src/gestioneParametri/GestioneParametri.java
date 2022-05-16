@@ -4,24 +4,28 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import gestioneInfoDiSistema.GestioneInfoSistema;
 import main.JsonIO;
 
 public class GestioneParametri {
 	
+	//private static final String PATH_PIAZZA = "src/gestioneParametri/parametri.json";
+	
 	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
 	private Piazza piazza;
+	String pathParametri;	
 	
 	public GestioneParametri() {
-		this.piazza = leggiPiazza();
+		GestioneInfoSistema info = new GestioneInfoSistema();
+		pathParametri = info.getInfoSistema().getUrlParametri(); 
+		
+		this.piazza = leggiPiazza(pathParametri);
 	}
 	
-	private static final String PATH_PIAZZA = "src/gestioneParametri/parametri.json";
-
  	public void creaPiazza(String citta, List<String> listaLuoghi, List<GiorniDellaSettimana> giorni, List<IntervalloOrario> intervalliOrari,
  			int scadenza) {
  		
@@ -29,8 +33,11 @@ public class GestioneParametri {
 		salvaPiazza();
 	}
 	
- 	protected Piazza getPiazza() {
- 		return this.piazza;
+ 	public Piazza getPiazza() {
+ 		if(piazza != null)
+ 			return this.piazza;
+ 		else
+ 			return leggiPiazza(pathParametri);
  	}
  	
  	protected void setCitta(String citta) {
@@ -59,6 +66,11 @@ public class GestioneParametri {
  	
  	public int getScadenza() {
  		return piazza.getScadenza();
+ 	}
+ 	
+ 	public void importaParametri(String path) {
+ 		this.piazza = leggiPiazza(path);
+ 		salvaPiazza();
  	}
 
  	/**
@@ -259,11 +271,11 @@ public class GestioneParametri {
 	}
 	
 	public void salvaPiazza() {
-		JsonIO.salvaOggettoSuJson(PATH_PIAZZA, this.piazza);
+		JsonIO.salvaOggettoSuJson(pathParametri, this.piazza);
 	}
 	
-	public Piazza leggiPiazza() {
-		return (Piazza) JsonIO.leggiOggettoDaJson(PATH_PIAZZA, Piazza.class);
+	public Piazza leggiPiazza(String path) {
+		return (Piazza) JsonIO.leggiOggettoDaJson(path, Piazza.class);
 	}
 
 	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogoDaIndividuare) {

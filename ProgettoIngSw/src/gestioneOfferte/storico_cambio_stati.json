@@ -28,6 +28,9 @@
   }, {
     "oldState" : "OffertaInScambio",
     "newState" : "OffertaAperta"
+  }, {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaAccoppiata"
   } ],
   "4" : [ {
     "oldState" : "OffertaAperta",
@@ -38,5 +41,8 @@
   }, {
     "oldState" : "OffertaInScambio",
     "newState" : "OffertaAperta"
+  }, {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaSelezionata"
   } ]
 }

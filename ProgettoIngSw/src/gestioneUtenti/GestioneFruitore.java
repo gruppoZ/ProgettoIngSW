@@ -19,7 +19,7 @@ public class GestioneFruitore extends GestioneUtente{
 	}
 	
 	public Piazza getPiazza() {
-		return gestoreParametri.leggiPiazza();
+		return gestoreParametri.getPiazza();
 	}
 	
 	public String getUsername() {

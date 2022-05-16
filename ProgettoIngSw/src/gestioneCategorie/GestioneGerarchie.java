@@ -1,6 +1,8 @@
 package gestioneCategorie;
 
 import java.util.*;
+
+import gestioneInfoDiSistema.GestioneInfoSistema;
 import main.JsonIO;
 
 public class GestioneGerarchie {
@@ -8,21 +10,25 @@ public class GestioneGerarchie {
 	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
 	
-	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
-		
+	//private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
+	String pathGerarchie;
+	
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
 	private HashMap<String, Gerarchia> gerarchie; 
 	
 	public GestioneGerarchie() {
+		GestioneInfoSistema info = new GestioneInfoSistema();
+		pathGerarchie = info.getInfoSistema().getUrlGerarchie(); 
+		
 		popolaGerarchie();
 	}
 	
 	public void leggiDaFileGerarchie() {
-		this.gerarchie = JsonIO.leggiGerarchieDaJson(PATH_GERARCHIE);
+		this.gerarchie = JsonIO.leggiGerarchieDaJson(pathGerarchie);
 	}
 	
 	public void salvaGerarchie() {
-        JsonIO.salvaOggettoSuJson(PATH_GERARCHIE, this.getGerarchie());
+        JsonIO.salvaOggettoSuJson(pathGerarchie, this.getGerarchie());
 	}
 	
 	public boolean isGerarchiePresenti() {
@@ -36,6 +42,14 @@ public class GestioneGerarchie {
 		if(gerarchie == null)
 			leggiDaFileGerarchie();
 		return this.gerarchie;
+	}
+	
+	public void importaGerarchie(String path) {
+		HashMap<String, Gerarchia> gerarchieImportate = JsonIO.leggiGerarchieDaJson(path);
+		
+//		getGerarchie().putAll(gerarchieImportate);  Nel caso io voglia aggiungere alle categorie già esistenti
+		this.gerarchie = gerarchieImportate;
+		salvaGerarchie();
 	}
 	
 	//-----------------------------------------------------------------

@@ -7,7 +7,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroIntervalloOrario extends ViewParametri{
 
-	private static final String GIVE_INTERVALLI_PRESENTI = "\nIntervalli presenti: ";
+	private static final String GIVE_INTERVALLI_PRESENTI = "Intervalli presenti: ";
 	private static final String MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE = "\nIntervallo aggiunto correttamente!";
 	private static final String MSG_TITOLO_ORARIO_FINALE = "\n------Inserimento Orario Finale------";
 	private static final String MSG_TITOLO_ORARIO_INIZIALE = "\n------Inserimento Orario Iniziale------";
