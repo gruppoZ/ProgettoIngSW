@@ -1,1 +1,67 @@
-[ ]
+[ {
+  "offertaFruitorePromotore" : {
+    "id" : 3,
+    "articolo" : {
+      "foglia" : {
+        "nome" : "a",
+        "descrizione" : "a",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "valida" : true,
+        "radice" : false
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "ottimo"
+      }
+    },
+    "username" : "f",
+    "statoOfferta" : {
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio"
+    }
+  },
+  "offertaFruitoreRichiesta" : {
+    "id" : 4,
+    "articolo" : {
+      "foglia" : {
+        "nome" : "a",
+        "descrizione" : "a",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "valida" : true,
+        "radice" : false
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "ok"
+      }
+    },
+    "username" : "wewe",
+    "statoOfferta" : {
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio"
+    }
+  },
+  "scadenza" : [ 2022, 5, 17 ],
+  "appuntamento" : {
+    "luogo" : "sud",
+    "data" : [ 2022, 5, 17 ],
+    "ora" : [ 2, 0 ],
+    "username" : "f"
+  }
+} ]
