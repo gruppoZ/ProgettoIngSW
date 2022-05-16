@@ -24,8 +24,8 @@
     },
     "username" : "f",
     "statoOfferta" : {
-      "type" : "OffertaAccoppiata",
-      "stato" : "OffertaAccoppiata"
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio"
     }
   },
   "offertaFruitoreRichiesta" : {
@@ -53,15 +53,15 @@
     },
     "username" : "wewe",
     "statoOfferta" : {
-      "type" : "OffertaSelezionata",
-      "stato" : "OffertaSelezionata"
+      "type" : "OffertaInScambio",
+      "stato" : "OffertaInScambio"
     }
   },
-  "scadenza" : [ 2022, 8, 24 ],
+  "scadenza" : [ 2022, 5, 17 ],
   "appuntamento" : {
-    "luogo" : null,
-    "data" : null,
-    "ora" : null,
-    "username" : null
+    "luogo" : "sud",
+    "data" : [ 2022, 5, 17 ],
+    "ora" : [ 2, 0 ],
+    "username" : "f"
   }
 } ]
