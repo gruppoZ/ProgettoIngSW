@@ -51,14 +51,8 @@ public class GestioneBaratto {
 		return null;
 	}
 	
-	/*
-	 * TODO
-	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
-	 */
-	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
-		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
-		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
-		
+	//TODO: NOME da cambiare
+	public void riempiListeBarattiScaduti(List<Baratto> listaBarattiScaduti, List<Offerta> listaOfferteScadute){
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getScadenza().isBefore(LocalDate.now())) {
 				listaBarattiScaduti.add(baratto);
@@ -66,16 +60,33 @@ public class GestioneBaratto {
 				listaOfferteScadute.add(baratto.getOffertaFruitoreRichiesta());
 			}
 		}
-		
-		rimuoviListaBaratti(listaBarattiScaduti);
-		
-		for (Offerta offertaScaduta : listaOfferteScadute) {
-			Offerta offerta = gestoreOfferte.getOffertaById(offertaScaduta.getId(), listaOfferte);
-			cambioOffertaScaduta(gestoreOfferte, offerta);
-		}	
 	}
 	
-	private void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
+	/*
+	 * TODO
+	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
+	 */
+//	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
+//		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
+//		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
+//		
+//		for (Baratto baratto : listaBaratti) {
+//			if(baratto.getScadenza().isBefore(LocalDate.now())) {
+//				listaBarattiScaduti.add(baratto);
+//				listaOfferteScadute.add(baratto.getOffertaFruitorePromotore());
+//				listaOfferteScadute.add(baratto.getOffertaFruitoreRichiesta());
+//			}
+//		}
+//		
+//		rimuoviListaBaratti(listaBarattiScaduti);
+//		
+//		for (Offerta offertaScaduta : listaOfferteScadute) {
+//			Offerta offerta = gestoreOfferte.getOffertaById(offertaScaduta.getId(), listaOfferte);
+//			cambioOffertaScaduta(gestoreOfferte, offerta);
+//		}	
+//	}
+	
+	public void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
 		for (Baratto baratto : listaBarattiDaRimuovere) {
 			this.listaBaratti.remove(baratto);
 		}
@@ -160,9 +171,9 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
-	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
-	}
+//	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
+//		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
+//	}
 	
 //	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
 //		LocalDate dataScadenza = LocalDate.now();

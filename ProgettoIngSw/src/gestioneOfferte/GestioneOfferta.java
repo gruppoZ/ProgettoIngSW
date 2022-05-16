@@ -5,6 +5,7 @@ import java.util.*;
 
 
 import gestioneCategorie.Categoria;
+import gestioneScambioArticoli.Baratto;
 import gestioneScambioArticoli.GestioneBaratto;
 import main.JsonIO;
 
@@ -85,8 +86,26 @@ public class GestioneOfferta {
 	}
 	
 	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
-		gestoreBaratto.gestisciBarattiScaduti(this, listaOfferte);
+		gestisciBarattiScaduti(gestoreBaratto, listaOfferte);
 		return listaOfferte;
+	}
+	
+	private void gestisciBarattiScaduti(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
+		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
+		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
+		gestoreBaratto.riempiListeBarattiScaduti(listaBarattiScaduti, listaOfferteScadute);
+		
+		gestoreBaratto.rimuoviListaBaratti(listaBarattiScaduti);
+		
+		for (Offerta offertaScaduta : listaOfferteScadute) {
+			Offerta offerta = getOffertaById(offertaScaduta.getId(), listaOfferte);
+			cambioOffertaScaduta(offerta);
+		}	
+		
+	}
+	
+	private void cambioOffertaScaduta(Offerta offerta) {
+		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
 	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
