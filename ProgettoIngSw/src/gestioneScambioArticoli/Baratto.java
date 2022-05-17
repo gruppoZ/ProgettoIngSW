@@ -58,9 +58,4 @@ public class Baratto {
 	public void setScadenza(LocalDate scadenza) {
 		this.scadenza = scadenza;
 	}
-
-	@Override
-	public String toString() {
-		return "Scambio [offertaA=" + offertaFruitorePromotore + ", offertaB=" + offertaFruitoreRichiesta + ", scadenza=" + scadenza + "]";
-	}
 }

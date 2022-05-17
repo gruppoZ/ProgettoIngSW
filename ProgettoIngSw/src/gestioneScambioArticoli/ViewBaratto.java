@@ -8,7 +8,6 @@ import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
-import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.GestioneParametri;
 import gestioneParametri.ViewParametroGiorno;
@@ -101,8 +100,12 @@ public class ViewBaratto {
 		} while(!fine);
 	}
 	
+	/**
+	 * Fa selezionare al fruitore due offerte, una sua e una di un altro fruitore
+	 * la quale però appartiene alla stessa categoria foglia.
+	 * Dopodichè cambia lo stato delle due offerte e crea un baratto.
+	 */
 	private void scambiaArticolo() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte); //TODO: va creata a livello di classe (?)
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
 		try {
 			System.out.println(MSG_SCEGLI_TUA_OFFERTA);
@@ -123,8 +126,11 @@ public class ViewBaratto {
 		}		
 	}
 	
+	/**
+	 * Permette di vedere tutte le offerte selezionate di un fruitore e 
+	 * di creare un appuntamento che andrà salvato nel baratto relativo all'offerta selezionata
+	 */
 	private void gestioneOfferteSelezionate() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteSelezionate.size() > 0) {
@@ -137,8 +143,7 @@ public class ViewBaratto {
 				showBaratto(baratto);
 				
 				boolean scelta = InputDati.yesOrNo(MSG_ASK_FISSARE_APPUNTAMENTO);
-				if(scelta) {
-					
+				if(scelta) {	
 					Appuntamento appuntamento = creaAppuntamento();
 					LocalDate dataScadenza = gestoreBaratto.getDataScadenza(gestorePiazza, appuntamento);
 					
@@ -159,10 +164,12 @@ public class ViewBaratto {
 		
 	}
 	
+	/**
+	 * Permette di vedere tutte le offerte in scambio di un fruitore e 
+	 * di accettare un appuntamento o rifiutarlo e proporne un altro
+	 */
 	private void gestioneOfferteInScambio() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(gestoreFruitore.getUsername());
-		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		
 		if(listaOfferteInScambio.size() > 0) {
 			try {				
@@ -207,35 +214,6 @@ public class ViewBaratto {
 				} else {
 					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
 				}
-				
-//				if(offertaInScambioAltroFruitore.getAppuntamento().isValido()) {
-//					viewAppuntamento.showAppuntamento(offertaInScambioAltroFruitore.getAppuntamento());
-//					
-//					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-//						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
-//						gestoreBaratto.rimuoviBaratto(baratto);
-//						
-//						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
-//					} else {
-//						Appuntamento appuntamento = creaAppuntamento();
-//						
-//						while(gestoreBaratto.checkUguaglianzaAppuntamenti(appuntamento, offertaInScambioAltroFruitore.getAppuntamento())) {
-//							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
-//							appuntamento = creaAppuntamento();
-//						}
-//						
-//						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();
-//						
-//						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, offertaInScambioAltroFruitore, appuntamento);
-//						gestoreBaratto.rimuoviBaratto(baratto);
-//						gestoreBaratto.creaBaratto(offertaAltroFruitore, offertaInScambioFruitoreCorrente, gestorePiazza.getScadenza());
-//					
-//						System.out.println(MSG_SUCCESS_DATI_INSERITI);
-//					}
-//				} else {
-//					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
-//				}
-				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}	
@@ -245,6 +223,7 @@ public class ViewBaratto {
 		
 	}
 	
+	//TODO: da spostare in view parametro giorno
 	private LocalDate richiestaData(String msg) {
 		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(gestorePiazza);
 		boolean formatoDateValido = false;
@@ -266,6 +245,10 @@ public class ViewBaratto {
 		return date;
 	}
 	
+	/**
+	 * Richiede di inserire tutti i parametri per la creazione di un appuntamento 
+	 * @return appuntamento creato
+	 */
 	private Appuntamento creaAppuntamento() {
 		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(gestorePiazza);
 		

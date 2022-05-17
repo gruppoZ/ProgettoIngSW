@@ -7,7 +7,6 @@ public class Appuntamento {
 	private String luogo;
 	private LocalDate data;
 	private LocalTime ora;
-//	private boolean valido;
 	private String username;
 	
 	public Appuntamento() {
@@ -18,7 +17,7 @@ public class Appuntamento {
 	 * @param luogo
 	 * @param data
 	 * @param ora
-	 * @param valido
+	 * @param username
 	 */
 	public Appuntamento(String luogo, LocalDate data, LocalTime ora, String username) {
 		this.luogo = luogo;
@@ -39,14 +38,6 @@ public class Appuntamento {
 		return ora;
 	}
 	
-//	public boolean isValido() {
-//		return valido;
-//	}
-//	
-//	public void setValido(boolean valido) {
-//		this.valido = valido;
-//	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -55,6 +46,12 @@ public class Appuntamento {
 		this.username = username;
 	}
 	
+	/**
+	 * Precondizione: appuntamento != null
+	 * 
+	 * @param appuntamento
+	 * @return TRUE quando luogo data e ora sono uguali
+	 */
 	public boolean equals(Appuntamento appuntamento) {
 		return this.luogo.equals(appuntamento.getLuogo()) && this.data.isEqual(appuntamento.getData()) && this.ora.compareTo(appuntamento.getOra()) == 0;
 	}
