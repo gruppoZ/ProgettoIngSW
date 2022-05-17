@@ -1,7 +1,5 @@
 package gestioneUtenti;
 
-import java.util.Iterator;
-
 import gestioneCategorie.Categoria;
 import gestioneCategorie.Gerarchia;
 import gestioneCategorie.ViewGerarchia;

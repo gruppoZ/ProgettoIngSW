@@ -16,13 +16,12 @@ public class Categoria {
 	
 	public Categoria() {
 	}
-
 	
 	public Categoria(String nome, String descrizione, boolean isRadice, List<CampoCategoria> campiNativi, List<CampoCategoria> campiEreditati) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.isRadice = isRadice;
-		sottoCategorie = new ArrayList<>();
+		this.sottoCategorie = new ArrayList<>();
 		this.campiNativi = campiNativi; 
 		this.campiEreditati = campiEreditati;
 		this.isValida = true;
@@ -105,6 +104,7 @@ public class Categoria {
 	}
 
 	/**
+	 *  Postcondizione: listaRitornata != null
 	 * 
 	 * @return lista completa contenente sia campi nativi che ereditati, vuota se non presenti (e non null)
 	 */
@@ -135,12 +135,26 @@ public class Categoria {
 		return this.sottoCategorie.size();
 	}
 	
+	/**
+	 * Precondizione: sottoCategoria != null
+	 * Postcondizione: sottoCategorie'.size() = sottoCategorie.size() + 1 
+	 * 				   elemento aggiunto alla lista
+	 * 
+	 * @param sottoCategoria
+	 */
 	public void addSottoCategoria(Categoria sottoCategoria) {
 		sottoCategorie.add(sottoCategoria);
 	}
 	
-	private void eliminaSottoCategoria(Categoria categoria) {
-		this.sottoCategorie.remove(categoria);
+	/**
+	 * Precondizione: sottoCategoria != null
+	 * Postcondizione: sottoCategorie'.size() = sottoCategorie.size() - 1 
+	 * 				   elemento rimosso dalla lista
+	 * 
+	 * @param sottoCategoria
+	 */
+	private void eliminaSottoCategoria(Categoria sottoCategoria) {
+		this.sottoCategorie.remove(sottoCategoria);
 	}
 	
 	public boolean sonoFoglia() {
@@ -149,6 +163,7 @@ public class Categoria {
 	
 	/**
 	 * Una categoria non e' piu' valida quando viene eliminata, vengono quindi eliminate tutte le sottocategorie non valide
+	 * 
 	 */
 	public void eliminaCategorieNonValide() {
 		ArrayList<Categoria> categorieNonValide = new ArrayList<Categoria>();
@@ -169,6 +184,8 @@ public class Categoria {
 	}
 
 	/**
+	 * Precondizione: categoria != null
+	 * 
 	 * Metodo per sapere quando due categorie sono uguali
 	 * @param categoria
 	 * @return

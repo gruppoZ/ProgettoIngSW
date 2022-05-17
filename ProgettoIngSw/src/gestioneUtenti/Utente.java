@@ -9,6 +9,7 @@ public abstract class Utente {
 	public Utente() {
 		
 	}
+	
 	/**
 	 * @param credenziali
 	 */

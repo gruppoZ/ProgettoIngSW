@@ -1,13 +1,15 @@
 package gestioneUtenti;
 
 import java.util.HashMap;
-
 import gestioneCategorie.Gerarchia;
 import gestioneCategorie.GestioneGerarchie;
 
 public abstract class GestioneUtente {
 	private GestioneGerarchie gestoreGerarchie;
 	
+	/**
+	 * Postcondizione: gestoreGerarchie != null
+	 */
 	public GestioneUtente() {
 		gestoreGerarchie = new GestioneGerarchie();
 	}

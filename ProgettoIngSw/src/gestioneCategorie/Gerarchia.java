@@ -3,7 +3,6 @@ package gestioneCategorie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Gerarchia {
@@ -42,6 +41,8 @@ public class Gerarchia {
 	}
 	
 	/**
+	 * Precondizione: categoria != null
+	 * Postcondizione: padre != null se categoria è sottoCategoria di qualcuno
 	 * 
 	 * @param categoria
 	 * @return padre della categoria passata come parametro, potrebbe essere NULL
@@ -58,6 +59,11 @@ public class Gerarchia {
 		return padre;
 	}
 	
+	/**
+	 * 
+	 * @param nomeCategoria
+	 * @return True se nomeCategoria è effettivamente il nome di una categoria esistente
+	 */
 	public boolean checkNomeCategoriaEsiste(String nomeCategoria) {
 		return elencoCategorie.containsKey(formattaNome(nomeCategoria));
 	}
@@ -78,6 +84,8 @@ public class Gerarchia {
 	}
 	
 	/**
+	 * Postcondizione: se nomeDaEliminare è il nome di una categoria => elencoCategorie'.size() = elencoCategorie.size() - 1
+	 * 
 	 * Ricorsivamente vengono invalidate anche tutte le sottocategorie della categoria da eliminare
 	 * Viene aggiornata la lista delle categorie
 	 * 
@@ -93,6 +101,10 @@ public class Gerarchia {
 		this.getRoot().eliminaCategorieNonValide();
 	}
 
+	/**
+	 * Postcondizione: Se Gerarchia contiene Categorie foglie => listaFoglie'.size() > 0
+	 * @return
+	 */
 	@JsonIgnore
 	public List<Categoria> getListaFoglie() {
 		List<Categoria> listaFoglie = new ArrayList<Categoria>();
@@ -104,6 +116,14 @@ public class Gerarchia {
 		return listaFoglie;
 	}
 	
+	/**
+	 * Precondizione: categoriaPassata != null
+	 * Postcondizione: elencoCategorie'.size() = elencoCategorie.size() + 1  
+	 * 
+	 * In questo modo si aggiorna l'elenco di Categorie con tutte le categorie effettivamente presenti 
+	 * nella Gerarchia
+	 * @param categoriaPassata
+	 */
 	public void popolaElencoCategorie(Categoria categoriaPassata){
 		addCategoriaInElenco(categoriaPassata.getNome(), categoriaPassata);
 		for (Categoria categoria : categoriaPassata.getSottoCategorie()) {

@@ -2,8 +2,6 @@ package gestioneCategorie;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import it.unibs.fp.mylib.BelleStringhe;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -244,19 +242,15 @@ public class ViewGerarchia {
 		gestoreGerarchia.getGerarchie().forEach((k, v) -> showGerarchiaSintetica(v));
 		
 		String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
-		
-		//possibile evitare di fare i due passaggi e fare solo get, se ritorna null => non esiste (pero' dovrei fare un controllo nella view)
-		//cosa che faccio gia' con checkEsistenzaCategoria quindi a sto punto
+
 		if(gestoreGerarchia.checkGerarchiaPresente(nomeRootSelezionata)) {
 			Gerarchia gerarchia = gestoreGerarchia.getGerarchiaByName(nomeRootSelezionata);
-			//aggiunto un metodo in Gerarchia che permette di prendere la lista delle foglie
-			//ATTENZIONE! nel metodo uso la hashmap che pero' non e' stata ripopolata quando si carica da file!
+			
 			List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
  
 			for (Categoria categoria : listaFoglie) {
 				System.out.println(viewCategoria.showCategoriaSemplificata(categoria));
 			}
-			
 			
 			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
 			

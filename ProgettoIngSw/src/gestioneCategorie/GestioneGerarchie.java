@@ -1,7 +1,6 @@
 package gestioneCategorie;
 
 import java.util.*;
-
 import gestioneInfoDiSistema.GestioneInfoSistema;
 import main.JsonIO;
 
@@ -9,8 +8,7 @@ public class GestioneGerarchie {
 	
 	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
-	
-	//private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
+
 	String pathGerarchie;
 	
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
@@ -47,7 +45,6 @@ public class GestioneGerarchie {
 	public void importaGerarchie(String path) {
 		HashMap<String, Gerarchia> gerarchieImportate = JsonIO.leggiGerarchieDaJson(path);
 		
-//		getGerarchie().putAll(gerarchieImportate);  Nel caso io voglia aggiungere alle categorie già esistenti
 		this.gerarchie = gerarchieImportate;
 		salvaGerarchie();
 	}
@@ -55,10 +52,13 @@ public class GestioneGerarchie {
 	//-----------------------------------------------------------------
 	private Gerarchia currentGerarchia;
 	
+	/**
+	 * Precondizione: root != null
+	 * Postcondizione: currentGerarchia != null
+	 * @param root
+	 */
 	public void creaRoot(Categoria root) {
-		int depth = 0;
-		
-		root.setProfondita(depth);
+		root.setProfondita(0);
 		currentGerarchia = new Gerarchia(root);
 		
 		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
@@ -70,9 +70,16 @@ public class GestioneGerarchie {
 		throw new NullPointerException();
 	}	
 	
+	/**
+	 * Precondizione: categotiaPadre != null, categoriaFiglia != null
+	 * Postcondizione: categoriaPadre'.getSottoCategorie().size() = categoriaPadre.getSottoCategorie().size() + 1
+	 * 					currentGerarchia'.getElencoCategorie().size() = currentGerarchia.getElencoCategorie().size() + 1
+	 * @param categoriaPadre
+	 * @param categoriaFiglia
+	 */
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
 		int depth = categoriaPadre.getProfondita() + 1;
-		
+
 		categoriaFiglia.setProfondita(depth);
 		this.currentGerarchia.addCategoriaInElenco(categoriaFiglia.getNome(),categoriaFiglia);
 	}
@@ -106,17 +113,23 @@ public class GestioneGerarchie {
 	}
 	
 	protected boolean checkNomeCategoriaEsiste(String nomeCategoria) {
-		return this.currentGerarchia.checkNomeCategoriaEsiste(nomeCategoria);
+		return this.getGerarchiaInLavorazione().checkNomeCategoriaEsiste(nomeCategoria);
 	}
 	
 	public Categoria getCategoriaByName(String nome) {
-		return this.currentGerarchia.getCategoriaByName(nome);
+		return this.getGerarchiaInLavorazione().getCategoriaByName(nome);
 	}
 	
 	protected boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
 		return nSottoCategorie >= NUM_MIN_SOTTOCATEGORIE;
 	}
 	
+	/**
+	 * Precondizione: categoriaDaRamificare != null
+	 * 
+	 * @param categoriaDaRamificare
+	 * @return
+	 */
 	protected int getNumSottoCatDaInserire(Categoria categoriaDaRamificare) {
 		if(checkNumMinimoSottoCategorie(categoriaDaRamificare.getSottoCategorie().size()) )
 			return NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO;

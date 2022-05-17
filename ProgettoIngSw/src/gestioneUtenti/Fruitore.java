@@ -19,9 +19,4 @@ public class Fruitore extends Utente {
 	public void menu(String username) {
 		(new ViewFruitore()).menu(username);				
 	}
-	
-	@Override
-	public String toString() {
-		return "Fruitore [credenziali=" + this.getCredenziali() + "]";
-	}
 }

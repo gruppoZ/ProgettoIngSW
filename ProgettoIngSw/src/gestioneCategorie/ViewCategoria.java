@@ -1,13 +1,13 @@
 package gestioneCategorie;
 
 import java.util.List;
-
 import it.unibs.fp.mylib.BelleStringhe;
 
 public class ViewCategoria {
 
 	/**
-	 * 
+	 * Precondizione: categoria != null
+	 * @param categoria
 	 * @return la stampa della categoria con tutti i suoi attributi che la caratterizzano come tale
 	 */
 	public String showCategoriaDettagliata(Categoria categoria) {
@@ -25,6 +25,11 @@ public class ViewCategoria {
 		return result.toString();
 	}
 	
+	/**
+	 * Precondizione: categoria != null
+	 * @param categoria
+	 * @return
+	 */
 	public String showCategoriaSemplificata(Categoria categoria) {
 		StringBuffer result = new StringBuffer();
 		String nTab = BelleStringhe.ripetiChar('\t', categoria.getProfondita());
@@ -39,7 +44,7 @@ public class ViewCategoria {
 	}
 	
 	/**
-	 * 
+	 * Precondizione: categoria != null
 	 * @param nTab = utilizzato per la visualizzazione, in base alla profondita', della categoria
 	 * @return
 	 */
@@ -60,6 +65,11 @@ public class ViewCategoria {
 		return result.toString();
 	}
 	
+	/**
+	 * Precondizione: campo != null
+	 * @param campo
+	 * @return
+	 */
 	private String showCampoCategoria(CampoCategoria campo) {
 		StringBuffer sb = new StringBuffer();
 		String msgObbligatorio = campo.isObbligatorio() ? "Obbligatorio" : "Facolatativo";

@@ -7,6 +7,7 @@ public class Configuratore extends Utente {
 	public Configuratore() {
 		
 	}
+	
 	/**
 	 * @param credenziali
 	 */
@@ -17,10 +18,5 @@ public class Configuratore extends Utente {
 	@Override
 	public void menu(String username) {
 		(new ViewConfiguratore()).menu(username);
-	}
-	
-	@Override
-	public String toString() {
-		return "Configuratore [credenziali=" + this.getCredenziali() + "]";
 	}
 }

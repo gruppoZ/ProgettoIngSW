@@ -8,6 +8,10 @@ public class GestioneFruitore extends GestioneUtente{
 	private GestioneParametri gestoreParametri;
 	private String username;
 	
+	/**
+	 * Postcondizione: gestoreParametri != null
+	 * @param username
+	 */
 	public GestioneFruitore(String username) {
 		super();
 		gestoreParametri = new GestioneParametri();
@@ -25,5 +29,4 @@ public class GestioneFruitore extends GestioneUtente{
 	public String getUsername() {
 		return this.username;
 	}
-	
 }

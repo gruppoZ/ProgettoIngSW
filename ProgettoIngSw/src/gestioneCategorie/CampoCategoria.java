@@ -1,6 +1,5 @@
 package gestioneCategorie;
 
-
 public class CampoCategoria {
 
 	private String descrizione;
@@ -10,7 +9,6 @@ public class CampoCategoria {
 	}
 	
 	public CampoCategoria(String descrizione, boolean obbligatorio) {
-		super();
 		this.descrizione = descrizione;
 		this.obbligatorio = obbligatorio;
 	}
