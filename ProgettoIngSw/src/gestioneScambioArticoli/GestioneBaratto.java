@@ -15,6 +15,7 @@ import main.JsonIO;
 public class GestioneBaratto {
 
 	private static final String PATH_BARATTI = "src/gestioneScambioArticoli/baratti.json";
+	private static final String PATH_BARATTI_TERMINATI = "src/gestioneScambioArticoli/barattiTerminati.json";
 
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
@@ -107,6 +108,20 @@ public class GestioneBaratto {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
 	}
 	
+	private List<Baratto> leggiBarattiTerminati(){
+		return JsonIO.leggiListaDaJson(PATH_BARATTI_TERMINATI, Baratto.class);
+	}
+	
+	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) {
+		JsonIO.salvaOggettoSuJson(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
+	}
+	
+	private void aggiungiBarattoTerminato(Baratto baratto) {
+		List<Baratto> listaBarattiTerminati = leggiBarattiTerminati();
+		listaBarattiTerminati.add(baratto);
+		salvaBarattiTerminati(listaBarattiTerminati);
+	}
+	
 	/**
 	 * Preso in input la scadenza in giorni calcola a partire da oggi la data di scadenza 
 	 * @param scadenzaInGiorni
@@ -195,6 +210,12 @@ public class GestioneBaratto {
 	protected void aggiornaAppuntamentoInBaratto(Baratto baratto, Appuntamento appuntamento) {
 		baratto.setAppuntamento(appuntamento);
 		salvaBaratti();
+	}
+	
+	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) {
+		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
+		rimuoviBaratto(baratto);
+		aggiungiBarattoTerminato(baratto);
 	}
 
 	/**
