@@ -1,13 +1,11 @@
 package gestioneScambioArticoli;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.Offerta;
 import gestioneOfferte.OffertaAccoppiata;
-import gestioneOfferte.OffertaAperta;
 import gestioneOfferte.OffertaChiusa;
 import gestioneOfferte.OffertaInScambio;
 import gestioneOfferte.OffertaSelezionata;
@@ -30,6 +28,11 @@ public class GestioneBaratto {
 		return this.baratto;
 	}
 	
+	/**
+	 * 
+	 * @param offerta
+	 * @return TRUE se "offerta" e' presente in almeno uno dei baratti nella lista
+	 */
 	public boolean isOffertaInBaratto(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return true;
@@ -52,7 +55,15 @@ public class GestioneBaratto {
 	}
 	
 	//TODO: NOME da cambiare
-	public void riempiListeBarattiScaduti(List<Baratto> listaBarattiScaduti, List<Offerta> listaOfferteScadute){
+	/**
+	 * Precondizione: listaBarattiScaduti != null && listaOfferteScadute != null
+	 * Postcondizione: 	listaBarattiScaduti'.size() = listaBarattiScaduti + n,
+	 * 					listaOfferteScadute'.size() = listaBarattiScaduti + 2*n | n numero di baratti scaduti
+	 * Inserisce nelle liste i baratti scaduti e le relative offerte 
+	 * @param listaBarattiScaduti
+	 * @param listaOfferteScadute
+	 */
+	public void riempiListeBarattiScaduti(List<Baratto> listaBarattiScaduti, List<Offerta> listaOfferteScadute) {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getScadenza().isBefore(LocalDate.now())) {
 				listaBarattiScaduti.add(baratto);
@@ -61,36 +72,30 @@ public class GestioneBaratto {
 			}
 		}
 	}
-	
-	/*
-	 * TODO
-	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
+
+	/**
+	 * Precondizione: listaBarattiDaRimuovere != null
+	 * Postcondizione:	listaBaratti'.size() = listaBaratti.size() - n | n = listaBarattiDaRimuovere.size()
+	 * 
+	 * Rimuove i baratti presenti in listaBarattiDaRimuovere dalla listaBaratti 
+	 * dopodichè salva nel file baratti.json la nuova listaBaratti
+	 * @param listaBarattiDaRimuovere
 	 */
-//	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
-//		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
-//		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
-//		
-//		for (Baratto baratto : listaBaratti) {
-//			if(baratto.getScadenza().isBefore(LocalDate.now())) {
-//				listaBarattiScaduti.add(baratto);
-//				listaOfferteScadute.add(baratto.getOffertaFruitorePromotore());
-//				listaOfferteScadute.add(baratto.getOffertaFruitoreRichiesta());
-//			}
-//		}
-//		
-//		rimuoviListaBaratti(listaBarattiScaduti);
-//		
-//		for (Offerta offertaScaduta : listaOfferteScadute) {
-//			Offerta offerta = gestoreOfferte.getOffertaById(offertaScaduta.getId(), listaOfferte);
-//			cambioOffertaScaduta(gestoreOfferte, offerta);
-//		}	
-//	}
-	
 	public void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
 		for (Baratto baratto : listaBarattiDaRimuovere) {
 			this.listaBaratti.remove(baratto);
 		}
 		
+		salvaBaratti();
+	}
+	
+	/**
+	 * Precondizione: baratto != null
+	 * Postcondizione:	listaBaratti'.size() = listaBaratti.size() - 1
+	 * @param baratto
+	 */
+	public void rimuoviBaratto(Baratto baratto) {
+		listaBaratti.remove(baratto);
 		salvaBaratti();
 	}
 	
@@ -102,16 +107,21 @@ public class GestioneBaratto {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
 	}
 	
-	public void rimuoviBaratto(Baratto baratto) {
-		listaBaratti.remove(baratto);
-		salvaBaratti();
-	}
-	
+	/**
+	 * Preso in input la scadenza in giorni calcola a partire da oggi la data di scadenza 
+	 * @param scadenzaInGiorni
+	 * @return data di scadenza
+	 */
 	protected LocalDate calcolaDataScadenza(int scadenzaInGiorni) {
 		LocalDate dataScadenza = LocalDate.now();
 		return dataScadenza.plusDays(scadenzaInGiorni);
 	}
 	
+	/**
+	 * @param gestorePiazza
+	 * @param appuntamento
+	 * @return data di scadenza
+	 */
 	protected LocalDate getDataScadenza(GestioneParametri gestorePiazza, Appuntamento appuntamento) {
 		LocalDate dataScadenza = calcolaDataScadenza(gestorePiazza.getScadenza());
 		if(dataScadenza.isAfter(appuntamento.getData())) dataScadenza = appuntamento.getData();
@@ -120,16 +130,14 @@ public class GestioneBaratto {
 	}
 	
 	/** 
-	 * Aggiorna il baratto da aggiornare settando tutti i suoi parametri
+	 * Aggiorna il baratto daAggiornare settando tutti i suoi parametri
 	 * @param daAggiornare
 	 * @param offertaA
 	 * @param offertaB
 	 * @param dataScadenza
 	 * @param appuntamento
 	 */
-	
 	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
-		
 		daAggiornare.setAppuntamento(appuntamento);
 		daAggiornare.setOffertaFruitorePromotore(offertaA);
 		daAggiornare.setOffertaFruitoreRichiesta(offertaB);
@@ -139,7 +147,7 @@ public class GestioneBaratto {
 	}
 	
 	/** 
-	 * Aggiorna il baratto da aggiornare settando soltanto il giorno della scadenza e l'appuntamento
+	 * Aggiorna il baratto daAggiornare settando soltanto il giorno della scadenza e l'appuntamento
 	 * @param daAggiornare
 	 * @param dataScadenza
 	 * @param appuntamento
@@ -151,39 +159,50 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
+	/**
+	 * Cambia lo stato dell'offertaA in "OffertaAccoppiata" e quello dell'offertaB in "OffertaSelezionata"
+	 * @param gestoreOfferta
+	 * @param offertaA
+	 * @param offertaB
+	 */
 	protected void switchToOfferteAccoppiate(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
 	}
 	
+	/**
+	 * Cambia lo stato delle offerte in "OffertaInScambio"
+	 * @param gestoreOfferta
+	 * @param offertaA
+	 * @param offertaB
+	 */
 	protected void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
 	}
 	
+	/**
+	 * Cambia lo stato delle offerte in "OffertaChiusa"
+	 * @param gestoreOfferta
+	 * @param offertaA
+	 * @param offertaB
+	 */
 	protected void switchToOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaChiusa());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
 	
-	protected void gestisciRifiutoAppuntamento(Baratto baratto, Appuntamento appuntamento) {
+	protected void aggiornaAppuntamentoInBaratto(Baratto baratto, Appuntamento appuntamento) {
 		baratto.setAppuntamento(appuntamento);
 		salvaBaratti();
 	}
-	
-//	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
-//		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
-//	}
-	
-//	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
-//		LocalDate dataScadenza = LocalDate.now();
-//		dataScadenza = dataScadenza.plusDays(scadenza);
-//		
-//		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);/
-//		
-//		listaBaratti.add(baratto);
-//		salvaBaratti();
-//	}
+
+	/**
+	 * Permette di creare un baratto, inserirlo nella listaBaratti ed aggiornare il file baratti.json
+	 * @param offertaA
+	 * @param offertaB
+	 * @param scadenzaInGiorni
+	 */
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) {
 		LocalDate dataScadenza = calcolaDataScadenza(scadenzaInGiorni);
 		
