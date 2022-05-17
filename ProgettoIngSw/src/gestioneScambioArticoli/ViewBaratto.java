@@ -102,8 +102,8 @@ public class ViewBaratto {
 	}
 	
 	private void scambiaArticolo() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte); //TODO: va creata a livello di classe (?)
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
+		
 		try {
 			System.out.println(MSG_SCEGLI_TUA_OFFERTA);
 			offertaA = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
@@ -124,7 +124,6 @@ public class ViewBaratto {
 	}
 	
 	private void gestioneOfferteSelezionate() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteSelezionate.size() > 0) {
@@ -160,9 +159,7 @@ public class ViewBaratto {
 	}
 	
 	private void gestioneOfferteInScambio() {
-//		ViewOfferte viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
 		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(gestoreFruitore.getUsername());
-		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		
 		if(listaOfferteInScambio.size() > 0) {
 			try {				
@@ -188,8 +185,7 @@ public class ViewBaratto {
 				
 				if(!usernameCorrente.equals(autoreAppuntamento)) {
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-						gestoreBaratto.switchToOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
-						gestoreBaratto.rimuoviBaratto(baratto);
+						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaAltroFruitore, offertaAltroFruitore, baratto);
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
 					} else {
@@ -207,34 +203,6 @@ public class ViewBaratto {
 				} else {
 					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
 				}
-				
-//				if(offertaInScambioAltroFruitore.getAppuntamento().isValido()) {
-//					viewAppuntamento.showAppuntamento(offertaInScambioAltroFruitore.getAppuntamento());
-//					
-//					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-//						gestoreBaratto.cambioOfferteChiuse(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore);
-//						gestoreBaratto.rimuoviBaratto(baratto);
-//						
-//						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
-//					} else {
-//						Appuntamento appuntamento = creaAppuntamento();
-//						
-//						while(gestoreBaratto.checkUguaglianzaAppuntamenti(appuntamento, offertaInScambioAltroFruitore.getAppuntamento())) {
-//							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
-//							appuntamento = creaAppuntamento();
-//						}
-//						
-//						OffertaInScambio tipoOfferta1 = (OffertaInScambio) offertaInScambioFruitoreCorrente.getStatoOfferta();
-//						
-//						gestoreBaratto.gestisciRifiutoAppuntamento(gestoreOfferte, tipoOfferta1, offertaInScambioAltroFruitore, appuntamento);
-//						gestoreBaratto.rimuoviBaratto(baratto);
-//						gestoreBaratto.creaBaratto(offertaAltroFruitore, offertaInScambioFruitoreCorrente, gestorePiazza.getScadenza());
-//					
-//						System.out.println(MSG_SUCCESS_DATI_INSERITI);
-//					}
-//				} else {
-//					System.out.println(MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE);
-//				}
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -305,7 +273,6 @@ public class ViewBaratto {
 	
 	private void showBaratto(Baratto baratto) {
 		StringBuffer sb = new StringBuffer();
-		ViewOfferte viewOfferta = new ViewOfferte();
 		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		
 		sb.append("**************************************\n");

@@ -7,7 +7,6 @@ public class Appuntamento {
 	private String luogo;
 	private LocalDate data;
 	private LocalTime ora;
-//	private boolean valido;
 	private String username;
 	
 	public Appuntamento() {
@@ -18,7 +17,7 @@ public class Appuntamento {
 	 * @param luogo
 	 * @param data
 	 * @param ora
-	 * @param valido
+	 * @param username
 	 */
 	public Appuntamento(String luogo, LocalDate data, LocalTime ora, String username) {
 		this.luogo = luogo;
@@ -38,14 +37,6 @@ public class Appuntamento {
 	public LocalTime getOra() {
 		return ora;
 	}
-	
-//	public boolean isValido() {
-//		return valido;
-//	}
-//	
-//	public void setValido(boolean valido) {
-//		this.valido = valido;
-//	}
 	
 	public String getUsername() {
 		return username;
