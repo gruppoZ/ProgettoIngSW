@@ -3,9 +3,9 @@ package gestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
-public class ViewParametroScadenza extends ViewParametri{
+public class ViewParametroScadenza extends ViewParametri {
 
-	private static final int MIN_SCADENZA = 0;
+	private static final int MIN_SCADENZA = 1;
 	
 	private static final String GIVE_SCADENZA_ATTUALE = "Scadenza attuale: %s giorni\n";
 	private static final String ASK_SCADENZA = "\nInserisci la nuova scadenza: ";

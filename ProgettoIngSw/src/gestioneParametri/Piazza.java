@@ -17,7 +17,7 @@ public class Piazza {
 		this.luoghi = new ArrayList<>();
 		this.giorni = new ArrayList<>();
 		this.intervalliOrari = new ArrayList<>();
-		this.scadenza = 0;
+		this.scadenza = 1;
 	}
 	
 	/**
