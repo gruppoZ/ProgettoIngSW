@@ -21,6 +21,13 @@ public interface StatoOfferta {
 	String getStato();
 	void changeState(Offerta offerta);
 	
+	/**
+	 * Precondizione: offerta != null, newState != null
+	 * Postcondizione: offerta.getStatoOfferta() != null
+	 * 
+	 * @param offerta
+	 * @param newState
+	 */
 	default void changeState(Offerta offerta, StatoOfferta newState) {
 		offerta.setStatoOfferta(newState);	
 	}	

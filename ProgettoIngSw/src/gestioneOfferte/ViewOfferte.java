@@ -45,9 +45,20 @@ public class ViewOfferte {
 	private GestioneOfferta gestoreOfferte;
 	private GestioneFruitore gestoreFruitore;
 	
+	/**
+	 * Postcondizione: gestoreOfferte != null
+	 */
 	public ViewOfferte() {
 		gestoreOfferte = new GestioneOfferta();
 	}
+	
+	/**
+	 * Precondizione: gestoreFruitore != null, gestoreOfferte != null
+	 * Postcondizione: this.gestoreFruitore != null, this.gestoreOfferte != null
+	 * 
+	 * @param gestoreFruitore
+	 * @param gestoreOfferte
+	 */
 	public ViewOfferte(GestioneFruitore gestoreFruitore, GestioneOfferta gestoreOfferte) {
 		this.gestoreFruitore = gestoreFruitore;
 		this.gestoreOfferte = gestoreOfferte;

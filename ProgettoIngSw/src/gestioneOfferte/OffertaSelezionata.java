@@ -2,8 +2,6 @@ package gestioneOfferte;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import gestioneScambioArticoli.Appuntamento;
-
 public class OffertaSelezionata implements StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
 	

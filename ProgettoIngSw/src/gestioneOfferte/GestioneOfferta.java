@@ -1,8 +1,6 @@
 package gestioneOfferte;
 
-import java.time.LocalDate;
 import java.util.*;
-
 
 import gestioneCategorie.Categoria;
 import gestioneScambioArticoli.Baratto;
@@ -39,8 +37,17 @@ public class GestioneOfferta {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
 	}
 	
+	public List<Offerta> getListaOfferte() {
+		return listaOfferte;
+	}
+	
+	public void setListaOfferte(List<Offerta> listaOfferte) {
+		this.listaOfferte = listaOfferte;
+	}
 	
 	/**
+	 * Precondizione: offerta != null, stato != null
+	 * 
 	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
 	 * @param offerta
 	 */
@@ -66,14 +73,6 @@ public class GestioneOfferta {
 		salvaStoricoCambioStati();
 		salvaOfferte();
 	}
-	
-	public List<Offerta> getListaOfferte() {
-		return listaOfferte;
-	}
-	
-	public void setListaOfferte(List<Offerta> listaOfferte) {
-		this.listaOfferte = listaOfferte;
-	}
 
 	protected List<Offerta> leggiListaOfferte() {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
@@ -85,15 +84,29 @@ public class GestioneOfferta {
 		return listaOfferte;
 	}
 	
+	/**
+	 * Precondizione: gestoreBaratto != null, listaOfferte != null
+	 * 
+	 * @param gestoreBaratto
+	 * @param listaOfferte
+	 * @return
+	 */
 	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
 		gestisciBarattiScaduti(gestoreBaratto, listaOfferte);
 		return listaOfferte;
 	}
 	
+	
+	/**
+	 * Precondizione: gestoreBaratto != null, listaOfferte != null
+	 * 
+	 * @param gestoreBaratto
+	 * @param listaOfferte
+	 */
 	private void gestisciBarattiScaduti(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
 		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
 		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
-		gestoreBaratto.riempiListeBarattiScaduti(listaBarattiScaduti, listaOfferteScadute);
+		gestoreBaratto.caricaBarattiScadutiEOfferteScadute(listaBarattiScaduti, listaOfferteScadute);
 		
 		gestoreBaratto.rimuoviListaBaratti(listaBarattiScaduti);
 		
@@ -104,10 +117,24 @@ public class GestioneOfferta {
 		
 	}
 	
+	/**
+	 * Precondizione: offerta != null
+	 * 
+	 * @param offerta
+	 */
 	private void cambioOffertaScaduta(Offerta offerta) {
 		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
+	
+	/**
+	 * Precondizione: id >= 1, listaOfferte != null
+	 * 
+	 * @param id
+	 * @param listaOfferte
+	 * @return
+	 * @throws NullPointerException
+	 */
 	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() == id) return offerta;
@@ -115,6 +142,13 @@ public class GestioneOfferta {
 		throw new NullPointerException();
 	}
 	
+	/**
+	 * Precondizione: id >= 1
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NullPointerException
+	 */
 	public Offerta getOffertaById(int id) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
 			if(offerta.getId() == id) return offerta;
@@ -162,6 +196,12 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+	/**
+	 * Precondizione: foglia != null
+	 * 
+	 * @param foglia
+	 * @return
+	 */
 	public List<Offerta> getOfferteAperteByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -174,6 +214,12 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+	/**
+	 * Precondizione: foglia != null
+	 * 
+	 * @param foglia
+	 * @return
+	 */
 	public List<Offerta> getOfferteChiuseByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -186,6 +232,13 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+
+	/**
+	 * Precondizione: foglia != null
+	 * 
+	 * @param foglia
+	 * @return
+	 */
 	public List<Offerta> getOfferteInScambioByCategoria(Categoria foglia) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -198,6 +251,13 @@ public class GestioneOfferta {
 		return result;
 	}
 	
+	/**
+	 * Precondizione: foglia != null
+	 * 
+	 * @param foglia
+	 * @param username
+	 * @return
+	 */
 	public List<Offerta> getOfferteAperteByCategoriaNonDiPoprietaDiUsername(Categoria foglia, String username) {
 		List<Offerta> result = new ArrayList<>();
 		for (Offerta offerta : listaOfferte) {
@@ -240,6 +300,12 @@ public class GestioneOfferta {
 		return idMax;
 	}
 	
+	/**
+	 * Precondizione: articolo != null
+	 * 
+	 * @param articolo
+	 * @param username
+	 */
 	protected void manageAggiuntaOfferta(Articolo articolo, String username) {
 		int id = getIdMax() + 1;
 		Offerta offerta = creaOfferta(id, articolo, username);
@@ -247,14 +313,32 @@ public class GestioneOfferta {
 		salvaOfferte();
 	}
 	
+	/**
+	 * Precondizione: id >= 1, Articolo != null
+	 * 
+	 * @param id
+	 * @param articolo
+	 * @param username
+	 * @return
+	 */
 	private Offerta creaOfferta(int id, Articolo articolo, String username) {
 		return new Offerta(id, articolo, username, new OffertaAperta());
 	}
 	
+	/**
+	 * Precondizione: offerta != null
+	 * Postcondizione: listaOfferte'.size() = listaOfferte.size() + 1 
+	 * @param offerta
+	 */
 	protected void aggiungiOfferta(Offerta offerta) {
 		this.listaOfferte.add(offerta);
 	}
 	
+	/**
+	 * Precondizione: offerta != null
+	 * Postcondizione: listaOfferte'.size() = listaOfferte.size() - 1 
+	 * @param offerta
+	 */
 	protected void rimuoviOfferta(Offerta offerta) {
 		this.listaOfferte.remove(offerta);
 	}

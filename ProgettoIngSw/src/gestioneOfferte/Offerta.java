@@ -11,6 +11,15 @@ public class Offerta {
 	public Offerta() {		
 	}
 	
+	/**
+	 * Precondizione: id >= 1, articolo != null, tipoOfferta != null
+	 * Postcondizione: this.id >= 1, this.articolo != null, this.statoOfferta != null
+	 * 
+	 * @param id
+	 * @param articolo
+	 * @param username
+	 * @param tipoOfferta
+	 */
 	public Offerta(int id, Articolo articolo, String username, StatoOfferta tipoOfferta) {
 		this.id = id;
 		this.articolo = articolo;
@@ -37,6 +46,12 @@ public class Offerta {
 		this.statoOfferta = tipoOfferta;
 	}
 	
+	/**
+	 * Precondizione: offerta != null
+	 * 
+	 * @param offerta
+	 * @return
+	 */
 	public boolean equals(Offerta offerta) {
 		return this.id == offerta.id;
 	}
