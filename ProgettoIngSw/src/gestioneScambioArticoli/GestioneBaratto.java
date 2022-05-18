@@ -20,6 +20,9 @@ public class GestioneBaratto {
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
 	
+	/**
+	 * Postcondizione: listaBaratti != null, baratto != null
+	 */
 	public GestioneBaratto() {
 		this.listaBaratti = leggiBaratti();
 		this.baratto = new Baratto();
@@ -30,6 +33,7 @@ public class GestioneBaratto {
 	}
 	
 	/**
+	 * Precondizione: offerta != null
 	 * 
 	 * @param offerta
 	 * @return TRUE se "offerta" e' presente in almeno uno dei baratti nella lista
@@ -41,6 +45,12 @@ public class GestioneBaratto {
 		return false;
 	}
 	
+	/**
+	 * Precondizione: offerta != null
+	 * 
+	 * @param offerta
+	 * @return
+	 */
 	public Baratto getBarattoByOfferta(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return baratto;
@@ -48,6 +58,11 @@ public class GestioneBaratto {
 		return null;
 	}
 	
+	/**
+	 * Precondizione: offertaSelezionata != null
+	 * @param offertaSelezionata
+	 * @return
+	 */
 	protected Baratto getBarattoByOffertaSelezionata(Offerta offertaSelezionata) {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getOffertaFruitoreRichiesta().equals(offertaSelezionata)) return baratto;
@@ -55,7 +70,6 @@ public class GestioneBaratto {
 		return null;
 	}
 	
-	//TODO: NOME da cambiare
 	/**
 	 * Precondizione: listaBarattiScaduti != null && listaOfferteScadute != null
 	 * Postcondizione: 	listaBarattiScaduti'.size() = listaBarattiScaduti + n,
@@ -64,7 +78,7 @@ public class GestioneBaratto {
 	 * @param listaBarattiScaduti
 	 * @param listaOfferteScadute
 	 */
-	public void riempiListeBarattiScaduti(List<Baratto> listaBarattiScaduti, List<Offerta> listaOfferteScadute) {
+	public void caricaBarattiScadutiEOfferteScadute(List<Baratto> listaBarattiScaduti, List<Offerta> listaOfferteScadute) {
 		for (Baratto baratto : listaBaratti) {
 			if(baratto.getScadenza().isBefore(LocalDate.now())) {
 				listaBarattiScaduti.add(baratto);
@@ -116,6 +130,10 @@ public class GestioneBaratto {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
 	}
 	
+	/**
+	 * Precondizione: baratto != null
+	 * @param baratto
+	 */
 	private void aggiungiBarattoTerminato(Baratto baratto) {
 		List<Baratto> listaBarattiTerminati = leggiBarattiTerminati();
 		listaBarattiTerminati.add(baratto);
@@ -133,6 +151,8 @@ public class GestioneBaratto {
 	}
 	
 	/**
+	 * Precondizione: gestorePiazza != null, appuntamento != null
+	 * 
 	 * @param gestorePiazza
 	 * @param appuntamento
 	 * @return data di scadenza
@@ -145,36 +165,42 @@ public class GestioneBaratto {
 	}
 	
 	/** 
+	 * Precondizione: barattoDaAggiornare != null, offertaA != null, offertaB != null, dataScadenza != null, appuntamento != null
+	 * 
 	 * Aggiorna il baratto daAggiornare settando tutti i suoi parametri
-	 * @param daAggiornare
+	 * @param barattoDaAggiornare
 	 * @param offertaA
 	 * @param offertaB
 	 * @param dataScadenza
 	 * @param appuntamento
 	 */
-	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
-		daAggiornare.setAppuntamento(appuntamento);
-		daAggiornare.setOffertaFruitorePromotore(offertaA);
-		daAggiornare.setOffertaFruitoreRichiesta(offertaB);
-		daAggiornare.setScadenza(dataScadenza);
+	protected void aggiornaBaratto(Baratto barattoDaAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
+		barattoDaAggiornare.setAppuntamento(appuntamento);
+		barattoDaAggiornare.setOffertaFruitorePromotore(offertaA);
+		barattoDaAggiornare.setOffertaFruitoreRichiesta(offertaB);
+		barattoDaAggiornare.setScadenza(dataScadenza);
 		
 		salvaBaratti();
 	}
 	
 	/** 
+	 * Precondizione: barattoDaAggiornare != null, dataScadenza != null, appuntamento != null
+	 * 
 	 * Aggiorna il baratto daAggiornare settando soltanto il giorno della scadenza e l'appuntamento
-	 * @param daAggiornare
+	 * @param barattoDaAggiornare
 	 * @param dataScadenza
 	 * @param appuntamento
 	 */
-	protected void aggiornaBaratto(Baratto daAggiornare, LocalDate dataScadenza, Appuntamento appuntamento) {		
-		daAggiornare.setAppuntamento(appuntamento);
-		daAggiornare.setScadenza(dataScadenza);
+	protected void aggiornaBaratto(Baratto barattoDaAggiornare, LocalDate dataScadenza, Appuntamento appuntamento) {		
+		barattoDaAggiornare.setAppuntamento(appuntamento);
+		barattoDaAggiornare.setScadenza(dataScadenza);
 		
 		salvaBaratti();
 	}
 	
 	/**
+	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
+	 * 
 	 * Cambia lo stato dell'offertaA in "OffertaAccoppiata" e quello dell'offertaB in "OffertaSelezionata"
 	 * @param gestoreOfferta
 	 * @param offertaA
@@ -186,6 +212,8 @@ public class GestioneBaratto {
 	}
 	
 	/**
+	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
+	 * 
 	 * Cambia lo stato delle offerte in "OffertaInScambio"
 	 * @param gestoreOfferta
 	 * @param offertaA
@@ -197,6 +225,8 @@ public class GestioneBaratto {
 	}
 	
 	/**
+	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
+	 * 
 	 * Cambia lo stato delle offerte in "OffertaChiusa"
 	 * @param gestoreOfferta
 	 * @param offertaA
@@ -207,11 +237,25 @@ public class GestioneBaratto {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
 	
+	/**
+	 * Precondizione: baratto != null, appuntamento != null
+	 * 
+	 * @param baratto
+	 * @param appuntamento
+	 */
 	protected void aggiornaAppuntamentoInBaratto(Baratto baratto, Appuntamento appuntamento) {
 		baratto.setAppuntamento(appuntamento);
 		salvaBaratti();
 	}
 	
+	/**
+	 * Precondizione: gestoreOfferte != null, offertaA != null, offertaB != null, baratto != null
+	 * 
+	 * @param gestoreOfferte
+	 * @param offertaA
+	 * @param offertaB
+	 * @param baratto
+	 */
 	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) {
 		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
 		rimuoviBaratto(baratto);
@@ -219,6 +263,8 @@ public class GestioneBaratto {
 	}
 
 	/**
+	 * Precondizione: offertaA != null, offertaB != nulll
+	 * 
 	 * Permette di creare un baratto, inserirlo nella listaBaratti ed aggiornare il file baratti.json
 	 * @param offertaA
 	 * @param offertaB
@@ -233,6 +279,12 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
+	/**
+	 * Precondizione: appuntamento1 != null, appuntamento2 != null
+	 * @param appuntamento1
+	 * @param appuntamento2
+	 * @return
+	 */
 	protected boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
 		return appuntamento1.equals(appuntamento2);
 	}

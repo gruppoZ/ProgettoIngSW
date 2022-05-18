@@ -13,6 +13,14 @@ public class Baratto {
 		
 	}
 	
+	/**
+	 * Precondizione: offertaA != null, offertaB != null, scadenza != null
+	 * Postcondizione: offertaFruitorePromotore != null, offertaFruitoreRichiesta != null, this.scadenza != null,
+	 * 					this.appuntamento != null
+	 * @param offertaA
+	 * @param offertaB
+	 * @param scadenza
+	 */
 	public Baratto(Offerta offertaA, Offerta offertaB, LocalDate scadenza) {
 		this.offertaFruitorePromotore = offertaA;
 		this.offertaFruitoreRichiesta = offertaB;
@@ -20,6 +28,14 @@ public class Baratto {
 		this.appuntamento = new Appuntamento();
 	}
 	
+	/**
+	 * Precondizione: offertaA != null, offertaB != null, scadenza != null
+	 * Postcondizione: offertaFruitorePromotore != null, offertaFruitoreRichiesta != null, this.scadenza != null,
+	 * 					this.appuntamento != null
+	 * @param offertaA
+	 * @param offertaB
+	 * @param scadenza
+	 */
 	public Baratto(Offerta offertaA, Offerta offertaB, LocalDate scadenza, Appuntamento appuntamento) {
 		this.offertaFruitorePromotore = offertaA;
 		this.offertaFruitoreRichiesta = offertaB;

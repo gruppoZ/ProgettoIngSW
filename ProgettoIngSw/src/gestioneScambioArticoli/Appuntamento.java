@@ -14,6 +14,8 @@ public class Appuntamento {
 	}
 	
 	/**
+	 * Precondizione: luogo != null, ora != null
+	 * Postcondizione: this.luogo != null, this.ora != null
 	 * @param luogo
 	 * @param data
 	 * @param ora

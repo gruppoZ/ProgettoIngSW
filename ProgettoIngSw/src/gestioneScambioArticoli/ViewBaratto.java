@@ -64,6 +64,13 @@ public class ViewBaratto {
 	public ViewBaratto() {
 	}
 	
+	/**
+	 * Precondizione: gestoreOfferte != null, gestoreFruitore != null
+	 * Postcondizione: this.gestoreOfferte != null, this.gestoreFruitore != null, gestoreBaratto != null, gestorePiazza != null
+	 * 
+	 * @param gestoreOfferte
+	 * @param gestoreFruitore
+	 */
 	public ViewBaratto(GestioneOfferta gestoreOfferte, GestioneFruitore gestoreFruitore) {
 		this.gestoreOfferte = gestoreOfferte;
 		this.gestoreFruitore = gestoreFruitore;
@@ -285,6 +292,10 @@ public class ViewBaratto {
 		viewAppuntamento.showAppuntamento(appuntamento);
 	}
 	
+	/**
+	 * Precondizione: baratto != null
+	 * @param baratto
+	 */
 	private void showBaratto(Baratto baratto) {
 		StringBuffer sb = new StringBuffer();
 		ViewOfferte viewOfferta = new ViewOfferte();
