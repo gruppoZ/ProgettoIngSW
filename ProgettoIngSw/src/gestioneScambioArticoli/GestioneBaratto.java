@@ -17,6 +17,7 @@ import main.JsonIO;
 public class GestioneBaratto {
 
 	private static final String PATH_BARATTI = "src/gestioneScambioArticoli/baratti.json";
+	private static final String PATH_BARATTI_TERMINATI = "src/gestioneScambioArticoli/barattiTerminati.json";
 
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
@@ -62,30 +63,6 @@ public class GestioneBaratto {
 		}
 	}
 	
-	/*
-	 * TODO
-	 * Funziona ma c'è un ping pong tra i gestori, da risolvere
-	 */
-//	public void gestisciBarattiScaduti(GestioneOfferta gestoreOfferte, List<Offerta> listaOfferte) {
-//		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
-//		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
-//		
-//		for (Baratto baratto : listaBaratti) {
-//			if(baratto.getScadenza().isBefore(LocalDate.now())) {
-//				listaBarattiScaduti.add(baratto);
-//				listaOfferteScadute.add(baratto.getOffertaFruitorePromotore());
-//				listaOfferteScadute.add(baratto.getOffertaFruitoreRichiesta());
-//			}
-//		}
-//		
-//		rimuoviListaBaratti(listaBarattiScaduti);
-//		
-//		for (Offerta offertaScaduta : listaOfferteScadute) {
-//			Offerta offerta = gestoreOfferte.getOffertaById(offertaScaduta.getId(), listaOfferte);
-//			cambioOffertaScaduta(gestoreOfferte, offerta);
-//		}	
-//	}
-	
 	public void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
 		for (Baratto baratto : listaBarattiDaRimuovere) {
 			this.listaBaratti.remove(baratto);
@@ -105,6 +82,21 @@ public class GestioneBaratto {
 	public void rimuoviBaratto(Baratto baratto) {
 		listaBaratti.remove(baratto);
 		salvaBaratti();
+	}
+	
+	
+	private List<Baratto> leggiBarattiTerminati(){
+		return JsonIO.leggiListaDaJson(PATH_BARATTI_TERMINATI, Baratto.class);
+	}
+	
+	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) {
+		JsonIO.salvaOggettoSuJson(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
+	}
+	
+	private void aggiungiBarattoTerminato(Baratto baratto) {
+		List<Baratto> listaBarattiTerminati = leggiBarattiTerminati();
+		listaBarattiTerminati.add(baratto);
+		salvaBarattiTerminati(listaBarattiTerminati);
 	}
 	
 	protected LocalDate calcolaDataScadenza(int scadenzaInGiorni) {
@@ -127,9 +119,7 @@ public class GestioneBaratto {
 	 * @param dataScadenza
 	 * @param appuntamento
 	 */
-	
 	protected void aggiornaBaratto(Baratto daAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
-		
 		daAggiornare.setAppuntamento(appuntamento);
 		daAggiornare.setOffertaFruitorePromotore(offertaA);
 		daAggiornare.setOffertaFruitoreRichiesta(offertaB);
@@ -171,19 +161,12 @@ public class GestioneBaratto {
 		salvaBaratti();
 	}
 	
-//	private void cambioOffertaScaduta(GestioneOfferta gestoreOfferta, Offerta offerta) {
-//		gestoreOfferta.gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
-//	}
-	
-//	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenza, Appuntamento appuntamento) {
-//		LocalDate dataScadenza = LocalDate.now();
-//		dataScadenza = dataScadenza.plusDays(scadenza);
-//		
-//		this.baratto = new Baratto(offertaA, offertaB, dataScadenza, appuntamento);/
-//		
-//		listaBaratti.add(baratto);
-//		salvaBaratti();
-//	}
+	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) {
+		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
+		rimuoviBaratto(baratto);
+		aggiungiBarattoTerminato(baratto);
+	}
+
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) {
 		LocalDate dataScadenza = calcolaDataScadenza(scadenzaInGiorni);
 		
