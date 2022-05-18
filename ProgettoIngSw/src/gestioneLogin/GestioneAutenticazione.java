@@ -13,6 +13,7 @@ public class GestioneAutenticazione {
 	
 	//Login  e check appositi per default
 	/**
+	 * Precondizione: crdenziali != null
 	 * 
 	 * @param credenziali
 	 * @return TRUE se le credenziali corrispondono a quelli di default
@@ -27,6 +28,8 @@ public class GestioneAutenticazione {
 	}
 	
 	/**
+	 * Precondizione: crdenziali != null AND utente != null
+	 * 
 	 * Richiede all'utente di inserire username e password 
 	 * @param path
 	 * @param erroreUsername
@@ -41,6 +44,8 @@ public class GestioneAutenticazione {
 	}
 	
 	/**
+	 * Precondizione: crdenziali != null AND utente != null
+	 * 
 	 * Veiene salvato l'utente con le relative credenziali
 	 * @param credenziali
 	 * @param utente
@@ -59,6 +64,8 @@ public class GestioneAutenticazione {
 	}
 		
 	/**
+	 * Precondizione: credenzaliDaControllare != null AND utente != null
+	 * 
 	 * Controlla se username e password esistono nel file .json
 	 * @param path
 	 * @param username
@@ -120,6 +127,12 @@ public class GestioneAutenticazione {
 		return credenzialiDefault;
 	}
 	
+	/**
+	 * Precondizione: crdenziali != null AND utente != null
+	 * 
+	 * @param credenziali
+	 * @param utente
+	 */
 	private void aggiornaFileCredenziali(Credenziali credenziali, Utente utente) {
 		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(PATH_CREDENZIALI);
 		

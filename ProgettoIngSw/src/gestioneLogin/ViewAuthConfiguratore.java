@@ -30,6 +30,7 @@ public class ViewAuthConfiguratore extends ViewAuth{
 		
 		if(loginDefault()) { //primo accesso configuratore
 			super.registrati(configuratore);
+			
 			//Una volta avvenuta la registrazione viene richiesto direttamente di fare il login
 			login();
 		}

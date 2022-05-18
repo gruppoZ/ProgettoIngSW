@@ -12,7 +12,6 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewOfferte {
 
-	private static final String MSG_OFFERTE = "offerte";
 	private static final String MSG_SHOW_OFFERTE_IN_SCAMBIO = "Offerte IN SCAMBIO";
 	private static final String MSG_SHOW_OFFERTE_CHIUSE = "Offerte CHIUSE";
 	private static final String MSG_SHOW_OFFERTE_APERTE = "Offerte APERTE";
@@ -231,7 +230,6 @@ public class ViewOfferte {
 		ViewArticolo viewArticolo = new ViewArticolo();
 		sb.append("##############################\n");
 		sb.append("Offerta ID: " + offerta.getId() + "\n"
-				+"->Autore: " + offerta.getUsername() + "\n"
 				+ "->Stato Offerta: " + offerta.getStatoOfferta().getStato() + "\n"
 				+ "->" );
 		

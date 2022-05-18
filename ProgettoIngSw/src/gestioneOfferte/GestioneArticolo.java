@@ -11,10 +11,19 @@ public class GestioneArticolo {
 	
 	private Articolo articolo;
 
+	/**
+	 * Postcondizione: articolo != null
+	 */
 	public GestioneArticolo() {
 		articolo = new Articolo();
 	}
 
+	/**
+	 * Precondizione: foglia != null, valoriCampi != null
+	 * Postcondizione: articolo != null
+	 * @param foglia
+	 * @param valoriCampi
+	 */
 	public void creaArticolo(Categoria foglia, HashMap<String, String> valoriCampi) {
 		this.articolo = new Articolo(foglia, valoriCampi);
 	}
@@ -55,10 +64,21 @@ public class GestioneArticolo {
 		return campiFacoltativi;
 	}
 	
+	/**
+	 * Precondizione: foglia != null
+	 * Postcondizione: this.articolo.getFoglia() != null
+	 * @param foglia
+	 */
 	public void addFoglia(Categoria foglia) {
 		this.articolo.setFoglia(foglia);
 	}
 	
+	/**
+	 * Precondizione: campo != null
+	 * Postcondizione: this.articolo.getValoreCampi() != null
+	 * @param campo
+	 * @param valore
+	 */
 	public void addValoreCampo(CampoCategoria campo, String valore) {
 		this.articolo.addValoreCampo(campo.getDescrizione(), valore);
 	}

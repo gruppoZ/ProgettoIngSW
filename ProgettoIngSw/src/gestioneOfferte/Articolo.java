@@ -13,6 +13,9 @@ public class Articolo {
 	}
 	
 	/**
+	 * Precondizione: foglia != null, valoreCampi != null
+	 * Postcondizione: this.foglia != null, this.valoreCampi != null
+	 * 
 	 * @param foglia
 	 * @param valoreCampi
 	 */
@@ -37,12 +40,12 @@ public class Articolo {
 		this.valoreCampi = valoreCampi;
 	}
 	
+	/**
+	 * Postcondizione: this.valoreCampi'.size() = this.valoreCampi.size() + 1
+	 * @param descrizioneCampo
+	 * @param valore
+	 */
 	public void addValoreCampo(String descrizioneCampo, String valore) {
 		this.valoreCampi.put(descrizioneCampo, valore);
-	}
-	
-	@Override
-	public String toString() {
-		return "Articolo [foglia=" + foglia + ", valoreCampi=" + valoreCampi + "]";
 	}
 }

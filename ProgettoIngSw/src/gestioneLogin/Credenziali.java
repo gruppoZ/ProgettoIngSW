@@ -16,30 +16,43 @@ public class Credenziali {
 	public String getUsername() {
 		return username;
 	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Precondizioni: credenziali != null
+	 * @param credenziali
+	 * @return
+	 */
 	public boolean checkCredenzialiUguali(Credenziali credenziali) {
 		return this.checkUsername(credenziali) && this.checkPassword(credenziali);
 	}
 	
+	/**
+	 * Precondizioni: credenziali != null
+	 * @param credenziali
+	 * @return
+	 */
 	public boolean checkUsername(Credenziali credenziali) {
 		return this.username.equals(credenziali.getUsername());
 	}
 	
+	/**
+	 * Precondizioni: credenziali != null
+	 * @param credenziali
+	 * @return
+	 */
 	public boolean checkPassword(Credenziali credenziali) {
 		return this.password.equals(credenziali.getPassword());
 	}
-	
-	@Override
-	public String toString() {
-		return "Credenziali [username=" + username + ", password=" + password + "]";
-	}	
 }

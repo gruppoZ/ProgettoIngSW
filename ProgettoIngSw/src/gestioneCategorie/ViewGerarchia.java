@@ -249,7 +249,7 @@ public class ViewGerarchia {
 			List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
  
 			for (Categoria categoria : listaFoglie) {
-				System.out.println(viewCategoria.showCategoriaSemplificata(categoria));
+				System.out.println(viewCategoria.showCategoriaFoglia(categoria));
 			}
 			
 			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);

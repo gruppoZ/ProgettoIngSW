@@ -45,6 +45,19 @@ public class ViewCategoria {
 	
 	/**
 	 * Precondizione: categoria != null
+	 * @param categoria
+	 * @return
+	 */
+	public String showCategoriaFoglia(Categoria categoria) {
+		StringBuffer result = new StringBuffer();
+		
+		result.append("->Nome: "+categoria.getNome()+"\n");
+
+		return result.toString();
+	}
+	
+	/**
+	 * Precondizione: categoria != null
 	 * @param nTab = utilizzato per la visualizzazione, in base alla profondita', della categoria
 	 * @return
 	 */
