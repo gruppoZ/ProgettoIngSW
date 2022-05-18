@@ -13,19 +13,31 @@ import main.JsonIO;
 
 public class GestioneParametri {
 	
-	//private static final String PATH_PIAZZA = "src/gestioneParametri/parametri.json";
-	
+	private static final int NUM_MINIMO_INTERVALLI = 1;
+	private static final int NUM_MINIMO_LUOGHI = 1;
 	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
 	private Piazza piazza;
-	String pathParametri;	
+	private String pathParametri;	
 	
+	/**
+	 * Postcondizione: pathParametri.length() > 0, this.piazza != null
+	 */
 	public GestioneParametri() {
 		GestioneInfoSistema info = new GestioneInfoSistema();
 		pathParametri = info.getInfoSistema().getUrlParametri(); 
-		
+
 		this.piazza = leggiPiazza(pathParametri);
 	}
 	
+	/**
+	 * Precondizione: citta.length > 0, listaLuoghi.size() > 0, giorni.size() > 0, intervalliOrari.size() > 0, piazza != null
+	 * 
+	 * @param citta
+	 * @param listaLuoghi
+	 * @param giorni
+	 * @param intervalliOrari
+	 * @param scadenza
+	 */
  	public void creaPiazza(String citta, List<String> listaLuoghi, List<GiorniDellaSettimana> giorni, List<IntervalloOrario> intervalliOrari,
  			int scadenza) {
  		
@@ -74,6 +86,9 @@ public class GestioneParametri {
  	}
 
  	/**
+ 	 * Precondizione: listaLuoghi != null
+ 	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() + 1 se checkPresenzaLuogo == false
+ 	 * 
  	 * Aggiunge luogo alla lista se non e' gia' presente inoltre salva su Json
  	 * Se luogo e' gia' presente throw new RuntimeException()
  	 * @param listaLuoghi
@@ -89,7 +104,8 @@ public class GestioneParametri {
  	}
  	
  	/**
- 	 *
+ 	 * Precondizione: listaLuoghi != null
+ 	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() - 1 se checkPresenzaLuogo == true
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
  	 */
@@ -108,10 +124,12 @@ public class GestioneParametri {
  	 * 		   False altrimenti
  	 */
  	protected boolean checkVincoloLuoghiMinimi() {
- 		return getLuoghi().size() > 1;
+ 		return getLuoghi().size() > NUM_MINIMO_LUOGHI;
  	}
  	
  	/**
+ 	 * Precondizione: giorni != null, giorno != null
+ 	 * Postcondizione: giorni'.size() = giorni.size() + 1 se checkPresenzaGiorno == false
  	 * 
  	 * @param giorni
  	 * @param giorno
@@ -128,6 +146,8 @@ public class GestioneParametri {
  	}
  	
  	/**
+ 	 * Precondizione: giorni != null, giornoDaEliminare != null
+ 	 * Postcondizione: giorni'.size() = giorni.size() - 1 se checkPresenzaGiorno == true 
  	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
@@ -143,7 +163,11 @@ public class GestioneParametri {
 		}
  	}
  	
- 	
+ 	/**
+ 	 * Precondizione: orari != null
+ 	 * @param orari
+ 	 * @return
+ 	 */
  	private IntervalloOrario estraiIntervalloMin(List<IntervalloOrario> orari) {
  		IntervalloOrario intervalloMin = orari.get(0);
  		
@@ -154,6 +178,11 @@ public class GestioneParametri {
  		return intervalloMin;
  	}
  	
+ 	/**
+ 	 * Precondizione: orari != null
+ 	 * @param orari
+ 	 * @return
+ 	 */
  	private List<IntervalloOrario> ordinaListaIntervalliOrari(List<IntervalloOrario> orari) {
  		List<IntervalloOrario> ordinata = new ArrayList<IntervalloOrario>();
  		
@@ -167,6 +196,8 @@ public class GestioneParametri {
  	}
  	
  	/**
+ 	 * Precondizione: orari != null, orarioDaAggiungere != null
+ 	 * Postcondizione: orari'.size() = orari.size() + 1 se checkValiditaIntervallo == false
  	 * 
  	 * @param orari
  	 * @param orarioDaAggiungere
@@ -183,7 +214,9 @@ public class GestioneParametri {
  	}
  	
  	/**
- 	 *
+ 	 * Precondizione: orari != null, orarioDaAggiungere != null
+ 	 * Postcondizione: orari'.size() = orari.size() - 1 se checkValiditaIntervallo == true
+ 	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
  	 */
@@ -204,10 +237,11 @@ public class GestioneParametri {
  	 *		   False altrimenti         
  	 */
  	protected boolean checkVincolIntervalliMinimi() {
- 		return getIntervalli().size() > 1;
+ 		return getIntervalli().size() > NUM_MINIMO_INTERVALLI;
  	}
  	
  	/**
+ 	 * Precondizione: intervalliOrari != null, intervallo != null
  	 * 
  	 * @param intervalliOrari
  	 * @param intervallo
@@ -225,6 +259,13 @@ public class GestioneParametri {
 		return true;
 	}
 	
+	/**
+	 * Precondizione: intervalliOrari != null, orario != null
+	 * 
+	 * @param intervalliOrari
+	 * @param orario
+	 * @return
+	 */
 	protected boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
 		if(intervalliOrari.size() == 0) return false;
 		
@@ -253,6 +294,8 @@ public class GestioneParametri {
 	}
 	
 	/**
+	 * Precondizione: date != null
+	 * 
 	 * Prende il parametro LocalDate, e verifica che il relativo giorno della settimana sia fra quelli messi a 
 	 * dispozione della Piazza 
 	 * @param date
@@ -278,6 +321,13 @@ public class GestioneParametri {
 		return (Piazza) JsonIO.leggiOggettoDaJson(path, Piazza.class);
 	}
 
+	/**
+	 * Precondizione: listaLuoghi != null
+	 * 
+	 * @param listaLuoghi
+	 * @param luogoDaIndividuare
+	 * @return
+	 */
 	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogoDaIndividuare) {
 		for (String luogo : listaLuoghi) {
 			if(luogo.equalsIgnoreCase(luogoDaIndividuare))
@@ -285,15 +335,34 @@ public class GestioneParametri {
 		}
 		return false;
 	}
-		
+	
+	/**
+	 * Precondizione: giorni != null
+	 * 
+	 * @param giorni
+	 * @param giorno
+	 * @return
+	 */
 	public boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
 		return giorni.contains(giorno);
 	}
 	
+	/**
+	 * Precondizione: giorni != null
+	 * Postcondizione: giorni'.size() = giorni.size()
+	 * 
+	 * @param giorni
+	 * @return
+	 */
 	public List<GiorniDellaSettimana> ordinaListaGiorni(List<GiorniDellaSettimana> giorni) {
 		return GiorniDellaSettimana.ordinaLista(giorni); //ordinare la lista dei giorni presenti in piazza
 	}
 
+	/**
+	 * Precondizione: scadenza > 0
+	 * 
+	 * @param scadenza
+	 */
 	protected void modificaScadenza(int scadenza) {
 		piazza.setScadenza(scadenza);
 		salvaPiazza();

@@ -43,8 +43,7 @@ public class SchermataPrincipale {
 				menuAccesso(new ViewAuthConfiguratore());
 				break;
 			default:
-				System.out.println(TXT_ERRORE_UTENTE);
-				
+				System.out.println(TXT_ERRORE_UTENTE);				
 			}
 		} while(!fine);
 	}

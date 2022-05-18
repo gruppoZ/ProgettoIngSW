@@ -5,18 +5,19 @@ import java.util.List;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
-public class ViewParametroIntervalloOrario extends ViewParametri{
+public class ViewParametroIntervalloOrario extends ViewParametri {
 
-	private static final String GIVE_INTERVALLI_PRESENTI = "Intervalli presenti: ";
-	private static final String MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE = "\nIntervallo aggiunto correttamente!";
+	private static final String MSG_WARNING_ORARIO_NON_VALIDO_REINSERIRE = "L'orario che hai inserito non e' accettabile.\nInserisci un altro orario: ";
+	private static final String ASK_ORARIO = "Inserisci un orario: ";
+	private static final String MSG_GIVE_INTERVALLI_PRESENTI = "Intervalli presenti: ";
 	private static final String MSG_TITOLO_ORARIO_FINALE = "\n------Inserimento Orario Finale------";
 	private static final String MSG_TITOLO_ORARIO_INIZIALE = "\n------Inserimento Orario Iniziale------";
-	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI = "Impossibile rimuovere l'Intervallo Orario. Ricorda che almeno un intervallo orario deve rimanere fissato.";
+	private static final String MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE = "\nIntervallo aggiunto correttamente!";
 	private static final String MSG_INTERVALLO_RIMOSSO = "\nIntervallo rimosso!\n";
-	private static final String MSG_NESSUN_INTERVALLO_PRESENTE = "\nNessun intervallo presente\n";
 	private static final String MSG_INTERVALLI_SOVRAPPOSTI = "\nImpossibile inserire l'intervallo. L'intervallo inserito si sovrappone con gli intervalli gia' presenti\n";
+	private static final String MSG_NESSUN_INTERVALLO_PRESENTE = "\nNessun intervallo presente\n";
 	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLO_NON_VALIDO = "Impossibile rimuovere l'intervallo. Intervallo non valido";
-	
+	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI = "Impossibile rimuovere l'Intervallo Orario. Ricorda che almeno un intervallo orario deve rimanere fissato.";
 
 	private static final String ASK_ORA_INIZIALE_INTERVALLO_RIMUOVERE = "Inserire l'orario iniziale dell'intervallo da rimuovere";
 	private static final String ASK_OPERAZIONE_DESIDERATA = "\n\nDigita il numero dell'opzione desiderata > ";
@@ -105,11 +106,11 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 	
 	public LocalTime scegliOrarioAppuntamento() {
 		showIntervalli();
-		System.out.println("Inserisci un orario: ");
+		System.out.println(ASK_ORARIO);
 		LocalTime orario = creaOrario();
 		
 		while(!getGestoreParametri().checkValiditaOrario(getGestoreParametri().getIntervalli(), orario)) {
-			System.out.println("L'orario che hai inserito non e' accettabile.\nInserisci un altro orario: ");
+			System.out.println(MSG_WARNING_ORARIO_NON_VALIDO_REINSERIRE);
 			orario = creaOrario();
 		}
 		
@@ -117,7 +118,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 	}
 
 	protected void showIntervalli() {
-		System.out.println(GIVE_INTERVALLI_PRESENTI);
+		System.out.println(MSG_GIVE_INTERVALLI_PRESENTI);
 		if(getGestoreParametri().getIntervalli().size() > 0) {
 			
 			getGestoreParametri().getIntervalli().forEach(e -> {
@@ -165,6 +166,12 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		return LocalTime.of(ora, minuti);
 	}
 	
+	/**
+	 * Precondizione: min != null, max != null
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	private LocalTime creaOrarioMin(LocalTime min, LocalTime max) {
 		int ora = InputDati.leggiIntero(ASK_ORA, min.getHour(), max.getHour());
 		int minuti;
@@ -177,6 +184,13 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		return LocalTime.of(ora, minuti);
 	}
 	
+	/**
+	 * Precondizione: min != null, max != null
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	private LocalTime creaOrarioMax(LocalTime min, LocalTime max) {
 		int ora;
 		int minuti;
@@ -196,6 +210,12 @@ public class ViewParametroIntervalloOrario extends ViewParametri{
 		return LocalTime.of(ora, minuti);
 	}
 	
+	/**
+	 * Precondizione: 0 <= ora <= 23
+	 * 
+	 * @param ora
+	 * @return
+	 */
 	private int scegliMinuti(int ora) {
 		int minuti = 0;
 		System.out.printf(GIVE_ALTERNATIVE_ORARIO, ora, ora);

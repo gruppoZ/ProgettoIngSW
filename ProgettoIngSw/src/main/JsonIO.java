@@ -21,13 +21,14 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import gestioneCategorie.Gerarchia;
 import gestioneLogin.Credenziali;
-import gestioneOfferte.Offerta;
 import gestioneOfferte.PassaggioTraStati;
 import gestioneParametri.Piazza;
 
 /**
  * La libreria JACKSON prende i dati da salvare di un oggetto attraverso i metodi get
- * per questo motivo ad alcuni metodi get e' stato messo un "_" che precede get
+ * Es: getNome() => JACKSON sa che deve salvare sul file un attributo "nome"
+ * per questo motivo alcuni metodi sono preceduti da @JsonIgnore in modo tale che JACKSON ignori il metodo nonostante
+ * inizi con get
  * @author 
  *
  */
@@ -38,8 +39,6 @@ public class JsonIO {
 	private static ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 	private static TypeFactory typeFactory = mapper.getTypeFactory();
 	
-	
-
 	/**
 	 * 
 	 * @param path
@@ -77,6 +76,7 @@ public class JsonIO {
 		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Integer.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
 	}
+	
 	/**
 	 * lettura di una hashmap generica attraverso i javatype
 	 * @param <K>
@@ -98,25 +98,17 @@ public class JsonIO {
 		}
 		return mappa;
 	}
-	
+		
 	public static <T> List<T> leggiListaDaJson(String path, Class<T> elementClass) {
 		List<T> lista = null;
 		CollectionType listType ;
 		listType  = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
 		try {
 			lista = mapper.readValue(new File(path), listType);		
-		} catch (JsonParseException e) {
-            // TODO Auto-generated catch block
+		} catch (Exception e) {
             e.printStackTrace();
         }
-        catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		
 		return lista;
 	}
 	

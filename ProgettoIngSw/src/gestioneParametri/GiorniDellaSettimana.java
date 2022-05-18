@@ -28,6 +28,12 @@ public enum GiorniDellaSettimana {
 		return nome;
 	}
 	
+	/**
+	 * Precondizione: daOrdinare != null
+	 * Postcondizione: ordinata.size() = daOrdinare.size()
+	 * @param daOrdinare
+	 * @return
+	 */
 	public static List<GiorniDellaSettimana> ordinaLista(List<GiorniDellaSettimana> daOrdinare) {
 		List<GiorniDellaSettimana> ordinata = new ArrayList<>();
 		
@@ -39,6 +45,13 @@ public enum GiorniDellaSettimana {
 		return ordinata;
 	}
 	
+	/**
+	 * Precondizione: id >= 0 AND id <= 6
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NullPointerException
+	 */
 	public static GiorniDellaSettimana getById(int id) throws NullPointerException {
 		for (GiorniDellaSettimana giorno : values()) {
 			if(giorno.ordine == id) return giorno;

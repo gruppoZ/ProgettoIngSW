@@ -15,6 +15,11 @@ public class ViewParametroGiorno extends ViewParametri{
 	private static final String ASK_INSERIRE_ALTRI_GIORNI = "Vuoi inserire altri giorni? ";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
 	
+	/**
+	 * Precondizione: gestoreParametri != null
+	 * 
+	 * @param gestoreParametri
+	 */
 	public ViewParametroGiorno(GestioneParametri gestoreParametri) {
 		super(gestoreParametri);
 	}
@@ -109,6 +114,11 @@ public class ViewParametroGiorno extends ViewParametri{
 		showGiorni(giorni);
 	}
 	
+	/**
+	 * Precondizione: giorni != null
+	 * 
+	 * @param giorni
+	 */
 	public void showGiorni(List<GiorniDellaSettimana> giorni) {
 		StringBuilder sb = new StringBuilder();
 		
@@ -118,6 +128,7 @@ public class ViewParametroGiorno extends ViewParametri{
 		
 		System.out.println(sb.toString());
 	}
+	
 	private GiorniDellaSettimana leggiGiorno() {
 		int id = InputDati.leggiIntero(ASK_GIORNO_DESIDERATO, 0, 6);
 		return GiorniDellaSettimana.getById(id);

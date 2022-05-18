@@ -6,6 +6,8 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewInfoDiSistema {
+	private static final String MSG_ASK_PATH_PIAZZA = "Inserisci un path valido per il file JSON dei Parametri della Piazza da importare: ";
+	private static final String MSG_ASK_PATH_GERARCHIE = "Inserisci un path valido per il file JSON delle Gerarchie da importare: ";
 	private static final String TXT_TITOLO = "Gestione di Sistema";
 	private static final String TXT_ERRORE = "ERRORE";
 	private static final String MSG_IMPORTA_GERARCHIE = "Importa Gerarchie";
@@ -17,8 +19,6 @@ public class ViewInfoDiSistema {
 	};
 	
 	public void menu() {	
-		String path;
-		
 		MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
@@ -29,34 +29,30 @@ public class ViewInfoDiSistema {
 				fine = true;
 				break;
 			case 1:
-				GestioneGerarchie gestoreGerarchie = new GestioneGerarchie();
-				path = askPathGerarchie();
-				
-				gestoreGerarchie.importaGerarchie(path);
+				importaGerarchie();
 				break;
 			case 2:
-				GestioneParametri gestoreParametri = new GestioneParametri();
-				path = askPathParametri();
-				
-				gestoreParametri.importaParametri(path);
+				importaPiazza();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	
 			}
 		} while(!fine);
 	}
-	
-	private String askPathGerarchie() {	
-		String path;
-		path = InputDati.leggiStringaNonVuota("Inserisci un path valido per il file JSON delle Gerarchie da importare: ");
+
+	private void importaPiazza() {
+		GestioneParametri gestoreParametri = new GestioneParametri();
+
+		String path = InputDati.leggiStringaNonVuota(MSG_ASK_PATH_PIAZZA);
 		
-		return path;
+		gestoreParametri.importaParametri(path);
 	}
-	
-	private String askPathParametri() {	
-		String path;
-		path = InputDati.leggiStringaNonVuota("Inserisci un path valido per il file JSON dei Parametri della Piazza da importare: ");
+
+	private void importaGerarchie() {
+		GestioneGerarchie gestoreGerarchie = new GestioneGerarchie();
 		
-		return path;
+		String path = InputDati.leggiStringaNonVuota(MSG_ASK_PATH_GERARCHIE);
+		
+		gestoreGerarchie.importaGerarchie(path);
 	}
 }

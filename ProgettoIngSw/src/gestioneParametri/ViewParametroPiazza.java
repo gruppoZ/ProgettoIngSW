@@ -7,8 +7,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroPiazza extends ViewParametri {
 
-	private static final String ASK_CITTA = "Inserisci il nome della citta': ";
-	
+	private static final String MSG_ASK_CITTA = "Inserisci il nome della citta': ";
 	private static final String MSG_PIAZZA_INESISTENTE = "\nNessuna Piazza presente!\n";
 	private static final String MSG_PIAZZA_GIA_PRESENTE = "\nPiazza già presente!\n";
 	private static final String MSG_MODIFICA= "Modifica";
@@ -131,6 +130,6 @@ public class ViewParametroPiazza extends ViewParametri {
 	}
 		
 	private String inserisciCitta() {
-		return InputDati.leggiStringaNonVuota(ASK_CITTA);
+		return InputDati.leggiStringaNonVuota(MSG_ASK_CITTA);
 	}
 }
