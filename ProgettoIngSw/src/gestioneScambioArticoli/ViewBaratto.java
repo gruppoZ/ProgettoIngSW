@@ -44,13 +44,13 @@ public class ViewBaratto {
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Scambio Articoli";
 	
-	private static final String MSG_SCEGLI_OFFERTE_APERTE = "Scambia Articolo";
+	private static final String MSG_PROPONI_BARATTO = "Proponi baratto";
 	private static final String MSG_CHECK_OFFERTE_SELEZIONATE = "Controlla eventuali offerte selezionate";
 	private static final String MSG_CHECK_OFFERTE_IN_SCAMBIO = "Controlla eventuali offerte in scambio";
 	private static final String MSG_VISUALIZZA_APPUNTAMENTO_OFFERTA = "Visualizza l'appuntamento di un offerta in scambio";
 	
 	private static final String [] TXT_VOCI = {
-			MSG_SCEGLI_OFFERTE_APERTE,
+			MSG_PROPONI_BARATTO,
 			MSG_CHECK_OFFERTE_SELEZIONATE,
 			MSG_CHECK_OFFERTE_IN_SCAMBIO,
 			MSG_VISUALIZZA_APPUNTAMENTO_OFFERTA

@@ -41,6 +41,9 @@
   }, {
     "username" : "c",
     "password" : "c"
+  }, {
+    "username" : "s",
+    "password" : "s"
   } ],
   "Fruitore" : [ {
     "username" : "fruitore1",
