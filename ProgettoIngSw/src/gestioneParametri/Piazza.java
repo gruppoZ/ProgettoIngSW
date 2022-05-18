@@ -10,9 +10,6 @@ public class Piazza {
 	private List<IntervalloOrario> intervalliOrari;
 	private int scadenza;
 	
-	//LISTA intervalli -> oggetto intervalli (orario_min, ora_max) -> classe orario (ora[00-23], minuti [00 o 30]
-	
-	//TODO: forse scadenza ma solo le liste
 	public Piazza() {
 		this.luoghi = new ArrayList<>();
 		this.giorni = new ArrayList<>();
