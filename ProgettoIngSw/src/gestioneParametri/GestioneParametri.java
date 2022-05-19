@@ -153,7 +153,7 @@ public class GestioneParametri {
  	 * @param giornoDaEliminare
  	 */
  	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException {
- 		if(checkPresenzaGiorno(piazza.getGiorni() ,giornoDaEliminare)) {
+ 		if(checkPresenzaGiorno(giorni ,giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
 			piazza.setGiorni(ordinaListaGiorni(giorni));
 			
