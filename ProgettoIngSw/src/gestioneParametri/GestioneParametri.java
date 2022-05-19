@@ -56,7 +56,7 @@ public class GestioneParametri {
  		this.piazza.setCitta(citta);
  	}
  	
- 	protected List<String> getLuoghi(){
+ 	public List<String> getLuoghi(){
  		return piazza.getLuoghi();
  	}
  	
@@ -247,7 +247,7 @@ public class GestioneParametri {
  	 * @param intervallo
  	 * @return TRUE se intervallo è valido e può essere inserito in intervalliOrari, FALSE altrimenti
  	 */
-	private boolean checkValiditaIntervallo(List<IntervalloOrario> intervalliOrari, IntervalloOrario intervallo) {
+	public boolean checkValiditaIntervallo(List<IntervalloOrario> intervalliOrari, IntervalloOrario intervallo) {
 		if(intervalliOrari.size() == 0) return true;
 		
 		for (IntervalloOrario intervalloOrario : intervalliOrari) {
