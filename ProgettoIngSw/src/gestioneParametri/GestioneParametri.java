@@ -83,6 +83,7 @@ public class GestioneParametri {
  	public void importaParametri(String path) {
  		this.piazza = leggiPiazza(path);
  		salvaPiazza();
+ 		
  	}
 
  	/**

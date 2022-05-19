@@ -85,7 +85,9 @@ public class ViewConfiguratore extends ViewUtente{
 			case 6:
 				ViewInfoDiSistema viewInfo = new ViewInfoDiSistema();
 				
-				viewInfo.menu();				
+				viewInfo.menu();		
+				
+				gestoreConfiguratore.aggiornaGerarchie();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);	
