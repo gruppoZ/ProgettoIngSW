@@ -110,7 +110,7 @@ public class GestioneParametri {
  	 * @param luogoDaEliminare
  	 */
  	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
- 		if(checkPresenzaLuogo(piazza.getLuoghi(), luogoDaEliminare)) {
+ 		if(checkPresenzaLuogo(listaLuoghi, luogoDaEliminare)) {
 			piazza.rimuoviLuogo(luogoDaEliminare);
 			salvaPiazza();
 		} else {
@@ -153,7 +153,7 @@ public class GestioneParametri {
  	 * @param giornoDaEliminare
  	 */
  	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException {
- 		if(checkPresenzaGiorno(piazza.getGiorni() ,giornoDaEliminare)) {
+ 		if(checkPresenzaGiorno(giorni, giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
 			piazza.setGiorni(ordinaListaGiorni(giorni));
 			
