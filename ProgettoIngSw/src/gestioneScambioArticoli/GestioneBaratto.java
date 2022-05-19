@@ -145,7 +145,7 @@ public class GestioneBaratto {
 	 * @param scadenzaInGiorni
 	 * @return data di scadenza
 	 */
-	protected LocalDate calcolaDataScadenza(int scadenzaInGiorni) {
+	public LocalDate calcolaDataScadenza(int scadenzaInGiorni) {
 		LocalDate dataScadenza = LocalDate.now();
 		return dataScadenza.plusDays(scadenzaInGiorni);
 	}
@@ -219,7 +219,7 @@ public class GestioneBaratto {
 	 * @param offertaA
 	 * @param offertaB
 	 */
-	protected void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	public void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
 	}
@@ -285,7 +285,7 @@ public class GestioneBaratto {
 	 * @param appuntamento2
 	 * @return
 	 */
-	protected boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
+	public boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
 		return appuntamento1.equals(appuntamento2);
 	}
 

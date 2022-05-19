@@ -21,7 +21,7 @@ public class GestioneOfferta {
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
 	
-	private boolean isOffertaAperta(Offerta offerta) {
+	public boolean isOffertaAperta(Offerta offerta) {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
 	
@@ -33,7 +33,7 @@ public class GestioneOfferta {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
 	}
 		
-	private boolean isOffertaInScambio(Offerta offerta) {
+	public boolean isOffertaInScambio(Offerta offerta) {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
 	}
 	
