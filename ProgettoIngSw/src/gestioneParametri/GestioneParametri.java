@@ -94,7 +94,7 @@ public class GestioneParametri {
  	 * @param listaLuoghi
  	 * @param luogo
  	 */
- 	protected void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException {
+ 	public void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException {
  		if(checkPresenzaLuogo(listaLuoghi, luogo)) {
  			throw new RuntimeException();
  		} else {
@@ -109,7 +109,7 @@ public class GestioneParametri {
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
  	 */
- 	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
+ 	public void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
  		if(checkPresenzaLuogo(piazza.getLuoghi(), luogoDaEliminare)) {
 			piazza.rimuoviLuogo(luogoDaEliminare);
 			salvaPiazza();

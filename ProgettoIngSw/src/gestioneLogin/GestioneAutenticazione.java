@@ -18,7 +18,7 @@ public class GestioneAutenticazione {
 	 * @param credenziali
 	 * @return TRUE se le credenziali corrispondono a quelli di default
 	 */
-	protected boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) {
+	public boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) {
 		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		
 		if(credenzialiDefault.checkCredenzialiUguali(credenziali))
@@ -35,7 +35,7 @@ public class GestioneAutenticazione {
 	 * @param erroreUsername
 	 * @return TRUE se il login e' avvenuto con successo FALSE se ho avuto qualche problema (es passwrod errata)
 	 */
-	protected boolean login(Utente utente, Credenziali credenziali) {		
+	public boolean login(Utente utente, Credenziali credenziali) {		
 		if(checkCredenziali(utente, PATH_CREDENZIALI, credenziali)) {
 			utente.setCredenziali(credenziali);
 			return true;
@@ -122,7 +122,7 @@ public class GestioneAutenticazione {
 		return false;
 	}
 	
-	protected Credenziali getCredenzialiDefault() {
+	public Credenziali getCredenzialiDefault() {
 		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		return credenzialiDefault;
 	}
