@@ -12,6 +12,7 @@ public class ViewInfoDiSistema {
 	private static final String TXT_ERRORE = "ERRORE";
 	private static final String MSG_IMPORTA_GERARCHIE = "Importa Gerarchie";
 	private static final String MSG_IMPORTA_PARAMETRI = "Importa Parametri";
+	private static final String MSG_SUCCESS_IMPORT_COMPLETATO = "\nImport dati eseguito correttamente.";	
 	
 	private static final String [] TXT_VOCI = {
 			MSG_IMPORTA_GERARCHIE,
@@ -46,6 +47,8 @@ public class ViewInfoDiSistema {
 		String path = InputDati.leggiStringaNonVuota(MSG_ASK_PATH_PIAZZA);
 		
 		gestoreParametri.importaParametri(path);
+		
+		System.out.println(MSG_SUCCESS_IMPORT_COMPLETATO);
 	}
 
 	private void importaGerarchie() {
@@ -54,5 +57,7 @@ public class ViewInfoDiSistema {
 		String path = InputDati.leggiStringaNonVuota(MSG_ASK_PATH_GERARCHIE);
 		
 		gestoreGerarchie.importaGerarchie(path);
+		
+		System.out.println(MSG_SUCCESS_IMPORT_COMPLETATO);
 	}
 }
