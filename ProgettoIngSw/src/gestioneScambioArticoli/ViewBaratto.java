@@ -19,6 +19,7 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
+	private static final String MSG_BARATTI_ASSENTI = "Nessun baratto disponibile.";
 	private static final String MSG_PROPRIETARIO_APPUNTAMENTO = "\nHai fissato il seguente appuntamento:";
 	private static final String MSG_PROPOSTA_APPUNTAMENTO = "\nL'autore dell'altra offerta ha fissato il seguente appuntamento:";
 	private static final String MSG_FORMATO_GIORNO_NON_VALIDO = "Formato giorno inserito non valido!";
@@ -258,17 +259,27 @@ public class ViewBaratto {
 		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		String username = gestoreFruitore.getUsername();
 		List<Offerta> listaOfferteScambio = gestoreOfferte.getOfferteInScambioByUtente(username);
+		Offerta offerta = new Offerta();
 		
-		Offerta offerta = viewOfferta.getOffertaById(listaOfferteScambio);
-		Baratto baratto = gestoreBaratto.getBarattoByOfferta(offerta);
-		Appuntamento appuntamento = baratto.getAppuntamento();
+		try {
+			offerta = viewOfferta.getOffertaById(listaOfferteScambio);			
+		} catch (NullPointerException e) {
+			System.out.println(MSG_OFFERTE_IN_SCAMBIO_ASSENTI);
+		}
 		
-		if(appuntamento.getUsername().equals(username))
-			System.out.println(MSG_PROPRIETARIO_APPUNTAMENTO);
-		else
-			System.out.println(MSG_PROPOSTA_APPUNTAMENTO);
-		
-		viewAppuntamento.showAppuntamento(appuntamento);
+		try {
+			Baratto baratto = gestoreBaratto.getBarattoByOfferta(offerta);
+			Appuntamento appuntamento = baratto.getAppuntamento();
+			
+			if(appuntamento.getUsername().equals(username))
+				System.out.println(MSG_PROPRIETARIO_APPUNTAMENTO);
+			else
+				System.out.println(MSG_PROPOSTA_APPUNTAMENTO);
+			
+			viewAppuntamento.showAppuntamento(appuntamento);
+		} catch (NullPointerException e) {
+			System.out.println(MSG_BARATTI_ASSENTI);
+		}
 	}
 	
 	private void showBaratto(Baratto baratto) {
