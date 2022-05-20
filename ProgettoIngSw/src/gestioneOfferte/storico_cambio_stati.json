@@ -36,9 +36,6 @@
     "newState" : "OffertaInScambio"
   }, {
     "oldState" : "OffertaInScambio",
-<<<<<<< HEAD
-    "newState" : "OffertaAperta"
-=======
     "newState" : "OffertaChiusa"
   }, {
     "oldState" : "OffertaChiusa",
@@ -49,7 +46,6 @@
   }, {
     "oldState" : "OffertaChiusa",
     "newState" : "OffertaChiusa"
->>>>>>> branch 'v5' of https://github.com/gruppoZ/ProgettoIngSW.git
   } ],
   "4" : [ {
     "oldState" : "OffertaAperta",
@@ -66,11 +62,6 @@
   }, {
     "oldState" : "OffertaSelezionata",
     "newState" : "OffertaInScambio"
-<<<<<<< HEAD
-  }, {
-    "oldState" : "OffertaInScambio",
-    "newState" : "OffertaAperta"
-=======
   } ],
   "5" : [ {
     "oldState" : "OffertaAperta",
@@ -91,6 +82,5 @@
   }, {
     "oldState" : "OffertaAccoppiata",
     "newState" : "OffertaInScambio"
->>>>>>> branch 'v5' of https://github.com/gruppoZ/ProgettoIngSW.git
   } ]
 }

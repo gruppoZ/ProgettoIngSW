@@ -53,7 +53,8 @@ public class GestioneBaratto {
 	 */
 	public Baratto getBarattoByOfferta(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
-			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return baratto;
+			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) 
+				return baratto;
 		}
 		return null;
 	}
