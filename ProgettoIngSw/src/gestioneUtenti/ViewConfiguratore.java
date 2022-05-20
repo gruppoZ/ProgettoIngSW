@@ -94,5 +94,4 @@ public class ViewConfiguratore extends ViewUtente{
 			}
 		} while(!fine);
 	}
-	
 }
