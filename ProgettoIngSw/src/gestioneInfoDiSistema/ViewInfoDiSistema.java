@@ -13,7 +13,7 @@ public class ViewInfoDiSistema {
 	private static final String MSG_IMPORTA_GERARCHIE = "Importa Gerarchie";
 	private static final String MSG_IMPORTA_PARAMETRI = "Importa Parametri";
 	private static final String MSG_SUCCESS_IMPORT_COMPLETATO = "\nImport dati eseguito correttamente.";
-	
+
 	private static final String [] TXT_VOCI = {
 			MSG_IMPORTA_GERARCHIE,
 			MSG_IMPORTA_PARAMETRI

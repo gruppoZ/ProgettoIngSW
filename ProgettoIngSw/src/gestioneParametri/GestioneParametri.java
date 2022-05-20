@@ -110,6 +110,7 @@ public class GestioneParametri {
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
  	 */
+
  	public void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
  		if(checkPresenzaLuogo(listaLuoghi, luogoDaEliminare)) {
 			piazza.rimuoviLuogo(luogoDaEliminare);
