@@ -265,7 +265,7 @@ public class GestioneParametri {
 	 * 
 	 * @param intervalliOrari
 	 * @param orario
-	 * @return
+	 * @return True se orario è compreso in uno degli intervalli in intervalliOrari
 	 */
 	protected boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
 		if(intervalliOrari.size() == 0) return false;
@@ -304,8 +304,7 @@ public class GestioneParametri {
 	 */
 	public boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date) {
 		String dateItalianoDayOfWeek = date.format(DateTimeFormatter.ofPattern("EEEE", Locale.ITALY));	
-	 
-		//TODO: potrebbe servire in altre occasioni => creare metodo a parte oppure spostare in GiorniDellaSettimana?
+
 		for (GiorniDellaSettimana giornoSettimana : getGiorni()) {
 			if(giornoSettimana.getNome().equalsIgnoreCase(dateItalianoDayOfWeek))
 				return true;

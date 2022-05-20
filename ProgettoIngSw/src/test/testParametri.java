@@ -14,6 +14,8 @@ import gestioneParametri.IntervalloOrario;
 
 class testParametri {
 
+	private static final String INVALIDE_DATE = "300/10/2021";
+
 	@Test
 	void canAddAndRemovePlacesFromPiazzaAlreadyCreated() {
 		GestioneParametri gestroreParametri = new GestioneParametri();
@@ -49,7 +51,7 @@ class testParametri {
 		GestioneParametri gestoreParametri = new GestioneParametri();
 		
 		assertThrows(DateTimeException.class, () -> {
-			gestoreParametri.dateInput("300/10/2021");
+			gestoreParametri.dateInput(INVALIDE_DATE);
 		});
 	}
 }
