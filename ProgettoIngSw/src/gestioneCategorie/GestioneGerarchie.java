@@ -7,7 +7,7 @@ import main.JsonIO;
 
 public class GestioneGerarchie {
 	
-	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
+	private static final String PATH_GERARCHIE = "resources/gerarchie.json";
 
 	private static final String TXT_TITOLO = "Menu creazione gerarchia";
 	private static final String TXT_ERRORE = "ERRORE";

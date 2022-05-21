@@ -1,0 +1,19 @@
+{
+  "citta" : "brescia",
+  "luoghi" : [ "nord", "sud" ],
+  "giorni" : [ "MARTEDI", "VENERDI" ],
+  "intervalliOrari" : [ {
+    "orarioMin" : [ 0, 0 ],
+    "orarioMax" : [ 0, 30 ]
+  }, {
+    "orarioMin" : [ 1, 0 ],
+    "orarioMax" : [ 2, 0 ]
+  }, {
+    "orarioMin" : [ 11, 30 ],
+    "orarioMax" : [ 12, 30 ]
+  }, {
+    "orarioMin" : [ 23, 0 ],
+    "orarioMax" : [ 23, 30 ]
+  } ],
+  "scadenza" : 222
+}
