@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import java.io.IOException;
+
 import gestioneLogin.Credenziali;
 
 public abstract class Utente {
@@ -26,5 +28,5 @@ public abstract class Utente {
 		this.credenziali = credenziali;
 	}	
 	
-	public abstract void menu(String username);
+	public abstract void menu(String username) throws IOException;
 }

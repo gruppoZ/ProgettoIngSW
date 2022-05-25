@@ -1,5 +1,6 @@
 package gestioneParametri;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,7 +13,7 @@ import gestioneInfoDiSistema.GestioneInfoSistema;
 import main.JsonIO;
 
 public class GestioneParametri {
-	
+	private static final int NUM_MINIMO_GIORNI = 1;
 	private static final int NUM_MINIMO_INTERVALLI = 1;
 	private static final int NUM_MINIMO_LUOGHI = 1;
 	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
@@ -21,8 +22,9 @@ public class GestioneParametri {
 	
 	/**
 	 * Postcondizione: pathParametri.length() > 0, this.piazza != null
+	 * @throws IOException 
 	 */
-	public GestioneParametri() {
+	public GestioneParametri() throws IOException {
 		GestioneInfoSistema info = new GestioneInfoSistema();
 		pathParametri = info.getInfoSistema().getUrlParametri(); 
 
@@ -37,15 +39,16 @@ public class GestioneParametri {
 	 * @param giorni
 	 * @param intervalliOrari
 	 * @param scadenza
+	 * @throws IOException 
 	 */
  	public void creaPiazza(String citta, List<String> listaLuoghi, List<GiorniDellaSettimana> giorni, List<IntervalloOrario> intervalliOrari,
- 			int scadenza) {
+ 			int scadenza) throws IOException {
  		
 		piazza =  new Piazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);
 		salvaPiazza();
 	}
 	
- 	public Piazza getPiazza() {
+ 	public Piazza getPiazza() throws IOException {
  		if(piazza != null)
  			return this.piazza;
  		else
@@ -80,7 +83,7 @@ public class GestioneParametri {
  		return piazza.getScadenza();
  	}
  	
- 	public void importaParametri(String path) {
+ 	public void importaParametri(String path) throws IOException {
  		this.piazza = leggiPiazza(path);
  		salvaPiazza();
  	}
@@ -93,8 +96,9 @@ public class GestioneParametri {
  	 * Se luogo e' gia' presente throw new RuntimeException()
  	 * @param listaLuoghi
  	 * @param luogo
+ 	 * @throws IOException 
  	 */
- 	protected void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException {
+ 	protected void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException, IOException {
  		if(checkPresenzaLuogo(listaLuoghi, luogo)) {
  			throw new RuntimeException();
  		} else {
@@ -108,13 +112,15 @@ public class GestioneParametri {
  	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() - 1 se checkPresenzaLuogo == true
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
+ 	 * @throws IOException 
+ 	 * @throws Exception 
  	 */
- 	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws RuntimeException {
+ 	protected void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws IOException, Exception {
  		if(checkPresenzaLuogo(listaLuoghi, luogoDaEliminare)) {
 			piazza.rimuoviLuogo(luogoDaEliminare);
 			salvaPiazza();
 		} else {
-			throw new RuntimeException();
+			throw new Exception();
 		}
  	}
  	
@@ -128,15 +134,25 @@ public class GestioneParametri {
  	}
  	
  	/**
+ 	 * 
+ 	 * @return True se è soddisfatto il requisiti sulla quantità minima di giorni nel caso venga svolto un'operazione di rimozione
+ 	 * 		   False altrimenti
+ 	 */
+ 	protected boolean checkVincoloGiorniMinimi() {
+ 		return getGiorni().size() > NUM_MINIMO_GIORNI;
+ 	}
+ 	
+ 	/**
  	 * Precondizione: giorni != null, giorno != null
  	 * Postcondizione: giorni'.size() = giorni.size() + 1 se checkPresenzaGiorno == false
  	 * 
  	 * @param giorni
  	 * @param giorno
+ 	 * @throws IOException 
  	 */
- 	protected void aggiungiGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) throws RuntimeException {
+ 	protected void aggiungiGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) throws IOException, Exception {
  		if(checkPresenzaGiorno(giorni, giorno)) {
- 			throw new RuntimeException();
+ 			throw new Exception();
  		} else {
  			giorni.add(giorno);
  			piazza.setGiorni(ordinaListaGiorni(giorni));
@@ -151,8 +167,9 @@ public class GestioneParametri {
  	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
+ 	 * @throws IOException 
  	 */
- 	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException {
+ 	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException, IOException {
  		if(checkPresenzaGiorno(giorni, giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
 			piazza.setGiorni(ordinaListaGiorni(giorni));
@@ -201,34 +218,42 @@ public class GestioneParametri {
  	 * 
  	 * @param orari
  	 * @param orarioDaAggiungere
+ 	 * @throws IOException 
+ 	 * @throws Exception 
  	 */
- 	protected void aggiungiIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) throws RuntimeException {
+ 	protected void aggiungiIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) throws IOException, Exception {
  		if(checkValiditaIntervallo(orari, orarioDaAggiungere)) {
  			orari.add(orarioDaAggiungere);
  			if(orari.size() > 1)
  				setIntervalli(ordinaListaIntervalliOrari(orari));
  			salvaPiazza();
  		} else {
- 			throw new RuntimeException();
+ 			throw new Exception();
  		}		
  	}
  	
  	/**
  	 * Precondizione: orari != null, orarioDaAggiungere != null
- 	 * Postcondizione: orari'.size() = orari.size() - 1 se checkValiditaIntervallo == true
+ 	 * Postcondizione: orari'.size() = orari.size() - 1 se intervalloTrovato != null
  	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
+ 	 * @throws IOException 
+ 	 * @throws Exception 
  	 */
- 	protected void rimuoviIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) throws RuntimeException {
+ 	protected void rimuoviIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) throws IOException, Exception {
+ 		IntervalloOrario intervalloTrovato = null;
+ 		
  		for (IntervalloOrario intervallo : orari) {
 			if(orarioMinDaEliminare.equals(intervallo.getOrarioMin())) {
-				piazza.rimuoviIntervallo(intervallo);
+				intervalloTrovato = intervallo;
 				salvaPiazza();
 			}
 		}
- 		
-		throw new RuntimeException();
+ 		if(intervalloTrovato != null)
+ 			piazza.rimuoviIntervallo(intervalloTrovato);
+ 		else 
+ 			throw new Exception();
  	} 	
  	
  	/**
@@ -313,11 +338,11 @@ public class GestioneParametri {
 		return false;
 	}
 	
-	public void salvaPiazza() {
+	public void salvaPiazza() throws IOException {
 		JsonIO.salvaOggettoSuJson(pathParametri, this.piazza);
 	}
 	
-	public Piazza leggiPiazza(String path) {
+	public Piazza leggiPiazza(String path) throws IOException {
 		return (Piazza) JsonIO.leggiOggettoDaJson(path, Piazza.class);
 	}
 
@@ -362,8 +387,9 @@ public class GestioneParametri {
 	 * Precondizione: scadenza > 0
 	 * 
 	 * @param scadenza
+	 * @throws IOException 
 	 */
-	protected void modificaScadenza(int scadenza) {
+	protected void modificaScadenza(int scadenza) throws IOException {
 		piazza.setScadenza(scadenza);
 		salvaPiazza();
 	}

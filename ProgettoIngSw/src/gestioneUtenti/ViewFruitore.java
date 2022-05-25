@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import java.io.IOException;
+
 import gestioneCategorie.ViewGerarchia;
 import gestioneOfferte.GestioneOfferta;
 import gestioneOfferte.ViewOfferte;
@@ -7,6 +9,8 @@ import gestioneParametri.ViewParametroPiazza;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
+
+	private static final String MSG_ERROR_INIT = "\n*** ERRORE inizializzazione dati Fruitore ***";
 
 	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile. Creane prima una.";
 	
@@ -22,46 +26,52 @@ public class ViewFruitore extends ViewUtente{
 	};
 	
 	@Override
-	public void menu(String username) {
-		GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
-		GestioneOfferta gestoreOfferta = new GestioneOfferta();
+	public void menu(String username) throws IOException {
 		
-		MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
-		int scelta = 0;
-		boolean fine = false;
-		do {
-			scelta = menuFruitore.scegli();
-			switch(scelta) {
-			case 0:
-				fine = true;
-				break;
-			case 1:
-				ViewGerarchia viewGerarchia = new ViewGerarchia();
-				
-				if(!gestoreFruitore.isGerarchieCreate())
-					System.out.println(MSG_ASSENZA_GERARCHIE);
-				else {
-					gestoreFruitore.getGerarchie().forEach((k,v) -> {
-						viewGerarchia.showGerarchiaSintetica(v);
-					});
-				}		
-				break;
-			case 2:
-				if(!gestoreFruitore.isPiazzaCreata())
-					System.out.println(MSG_NESSUNA_PIAZZA);
-				else {
-					ViewParametroPiazza viewPiazza = new ViewParametroPiazza();
-					viewPiazza.showPiazza();
+		try {
+			GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
+			GestioneOfferta gestoreOfferta = new GestioneOfferta();
+			
+			MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
+			int scelta = 0;
+			boolean fine = false;
+			do {
+				scelta = menuFruitore.scegli();
+				switch(scelta) {
+				case 0:
+					fine = true;
+					break;
+				case 1:
+					ViewGerarchia viewGerarchia = new ViewGerarchia();
+					
+					if(!gestoreFruitore.isGerarchieCreate())
+						System.out.println(MSG_ASSENZA_GERARCHIE);
+					else {
+						gestoreFruitore.getGerarchie().forEach((k,v) -> {
+							viewGerarchia.showGerarchiaSintetica(v);
+						});
+					}		
+					break;
+				case 2:
+					if(!gestoreFruitore.isPiazzaCreata())
+						System.out.println(MSG_NESSUNA_PIAZZA);
+					else {
+						ViewParametroPiazza viewPiazza = new ViewParametroPiazza();
+						viewPiazza.showPiazza();
+					}
+					break;
+				case 3:
+					ViewOfferte viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);
+					viewOfferte.menu();
+					break;
+				default:
+					System.out.println(TXT_ERRORE);
+					
 				}
-				break;
-			case 3:
-				ViewOfferte viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);
-				viewOfferte.menu();
-				break;
-			default:
-				System.out.println(TXT_ERRORE);
-				
-			}
-		} while(!fine);
+			} while(!fine);
+		} catch (IOException e) {
+			throw new IOException(e.getMessage() + MSG_ERROR_INIT);
+		}
+		
 	}
 }

@@ -1,5 +1,6 @@
 package gestioneCategorie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import it.unibs.fp.mylib.InputDati;
@@ -7,8 +8,10 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
 	
-	private static final String MSG_ERROR_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
-	private static final String MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
+	private static final String MSG_ERRORE_SALVATAGGIO_GERARCHIA_APPENA_CREATA = "*** ERRORE salvataggio gerarchia appena creata ***";
+	private static final String MSG_ERRORE_INIT_GERARCHIE = "*** ERRORE Inizializzazione Gerarchie ***";
+	private static final String MSG_ERRORE_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
+	private static final String MSG_ERRORE_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
 	
 	private static final String MSG_GERARCHIA_RIMOSSA_SUCCESSO = "\nGerarchia eliminata con successo";
 
@@ -51,21 +54,37 @@ public class ViewGerarchia {
 	
 	private GestioneGerarchie gestoreGerarchia;
 	
-	public ViewGerarchia() {
-		gestoreGerarchia = new GestioneGerarchie();
+	public ViewGerarchia() throws IOException {
+		try {
+			gestoreGerarchia = new GestioneGerarchie();
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+		}
+	}
+	
+	public void update() throws IOException {
+		try {
+			this.gestoreGerarchia.updateGerarchie();
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+		}
 	}
 
 	/**
 	 * Chiede che nome utilizzare per il root.
 	 * Verifica se il nome e' già in uso. Nel caso lo fosse viene richiesto di usare un altro nome
 	 * @return nome utilizzabile
+	 * @throws IOException 
 	 */
-	private String askNomeRoot() {
-		String nome;
-		nome = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT);
+	private String askNomeRoot() throws IOException {
+		String nome = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT);
 
-		while(gestoreGerarchia.checkGerarchiaPresente(nome)) {
-			nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
+		try {
+			while(gestoreGerarchia.checkGerarchiaPresente(nome)) {
+				nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
+			}
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
 		}
 		
 		return nome;
@@ -120,7 +139,7 @@ public class ViewGerarchia {
 		return gestoreGerarchia.getCategoriaByName(nomeCategoriaDaRamificare);
 	}
 	
-	private void creaRoot() {					
+	private void creaRoot() throws IOException {					
 		String nome, descrizione;
 		boolean ask_campoNativo;
 		boolean isRoot = true;
@@ -237,46 +256,49 @@ public class ViewGerarchia {
 		}
 	}
 	
-	public Categoria scegliFoglia() {
+	public Categoria scegliFoglia() throws IOException {
 		ViewCategoria viewCategoria = new ViewCategoria();
-		gestoreGerarchia.getGerarchie().forEach((k, v) -> showGerarchiaSintetica(v));
-		
-		String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
+		try {
+			gestoreGerarchia.getGerarchie().forEach((k, v) -> showGerarchiaSintetica(v));
+			
+			String nomeRootSelezionata = InputDati.leggiStringaNonVuota(ASK_NOME_ROOT_CATEGORIA_SCELTA);
 
-		if(gestoreGerarchia.checkGerarchiaPresente(nomeRootSelezionata)) {
-			Gerarchia gerarchia = gestoreGerarchia.getGerarchiaByName(nomeRootSelezionata);
-			
-			List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
- 
-			for (Categoria categoria : listaFoglie) {
-				System.out.println(viewCategoria.showCategoriaFoglia(categoria));
-			}
-			
-			String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
-			
-			if(gerarchia.checkNomeCategoriaEsiste(nomeFogliaSelezionata)) {
-				Categoria foglia = gerarchia.getCategoriaByName(nomeFogliaSelezionata);
+			if(gestoreGerarchia.checkGerarchiaPresente(nomeRootSelezionata)) {
+				Gerarchia gerarchia = gestoreGerarchia.getGerarchiaByName(nomeRootSelezionata);
 				
-				return foglia;
+				List<Categoria> listaFoglie = gerarchia.getListaFoglie(); 
+	 
+				for (Categoria categoria : listaFoglie) {
+					System.out.println(viewCategoria.showCategoriaFoglia(categoria));
+				}
+				
+				String nomeFogliaSelezionata = InputDati.leggiStringaNonVuota(ASK_CATEGORIA_FOGLIA);
+				
+				if(gerarchia.checkNomeCategoriaEsiste(nomeFogliaSelezionata)) {
+					Categoria foglia = gerarchia.getCategoriaByName(nomeFogliaSelezionata);
+					
+					return foglia;
+				} else {
+					System.out.println(MSG_ERRORE_CATEGORIA_FOGLIA_INESISTENTE);
+				}	
 			} else {
-				System.out.println(MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE);
-			}	
-		} else {
-			System.out.println(MSG_ERROR_NOME_ROOT_INESISTENTE);
+				System.out.println(MSG_ERRORE_NOME_ROOT_INESISTENTE);
+			}
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
 		}
-		
 		return null;
 	}	
 	
-	public void menu() {
-		MyMenu menuModificaGiorni = new MyMenu(TXT_TITOLO, TXT_VOCI);
+	public void menu() throws IOException {
+		MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
 		boolean gerarchiaEliminata = false;
 		creaRoot();		
 		
 		do {
-			scelta = menuModificaGiorni.scegli();
+			scelta = menu.scegli();
 			switch(scelta) {
 			case 0:
 				fine = !InputDati.yesOrNo(ASK_CONTINUARE_MODIFICA_GERARCHIA);
@@ -308,8 +330,13 @@ public class ViewGerarchia {
 			}
 		} while(!fine);
 		
-		if(!gerarchiaEliminata)
-			gestoreGerarchia.fineCreazioneGerarchia();
+		if(!gerarchiaEliminata) {
+			try {
+				gestoreGerarchia.fineCreazioneGerarchia();
+			} catch (IOException e) {
+				System.out.println(MSG_ERRORE_SALVATAGGIO_GERARCHIA_APPENA_CREATA);
+			}
+		}
 	}
 	
 	public void showGerarchia(Gerarchia gerarchia) {

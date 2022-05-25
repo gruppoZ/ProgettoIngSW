@@ -1,5 +1,7 @@
 package gestioneOfferte;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,9 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewOfferte {
 
+	private static final String MSG_ERROR_FILE_INERENTI_IL_BARATTO = "Impossibile interagire con i file inerenti il baratto.";
+	private static final String MSG_ERROR_FILE_INERENTI_IL_BARATTO_NON_TROVATI = "Impossibile interagire con i file inerenti il baratto. File non trovati";
+	
 	private static final String MSG_SHOW_OFFERTE_IN_SCAMBIO = "Offerte IN SCAMBIO";
 	private static final String MSG_SHOW_OFFERTE_CHIUSE = "Offerte CHIUSE";
 	private static final String MSG_SHOW_OFFERTE_APERTE = "Offerte APERTE";
@@ -47,9 +52,16 @@ public class ViewOfferte {
 	
 	/**
 	 * Postcondizione: gestoreOfferte != null
+	 * @throws FileNotFoundException, IOException 
 	 */
-	public ViewOfferte() {
-		gestoreOfferte = new GestioneOfferta();
+	public ViewOfferte() throws FileNotFoundException, IOException {
+		try {
+			gestoreOfferte = new GestioneOfferta();
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(MSG_ERROR_FILE_INERENTI_IL_BARATTO_NON_TROVATI);
+		} catch (IOException e) {
+			throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
+		}
 	}
 	
 	/**
@@ -64,7 +76,7 @@ public class ViewOfferte {
 		this.gestoreOfferte = gestoreOfferte;
 	}
 	
-	public void menu() {
+	public void menu() throws IOException {
 		MyMenu menuOfferte = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		ViewBaratto viewScambio;
 		
@@ -115,8 +127,9 @@ public class ViewOfferte {
 	
 	/**
 	 * Permette di ritirare un offerta selezionandola tramite l'id
+	 * @throws IOException 
 	 */
-	public void ritiraOfferta() {
+	public void ritiraOfferta() throws IOException {
 		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteAttiveByUtente.size() > 0) {
@@ -124,7 +137,11 @@ public class ViewOfferte {
 			Offerta offerta = this.getOffertaById(listaOfferteAttiveByUtente);
 			
 			if(offerta != null) {
-				gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+				try {
+					gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+				} catch (IOException e) {
+					throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
+				}
 				System.out.println(MSG_OFFERTA_RITIRATA);
 			} else {
 				System.out.println(MSG_ID_NON_VALIDO);

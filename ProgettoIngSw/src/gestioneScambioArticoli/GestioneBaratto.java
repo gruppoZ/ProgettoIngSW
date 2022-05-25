@@ -1,5 +1,7 @@
 package gestioneScambioArticoli;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,8 +24,10 @@ public class GestioneBaratto {
 	
 	/**
 	 * Postcondizione: listaBaratti != null, baratto != null
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public GestioneBaratto() {
+	public GestioneBaratto() throws FileNotFoundException, IOException {
 		this.listaBaratti = leggiBaratti();
 		this.baratto = new Baratto();
 	}
@@ -96,8 +100,9 @@ public class GestioneBaratto {
 	 * Rimuove i baratti presenti in listaBarattiDaRimuovere dalla listaBaratti 
 	 * dopodichè salva nel file baratti.json la nuova listaBaratti
 	 * @param listaBarattiDaRimuovere
+	 * @throws IOException 
 	 */
-	public void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) {
+	public void rimuoviListaBaratti(List<Baratto> listaBarattiDaRimuovere) throws IOException {
 		for (Baratto baratto : listaBarattiDaRimuovere) {
 			this.listaBaratti.remove(baratto);
 		}
@@ -109,33 +114,36 @@ public class GestioneBaratto {
 	 * Precondizione: baratto != null
 	 * Postcondizione:	listaBaratti'.size() = listaBaratti.size() - 1
 	 * @param baratto
+	 * @throws IOException 
 	 */
-	public void rimuoviBaratto(Baratto baratto) {
+	public void rimuoviBaratto(Baratto baratto) throws IOException {
 		listaBaratti.remove(baratto);
 		salvaBaratti();
 	}
 	
-	private List<Baratto> leggiBaratti(){
+	private List<Baratto> leggiBaratti() throws FileNotFoundException, IOException{
 		return JsonIO.leggiListaDaJson(PATH_BARATTI, Baratto.class);
 	}
 	
-	private void salvaBaratti() {
+	private void salvaBaratti() throws IOException {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
 	}
 	
-	private List<Baratto> leggiBarattiTerminati(){
+	private List<Baratto> leggiBarattiTerminati() throws FileNotFoundException, IOException{
 		return JsonIO.leggiListaDaJson(PATH_BARATTI_TERMINATI, Baratto.class);
 	}
 	
-	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) {
+	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) throws IOException {
 		JsonIO.salvaOggettoSuJson(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
 	}
 	
 	/**
 	 * Precondizione: baratto != null
 	 * @param baratto
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	private void aggiungiBarattoTerminato(Baratto baratto) {
+	private void aggiungiBarattoTerminato(Baratto baratto) throws FileNotFoundException, IOException {
 		List<Baratto> listaBarattiTerminati = leggiBarattiTerminati();
 		listaBarattiTerminati.add(baratto);
 		salvaBarattiTerminati(listaBarattiTerminati);
@@ -174,8 +182,9 @@ public class GestioneBaratto {
 	 * @param offertaB
 	 * @param dataScadenza
 	 * @param appuntamento
+	 * @throws IOException 
 	 */
-	protected void aggiornaBaratto(Baratto barattoDaAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) {
+	protected void aggiornaBaratto(Baratto barattoDaAggiornare, Offerta offertaA, Offerta offertaB, LocalDate dataScadenza, Appuntamento appuntamento) throws IOException {
 		barattoDaAggiornare.setAppuntamento(appuntamento);
 		barattoDaAggiornare.setOffertaFruitorePromotore(offertaA);
 		barattoDaAggiornare.setOffertaFruitoreRichiesta(offertaB);
@@ -191,8 +200,9 @@ public class GestioneBaratto {
 	 * @param barattoDaAggiornare
 	 * @param dataScadenza
 	 * @param appuntamento
+	 * @throws IOException 
 	 */
-	protected void aggiornaBaratto(Baratto barattoDaAggiornare, LocalDate dataScadenza, Appuntamento appuntamento) {		
+	protected void aggiornaBaratto(Baratto barattoDaAggiornare, LocalDate dataScadenza, Appuntamento appuntamento) throws IOException {		
 		barattoDaAggiornare.setAppuntamento(appuntamento);
 		barattoDaAggiornare.setScadenza(dataScadenza);
 		
@@ -206,8 +216,9 @@ public class GestioneBaratto {
 	 * @param gestoreOfferta
 	 * @param offertaA
 	 * @param offertaB
+	 * @throws IOException 
 	 */
-	protected void switchToOfferteAccoppiate(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	protected void switchToOfferteAccoppiate(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
 	}
@@ -219,8 +230,9 @@ public class GestioneBaratto {
 	 * @param gestoreOfferta
 	 * @param offertaA
 	 * @param offertaB
+	 * @throws IOException 
 	 */
-	protected void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	protected void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
 	}
@@ -232,8 +244,9 @@ public class GestioneBaratto {
 	 * @param gestoreOfferta
 	 * @param offertaA
 	 * @param offertaB
+	 * @throws IOException 
 	 */
-	protected void switchToOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) {
+	protected void switchToOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaChiusa());
 		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
 	}
@@ -243,8 +256,9 @@ public class GestioneBaratto {
 	 * 
 	 * @param baratto
 	 * @param appuntamento
+	 * @throws IOException 
 	 */
-	protected void aggiornaAppuntamentoInBaratto(Baratto baratto, Appuntamento appuntamento) {
+	protected void aggiornaAppuntamentoInBaratto(Baratto baratto, Appuntamento appuntamento) throws IOException {
 		baratto.setAppuntamento(appuntamento);
 		salvaBaratti();
 	}
@@ -256,8 +270,9 @@ public class GestioneBaratto {
 	 * @param offertaA
 	 * @param offertaB
 	 * @param baratto
+	 * @throws IOException 
 	 */
-	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) {
+	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) throws IOException {
 		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
 		rimuoviBaratto(baratto);
 		aggiungiBarattoTerminato(baratto);
@@ -270,8 +285,9 @@ public class GestioneBaratto {
 	 * @param offertaA
 	 * @param offertaB
 	 * @param scadenzaInGiorni
+	 * @throws IOException 
 	 */
-	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) {
+	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) throws IOException {
 		LocalDate dataScadenza = calcolaDataScadenza(scadenzaInGiorni);
 		
 		this.baratto = new Baratto(offertaA, offertaB, dataScadenza);

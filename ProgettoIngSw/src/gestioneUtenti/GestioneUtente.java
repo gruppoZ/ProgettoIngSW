@@ -1,5 +1,6 @@
 package gestioneUtenti;
 
+import java.io.IOException;
 import java.util.HashMap;
 import gestioneCategorie.Gerarchia;
 import gestioneCategorie.GestioneGerarchie;
@@ -9,8 +10,9 @@ public abstract class GestioneUtente {
 	
 	/**
 	 * Postcondizione: gestoreGerarchie != null
+	 * @throws IOException 
 	 */
-	public GestioneUtente() {
+	public GestioneUtente() throws IOException {
 		gestoreGerarchie = new GestioneGerarchie();
 	}
 	
@@ -18,15 +20,15 @@ public abstract class GestioneUtente {
 		return this.gestoreGerarchie;
 	}
 	
-	public HashMap<String, Gerarchia> getGerarchie() {
+	public HashMap<String, Gerarchia> getGerarchie() throws IOException {
 		return gestoreGerarchie.getGerarchie();
 	}
 
-	public boolean isGerarchieCreate() {
+	public boolean isGerarchieCreate() throws IOException {
 		return gestoreGerarchie.isGerarchiePresenti();
 	}	
 	
-	protected void aggiornaGerarchie() {
+	protected void aggiornaGerarchie() throws IOException {
 		gestoreGerarchie.leggiDaFileGerarchie();
 	}
 }

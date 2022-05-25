@@ -1,5 +1,6 @@
 package gestioneParametri;
 
+import java.io.IOException;
 import java.util.List;
 
 import it.unibs.fp.mylib.InputDati;
@@ -7,6 +8,8 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroLuogo extends ViewParametri{
 
+	private static final String MSG_ERROR_RIMOZIONE_LUOGO_FALLITA_INTERAZIONE_CON_FILE = "Impossibile rimuovere luogo. Fallita interazione con il file.";
+	private static final String MSG_ERROR_AGGIUNGERE_LUOGO_FALLITA_INTERAZIONE_CON_FILE = "Impossibile aggiungere luogo. Fallita interazione con il file.";
 	private static final String MSG_LUOGHI_PRESENTI = "Luoghi presenti: ";
 	private static final String MSG_LUOGO_NON_PRESENTE = "il luogo scelto non è stato trovato. Scegli un luogo valido: ";
 	private static final String MSG_LUOGO_GIA_PRESNTE = "Il luogo e' gia' presente";
@@ -15,14 +18,15 @@ public class ViewParametroLuogo extends ViewParametri{
 	private static final String ASK_LUOGO_RIMOZIONE = "Inserisci il luogo da rimuovere: ";
 	private static final String ASK_ALTRI_LUOGHI = "Vuoi inserire altri luoghi? ";
 	private static final String ASK_LUOGO = "Inserisci un luogo: ";
-	private static final String TIPOLOGIA_PARAMETRO = "Luoghi";	
+	private static final String TIPOLOGIA_PARAMETRO = "Luoghi";
+	private static final String MSG_LUOGO_RIMOSSO = "\nLuogo rimosso!\n";	
 	
 	public ViewParametroLuogo(GestioneParametri gestoreParametri) {
 		super(gestoreParametri);
 	}
 	
 	@Override
-	public void menu() {
+	public void menu() throws IOException {
 		MyMenu menuModificaLuoghi = new MyMenu(TIPOLOGIA_PARAMETRO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
@@ -47,33 +51,37 @@ public class ViewParametroLuogo extends ViewParametri{
 	}
 
 	@Override
-	public void aggiungi() {
+	public void aggiungi() throws IOException {
 		List<String> listaLuoghi = getGestoreParametri().getLuoghi();
 		do {
 			String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO);
 			
 			try {
 				getGestoreParametri().aggiungiLuogo(listaLuoghi, luogo);
-			} catch(RuntimeException e) {
+			} catch(IOException e) {
+				throw new IOException(MSG_ERROR_AGGIUNGERE_LUOGO_FALLITA_INTERAZIONE_CON_FILE);
+			} catch(Exception e) {
 				System.out.println(MSG_LUOGO_GIA_PRESNTE);
 			}		
 		} while(InputDati.yesOrNo(ASK_ALTRI_LUOGHI));
 	}
 
 	@Override
-	public void rimuovi() {
+	public void rimuovi() throws IOException {
 		List<String> listaLuoghi = getGestoreParametri().getLuoghi();
-		
-		showLuoghi();
-		
-		String luogoDaEliminare = InputDati.leggiStringaNonVuota(ASK_LUOGO_RIMOZIONE);
-		
+
 		if(!getGestoreParametri().checkVincoloLuoghiMinimi())
 			System.out.println(MSG_ERRORE_RIMOZIONE_LUOGHI_INSUFFICIENTI);
 		else {
+			//showLuoghi();
+			
+			String luogoDaEliminare = InputDati.leggiStringaNonVuota(ASK_LUOGO_RIMOZIONE);
 			try {
 				getGestoreParametri().rimuoviLuogo(listaLuoghi, luogoDaEliminare);
-			} catch(RuntimeException e) {
+				System.out.println(MSG_LUOGO_RIMOSSO);
+			} catch (IOException e) {
+				throw new IOException(MSG_ERROR_RIMOZIONE_LUOGO_FALLITA_INTERAZIONE_CON_FILE);
+			} catch (Exception e) {
 				System.out.println(MSG_ERRORE_RIMOZIONE_LUOGO); 
 			}
 		}

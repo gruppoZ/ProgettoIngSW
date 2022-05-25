@@ -1,9 +1,13 @@
 package gestioneParametri;
 
+import java.io.IOException;
+
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroScadenza extends ViewParametri {
+
+	private static final String MSG_ERROR_MODIFICA_SCADENZA_FALLITA_NO_INTERAZIONE_CON_FILE = "Impossibile modificare la Scadenza. Fallita interazione con il file.";
 
 	private static final int MIN_SCADENZA = 1;
 	
@@ -26,7 +30,7 @@ public class ViewParametroScadenza extends ViewParametri {
 	}
 	
 	@Override
-	public void menu() {
+	public void menu() throws IOException {
 		MyMenu menuModificaPiazza = new MyMenu(TXT_TITOLO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
@@ -47,12 +51,16 @@ public class ViewParametroScadenza extends ViewParametri {
 	}
 
 	@Override
-	public void aggiungi() {
+	public void aggiungi() throws IOException {
 		showScadenza();
 		
 		int scadenza = inserisciScadenza();
 	
-		getGestoreParametri().modificaScadenza(scadenza);
+		try {
+			getGestoreParametri().modificaScadenza(scadenza);
+		} catch (IOException e) {
+			throw new IOException(MSG_ERROR_MODIFICA_SCADENZA_FALLITA_NO_INTERAZIONE_CON_FILE);
+		}
 	}
 
 	@Override

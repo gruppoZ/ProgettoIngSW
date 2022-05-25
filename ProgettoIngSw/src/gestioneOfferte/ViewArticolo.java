@@ -1,5 +1,5 @@
 package gestioneOfferte;
-
+import java.io.IOException;
 import java.util.List;
 
 import gestioneCategorie.CampoCategoria;
@@ -9,7 +9,6 @@ import gestioneUtenti.GestioneFruitore;
 import it.unibs.fp.mylib.InputDati;
 
 public class ViewArticolo {
-	
 	private static final String MSG_CAMPI_NON_COMPILATI_ARTICOLO = "Nessun Campo compilato per questo articolo!";
 	private static final String MSG_PUBBLICAZIONE_ACCETTATA = "\nLa pubblicazione e' stata accettata";
 	
@@ -18,6 +17,7 @@ public class ViewArticolo {
 	
 	private static final String MSG_WARNING_CAMPO_COMPILAZIONE_OBBLIGATORIA = "Se non si compila il campo la pubblicazione dell'articolo verra' annullata";
 	private static final String MSG_ERROR_COMPILAZIONE_CAMPO = "\nLa compilazione dell'articolo non e' andata a buon fine!\n";
+	private static final String MSG_ERROR_FILE_INERENTI_IL_BARATTO = "Impossibile interagire con i file inerenti il baratto.";
 	
 	private GestioneFruitore gestoreFruitore;
 	private GestioneArticolo gestoreArticolo;
@@ -39,7 +39,7 @@ public class ViewArticolo {
 		gestoreArticolo = new GestioneArticolo();
 	}
 	
-	public void aggiungiArticolo() {
+	public void aggiungiArticolo() throws IOException {
 		ViewGerarchia viewGerarchia = new ViewGerarchia();
 		Categoria foglia = viewGerarchia.scegliFoglia();
 		
@@ -50,10 +50,11 @@ public class ViewArticolo {
 				inserisciValoriCampi();
 				System.out.println(MSG_PUBBLICAZIONE_ACCETTATA);
 				gestoreOfferte.manageAggiuntaOfferta(gestoreArticolo.getArticolo(), gestoreFruitore.getUsername());
-			} catch(RuntimeException e) {
-				System.out.println(e.getMessage());
+			} catch(IOException e) {
+				throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
 			}
 		}
+
 	}
 	
 	private boolean compilaCampiObbligatori() {

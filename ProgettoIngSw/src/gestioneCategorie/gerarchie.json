@@ -1,4 +1,70 @@
 {
+  "ROOT_TEST" : {
+    "root" : {
+      "nome" : "root_test",
+      "descrizione" : "gerarchia da test",
+      "sottoCategorie" : [ {
+        "nome" : "f1",
+        "descrizione" : "sd",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      }, {
+        "nome" : "f2",
+        "descrizione" : "dd",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      } ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    }
+  },
+  "ASD" : {
+    "root" : {
+      "nome" : "asd",
+      "descrizione" : "n",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    }
+  },
   "LIBRO" : {
     "root" : {
       "nome" : "Libro",
@@ -34,8 +100,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Romanzo di letteratura straniera",
           "descrizione" : "Romanzo originalmente in lingua straniera, appartenente a una letteratura straniera",
@@ -67,8 +133,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Romanzo di avventura",
           "descrizione" : "Romanzo generalmente improntato sull'avventura, seguendo le vicende di uno o piu' protagonisti atti a intraprendere un viaggio composto da vicende emozionanti, piene d'azione",
@@ -97,8 +163,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Romanzo di fantascienza",
           "descrizione" : "Romanzo improntato sulla narrazione basata su speculazioni e ipotesi di carattere piu' o meno plausibilmente tecnico-scientifiche e i loro impatti sulla societa' e sull'individuo. I personaggi, oltre che esseri umani, possono essere alieni, robot, cyborg, mostri o mutanti; la storia puo' essere ambientata nel passato, nel presente o, piu' frequentemente, nel futuro",
@@ -133,8 +199,8 @@
                 "obbligatorio" : false
               } ],
               "profondita" : 4,
-              "valida" : true,
-              "radice" : false
+              "radice" : false,
+              "valida" : true
             }, {
               "nome" : "Cataclismico",
               "descrizione" : "Romanzo apocalittico che tratta di come il mondo reagirebbe a un'evento naturale o causato dall'uomo che potrebbe portare alla distruzione del genere umano, della Terra o ad altri eventi catastrofici che minacciano di cambiare per sempre la nostra quotidianita'",
@@ -163,8 +229,8 @@
                 "obbligatorio" : false
               } ],
               "profondita" : 4,
-              "valida" : true,
-              "radice" : false
+              "radice" : false,
+              "valida" : true
             } ],
             "campiNativi" : [ ],
             "campiEreditati" : [ {
@@ -190,8 +256,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           }, {
             "nome" : "Romanzo cyberpunk",
             "descrizione" : "Romanzo incentrato su un genere narrativo che trae spunto dalla critica alla possibilità di un pericoloso sviluppo senza limite della tecnologia e di un controllo capillare dell'individuo da parte di una società oppressiva, reinterpretandoli in chiave fantastica e trasponendoli in un ipotetico mondo futuro",
@@ -220,8 +286,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           } ],
           "campiNativi" : [ ],
           "campiEreditati" : [ {
@@ -247,8 +313,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Romanzo giallo",
           "descrizione" : "Romanzo poliziesco molto diffuso (così chiamato in Italia a partire dagli anni Trenta perché di solito il libro aveva una copertina gialla), che tiene desto l'interesse del lettore con la narrazione di misteriosi delitti o vicende impreviste e di un'inchiesta",
@@ -277,8 +343,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Romanzo horror",
           "descrizione" : "Romanzo che mira a suscitare nel lettore sentimenti di ribrezzo, di repulsione, di spavento o di raccapriccio. Tramite la commistione della realtà quotidiana con elementi di carattere soprannaturale o surreale o tramite l'inserimento inatteso di circostanze non razionali, ipotizzando situazioni che destabilizzano le sicurezze acquisite nel lettore, vengono in questi instillate emozioni e sensazioni di paura",
@@ -307,8 +373,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         } ],
         "campiNativi" : [ {
           "descrizione" : "Pubblico indicato",
@@ -334,8 +400,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Saggio",
         "descrizione" : "Scritto di carattere specifico o monografico, di limitata estensione, in cui l'autore analizza criticamente un determinato argomento storico, biografico o critico o da' una breve descrizione di un luogo o di un carattere",
@@ -364,8 +430,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Saggio accademico",
           "descrizione" : "Corrisponde all'esposizione e all'argomentazione su un argomento di interesse per la comunità accademica, in un ordine logico discorsivo e con una base bibliografica. I saggi accademici devono sempre includere le fonti consultate (bibliografia e altre fonti). Serve a valutare gli studenti in termini di gestione della fonte, conoscenza della materia, argomentazione e critica. Sebbene i saggi accademici non abbiano scopi estetici, non sono in contrasto con la ricerca dell'eleganza discorsiva",
@@ -391,8 +457,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Saggio scientifico",
           "descrizione" : "E' un testo argomentativo inteso a riflettere argomenti scientifici e, in virtù di ciò, richiede rigore nei dati offerti e nell'analisi delle informazioni. A differenza del saggio letterario, lo scienziato non persegue alcun fine estetico, ma per garantire l'effettiva comunicazione della premessa. I saggi scientifici sono spesso discussi alla luce dei riferimenti a teorie, esperimenti, tabelle, ecc., che servono a presentare un'ipotesi o una confutazione nel dibattito. Come i saggi accademici in generale, i saggi scientifici richiedono la presentazione di una bibliografia o fonti di riferimento",
@@ -418,8 +484,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Saggio di musica, teatro e danza",
           "descrizione" : "Viene di solito applicato nelle discipline delle arti dello spettacolo come il teatro, la musica o la danza, per correggere possibili difetti prima della presentazione definitiva di un'opera al pubblico",
@@ -445,8 +511,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Saggio di politica",
           "descrizione" : "Saggio che affronta tematiche di chiave politica",
@@ -472,8 +538,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         } ],
         "campiNativi" : [ ],
         "campiEreditati" : [ {
@@ -496,8 +562,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Opera a fumetti",
         "descrizione" : "Un particolare tipo di linguaggio, composto da disegni e testi verbali che servono per raccontare una storia; sono destinati sia a un pubblico infantile sia a un pubblico adulto",
@@ -526,8 +592,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Testo scolastico",
         "descrizione" : "Considerato il punto ideale di incontro tra docente e studente, un canale di comunicazione didattico privilegiato",
@@ -562,8 +628,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Brochure",
         "descrizione" : "Un opuscolo di poche pagine, a multipli di quattro, che ha lo scopo di comunicare un’azienda, un prodotto o un evento",
@@ -592,8 +658,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       } ],
       "campiNativi" : [ {
         "descrizione" : "Stato di conservazione",
@@ -616,8 +682,8 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "valida" : true,
-      "radice" : true
+      "radice" : true,
+      "valida" : true
     }
   },
   "GIOCO" : {
@@ -652,8 +718,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Gioco all'aperto",
         "descrizione" : "Gioco o giocattolo utilizzato per attivita' all'aperto",
@@ -682,8 +748,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Giocattolo per bambini",
         "descrizione" : "Giocattolo adatto ai bambini",
@@ -721,8 +787,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Bambola",
           "descrizione" : "Fantoccio di legno, di cartapesta, di celluloide, di materia plastica o d’altro, che rappresenta una bambina, un bambino o una donna, spesso dotato di occhi mobili, di movimento automatico, di apparecchio che imita la voce umana",
@@ -757,8 +823,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         } ],
         "campiNativi" : [ ],
         "campiEreditati" : [ {
@@ -784,8 +850,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       }, {
         "nome" : "Videogioco",
         "descrizione" : "Software che, per mezzo di una grafica sofisticata, simula situazioni di carattere ludico (competizioni sportive, combattimenti o sfide di vario genere ambientate nei luoghi più diversi), permettendo a uno o più giocatori di giocare sia tra loro sia contro il computer; può essere installato in un dispositivo elettronico specializzato, come quelli presenti nelle sale giochi, oppure in un personal computer",
@@ -838,8 +904,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           }, {
             "nome" : "Narrativo",
             "descrizione" : "Videogioco che ha lo scopo di accompagnare il giocatore in un'avventura videoludica incentrata sulla narrazione di una storia",
@@ -886,8 +952,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           } ],
           "campiNativi" : [ ],
           "campiEreditati" : [ {
@@ -931,8 +997,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         }, {
           "nome" : "Multi-Player",
           "descrizione" : "Videogioco improntato sull'interazione con altri giocatori, sia essa di natura collaborativa, sotto forma di classifica o di sfida",
@@ -985,8 +1051,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           }, {
             "nome" : "Casual",
             "descrizione" : "Videogioco solitamente collaborativo fra diversi giocatori. L'obiettivo e' dare la possiblita' al giocatore di passare del tempo rilassandosi anche insieme a degli amici",
@@ -1033,8 +1099,8 @@
               "obbligatorio" : false
             } ],
             "profondita" : 3,
-            "valida" : true,
-            "radice" : false
+            "radice" : false,
+            "valida" : true
           } ],
           "campiNativi" : [ ],
           "campiEreditati" : [ {
@@ -1078,8 +1144,8 @@
             "obbligatorio" : false
           } ],
           "profondita" : 2,
-          "valida" : true,
-          "radice" : false
+          "radice" : false,
+          "valida" : true
         } ],
         "campiNativi" : [ {
           "descrizione" : "Genere",
@@ -1123,8 +1189,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "valida" : true,
-        "radice" : false
+        "radice" : false,
+        "valida" : true
       } ],
       "campiNativi" : [ {
         "descrizione" : "Stato di conservazione",
@@ -1150,8 +1216,8 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "valida" : true,
-      "radice" : true
+      "radice" : true,
+      "valida" : true
     }
   }
 }

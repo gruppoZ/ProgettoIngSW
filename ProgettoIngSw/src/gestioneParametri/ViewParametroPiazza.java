@@ -1,12 +1,14 @@
 package gestioneParametri;
 
+import java.io.IOException;
 import java.util.List;
 
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroPiazza extends ViewParametri {
-
+	private static final String MSG_ERROR_SALVATAGGIO_PIAZZA_FALLITA_NO_INTERAZIONE_CON_FILE = "Impossibile salvare Piazza. Fallita interazione con il file.";
+	private static final String MSG_ERRORE_LETTURA_PARAMETRI_FILE = "*** ERRORE lettura parametri da file ***";
 	private static final String MSG_ASK_CITTA = "Inserisci il nome della citta': ";
 	private static final String MSG_PIAZZA_INESISTENTE = "\nNessuna Piazza presente!\n";
 	private static final String MSG_PIAZZA_GIA_PRESENTE = "\nPiazza già presente!\n";
@@ -19,7 +21,11 @@ public class ViewParametroPiazza extends ViewParametri {
 	
 	private ViewParametri view;
 	
-	public void menuModificaPiazza() {		
+	public ViewParametroPiazza() throws IOException {
+		super();
+	}
+	
+	public void menuModificaPiazza() throws IOException {		
 		MyMenu menuModificaPiazza = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
@@ -54,7 +60,7 @@ public class ViewParametroPiazza extends ViewParametri {
 	}
 	
 	@Override
-	public void menu() {		
+	public void menu() throws IOException {		
 		MyMenu menuModificaPiazza = new MyMenu(TXT_TITOLO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
@@ -87,7 +93,7 @@ public class ViewParametroPiazza extends ViewParametri {
 	}
 	
 	@Override
-	public void aggiungi() {
+	public void aggiungi() throws IOException {
 		String citta = inserisciCitta();
 		getGestoreParametri().setCitta(citta);
 		
@@ -110,23 +116,33 @@ public class ViewParametroPiazza extends ViewParametri {
 		view.aggiungi();
 		int scadenza = getGestoreParametri().getScadenza();
 		
-		getGestoreParametri().creaPiazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);	
+		try {
+			getGestoreParametri().creaPiazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);
+		} catch (IOException e) {
+			throw new IOException(MSG_ERROR_SALVATAGGIO_PIAZZA_FALLITA_NO_INTERAZIONE_CON_FILE);
+		}	
 	}
 
 	@Override
 	public void rimuovi() {
 	}
 
-	public void showPiazza() {
-		Piazza piazza = getGestoreParametri().getPiazza();
-		ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(getGestoreParametri());
-		ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(getGestoreParametri());
-		ViewParametroIntervalloOrario viewParamtroIntervalli = new ViewParametroIntervalloOrario(getGestoreParametri());
+	public void showPiazza() throws IOException {
+		Piazza piazza;
+		try {
+			piazza = getGestoreParametri().getPiazza();
+			ViewParametroLuogo viewParametroLuogo = new ViewParametroLuogo(getGestoreParametri());
+			ViewParametroGiorno viewParametroGiorno = new ViewParametroGiorno(getGestoreParametri());
+			ViewParametroIntervalloOrario viewParamtroIntervalli = new ViewParametroIntervalloOrario(getGestoreParametri());
+			
+			System.out.println("Piazza " + piazza.getCitta());
+			viewParametroLuogo.showLuoghi();
+			viewParametroGiorno.showGiorniPresenti();
+			viewParamtroIntervalli.showIntervalli();
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_LETTURA_PARAMETRI_FILE);
+		}
 		
-		System.out.println("Piazza " + piazza.getCitta());
-		viewParametroLuogo.showLuoghi();
-		viewParametroGiorno.showGiorniPresenti();
-		viewParamtroIntervalli.showIntervalli();
 	}
 		
 	private String inserisciCitta() {

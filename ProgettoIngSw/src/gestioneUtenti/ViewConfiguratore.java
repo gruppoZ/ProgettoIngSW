@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import java.io.IOException;
+
 import gestioneCategorie.Categoria;
 import gestioneCategorie.Gerarchia;
 import gestioneCategorie.ViewGerarchia;
@@ -28,71 +30,73 @@ public class ViewConfiguratore extends ViewUtente{
 	};
 	
 	@Override
-	public void menu(String username) {
-		GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();		
-		
-		ViewOfferte viewOfferte = new ViewOfferte();
-		ViewGerarchia viewGerarchia = new ViewGerarchia();
-		Categoria foglia;
-		
-		MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
-		int scelta = 0;
-		boolean fine = false;
-		do {
-			scelta = menuConfiguratore.scegli();
-			switch(scelta) {
-			case 0:
-				fine = true;
-				break;
-			case 1:
-				viewGerarchia = new ViewGerarchia();
-				viewGerarchia.menu();
-				
-				gestoreConfiguratore.aggiornaGerarchie();				
-				break;
-			case 2:
-				viewGerarchia = new ViewGerarchia();
-				
-				if(!gestoreConfiguratore.isGerarchieCreate())
-					System.out.println(MSG_ASSENZA_GERARCHIE);
-				else {				
-					for (Gerarchia gerarchia : gestoreConfiguratore.getGerarchie().values()) {
-						viewGerarchia.showGerarchia(gerarchia);
+	public void menu(String username) throws IOException {
+		try {
+			GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();
+			ViewOfferte viewOfferte = new ViewOfferte();
+			ViewGerarchia viewGerarchia = new ViewGerarchia();
+			Categoria foglia;
+			
+			MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
+			int scelta = 0;
+			boolean fine = false;
+			do {
+				scelta = menuConfiguratore.scegli();
+				switch(scelta) {
+				case 0:
+					fine = true;
+					break;
+				case 1:
+					viewGerarchia.update();
+					viewGerarchia.menu();
+					
+					gestoreConfiguratore.aggiornaGerarchie();				
+					break;
+				case 2:
+					viewGerarchia.update();
+					
+					if(!gestoreConfiguratore.isGerarchieCreate())
+						System.out.println(MSG_ASSENZA_GERARCHIE);
+					else {				
+						for (Gerarchia gerarchia : gestoreConfiguratore.getGerarchie().values()) {
+							viewGerarchia.showGerarchia(gerarchia);
+						}
 					}
+					break;
+				case 3:
+					ViewParametri viewPiazza = new ViewParametroPiazza();
+					viewPiazza.menu();
+					break;
+				case 4:
+					viewGerarchia.update();
+					viewOfferte = new ViewOfferte();
+					
+					foglia = viewGerarchia.scegliFoglia();
+					
+					viewOfferte.showOfferteAperteByCategoria(foglia);
+					break;
+				case 5:
+					viewGerarchia.update();
+					viewOfferte = new ViewOfferte();
+					
+					foglia = viewGerarchia.scegliFoglia();
+					
+					viewOfferte.showOfferteInScambioByCategoria(foglia);
+					viewOfferte.showOfferteChiuseByCategoria(foglia);
+					break;
+				case 6:
+					ViewInfoDiSistema viewInfo = new ViewInfoDiSistema();
+					
+					viewInfo.menu();
+					
+					gestoreConfiguratore.aggiornaGerarchie();
+					break;
+				default:
+					System.out.println(TXT_ERRORE);	
 				}
-				break;
-			case 3:
-				ViewParametri viewPiazza = new ViewParametroPiazza();
-				viewPiazza.menu();
-				break;
-			case 4:
-				viewGerarchia = new ViewGerarchia();
-				viewOfferte = new ViewOfferte();
-				
-				foglia = viewGerarchia.scegliFoglia();
-				
-				viewOfferte.showOfferteAperteByCategoria(foglia);
-				break;
-			case 5:
-				viewGerarchia = new ViewGerarchia();
-				viewOfferte = new ViewOfferte();
-				
-				foglia = viewGerarchia.scegliFoglia();
-				
-				viewOfferte.showOfferteInScambioByCategoria(foglia);
-				viewOfferte.showOfferteChiuseByCategoria(foglia);
-				break;
-			case 6:
-				ViewInfoDiSistema viewInfo = new ViewInfoDiSistema();
-				
-				viewInfo.menu();
-				
-				gestoreConfiguratore.aggiornaGerarchie();
-				break;
-			default:
-				System.out.println(TXT_ERRORE);	
-			}
-		} while(!fine);
-	}
-	
+			} while(!fine);
+		} catch (IOException e) {
+			throw new IOException(e.getMessage());
+		}	
+	}	
 }
