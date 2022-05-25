@@ -1,5 +1,8 @@
 package main;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import gestioneLogin.ViewAuth;
 import gestioneLogin.ViewAuthConfiguratore;
 import gestioneLogin.ViewAuthFruitore;
@@ -26,7 +29,7 @@ public class SchermataPrincipale {
 			MSG_CONFIGURATORE,
 	};
 	
-	public void init() {
+	public void init() throws FileNotFoundException, IOException {
 		MyMenu menuSceltaUtente = new MyMenu(TXT_TITOLO_UTENTE, TXT_VOCI_UTENTE);
 		int scelta = 0;
 		boolean fine = false;
@@ -48,7 +51,7 @@ public class SchermataPrincipale {
 		} while(!fine);
 	}
 	
-	private void menuAccesso(ViewAuth auth) {
+	private void menuAccesso(ViewAuth auth) throws FileNotFoundException, IOException {
 		MyMenu menuAccessoConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;

@@ -1,5 +1,7 @@
 package gestioneOfferte;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import gestioneCategorie.Categoria;
@@ -8,7 +10,6 @@ import gestioneScambioArticoli.GestioneBaratto;
 import main.JsonIO;
 
 public class GestioneOfferta {
-
 	private static final String PATH_OFFERTE = "src/gestioneOfferte/offerte.json";
 	private static final String PATH_STORICO_CAMBIO_STATI = "src/gestioneOfferte/storico_cambio_stati.json";
 	
@@ -16,7 +17,7 @@ public class GestioneOfferta {
 	
 	HashMap<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
 	
-	public GestioneOfferta() {
+	public GestioneOfferta() throws FileNotFoundException, IOException {
 		this.storicoMovimentazioni = leggiStoricoCambioStati();
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
@@ -50,8 +51,9 @@ public class GestioneOfferta {
 	 * 
 	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
 	 * @param offerta
+	 * @throws IOException 
 	 */
-	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) {
+	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) throws IOException {
 		int id = offerta.getId();
 		String oldState, newState;
 		oldState = offerta.getStatoOfferta().getStato();
@@ -74,7 +76,7 @@ public class GestioneOfferta {
 		salvaOfferte();
 	}
 
-	protected List<Offerta> leggiListaOfferte() {
+	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
 		if(listaOfferte == null) //per evitare di salvare "null" nel file offerte.json 
 			listaOfferte = new ArrayList<Offerta>();
@@ -90,8 +92,9 @@ public class GestioneOfferta {
 	 * @param gestoreBaratto
 	 * @param listaOfferte
 	 * @return
+	 * @throws IOException 
 	 */
-	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
+	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) throws IOException {
 		gestisciBarattiScaduti(gestoreBaratto, listaOfferte);
 		return listaOfferte;
 	}
@@ -102,8 +105,9 @@ public class GestioneOfferta {
 	 * 
 	 * @param gestoreBaratto
 	 * @param listaOfferte
+	 * @throws IOException 
 	 */
-	private void gestisciBarattiScaduti(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) {
+	private void gestisciBarattiScaduti(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) throws IOException {
 		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
 		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
 		gestoreBaratto.caricaBarattiScadutiEOfferteScadute(listaBarattiScaduti, listaOfferteScadute);
@@ -121,8 +125,9 @@ public class GestioneOfferta {
 	 * Precondizione: offerta != null
 	 * 
 	 * @param offerta
+	 * @throws IOException 
 	 */
-	private void cambioOffertaScaduta(Offerta offerta) {
+	private void cambioOffertaScaduta(Offerta offerta) throws IOException {
 		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
 	}
 	
@@ -270,15 +275,15 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() {
+	protected HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() throws FileNotFoundException, IOException {
 		return JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
 	}
 	
-	public void salvaOfferte() {
+	public void salvaOfferte() throws IOException {
 		JsonIO.salvaOggettoSuJson(PATH_OFFERTE, listaOfferte);
 	}
 	
-	protected void salvaStoricoCambioStati() {
+	protected void salvaStoricoCambioStati() throws IOException {
 		JsonIO.salvaOggettoSuJson(PATH_STORICO_CAMBIO_STATI, storicoMovimentazioni);
 	}
 	
@@ -305,8 +310,9 @@ public class GestioneOfferta {
 	 * 
 	 * @param articolo
 	 * @param username
+	 * @throws IOException 
 	 */
-	protected void manageAggiuntaOfferta(Articolo articolo, String username) {
+	protected void manageAggiuntaOfferta(Articolo articolo, String username) throws IOException {
 		int id = getIdMax() + 1;
 		Offerta offerta = creaOfferta(id, articolo, username);
 		aggiungiOfferta(offerta);

@@ -1,5 +1,8 @@
 package gestioneLogin;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import gestioneUtenti.Fruitore;
 
 public class ViewAuthFruitore extends ViewAuth {	
@@ -14,13 +17,13 @@ public class ViewAuthFruitore extends ViewAuth {
 	}
 
 	@Override
-	public void login() {
+	public void login() throws FileNotFoundException, IOException {
 		System.out.printf(INTESTAZIONE_LOGIN, TIPOLOGIA_UTENTE);
 		super.checkLogin(fruitore);
 	}
 
 	@Override
-	public void registrati() {
+	public void registrati() throws FileNotFoundException, IOException {
 		System.out.printf(INTESTAZIONE_REGISTRAZIONE, TIPOLOGIA_UTENTE);
 		
 		super.registrati(fruitore);

@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import java.io.IOException;
+
 import gestioneLogin.Credenziali;
 
 public class Fruitore extends Utente {
@@ -16,7 +18,7 @@ public class Fruitore extends Utente {
 	}
 
 	@Override
-	public void menu(String username) {
+	public void menu(String username) throws IOException {
 		(new ViewFruitore()).menu(username);				
 	}
 }

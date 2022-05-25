@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import gestioneScambioArticoli.GestioneBaratto;
 class testGestioneScambioArticoli {
 
 	@Test
-	void compareAppointments() {
+	void compareAppointments() throws FileNotFoundException, IOException {
 		GestioneBaratto gestoreBaratti = new GestioneBaratto();
 		Appuntamento appuntamento1 = new Appuntamento("nord", LocalDate.now(),LocalTime.now(), "pippo");
 		Appuntamento appuntamento2 = new Appuntamento("sud", LocalDate.now(),LocalTime.now(), "pippo");
@@ -31,7 +33,7 @@ class testGestioneScambioArticoli {
 	}
 	
 	@Test
-	void switchOffertToClose() {
+	void switchOffertToClose() throws FileNotFoundException, IOException {
 		CampoCategoria campo = new CampoCategoria("Stato", false);
 		List<CampoCategoria> listaCampi = new ArrayList<CampoCategoria>();
 		listaCampi.add(campo);
@@ -55,7 +57,7 @@ class testGestioneScambioArticoli {
 	}
 	
 	@Test
-	void dataScadenzaCalcolataCorrettamente() {
+	void dataScadenzaCalcolataCorrettamente() throws FileNotFoundException, IOException {
 		GestioneBaratto gestoreBaratti = new GestioneBaratto();
 		LocalDate dataScadenzaCalcolata = gestoreBaratti.calcolaDataScadenza(5);
 		LocalDate dataScadenza = LocalDate.now().plusDays(5);

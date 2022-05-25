@@ -1,17 +1,16 @@
 package main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -44,12 +43,8 @@ public class JsonIO {
 	 * @param path
 	 * @param oggetto
 	 */
-	public static void salvaOggettoSuJson(String path, Object oggetto) {
-		try { 
-			writer.writeValue(Paths.get(path).toFile(), oggetto);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public static void salvaOggettoSuJson(String path, Object oggetto) throws IOException {
+		writer.writeValue(Paths.get(path).toFile(), oggetto);
 	}
 
 	/**
@@ -57,22 +52,16 @@ public class JsonIO {
 	 * @param path
 	 * @return
 	 */
-	public static HashMap<String, Gerarchia> leggiGerarchieDaJson(String path) {
-		HashMap<String, Gerarchia> result = null;
-		try { 
-			result = mapper.readValue(new File(path), new TypeReference<HashMap<String, Gerarchia>>() {});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
+	public static HashMap<String, Gerarchia> leggiGerarchieDaJson(String path) throws IOException, FileNotFoundException {
+		return mapper.readValue(new File(path), new TypeReference<HashMap<String, Gerarchia>>() {});
 	}
 	
-	public static HashMap<String, ArrayList<Credenziali>> leggiCredenzialiHashMapDaJson(String path) {
+	public static HashMap<String, ArrayList<Credenziali>> leggiCredenzialiHashMapDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
 	
-	public static HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) {
+	public static HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Integer.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
 	}
@@ -86,28 +75,20 @@ public class JsonIO {
 	 * @param elementClassValue
 	 * @return
 	 */
-	private static <K, V> HashMap<K, V> leggiHashMapDaJson(String path, JavaType elementClassKey, JavaType elementClassValue) {
+	private static <K, V> HashMap<K, V> leggiHashMapDaJson(String path, JavaType elementClassKey, JavaType elementClassValue) throws IOException, FileNotFoundException{
 		HashMap<K, V> mappa = null;
 		
-		MapType listType;
-		listType  = typeFactory.constructMapType(HashMap.class, elementClassKey, elementClassValue);	
-		try {
-			mappa = mapper.readValue(new File(path), listType);		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		MapType listType = typeFactory.constructMapType(HashMap.class, elementClassKey, elementClassValue);	
+		mappa = mapper.readValue(new File(path), listType);		
+		
 		return mappa;
 	}
 		
-	public static <T> List<T> leggiListaDaJson(String path, Class<T> elementClass) {
+	public static <T> List<T> leggiListaDaJson(String path, Class<T> elementClass) throws IOException, FileNotFoundException {
 		List<T> lista = null;
-		CollectionType listType ;
-		listType  = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
-		try {
-			lista = mapper.readValue(new File(path), listType);		
-		} catch (Exception e) {
-            e.printStackTrace();
-        }
+		CollectionType listType = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
+
+		lista = mapper.readValue(new File(path), listType);	
 		
 		return lista;
 	}
@@ -123,12 +104,7 @@ public class JsonIO {
 		return piazza;
 	}
 	
-	public static <T> Object leggiOggettoDaJson(String path, Class<T> classe) {
-		try {
-			return mapper.readValue(new File(path), classe);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static <T> Object leggiOggettoDaJson(String path, Class<T> classe) throws IOException {
+		return mapper.readValue(new File(path), classe);
 	}
 }

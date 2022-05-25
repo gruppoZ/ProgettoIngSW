@@ -1,6 +1,9 @@
 package gestioneParametri;
 
+import java.io.IOException;
+
 public abstract class ViewParametri {
+	private static final String MSG_ERRORE_INIT_PARAMETRI = "*** Errore inizializzazione Parametri ***";
 	//costanti per menu
 	protected static final String TXT_TITOLO = "Gestione Piazza";
 	protected static final String TXT_TITOLO_SOTTOMENU = "-----------";
@@ -25,8 +28,12 @@ public abstract class ViewParametri {
 	
 	private GestioneParametri gestoreParametri;
 	
-	public ViewParametri() {
-		gestoreParametri = new GestioneParametri();
+	public ViewParametri() throws IOException {
+		try {
+			gestoreParametri = new GestioneParametri();
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_INIT_PARAMETRI);
+		}
 	}
 	
 	/**
@@ -42,7 +49,7 @@ public abstract class ViewParametri {
 		return this.gestoreParametri;
 	}
 	
-	public abstract void menu();
-	public abstract void aggiungi();
-	public abstract void rimuovi();
+	public abstract void menu() throws IOException;
+	public abstract void aggiungi() throws IOException;
+	public abstract void rimuovi() throws IOException;
 }

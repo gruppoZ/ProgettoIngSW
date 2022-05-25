@@ -1,5 +1,6 @@
 package test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ class testGestioneGerarchia {
 	GestioneGerarchie gestoreGerarchia;
 	
 	@Test
-	void test() {
+	void test() throws IOException {
 		gestoreGerarchia = new GestioneGerarchie();
 		
 		List<CampoCategoria> campiNativiDefault = new ArrayList<>();

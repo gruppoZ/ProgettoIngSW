@@ -1,6 +1,6 @@
-package gestioneInfoDiSistema;
+package gestioneFileProgramma;
 
-public class InfoDiSistema {
+public class FileDiSistema {
 
 	private String urlGerarchie;
 	private String urlParametri;

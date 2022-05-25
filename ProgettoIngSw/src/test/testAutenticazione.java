@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import gestioneLogin.Credenziali;
@@ -11,7 +14,7 @@ import gestioneUtenti.*;
 class testAutenticazione {
 
 	@Test
-	void canNotLoginNotRegisteredUser() {
+	void canNotLoginNotRegisteredUser() throws FileNotFoundException, IllegalArgumentException, IOException {
 		String username = "Pippo";
 		String password = "Pluto";
 		
@@ -23,7 +26,7 @@ class testAutenticazione {
 	}
 
 	@Test
-	void canObtainDefaultCredentialsFromFile() {	
+	void canObtainDefaultCredentialsFromFile() throws IOException {	
 		GestioneAutenticazione gestoreAuth = new GestioneAutenticazione();
 		Credenziali credenzialiDefault = gestoreAuth.getCredenzialiDefault();
 		Credenziali credenziali = new Credenziali("root", "root");

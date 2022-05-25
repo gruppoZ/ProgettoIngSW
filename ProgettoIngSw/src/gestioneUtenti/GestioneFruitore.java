@@ -1,5 +1,7 @@
 package gestioneUtenti;
 
+import java.io.IOException;
+
 import gestioneParametri.GestioneParametri;
 import gestioneParametri.Piazza;
 
@@ -11,8 +13,9 @@ public class GestioneFruitore extends GestioneUtente{
 	/**
 	 * Postcondizione: gestoreParametri != null
 	 * @param username
+	 * @throws IOException 
 	 */
-	public GestioneFruitore(String username) {
+	public GestioneFruitore(String username) throws IOException {
 		super();
 		gestoreParametri = new GestioneParametri();
 		this.username = username;
@@ -22,7 +25,7 @@ public class GestioneFruitore extends GestioneUtente{
 		return gestoreParametri.isPiazzaCreata();
 	}
 	
-	public Piazza getPiazza() {
+	public Piazza getPiazza() throws IOException {
 		return gestoreParametri.getPiazza();
 	}
 	

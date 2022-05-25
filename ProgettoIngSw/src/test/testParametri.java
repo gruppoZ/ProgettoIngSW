@@ -3,6 +3,8 @@ package test;
 import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ class testParametri {
 	private static final String INVALIDE_DATE = "300/10/2021";
 
 	@Test
-	void canAddAndRemovePlacesFromPiazzaAlreadyCreated() {
+	void canAddAndRemovePlacesFromPiazzaAlreadyCreated() throws IOException, Exception {
 		GestioneParametri gestroreParametri = new GestioneParametri();
 		Piazza piazza = gestroreParametri.getPiazza();
 		
@@ -31,7 +33,7 @@ class testParametri {
 	}
 	
 	@Test
-	void canAddIntervvalloOrarioInListIntervalli() {
+	void canAddIntervvalloOrarioInListIntervalli() throws IOException {
 		GestioneParametri gestoreParametri = new GestioneParametri();
 		List<IntervalloOrario> intervalli = new ArrayList<>();
 		
@@ -47,7 +49,7 @@ class testParametri {
 	}
 	
 	@Test
-	void canNotConvertFromStringToLocalDate() {
+	void canNotConvertFromStringToLocalDate() throws IOException {
 		GestioneParametri gestoreParametri = new GestioneParametri();
 		
 		assertThrows(DateTimeException.class, () -> {

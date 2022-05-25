@@ -1,10 +1,16 @@
 package gestioneLogin;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import gestioneUtenti.Utente;
 import it.unibs.fp.mylib.InputDati;
 
 public abstract class ViewAuth {
 
+//	protected static final String MSG_ERROR_LOGIN = "Impossibile eseguire login";
+	protected static final String MSG_ERROR_LOGIN_FILE_NON_TROVATO = "Impossibile eseguire login. Fallita interazione con il file";
+	private static final String MSG_ERRORE_LETTURA_CREDENZIALI = "*** ERRORE letture credenziali da file ***";
 	protected static final String INTESTAZIONE_LOGIN = "\nLogin %s";
 	protected static final String INTESTAZIONE_REGISTRAZIONE = "Registrazione %s";
 	private static final String MSG_RIPETI_LOGIN = "Vuoi rifare il login?";
@@ -25,25 +31,32 @@ public abstract class ViewAuth {
 		gestoreAuth = new GestioneAutenticazione();
 	}
 	
-	public abstract void login();
-	public abstract void registrati();
+	public abstract void login() throws FileNotFoundException, IOException;
+	public abstract void registrati() throws FileNotFoundException, IOException;
 	
 	/**
 	 * Precondizione: utente != null
 	 * @param utente
 	 * @return
+	 * @throws IOException 
 	 */
-	public boolean login(Utente utente) {
+	public boolean login(Utente utente) throws FileNotFoundException, IOException {
 		String username = chiediUsername(MSG_USERNAME_LOGIN);
 		String password = chiediPassword(MSG_PASSWORD_LOGIN);
 		
-		if(this.gestoreAuth.login(utente, new Credenziali(username, password))) {
-			System.out.println(MSG_LOGIN_EFFETTUATO);
-			return true;
-		}
-		else {
-			System.out.println(MSG_CREDENZIALI_ERRATE);
-			return false;
+		try {
+			if(this.gestoreAuth.login(utente, new Credenziali(username, password))) {
+				System.out.println(MSG_LOGIN_EFFETTUATO);
+				return true;
+			}
+			else {
+				System.out.println(MSG_CREDENZIALI_ERRATE);
+				return false;
+			}
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(MSG_ERROR_LOGIN_FILE_NON_TROVATO);
+		} catch (IllegalArgumentException | IOException e) {
+			throw new IOException(MSG_ERROR_LOGIN_FILE_NON_TROVATO);
 		}
 	}
 	
@@ -51,26 +64,31 @@ public abstract class ViewAuth {
 	 * Precondizione: utente != null
 	 * Permette all'utente di registrarsi gestendo il caso in cui si utilizzi un username già in uso
 	 * @param utente
+	 * @throws IOException 
 	 */
-	public void registrati(Utente utente) {
+	public void registrati(Utente utente) throws IOException {
 		String username;
 		String password;
 		Credenziali credenziali;
 				
 		username = chiediUsername(MSG_USERNAME);
 		
-		while(this.gestoreAuth.checkRegistrazione(username)) {
-			System.out.println(MSG_USERNAME_ESISTENTE);
-			username = chiediUsername(MSG_USERNAME);
-		}
-		
-		password = chiediPassword(MSG_PASSWORD);
-		
-		credenziali = new Credenziali(username, password);
-		
-		System.out.printf(MSG_RESISTRAZIONE_SUCCESSO_GIVE_CREDENZIALI, username, password);
+		try {
+			while(this.gestoreAuth.checkRegistrazione(username)) {
+				System.out.println(MSG_USERNAME_ESISTENTE);
+				username = chiediUsername(MSG_USERNAME);
+			}
+			
+			password = chiediPassword(MSG_PASSWORD);
+			
+			credenziali = new Credenziali(username, password);
+			
+			System.out.printf(MSG_RESISTRAZIONE_SUCCESSO_GIVE_CREDENZIALI, username, password);
 
-		this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
+			this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
+		} catch (IOException e) {
+			throw new IOException(MSG_ERRORE_LETTURA_CREDENZIALI);
+		}
 	}
 	
 	/**
@@ -78,8 +96,10 @@ public abstract class ViewAuth {
 	 * Verifica se l'utente si è loggatto correttaente, in tal caso mostra il relativo menu
 	 * Altrimenti viene chiesto se si vuole ripetere il login
 	 * @param utente
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void checkLogin(Utente utente) {
+	public void checkLogin(Utente utente) throws FileNotFoundException, IOException {
 		boolean ritenta;
 		do {
 			if(login(utente)) {

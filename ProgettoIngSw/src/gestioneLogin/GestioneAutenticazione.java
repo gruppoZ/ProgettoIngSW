@@ -1,5 +1,7 @@
 package gestioneLogin;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,8 +19,9 @@ public class GestioneAutenticazione {
 	 * 
 	 * @param credenziali
 	 * @return TRUE se le credenziali corrispondono a quelli di default
+	 * @throws IOException 
 	 */
-	public boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) {
+	public boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) throws IOException {
 		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		
 		if(credenzialiDefault.checkCredenzialiUguali(credenziali))
@@ -34,8 +37,11 @@ public class GestioneAutenticazione {
 	 * @param path
 	 * @param erroreUsername
 	 * @return TRUE se il login e' avvenuto con successo FALSE se ho avuto qualche problema (es passwrod errata)
-	 */
-	public boolean login(Utente utente, Credenziali credenziali) {		
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
+	 * @throws FileNotFoundException 
+	 */	
+	public boolean login(Utente utente, Credenziali credenziali) throws FileNotFoundException, IllegalArgumentException, IOException {		
 		if(checkCredenziali(utente, PATH_CREDENZIALI, credenziali)) {
 			utente.setCredenziali(credenziali);
 			return true;
@@ -49,8 +55,11 @@ public class GestioneAutenticazione {
 	 * Veiene salvato l'utente con le relative credenziali
 	 * @param credenziali
 	 * @param utente
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
+	 * @throws FileNotFoundException 
 	 */
-	protected void effettuaRegistrazione(Credenziali credenziali, Utente utente) {
+	protected void effettuaRegistrazione(Credenziali credenziali, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
 		aggiornaFileCredenziali(credenziali, utente);
 	}
 	
@@ -58,8 +67,9 @@ public class GestioneAutenticazione {
 	 * 
 	 * @param username
 	 * @return TRUE se è possibile procedere con la registrazione utilizzando username, FALSE altrimenti
+	 * @throws IOException 
 	 */
-	protected boolean checkRegistrazione(String username) {
+	protected boolean checkRegistrazione(String username) throws IOException {
 		return (!checkUnique(username, PATH_CREDENZIALI) || checkDefault(username));
 	}
 		
@@ -72,12 +82,13 @@ public class GestioneAutenticazione {
 	 * @param password
 	 * @param erroreUsername
 	 * @return TRUE se le credenziali sono valide FALSE altrimenti
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
+	 * @throws FileNotFoundException 
 	 */
-	private boolean checkCredenziali(Utente utente, String path, Credenziali credenzaliDaControllare) {
+	private boolean checkCredenziali(Utente utente, String path, Credenziali credenzaliDaControllare) throws FileNotFoundException, IllegalArgumentException, IOException {
 		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(path);
-		//problema e' che creo objectMapper pure qua -> potrei risolvere creando un metodo leggiCredenzialiHashMapDaJson che 
-		//fa le righe 105-107 e chiama il generic
-		
+	
 		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
 		for (Credenziali credenziali : listaCredenziali) {
 			if(credenziali.checkCredenzialiUguali(credenzaliDaControllare))
@@ -91,8 +102,11 @@ public class GestioneAutenticazione {
 	 * @param username
 	 * @param path
 	 * @return TRUE se lo username e' unico FALSE se esiste gia'
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
+	 * @throws FileNotFoundException 
 	 */
-	private boolean checkUnique(String username, String path) {
+	private boolean checkUnique(String username, String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(path);
 		
 		for (ArrayList<Credenziali> listaCredenziali : elencoCredenziali.values()) {
@@ -110,8 +124,9 @@ public class GestioneAutenticazione {
 	 * @param username
 	 * @param pathDefault
 	 * @return TRUE se lo username passato e' uguale a quello utilizzato nelle credenziali di default
+	 * @throws IOException 
 	 */
-	private boolean checkDefault(String username) {
+	private boolean checkDefault(String username) throws IOException {
 		
 		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);		
 		String usernameDefault = credenzialiDefault.getUsername();
@@ -122,7 +137,7 @@ public class GestioneAutenticazione {
 		return false;
 	}
 	
-	public Credenziali getCredenzialiDefault() {
+	public Credenziali getCredenzialiDefault() throws IOException {
 		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		return credenzialiDefault;
 	}
@@ -132,8 +147,11 @@ public class GestioneAutenticazione {
 	 * 
 	 * @param credenziali
 	 * @param utente
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
+	 * @throws FileNotFoundException 
 	 */
-	private void aggiornaFileCredenziali(Credenziali credenziali, Utente utente) {
+	private void aggiornaFileCredenziali(Credenziali credenziali, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
 		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(PATH_CREDENZIALI);
 		
 		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());

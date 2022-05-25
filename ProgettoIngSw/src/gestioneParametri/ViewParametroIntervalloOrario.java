@@ -1,5 +1,6 @@
 package gestioneParametri;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
 import it.unibs.fp.mylib.InputDati;
@@ -7,6 +8,8 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewParametroIntervalloOrario extends ViewParametri {
 
+	private static final String MSG_ERRORE_AGGIUNTA_INTERVALLO_ORARIO_FALLITA_NO_INTERAZIONE_CON_FILE = "Impossibile aggiungere intervallo orario. Fallita interazione con il file";
+	private static final String MSG_ERRORE_RIMOZIONE_INTERVALLO_ORARIO_FALLITA_NO_INTERAZIONE_CON_FILE = "Impossibile rimuovere intervallo orario. Fallita interazione con il file";
 	private static final String MSG_WARNING_ORARIO_NON_VALIDO_REINSERIRE = "L'orario che hai inserito non e' accettabile.\nInserisci un altro orario: ";
 	private static final String ASK_ORARIO = "Inserisci un orario: ";
 	private static final String MSG_GIVE_INTERVALLI_PRESENTI = "Intervalli presenti: ";
@@ -39,11 +42,13 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	}
 	
 	@Override
-	public void menu() {
+	public void menu() throws IOException {
 		MyMenu menuModificaIntervalli = new MyMenu(TIPOLOGIA_PARAMETRO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
 		do {
+			showIntervalli();
+			
 			scelta = menuModificaIntervalli.scegli();
 			switch(scelta) {
 			case 0:
@@ -62,19 +67,21 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	}
 
 	@Override
-	public void aggiungi() {
+	public void aggiungi() throws IOException {
 		
 		do {
 			List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
-			showIntervalli();
+			//showIntervalli();
 			IntervalloOrario daAggiungere = creaIntervalloOrario();
 			
 			try {
 				getGestoreParametri().aggiungiIntervalloOrario(listaIntervalli, daAggiungere);
 				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
 				
-				showIntervalli();
-			} catch(RuntimeException e) {
+				//showIntervalli();
+			} catch (IOException e) {
+				throw new IOException(MSG_ERRORE_AGGIUNTA_INTERVALLO_ORARIO_FALLITA_NO_INTERAZIONE_CON_FILE);
+			} catch (Exception e) {
 				System.out.println(MSG_INTERVALLI_SOVRAPPOSTI);
 			}
 		} while(InputDati.yesOrNo(ASK_ALTRI_INTERVALLI));
@@ -82,23 +89,23 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	}
 
 	@Override
-	public void rimuovi() {
+	public void rimuovi() throws IOException {
 		List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
-
-		showIntervalli();
 		
-		System.out.println(ASK_ORA_INIZIALE_INTERVALLO_RIMUOVERE);
-		LocalTime orarioMinDaEliminare = creaOrarioMin(LocalTime.MIN, LocalTime.of(23, 0));
-		System.out.printf(GIVE_ORA_INIZIALE_INTERVALLO_RIMUOVERE,orarioMinDaEliminare.toString());
-					
 		if(!getGestoreParametri().checkVincolIntervalliMinimi())
 			System.out.println(MSG_ERRORE_RIMOZIONE_INTERVALLI_INSUFFICIENTI);
 		else {
+			
+			System.out.println(ASK_ORA_INIZIALE_INTERVALLO_RIMUOVERE);
+			LocalTime orarioMinDaEliminare = creaOrarioMin(LocalTime.MIN, LocalTime.of(23, 0));
+			System.out.printf(GIVE_ORA_INIZIALE_INTERVALLO_RIMUOVERE,orarioMinDaEliminare.toString());
+				
 			try {
 				getGestoreParametri().rimuoviIntervalloOrario(listaIntervalli, orarioMinDaEliminare);
 				System.out.println(MSG_INTERVALLO_RIMOSSO);
-				showIntervalli();
-			} catch (RuntimeException e) {
+			} catch (IOException e) {
+				throw new IOException(MSG_ERRORE_RIMOZIONE_INTERVALLO_ORARIO_FALLITA_NO_INTERAZIONE_CON_FILE);
+			} catch (Exception e) {
 				System.out.println(MSG_ERRORE_RIMOZIONE_INTERVALLO_NON_VALIDO);
 			}
 		}

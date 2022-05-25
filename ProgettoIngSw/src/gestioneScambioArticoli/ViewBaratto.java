@@ -1,5 +1,6 @@
 package gestioneScambioArticoli;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +19,9 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
+	private static final String MSG_ERROR_SHOW_OFFERTE = "\nNon è stato possibile mostare le offerte";
+	private static final String MSG_ERRORE_INIT_GESTIONE_BARATTO = "*** ERRORE inizializzazione Gestione Baratto ***";
+	private static final String MSG_ERRORE_INIT_PARAMETRI = "*** ERRORE inizializzazione Parametri ***";
 	private static final String MSG_BARATTI_ASSENTI = "Nessun baratto disponibile.";
 	private static final String MSG_PROPRIETARIO_APPUNTAMENTO = "\nHai fissato il seguente appuntamento:";
 	private static final String MSG_PROPOSTA_APPUNTAMENTO = "\nL'autore dell'altra offerta ha fissato il seguente appuntamento:";
@@ -64,12 +68,22 @@ public class ViewBaratto {
 	public ViewBaratto() {
 	}
 	
-	public ViewBaratto(GestioneOfferta gestoreOfferte, GestioneFruitore gestoreFruitore) {
+	public ViewBaratto(GestioneOfferta gestoreOfferte, GestioneFruitore gestoreFruitore) throws IOException {
 		this.gestoreOfferte = gestoreOfferte;
 		this.gestoreFruitore = gestoreFruitore;
-		this.gestoreBaratto = new GestioneBaratto();
-		this.gestorePiazza = new GestioneParametri();
-		this.viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);
+		
+		try {
+			this.gestoreBaratto = new GestioneBaratto();
+		} catch (IOException e) {
+			throw new IOException(e.getMessage() + MSG_ERRORE_INIT_GESTIONE_BARATTO);
+		}
+		try {
+			this.gestorePiazza = new GestioneParametri();
+		} catch (IOException e) {
+			throw new IOException(e.getMessage() + MSG_ERRORE_INIT_PARAMETRI);
+		}
+		
+		this.viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);	
 	}
 	
 	public void menu() {	
@@ -294,22 +308,28 @@ public class ViewBaratto {
 		}
 	}
 	
-	private void showBaratto(Baratto baratto) {
+	private void showBaratto(Baratto baratto) throws IOException {
 		StringBuffer sb = new StringBuffer();
-		ViewOfferte viewOfferta = new ViewOfferte();
-		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 		
-		sb.append("**************************************\n");
-		sb.append("Baratto:\n"
-				+ "->Scadenza: " + baratto.getScadenza().format(DateTimeFormatter.ofPattern("dd MMMM uuuu")) + "\n");
+		try {
+			ViewOfferte viewOfferta = new ViewOfferte();
+			ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
+			
+			sb.append("**************************************\n");
+			sb.append("Baratto:\n"
+					+ "->Scadenza: " + baratto.getScadenza().format(DateTimeFormatter.ofPattern("dd MMMM uuuu")) + "\n");
+			
+			System.out.print(sb.toString());
+					
+			Offerta offertaA = baratto.getOffertaFruitorePromotore();
+			Offerta offertaB = baratto.getOffertaFruitoreRichiesta();
+			viewOfferta.showOfferta(offertaA);
+			viewOfferta.showOfferta(offertaB);
+			
+			viewAppuntamento.showAppuntamento(baratto.getAppuntamento());
+		} catch (IOException e) {
+			throw new IOException(e.getMessage() + MSG_ERROR_SHOW_OFFERTE);
+		}
 		
-		System.out.print(sb.toString());
-				
-		Offerta offertaA = baratto.getOffertaFruitorePromotore();
-		Offerta offertaB = baratto.getOffertaFruitoreRichiesta();
-		viewOfferta.showOfferta(offertaA);
-		viewOfferta.showOfferta(offertaB);
-		
-		viewAppuntamento.showAppuntamento(baratto.getAppuntamento());
 	}
 }

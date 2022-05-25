@@ -1,7 +1,9 @@
 package gestioneCategorie;
 
+import java.io.IOException;
 import java.util.*;
-import gestioneInfoDiSistema.GestioneInfoSistema;
+
+import gestioneFileProgramma.GestioneFileProgramma;
 import main.JsonIO;
 
 public class GestioneGerarchie {
@@ -14,35 +16,39 @@ public class GestioneGerarchie {
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
 	private HashMap<String, Gerarchia> gerarchie; 
 	
-	public GestioneGerarchie() {
-		GestioneInfoSistema info = new GestioneInfoSistema();
+	public GestioneGerarchie() throws IOException {
+		updateGerarchie();	
+	}
+	
+	public void updateGerarchie() throws IOException {
+		GestioneFileProgramma info = new GestioneFileProgramma();
 		pathGerarchie = info.getInfoSistema().getUrlGerarchie(); 
 		
 		popolaGerarchie();
 	}
 	
-	public void leggiDaFileGerarchie() {
+	public void leggiDaFileGerarchie() throws IOException {
 		this.gerarchie = JsonIO.leggiGerarchieDaJson(pathGerarchie);
 	}
 	
-	public void salvaGerarchie() {
+	public void salvaGerarchie() throws IOException {
         JsonIO.salvaOggettoSuJson(pathGerarchie, this.getGerarchie());
 	}
 	
-	public boolean isGerarchiePresenti() {
+	public boolean isGerarchiePresenti() throws IOException {
 		if(this.getGerarchie().size() == 0)
 			return false;
 		else
 			return true;
 	}
 	
-	public HashMap<String, Gerarchia> getGerarchie() {
+	public HashMap<String, Gerarchia> getGerarchie() throws IOException {
 		if(gerarchie == null)
 			leggiDaFileGerarchie();
 		return this.gerarchie;
 	}
 	
-	public void importaGerarchie(String path) {
+	public void importaGerarchie(String path) throws IOException {
 		HashMap<String, Gerarchia> gerarchieImportate = JsonIO.leggiGerarchieDaJson(path);
 		
 		this.gerarchie = gerarchieImportate;
@@ -89,7 +95,7 @@ public class GestioneGerarchie {
 		campiNativi.add(new CampoCategoria("Descrizione libera", false));
 	}
 	
-	public void fineCreazioneGerarchia() {
+	public void fineCreazioneGerarchia() throws IOException {
 		this.getGerarchie().put(this.currentGerarchia.getNomeFormattato(), currentGerarchia);
 		salvaGerarchie();
 	}
@@ -154,11 +160,11 @@ public class GestioneGerarchie {
 		return this.currentGerarchia.getRoot().getNome().equalsIgnoreCase(nomeDaEliminare);
 	}
 	
-	public boolean checkGerarchiaPresente(String nome) {
+	public boolean checkGerarchiaPresente(String nome) throws IOException {
 		return getGerarchie().containsKey(this.formattaNome(nome));
 	}
 	
-	public Gerarchia getGerarchiaByName(String nomeRoot) {
+	public Gerarchia getGerarchiaByName(String nomeRoot) throws IOException {
 		return getGerarchie().get(this.formattaNome(nomeRoot));
 	} 
 	
@@ -168,8 +174,9 @@ public class GestioneGerarchie {
 	
 	/**
 	 * Permette di ricreare la hashmap ElencoCategoria di ogni Gerarchia salvata su JSON
+	 * @throws IOException 
 	 */
-	public void popolaGerarchie() {
+	public void popolaGerarchie() throws IOException {
 		for (Gerarchia gerarchia : getGerarchie().values()) {
 			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
 		}
