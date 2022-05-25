@@ -2,7 +2,8 @@ package gestioneCategorie;
 
 import java.io.IOException;
 import java.util.*;
-import gestioneInfoDiSistema.GestioneInfoSistema;
+
+import gestioneFileProgramma.GestioneFileProgramma;
 import main.JsonIO;
 
 public class GestioneGerarchie {

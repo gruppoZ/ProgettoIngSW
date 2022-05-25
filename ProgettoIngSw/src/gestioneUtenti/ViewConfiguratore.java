@@ -5,7 +5,7 @@ import java.io.IOException;
 import gestioneCategorie.Categoria;
 import gestioneCategorie.Gerarchia;
 import gestioneCategorie.ViewGerarchia;
-import gestioneInfoDiSistema.ViewInfoDiSistema;
+import gestioneFileProgramma.ViewFileProgramma;
 import gestioneOfferte.ViewOfferte;
 import gestioneParametri.ViewParametri;
 import gestioneParametri.ViewParametroPiazza;
@@ -85,7 +85,7 @@ public class ViewConfiguratore extends ViewUtente{
 					viewOfferte.showOfferteChiuseByCategoria(foglia);
 					break;
 				case 6:
-					ViewInfoDiSistema viewInfo = new ViewInfoDiSistema();
+					ViewFileProgramma viewInfo = new ViewFileProgramma();
 					
 					viewInfo.menu();
 					

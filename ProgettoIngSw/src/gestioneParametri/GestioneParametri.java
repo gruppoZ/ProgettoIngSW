@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import gestioneInfoDiSistema.GestioneInfoSistema;
+import gestioneFileProgramma.GestioneFileProgramma;
 import main.JsonIO;
 
 public class GestioneParametri {
@@ -25,7 +25,7 @@ public class GestioneParametri {
 	 * @throws IOException 
 	 */
 	public GestioneParametri() throws IOException {
-		GestioneInfoSistema info = new GestioneInfoSistema();
+		GestioneFileProgramma info = new GestioneFileProgramma();
 		pathParametri = info.getInfoSistema().getUrlParametri(); 
 
 		this.piazza = leggiPiazza(pathParametri);
