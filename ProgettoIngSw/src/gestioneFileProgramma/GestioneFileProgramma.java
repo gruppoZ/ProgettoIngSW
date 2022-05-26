@@ -6,7 +6,7 @@ import main.JsonIO;
 
 public class GestioneFileProgramma {
 
-	private static final String PATH_INDO_SISTEMA= "src/gestioneInfoDiSistema/system-info.json";
+	private static final String PATH_INDO_SISTEMA= "resources/system-info.json";
 	private FileDiSistema infoSistema;
 	
 	public GestioneFileProgramma() throws IOException {

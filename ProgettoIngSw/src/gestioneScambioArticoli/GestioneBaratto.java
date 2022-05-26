@@ -16,8 +16,8 @@ import main.JsonIO;
 
 public class GestioneBaratto {
 
-	private static final String PATH_BARATTI = "src/gestioneScambioArticoli/baratti.json";
-	private static final String PATH_BARATTI_TERMINATI = "src/gestioneScambioArticoli/barattiTerminati.json";
+	private static final String PATH_BARATTI = "resources/baratti.json";
+	private static final String PATH_BARATTI_TERMINATI = "resources/barattiTerminati.json";
 
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
