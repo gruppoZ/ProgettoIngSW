@@ -13,10 +13,11 @@ import gestioneFileProgramma.GestioneFileProgramma;
 import main.JsonIO;
 
 public class GestioneParametri {
+	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
 	private static final int NUM_MINIMO_GIORNI = 1;
 	private static final int NUM_MINIMO_INTERVALLI = 1;
 	private static final int NUM_MINIMO_LUOGHI = 1;
-	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
+	
 	private Piazza piazza;
 	private String pathParametri;	
 	
@@ -97,11 +98,13 @@ public class GestioneParametri {
  	 * Se luogo e' gia' presente throw new RuntimeException()
  	 * @param listaLuoghi
  	 * @param luogo
- 	 * @throws IOException 
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception nel caso in cui il luogo sia già presente in listaLuoghi
  	 */
- 	public void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws RuntimeException, IOException {
+
+ 	public void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws Exception, IOException {
  		if(checkPresenzaLuogo(listaLuoghi, luogo)) {
- 			throw new RuntimeException();
+ 			throw new Exception();
  		} else {
  			listaLuoghi.add(luogo);	
  			salvaPiazza();
@@ -113,8 +116,8 @@ public class GestioneParametri {
  	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() - 1 se checkPresenzaLuogo == true
  	 * @param listaLuoghi
  	 * @param luogoDaEliminare
- 	 * @throws IOException 
- 	 * @throws Exception 
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se luogoDaEliminare non fa parte dei listaLuoghi
  	 */
  	public void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws IOException, Exception {
  		if(checkPresenzaLuogo(listaLuoghi, luogoDaEliminare)) {
@@ -149,7 +152,8 @@ public class GestioneParametri {
  	 * 
  	 * @param giorni
  	 * @param giorno
- 	 * @throws IOException 
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se giorno è già presente in giorni
  	 */
  	protected void aggiungiGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) throws IOException, Exception {
  		if(checkPresenzaGiorno(giorni, giorno)) {
@@ -168,16 +172,17 @@ public class GestioneParametri {
  	 * 
  	 * @param giorni
  	 * @param giornoDaEliminare
- 	 * @throws IOException 
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se giorno non è presente in giorni
  	 */
- 	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws RuntimeException, IOException {
+ 	protected void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws IOException, Exception {
  		if(checkPresenzaGiorno(giorni, giornoDaEliminare)) {
 			piazza.rimuoviGiorno(giornoDaEliminare);
 			piazza.setGiorni(ordinaListaGiorni(giorni));
 			
 			salvaPiazza();
 		} else {
- 			throw new RuntimeException();
+ 			throw new Exception();
 		}
  	}
  	
@@ -219,8 +224,8 @@ public class GestioneParametri {
  	 * 
  	 * @param orari
  	 * @param orarioDaAggiungere
- 	 * @throws IOException 
- 	 * @throws Exception 
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se orarioDaAggiungere non è valido per essere inserito tra gli orari già presenti
  	 */
  	protected void aggiungiIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) throws IOException, Exception {
  		if(checkValiditaIntervallo(orari, orarioDaAggiungere)) {
@@ -237,10 +242,10 @@ public class GestioneParametri {
  	 * Precondizione: orari != null, orarioDaAggiungere != null
  	 * Postcondizione: orari'.size() = orari.size() - 1 se intervalloTrovato != null
  	 * 
- 	 * @param giorni
- 	 * @param giornoDaEliminare
- 	 * @throws IOException 
- 	 * @throws Exception 
+ 	 * @param orari
+ 	 * @param orarioMinDaEliminare
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se l'intervallo da eliminare con orarioMinDaEliminare non è presente fra gli orari
  	 */
  	protected void rimuoviIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) throws IOException, Exception {
  		IntervalloOrario intervalloTrovato = null;

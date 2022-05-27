@@ -10,12 +10,11 @@ import gestioneScambioArticoli.GestioneBaratto;
 import main.JsonIO;
 
 public class GestioneOfferta {
-	private static final String PATH_OFFERTE = "src/gestioneOfferte/offerte.json";
-	private static final String PATH_STORICO_CAMBIO_STATI = "src/gestioneOfferte/storico_cambio_stati.json";
+	private static final String PATH_OFFERTE = "resources/offerte.json";
+	private static final String PATH_STORICO_CAMBIO_STATI = "resources/storico_cambio_stati.json";
 	
 	private List<Offerta> listaOfferte = new ArrayList<Offerta>(); 
-	
-	HashMap<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
+	private Map<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
 	
 	public GestioneOfferta() throws FileNotFoundException, IOException {
 		this.storicoMovimentazioni = leggiStoricoCambioStati();
@@ -78,10 +77,10 @@ public class GestioneOfferta {
 
 	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
-		if(listaOfferte == null) //per evitare di salvare "null" nel file offerte.json 
+		if(listaOfferte == null) 
 			listaOfferte = new ArrayList<Offerta>();
 		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
-		//ora salva sempre, meglio salvare solo quando faccio un cambio
+		
 		salvaOfferte();		
 		return listaOfferte;
 	}

@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="gestioneUtenti.ViewFruitore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/ViewFruitore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2233" y="953"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="main.JsonIO" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/main/JsonIO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="484" x="888" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="gestioneParametri.ViewParametri" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametri.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="224" x="2122" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="gestioneOfferte.PassaggioTraStati" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/PassaggioTraStati.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="180" x="1919" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="gestioneParametri.ViewParametroScadenza" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametroScadenza.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="434" x="3116" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="gestioneLogin.Credenziali" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneLogin/Credenziali.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5358" y="1661"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="gestioneOfferte.OffertaInScambio" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaInScambio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="5297" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="gestioneScambioArticoli.Baratto" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneScambioArticoli/Baratto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="266" x="4115" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="gestioneFileProgramma.FileDiSistema" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneFileProgramma/FileDiSistema.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2011" y="946"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="gestioneFileProgramma.ViewFileProgramma" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneFileProgramma/ViewFileProgramma.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="253" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="11" language="java" name="gestioneParametri.GiorniDellaSettimana" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/GiorniDellaSettimana.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="344" x="3398" y="3666"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="12" language="java" name="gestioneUtenti.ViewUtente" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/ViewUtente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="215" x="2523" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="gestioneOfferte.OffertaSelezionata" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaSelezionata.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="4911" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="gestioneUtenti.GestioneFruitore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/GestioneFruitore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2943" y="1379"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="gestioneOfferte.OffertaRitirata" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaRitirata.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="4525" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="gestioneOfferte.OffertaChiusa" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaChiusa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="5104" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="gestioneLogin.ViewAuth" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneLogin/ViewAuth.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="332" x="4847" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="gestioneLogin.GestioneAutenticazione" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneLogin/GestioneAutenticazione.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="280" x="4527" y="842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="gestioneOfferte.ViewOfferte" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/ViewOfferte.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="657" width="345" x="3224" y="842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="main.SchermataPrincipale" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/main/SchermataPrincipale.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="176" x="1412" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="gestioneCategorie.Gerarchia" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/Gerarchia.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="284" x="758" y="3239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="gestioneOfferte.GestioneOfferta" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/GestioneOfferta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="675" width="445" x="3630" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="gestioneScambioArticoli.ViewBaratto" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneScambioArticoli/ViewBaratto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="765" width="378" x="3590" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="gestioneUtenti.Utente" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/Utente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5296" y="922"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="25" language="java" name="gestioneOfferte.StatiOfferta" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/StatiOfferta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="209" x="639" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="26" language="java" name="gestioneScambioArticoli.Appuntamento" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneScambioArticoli/Appuntamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5612" y="2517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="gestioneCategorie.GestioneGerarchie" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/GestioneGerarchie.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="371" x="758" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="gestioneOfferte.Articolo" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/Articolo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="248" x="1150" y="3239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="gestioneParametri.Piazza" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/Piazza.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="403" x="3590" y="3239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="gestioneScambioArticoli.ViewAppuntamento" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneScambioArticoli/ViewAppuntamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="265" x="334" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="gestioneCategorie.CampoCategoria" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/CampoCategoria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="182" x="758" y="4319"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="gestioneCategorie.ViewCategoria" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/ViewCategoria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="251" x="1628" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="gestioneCategorie.Categoria" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/Categoria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="402" x="758" y="3666"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="gestioneOfferte.ViewArticolo" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/ViewArticolo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2827" y="1011"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="gestioneParametri.ViewParametroLuogo" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametroLuogo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="412" x="1670" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="gestioneOfferte.OffertaAccoppiata" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaAccoppiata.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="4332" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="gestioneUtenti.Configuratore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/Configuratore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="153" x="5030" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="gestioneParametri.ViewParametroIntervalloOrario" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametroIntervalloOrario.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="711" width="499" x="2577" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="gestioneUtenti.GestioneConfiguratore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/GestioneConfiguratore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="553" y="1299"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="gestioneParametri.ViewParametroPiazza" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametroPiazza.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1664" y="2247"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="gestioneUtenti.Fruitore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/Fruitore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5605" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="gestioneParametri.ViewParametroGiorno" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/ViewParametroGiorno.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="415" x="2122" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="gestioneFileProgramma.GestioneFileProgramma" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneFileProgramma/GestioneFileProgramma.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="191" x="2292" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="gestioneOfferte.GestioneArticolo" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/GestioneArticolo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="281" x="1314" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="gestioneParametri.GestioneParametri" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/GestioneParametri.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="747" width="448" x="3590" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="gestioneUtenti.ViewConfiguratore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/ViewConfiguratore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2483" y="960"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="gestioneLogin.ViewAuthConfiguratore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneLogin/ViewAuthConfiguratore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="302" x="4847" y="842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="main.Main" project="ProgettoIngSw_v3" file="/ProgettoIngSw_v3/src/main/Main.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="2139" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="gestioneParametri.IntervalloOrario" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneParametri/IntervalloOrario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="243" x="3782" y="3666"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="gestioneOfferte.Offerta" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/Offerta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="214" x="4078" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="51" language="java" name="gestioneOfferte.StatoOfferta" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/StatoOfferta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="216" x="4718" y="3239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="52" language="java" name="gestioneScambioArticoli.GestioneBaratto" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneScambioArticoli/GestioneBaratto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="372" x="4115" y="842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="gestioneCategorie.ViewGerarchia" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneCategorie/ViewGerarchia.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="873" width="476" x="798" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="gestioneLogin.ViewAuthFruitore" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneLogin/ViewAuthFruitore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5556" y="917"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="gestioneUtenti.GestioneUtente" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneUtenti/GestioneUtente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="840" y="1278"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="gestioneOfferte.OffertaAperta" project="ProgettoIngSw_v3" 
+    file="/ProgettoIngSw_v3/src/gestioneOfferte/OffertaAperta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="153" x="4718" y="2452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="57">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="58" name="appuntamento"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <bendpoint x="1017" y="3139"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="61" name="currentGerarchia"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="64">    
+    <bendpoint x="4190" y="2271"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="65" name="offertaFruitoreRichiesta"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="69">    
+    <bendpoint x="660" y="2322"/>    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="70" name="gestoreGerarchie"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="73" name="foglia"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="75">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="55"/>  
+  </generalization>  
+  <association id="76">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="77" name="gestoreFruitore"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="80" name="intervalliOrari"/>      
+      <multiplicity id="81" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <bendpoint x="4281" y="2139"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="83" name="offertaFruitorePromotore">        
+        <position height="18" width="129" x="4238" y="2397"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="85">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="55"/>  
+  </generalization>  
+  <association id="87">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="88" name="listaBaratti"/>      
+      <multiplicity id="89" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <bendpoint x="4145" y="3214"/>    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="91" name="articolo"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="93">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="94">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="95" name="gestoreAuth"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <bendpoint x="839" y="3135"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="98" name="gerarchie"/>      
+      <multiplicity id="99" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="101" name="credenziali"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="104" name="infoSistema"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="107" name="gestoreParametri"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="109">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <realization id="110">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="111">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="112" name="configuratore"/>      
+      <multiplicity id="113" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="114">    
+    <bendpoint x="970" y="3633"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="115" name="root"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="118" name="piazza"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="121" name="gestoreParametri"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="123">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="124">    
+    <bendpoint x="3599" y="842"/>    
+    <bendpoint x="3602" y="2242"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="125" name="gestorePiazza"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="128" name="statoOfferta"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <bendpoint x="3987" y="2355"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="131" name="listaOfferte"/>      
+      <multiplicity id="132" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <bendpoint x="3220" y="1522"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="134" name="gestoreOfferte"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="137" name="view"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="139">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="140">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="141" name="gestoreBaratto"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="144" name="gestoreOfferte"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="146">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="147">    
+    <bendpoint x="881" y="3630"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="148" name="elencoCategorie"/>      
+      <multiplicity id="149" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <bendpoint x="3620" y="842"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="151" name="gestoreOfferte"/>      
+      <multiplicity id="152" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="153">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="154" name="gestoreGerarchia"/>      
+      <multiplicity id="155" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="156">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="157" name="sottoCategorie"/>      
+      <multiplicity id="158" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="160" name="gestoreArticolo"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="163" name="giorni"/>      
+      <multiplicity id="164" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="165">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="166" name="campiNativi"/>      
+      <multiplicity id="167" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="169" name="viewOfferta"/>      
+      <multiplicity id="170" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="171">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="172" name="articolo"/>      
+      <multiplicity id="173" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="174">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="175">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <association id="176">    
+    <bendpoint x="964" y="4298"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="177" name="campiEreditati"/>      
+      <multiplicity id="178" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="179">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="180">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="181" name="gestoreFruitore"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="183">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="184">    
+    <bendpoint x="4141" y="1467"/>    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="185" name="baratto"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="187">    
+    <end type="SOURCE" refId="56"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="188">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="189" name="fruitore"/>      
+      <multiplicity id="190" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="191">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <generalization id="192">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="193">    
+    <bendpoint x="3193" y="842"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="194" name="gestoreFruitore"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

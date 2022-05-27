@@ -31,13 +31,13 @@ public class ViewParametroGiorno extends ViewParametri{
 	
 	@Override
 	public void menu() throws IOException {
-		MyMenu menuModificaGiorni = new MyMenu(TIPOLOGIA_PARAMETRO, TXT_VOCI_MODIFICA);
+		MyMenu menu = new MyMenu(TIPOLOGIA_PARAMETRO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
 		do {
 			showGiorniPresenti();
 
-			scelta = menuModificaGiorni.scegli();
+			scelta = menu.scegli();
 			switch(scelta) {
 			case 0:
 				fine = true;
@@ -93,7 +93,7 @@ public class ViewParametroGiorno extends ViewParametri{
 				System.out.println(MSG_GIORNO_RIMOSSO);
 			} catch (IOException e) {
 				throw new IOException(MSG_ERROR_RIMUZIONE_GIORNO_NO_INTERAZIONE_CON_IL_FILE);
-			} catch (RuntimeException e) {
+			} catch (Exception e) {
 				System.out.println(MSG_GIORNO_NON_VALIDO);
 			} 
 		}		

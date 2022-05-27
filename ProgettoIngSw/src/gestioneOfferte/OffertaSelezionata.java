@@ -18,9 +18,4 @@ public class OffertaSelezionata implements StatoOfferta {
 	@Override
 	public void changeState(Offerta offerta) {
 	}
-
-	@Override
-	public String toString() {
-		return "OffertaSelezionata [stato=" + stato + "]";
-	}
 }

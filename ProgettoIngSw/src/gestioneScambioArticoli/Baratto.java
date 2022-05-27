@@ -10,7 +10,6 @@ public class Baratto {
 	Appuntamento appuntamento;
 	
 	public Baratto() {
-		
 	}
 	
 	/**

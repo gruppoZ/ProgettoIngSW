@@ -7,7 +7,7 @@ import gestioneUtenti.Configuratore;
 
 public class ViewAuthConfiguratore extends ViewAuth{
 
-	private static final String MSG_ERRORE_LETTURA_CREDENZIALI_DEFAULT = "*** ERRORE lettura credenziali Default da file ***";
+	private static final String MSG_ERROR_LETTURA_CREDENZIALI_DEFAULT = "*** ERRORE lettura credenziali Default da file ***";
 	private static final String MSG_GIVE_CREDENZIALI_DEFAULT = "Credenziali Default: \n\tUsername: %s \tPassword: %s\n";
 	private static final String MSG_PRE_REGISTRAZIONE = "Le credenziali da utilizzare per il primo accesso sono:";
 	private static final String TIPOLOGIA_UTENTE = "CONFIGURATORE\n";
@@ -51,7 +51,7 @@ public class ViewAuthConfiguratore extends ViewAuth{
 				System.out.println(MSG_LOGIN_EFFETTUATO);
 				return true;
 			} else {
-				System.out.println(MSG_ERRORE_CREDENZIALI_DEFAULT);
+				System.out.println(MSG_ERROR_CREDENZIALI_DEFAULT);
 				return false;	
 			}
 			
@@ -69,7 +69,7 @@ public class ViewAuthConfiguratore extends ViewAuth{
 			
 			System.out.printf(MSG_GIVE_CREDENZIALI_DEFAULT, usernameDefault, passwordDefault);
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_LETTURA_CREDENZIALI_DEFAULT);
+			throw new IOException(MSG_ERROR_LETTURA_CREDENZIALI_DEFAULT);
 		}
 	}
 }

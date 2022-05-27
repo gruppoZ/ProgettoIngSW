@@ -55,10 +55,4 @@ public class Offerta {
 	public boolean equals(Offerta offerta) {
 		return this.id == offerta.id;
 	}
-
-	@Override
-	public String toString() {
-		return "Offerta [id=" + id + ", articolo=" + articolo + ", username=" + username + ", tipoOfferta="
-				+ statoOfferta + "]";
-	}
 }

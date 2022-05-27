@@ -92,18 +92,7 @@ public class JsonIO {
 		
 		return lista;
 	}
-	
-	public static Piazza leggiPiazzaDaJson(String path) {
-		Piazza piazza = null;
-		try {
-			piazza = mapper.readValue(new File(path), Piazza.class);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return piazza;
-	}
-	
+		
 	public static <T> Object leggiOggettoDaJson(String path, Class<T> classe) throws IOException {
 		return mapper.readValue(new File(path), classe);
 	}

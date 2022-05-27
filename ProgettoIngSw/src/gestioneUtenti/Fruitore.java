@@ -7,7 +7,6 @@ import gestioneLogin.Credenziali;
 public class Fruitore extends Utente {
 
 	public Fruitore() {
-		
 	}
 
 	/**

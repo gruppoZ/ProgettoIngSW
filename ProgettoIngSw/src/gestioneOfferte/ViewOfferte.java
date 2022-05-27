@@ -20,8 +20,17 @@ public class ViewOfferte {
 	private static final String MSG_SHOW_OFFERTE_IN_SCAMBIO = "Offerte IN SCAMBIO";
 	private static final String MSG_SHOW_OFFERTE_CHIUSE = "Offerte CHIUSE";
 	private static final String MSG_SHOW_OFFERTE_APERTE = "Offerte APERTE";
+	
+	private static final String MSG_ID_NON_VALIDO = "\nL'id selezionato non fa riferimento a nessun'offerta aperta del fruitore";
+	private static final String MSG_RICHIESTA_ID = "\nInserire l'id dell'offerta da selezionare: ";
+	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
+	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti %s per la categoria selezionata. \n";
+	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
+	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
+	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
+	
 	//costanti per menu
-	protected static final String TXT_ERRORE = "ERRORE";
+	protected static final String TXT_ERROR = "ERRORE";
 	private static final String TXT_TITOLO = "Gestisci Offerte";
 		
 	private static final String MSG_PUBBLICA_ARTICOLO = "Inserisci un articolo";
@@ -36,16 +45,7 @@ public class ViewOfferte {
 			MSG_OFFERTE_APERTE,
 			MSG_OFFERTE_AUTORE,
 			MSG_SCAMBIA_ARTICOLI			
-	};
-	
-	private static final String MSG_ID_NON_VALIDO = "\nL'id selezionato non fa riferimento a nessun'offerta aperta del fruitore";
-	private static final String MSG_RICHIESTA_ID = "\nInserire l'id dell'offerta da selezionare: ";
-	private static final String MSG_OFFERTE_BY_UTENTE_INESISTENTI = "\nNon sono presenti offerte a tuo nome:";
-	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti %s per la categoria selezionata. \n";
-	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
-	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
-	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
-	
+	};	
 	
 	private GestioneOfferta gestoreOfferte;
 	private GestioneFruitore gestoreFruitore;
@@ -108,14 +108,14 @@ public class ViewOfferte {
 				viewScambio.menu();
 				break;
 			default:
-				System.out.println(TXT_ERRORE);
+				System.out.println(TXT_ERROR);
 			}
 		} while(!fine);
 	}
 	
 	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException {
 		try {
-			showOfferte(listaOfferte); //TODO: giusto che questo metodo faccia show o meglio farlo prima di ogni chiamata al metodo?
+			showOfferte(listaOfferte); 
 			
 			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
 			
@@ -152,19 +152,19 @@ public class ViewOfferte {
 		
 	}
 	
-	public void showOfferte(List<Offerta> listaOfferte) throws RuntimeException {
+	public void showOfferte(List<Offerta> listaOfferte) {
 		if(listaOfferte.size() > 0) {
 			for (Offerta offerta : listaOfferte) {
 				showOfferta(offerta);
 			}
 		} else
-			throw new RuntimeException();
-			//System.out.println(MSG_OFFERTE_INESISTENTI);
+			System.out.println(MSG_OFFERTE_INESISTENTI);
 	}
 	
 	/**
 	 * Mostra se disponibili le offerte attive dopo aver scelto una Categoria Foglia.
 	 * Se non presenti lo viene detto a video
+	 * @param foglia
 	 */
 	public void showOfferteAperteByCategoria(Categoria foglia) { 
 		if(foglia != null) {
@@ -260,12 +260,6 @@ public class ViewOfferte {
 		sb.append("Offerta ID: " + offerta.getId() + "\n"
 				+ "->Stato Offerta: " + offerta.getStatoOfferta().getStato() + "\n"
 				+ "->" );
-		
-		//il seguente metodo NON va gestito in questo metodo ma da chi si occupa del case 3: showOfferteAperteByName()
-		//TODO: se offerta è IN SCAMBIO => Visualizzare ultima risposta fornita dall’autore
-		//dell’offerta a essa collegata
-		//Se offerta è Selezionata e visto che è di proprietà del corrente fruitore => bisogna farlo notare poichè 
-		//il fruitore dovrà allegare una risposta
 		
 		System.out.print(sb.toString());
 		viewArticolo.showArticolo(offerta.getArticolo());

@@ -52,11 +52,11 @@ public class SchermataPrincipale {
 	}
 	
 	private void menuAccesso(ViewAuth auth) throws FileNotFoundException, IOException {
-		MyMenu menuAccessoConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
+		MyMenu menuAccesso = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
 		do {
-			scelta = menuAccessoConfiguratore.scegli();
+			scelta = menuAccesso.scegli();
 			switch(scelta) {
 			case 0:
 				fine = true;
@@ -69,7 +69,6 @@ public class SchermataPrincipale {
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
-				
 			}
 		} while(!fine);
 	}

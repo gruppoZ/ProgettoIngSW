@@ -19,10 +19,5 @@ public class OffertaAperta implements StatoOfferta {
 	public void changeState(Offerta offerta) {
 		offerta.setStatoOfferta(new OffertaRitirata());	
 	}
-
-	@Override
-	public String toString() {
-		return "OffertaAperta [stato=" + stato + "]";
-	}
 }
 

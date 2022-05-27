@@ -16,8 +16,8 @@ import main.JsonIO;
 
 public class GestioneBaratto {
 
-	private static final String PATH_BARATTI = "src/gestioneScambioArticoli/baratti.json";
-	private static final String PATH_BARATTI_TERMINATI = "src/gestioneScambioArticoli/barattiTerminati.json";
+	private static final String PATH_BARATTI = "resources/baratti.json";
+	private static final String PATH_BARATTI_TERMINATI = "resources/barattiTerminati.json";
 
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
@@ -76,7 +76,7 @@ public class GestioneBaratto {
 	}
 	
 	/**
-	 * Precondizione: listaBarattiScaduti != null && listaOfferteScadute != null
+	 * Precondizione: listaBarattiScaduti != null AND listaOfferteScadute != null
 	 * Postcondizione: 	listaBarattiScaduti'.size() = listaBarattiScaduti + n,
 	 * 					listaOfferteScadute'.size() = listaBarattiScaduti + 2*n | n numero di baratti scaduti
 	 * Inserisce nelle liste i baratti scaduti e le relative offerte 
@@ -305,5 +305,4 @@ public class GestioneBaratto {
 	public boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
 		return appuntamento1.equals(appuntamento2);
 	}
-
 }

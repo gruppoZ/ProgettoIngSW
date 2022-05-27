@@ -3,7 +3,8 @@ package gestioneParametri;
 import java.io.IOException;
 
 public abstract class ViewParametri {
-	private static final String MSG_ERRORE_INIT_PARAMETRI = "*** Errore inizializzazione Parametri ***";
+	private static final String MSG_ERROR_INIT_PARAMETRI = "*** Errore inizializzazione Parametri ***";
+	
 	//costanti per menu
 	protected static final String TXT_TITOLO = "Gestione Piazza";
 	protected static final String TXT_TITOLO_SOTTOMENU = "-----------";
@@ -12,6 +13,7 @@ public abstract class ViewParametri {
 	protected static final String MSG_MODIFICA_GIORNI = "Modifica la lista dei giorni";
 	protected static final String MSG_MODIFICA_INTERVALLI = "Modifica la lista degli intervalli";
 	protected static final String MSG_MODIFICA_SCADENZA = "Modifica la scadenza";
+	
 	protected static final String [] TXT_VOCI = {
 			MSG_MODIFICA_LUOGHI,
 			MSG_MODIFICA_GIORNI,
@@ -21,6 +23,7 @@ public abstract class ViewParametri {
 	
 	protected static final String MSG_AGGIUNGI = "Aggiungi";
 	protected static final String MSG_RIMUOVI= "Rimuovi";
+	
 	protected static final String [] TXT_VOCI_MODIFICA = {
 			MSG_AGGIUNGI,
 			MSG_RIMUOVI,
@@ -32,7 +35,7 @@ public abstract class ViewParametri {
 		try {
 			gestoreParametri = new GestioneParametri();
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_INIT_PARAMETRI);
+			throw new IOException(MSG_ERROR_INIT_PARAMETRI);
 		}
 	}
 	
