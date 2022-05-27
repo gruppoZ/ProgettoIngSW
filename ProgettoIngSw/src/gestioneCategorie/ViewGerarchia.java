@@ -8,10 +8,10 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
 	
-	private static final String MSG_ERRORE_SALVATAGGIO_GERARCHIA_APPENA_CREATA = "*** ERRORE salvataggio gerarchia appena creata ***";
-	private static final String MSG_ERRORE_INIT_GERARCHIE = "*** ERRORE Inizializzazione Gerarchie ***";
-	private static final String MSG_ERRORE_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
-	private static final String MSG_ERRORE_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
+	private static final String MSG_ERROR_SALVATAGGIO_GERARCHIA_APPENA_CREATA = "*** ERRORE salvataggio gerarchia appena creata ***";
+	private static final String MSG_ERROR_INIT_GERARCHIE = "*** ERRORE Inizializzazione Gerarchie ***";
+	private static final String MSG_ERROR_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
+	private static final String MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
 	
 	private static final String MSG_GERARCHIA_RIMOSSA_SUCCESSO = "\nGerarchia eliminata con successo";
 
@@ -58,7 +58,7 @@ public class ViewGerarchia {
 		try {
 			gestoreGerarchia = new GestioneGerarchie();
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+			throw new IOException(MSG_ERROR_INIT_GERARCHIE);
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class ViewGerarchia {
 		try {
 			this.gestoreGerarchia.updateGerarchie();
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+			throw new IOException(MSG_ERROR_INIT_GERARCHIE);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class ViewGerarchia {
 				nome = InputDati.leggiStringaNonVuota("nome: " + nome + " già in uso per un'altra radice! Scegli un nome univoco per la radice: ");
 			}
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+			throw new IOException(MSG_ERROR_INIT_GERARCHIE);
 		}
 		
 		return nome;
@@ -279,13 +279,13 @@ public class ViewGerarchia {
 					
 					return foglia;
 				} else {
-					System.out.println(MSG_ERRORE_CATEGORIA_FOGLIA_INESISTENTE);
+					System.out.println(MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE);
 				}	
 			} else {
-				System.out.println(MSG_ERRORE_NOME_ROOT_INESISTENTE);
+				System.out.println(MSG_ERROR_NOME_ROOT_INESISTENTE);
 			}
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_INIT_GERARCHIE);
+			throw new IOException(MSG_ERROR_INIT_GERARCHIE);
 		}
 		return null;
 	}	
@@ -316,14 +316,7 @@ public class ViewGerarchia {
 				}
 				break;
 			case 4:
-				try {
-					Gerarchia gerarchiaInLavorazione = gestoreGerarchia.getGerarchiaInLavorazione();
-					showGerarchia(gerarchiaInLavorazione);
-				} catch (NullPointerException e) {
-					System.out.println(e.getMessage());
-					//Per come è strutturato il programma, l'utente potrà accedere a questo menù soltanto dopo
-					//aver inizializzato la gerarchia creando la categoria radice => gerarchiaInLavorazione != null.
-				}
+				this.showGerarchiaInLavorazione();
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
@@ -334,8 +327,19 @@ public class ViewGerarchia {
 			try {
 				gestoreGerarchia.fineCreazioneGerarchia();
 			} catch (IOException e) {
-				System.out.println(MSG_ERRORE_SALVATAGGIO_GERARCHIA_APPENA_CREATA);
+				System.out.println(MSG_ERROR_SALVATAGGIO_GERARCHIA_APPENA_CREATA);
 			}
+		}
+	}
+	
+	private void showGerarchiaInLavorazione() {
+		try {
+			Gerarchia gerarchiaInLavorazione = gestoreGerarchia.getGerarchiaInLavorazione();
+			showGerarchia(gerarchiaInLavorazione);
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+			//Per come è strutturato il programma, l'utente potrà accedere a questo menù soltanto dopo
+			//aver inizializzato la gerarchia creando la categoria radice => gerarchiaInLavorazione != null.
 		}
 	}
 	

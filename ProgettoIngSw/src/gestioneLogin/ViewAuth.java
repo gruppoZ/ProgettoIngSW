@@ -8,13 +8,12 @@ import it.unibs.fp.mylib.InputDati;
 
 public abstract class ViewAuth {
 
-//	protected static final String MSG_ERROR_LOGIN = "Impossibile eseguire login";
-	protected static final String MSG_ERROR_LOGIN_FILE_NON_TROVATO = "Impossibile eseguire login. Fallita interazione con il file";
-	private static final String MSG_ERRORE_LETTURA_CREDENZIALI = "*** ERRORE letture credenziali da file ***";
 	protected static final String INTESTAZIONE_LOGIN = "\nLogin %s";
 	protected static final String INTESTAZIONE_REGISTRAZIONE = "Registrazione %s";
+	protected static final String MSG_ERROR_CREDENZIALI_DEFAULT = "ATTENZIONE: CREDENZIALI ERRATE";
+	protected static final String MSG_ERROR_LOGIN_FILE_NON_TROVATO = "Impossibile eseguire login. Fallita interazione con il file";
+	private static final String MSG_ERROR_LETTURA_CREDENZIALI = "*** ERRORE letture credenziali da file ***";
 	private static final String MSG_RIPETI_LOGIN = "Vuoi rifare il login?";
-	protected static final String MSG_ERRORE_CREDENZIALI_DEFAULT = "ATTENZIONE: CREDENZIALI ERRATE";
 	protected static final String MSG_USERNAME_ESISTENTE = "ATTENZIONE: USERNAME GIA' ESISTENTE";
 	protected static final String MSG_PASSWORD_ERRATA = "ATTENZIONE: PASSWORD ERRATA";
 	protected static final String MSG_LOGIN_EFFETTUATO = "Login avvenuto con successo";
@@ -87,7 +86,7 @@ public abstract class ViewAuth {
 
 			this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
 		} catch (IOException e) {
-			throw new IOException(MSG_ERRORE_LETTURA_CREDENZIALI);
+			throw new IOException(MSG_ERROR_LETTURA_CREDENZIALI);
 		}
 	}
 	
