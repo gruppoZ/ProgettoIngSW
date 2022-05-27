@@ -305,5 +305,4 @@ public class GestioneBaratto {
 	protected boolean checkUguaglianzaAppuntamenti(Appuntamento appuntamento1, Appuntamento appuntamento2) {
 		return appuntamento1.equals(appuntamento2);
 	}
-
 }

@@ -69,7 +69,6 @@ public class SchermataPrincipale {
 				break;
 			default:
 				System.out.println(TXT_ERRORE);
-				
 			}
 		} while(!fine);
 	}

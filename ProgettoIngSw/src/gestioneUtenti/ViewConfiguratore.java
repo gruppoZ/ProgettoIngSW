@@ -37,11 +37,11 @@ public class ViewConfiguratore extends ViewUtente{
 			ViewGerarchia viewGerarchia = new ViewGerarchia();
 			Categoria foglia;
 			
-			MyMenu menuConfiguratore = new MyMenu(TXT_TITOLO, TXT_VOCI);
+			MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 			int scelta = 0;
 			boolean fine = false;
 			do {
-				scelta = menuConfiguratore.scegli();
+				scelta = menu.scegli();
 				switch(scelta) {
 				case 0:
 					fine = true;
@@ -92,7 +92,7 @@ public class ViewConfiguratore extends ViewUtente{
 					gestoreConfiguratore.aggiornaGerarchie();
 					break;
 				default:
-					System.out.println(TXT_ERRORE);	
+					System.out.println(TXT_ERROR);	
 				}
 			} while(!fine);
 		} catch (IOException e) {

@@ -10,7 +10,6 @@ public class Appuntamento {
 	private String username;
 	
 	public Appuntamento() {
-		
 	}
 	
 	/**

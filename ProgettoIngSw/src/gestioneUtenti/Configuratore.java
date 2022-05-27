@@ -7,7 +7,6 @@ import gestioneLogin.Credenziali;
 public class Configuratore extends Utente {
 
 	public Configuratore() {
-		
 	}
 	
 	/**

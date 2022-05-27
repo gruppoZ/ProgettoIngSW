@@ -27,16 +27,15 @@ public class ViewFruitore extends ViewUtente{
 	
 	@Override
 	public void menu(String username) throws IOException {
-		
 		try {
 			GestioneFruitore gestoreFruitore = new GestioneFruitore(username);
 			GestioneOfferta gestoreOfferta = new GestioneOfferta();
 			
-			MyMenu menuFruitore = new MyMenu(TXT_TITOLO, TXT_VOCI);
+			MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 			int scelta = 0;
 			boolean fine = false;
 			do {
-				scelta = menuFruitore.scegli();
+				scelta = menu.scegli();
 				switch(scelta) {
 				case 0:
 					fine = true;
@@ -65,13 +64,12 @@ public class ViewFruitore extends ViewUtente{
 					viewOfferte.menu();
 					break;
 				default:
-					System.out.println(TXT_ERRORE);
+					System.out.println(TXT_ERROR);
 					
 				}
 			} while(!fine);
 		} catch (IOException e) {
 			throw new IOException(e.getMessage() + MSG_ERROR_INIT);
 		}
-		
 	}
 }

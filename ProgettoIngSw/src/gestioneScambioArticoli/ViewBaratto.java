@@ -20,30 +20,37 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewBaratto {
 	private static final String MSG_ERROR_SHOW_OFFERTE = "\nNon è stato possibile mostare le offerte";
-	private static final String MSG_ERRORE_INIT_GESTIONE_BARATTO = "*** ERRORE inizializzazione Gestione Baratto ***";
-	private static final String MSG_ERRORE_INIT_PARAMETRI = "*** ERRORE inizializzazione Parametri ***";
+	private static final String MSG_ERROR_INIT_GESTIONE_BARATTO = "*** ERRORE inizializzazione Gestione Baratto ***";
+	private static final String MSG_ERROR_INIT_PARAMETRI = "*** ERRORE inizializzazione Parametri ***";
+	
+	private static final String MSG_SUCCESS_BARATTO_CONCLUSO = "*** Baratto concluso correttamente ***";
+	private static final String MSG_SUCCESS_DATI_INSERITI = "*** Dati inseriti correttamente ***";
+	
+	private static final String MSG_WARNING_FISSARE_APPUNTAMENTO_ENTRO_SCADENZA = "Attenzione! Se non viene fissato un apputnamento entro: %s il baratto verra' cancellato!\n";
+	private static final String MSG_WARNING_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI = "Hai inserito un appuntamento uguale a quello proposto dall'altro fruitore.\n"
+			+ "Reinserire l'appuntamento.";
+	private static final String MSG_WARNING_GIORNO_SCELTO_NON_VALIDO = "Giorno non accettato. Ricorda "
+			+ "di scegliere una data in un giorno della settimana fra quelli disponibili per gli appuntamenti."
+			+ "\n\nInserisci data nel formato d/m/yyyy:";
+	private static final String MSG_WARNING_FORMATO_GIORNO_NON_VALIDO = "Formato giorno inserito non valido!";
+	
+	private static final String MSG_OFFERTE_IN_SCAMBIO_ASSENTI = "Non hai offerte in scambio.";
+	private static final String MSG_OFFERTE_SELEZIONATE_ASSENTI = "Non hai offerte selezionate";
+	
+	private static final String MSG_ASK_FISSARE_APPUNTAMENTO = "Vuoi fissare un appuntamento?";
+	private static final String MSG_ASK_ACCETTARE_APPUNTAMENTO = "Vuoi accettare l'appuntamento?";
+	
 	private static final String MSG_BARATTI_ASSENTI = "Nessun baratto disponibile.";
 	private static final String MSG_PROPRIETARIO_APPUNTAMENTO = "\nHai fissato il seguente appuntamento:";
 	private static final String MSG_PROPOSTA_APPUNTAMENTO = "\nL'autore dell'altra offerta ha fissato il seguente appuntamento:";
-	private static final String MSG_FORMATO_GIORNO_NON_VALIDO = "Formato giorno inserito non valido!";
-	private static final String MSG_SUCCESS_BARATTO_CONCLUSO = "*** Baratto concluso correttamente ***";
-	private static final String MSG_SUCCESS_DATI_INSERITI = "*** Dati inseriti correttamente ***";
-	private static final String MSG_ASK_ACCETTARE_APPUNTAMENTO = "Vuoi accettare l'appuntamento?";
-	private static final String MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI = "Hai inserito un appuntamento uguale a quello proposto dall'altro fruitore.\n"
-			+ "Reinserire l'appuntamento.";
 	private static final String MSG_INSERISCI_DATA_D_M_YYYY = "Inserisci data nel formato d/m/yyyy:";
-	private static final String MSG_GIORNO_SCELTO_NON_VALIDO = "Giorno non accettato. Ricorda "
-			+ "di scegliere una data in un giorno della settimana fra quelli disponibili per gli appuntamenti."
-			+ "\n\nInserisci data nel formato d/m/yyyy:";
 	private static final String MSG_ATTENDI_RISPOSTA_ALTRO_FRUITORE = "\nDevi attendere una risposta dall'altro fruitore!";
-	private static final String MSG_OFFERTE_IN_SCAMBIO_ASSENTI = "Non hai offerte in scambio.";
-	private static final String MSG_SCEGLI_TUA_OFFERTA_IN_SCAMBIO = "\nSeleziona una delle tue offerte in scambio: ";
-	private static final String MSG_OFFERTE_SELEZIONATE_ASSENTI = "Non hai offerte selezionate";
-	private static final String MSG_WARNING_FISSARE_APPUNTAMENTO_ENTRO_SCADENZA = "Attenzione! Se non viene fissato un apputnamento entro: %s il baratto verra' cancellato!\n";
-	private static final String MSG_ASK_FISSARE_APPUNTAMENTO = "Vuoi fissare un appuntamento?";
+	
 	private static final String MSG_SCEGLI_TUA_OFFERTA_SELEZIONATA = "\nSeleziona una delle tue offerte selezionate: ";
 	private static final String MSG_SCEGLI_OFFERTA_ALTRO_FRUITORE = "\nSeleziona un'offerta tra le offerte degli altri fruitori: ";
 	private static final String MSG_SCEGLI_TUA_OFFERTA = "\nSeleziona una delle tue offerte: ";
+	private static final String MSG_SCEGLI_TUA_OFFERTA_IN_SCAMBIO = "\nSeleziona una delle tue offerte in scambio: ";
+	
 	//costanti per menu
 	protected static final String TXT_ERRORE = "ERRORE";
 	private static final String TXT_TITOLO = "Scambio Articoli";
@@ -75,12 +82,12 @@ public class ViewBaratto {
 		try {
 			this.gestoreBaratto = new GestioneBaratto();
 		} catch (IOException e) {
-			throw new IOException(e.getMessage() + MSG_ERRORE_INIT_GESTIONE_BARATTO);
+			throw new IOException(e.getMessage() + MSG_ERROR_INIT_GESTIONE_BARATTO);
 		}
 		try {
 			this.gestorePiazza = new GestioneParametri();
 		} catch (IOException e) {
-			throw new IOException(e.getMessage() + MSG_ERRORE_INIT_PARAMETRI);
+			throw new IOException(e.getMessage() + MSG_ERROR_INIT_PARAMETRI);
 		}
 		
 		this.viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);	
@@ -216,7 +223,7 @@ public class ViewBaratto {
 						Appuntamento nuovoAppuntamento = creaAppuntamento();
 						
 						while(gestoreBaratto.checkUguaglianzaAppuntamenti(nuovoAppuntamento, appuntamento)) {
-							System.out.println(MSG_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
+							System.out.println(MSG_WARNING_APPUNTAMENTO_INSERITO_UGUALE_REINSERISCI);
 							nuovoAppuntamento = creaAppuntamento();
 						}
 						LocalDate dataScadenza = gestoreBaratto.getDataScadenza(gestorePiazza, appuntamento);
@@ -249,7 +256,7 @@ public class ViewBaratto {
 				date = gestorePiazza.dateInput(dateTesto);
 				formatoDateValido = false;
 			} catch (DateTimeException e) {
-				System.out.println(MSG_FORMATO_GIORNO_NON_VALIDO);
+				System.out.println(MSG_WARNING_FORMATO_GIORNO_NON_VALIDO);
 				formatoDateValido = true;
 			}
 		}while(formatoDateValido);
@@ -269,7 +276,7 @@ public class ViewBaratto {
 		LocalDate date = richiestaData(MSG_INSERISCI_DATA_D_M_YYYY);
 		
 		while(!gestorePiazza.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date) || date.isBefore(LocalDate.now())) {
-			date = richiestaData(MSG_GIORNO_SCELTO_NON_VALIDO);
+			date = richiestaData(MSG_WARNING_GIORNO_SCELTO_NON_VALIDO);
 		}
 		
 		ViewParametroIntervalloOrario viewParametroIntervalloOrario = new ViewParametroIntervalloOrario(gestorePiazza);

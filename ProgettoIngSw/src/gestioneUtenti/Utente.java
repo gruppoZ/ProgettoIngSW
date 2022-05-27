@@ -9,7 +9,6 @@ public abstract class Utente {
 	private Credenziali credenziali;
 
 	public Utente() {
-		
 	}
 	
 	/**

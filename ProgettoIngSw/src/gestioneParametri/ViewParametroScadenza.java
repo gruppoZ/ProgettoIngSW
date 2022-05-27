@@ -31,11 +31,11 @@ public class ViewParametroScadenza extends ViewParametri {
 	
 	@Override
 	public void menu() throws IOException {
-		MyMenu menuModificaScadenza = new MyMenu(TXT_TITOLO, TXT_VOCI_MODIFICA);
+		MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI_MODIFICA);
 		int scelta = 0;
 		boolean fine = false;
 		do {
-			scelta = menuModificaScadenza.scegli();
+			scelta = menu.scegli();
 			switch(scelta) {
 			case 0:
 				fine = true;
