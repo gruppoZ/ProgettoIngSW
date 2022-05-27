@@ -87,11 +87,11 @@ public class ViewBaratto {
 	}
 	
 	public void menu() {	
-		MyMenu viewScambio = new MyMenu(TXT_TITOLO, TXT_VOCI);
+		MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
 		do {
-			scelta = viewScambio.scegli();
+			scelta = menu.scegli();
 			switch(scelta) {
 			case 0:
 				fine = true;
