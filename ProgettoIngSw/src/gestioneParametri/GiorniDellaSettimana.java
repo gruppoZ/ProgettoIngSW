@@ -46,7 +46,7 @@ public enum GiorniDellaSettimana {
 	}
 	
 	/**
-	 * Precondizione: id >= 0 AND id <= 6
+	 * Precondizione: id > = 0 AND id < = 6
 	 * 
 	 * @param id
 	 * @return

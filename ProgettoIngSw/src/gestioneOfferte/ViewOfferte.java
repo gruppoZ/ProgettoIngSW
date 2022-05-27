@@ -164,6 +164,7 @@ public class ViewOfferte {
 	/**
 	 * Mostra se disponibili le offerte attive dopo aver scelto una Categoria Foglia.
 	 * Se non presenti lo viene detto a video
+	 * @param foglia
 	 */
 	public void showOfferteAperteByCategoria(Categoria foglia) { 
 		if(foglia != null) {

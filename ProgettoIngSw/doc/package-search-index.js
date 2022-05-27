@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"gestioneCategorie"},{"l":"gestioneFileProgramma"},{"l":"gestioneLogin"},{"l":"gestioneOfferte"},{"l":"gestioneParametri"},{"l":"gestioneScambioArticoli"},{"l":"gestioneUtenti"},{"l":"main"}];updateSearchResults();

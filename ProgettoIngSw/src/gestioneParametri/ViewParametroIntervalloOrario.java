@@ -214,7 +214,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	}
 	
 	/**
-	 * Precondizione: 0 <= ora <= 23
+	 * Precondizione: 0 < = ora < = 23
 	 * 
 	 * @param ora
 	 * @return

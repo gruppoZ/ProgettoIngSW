@@ -240,8 +240,8 @@ public class GestioneParametri {
  	 * Precondizione: orari != null, orarioDaAggiungere != null
  	 * Postcondizione: orari'.size() = orari.size() - 1 se intervalloTrovato != null
  	 * 
- 	 * @param giorni
- 	 * @param giornoDaEliminare
+ 	 * @param orari
+ 	 * @param orarioMinDaEliminare
  	 * @throws IOException se la scrittura su file fallisce
  	 * @throws Exception se l'intervallo da eliminare con orarioMinDaEliminare non è presente fra gli orari
  	 */

@@ -34,8 +34,8 @@ public class GestioneAutenticazione {
 	 * Precondizione: crdenziali != null AND utente != null
 	 * 
 	 * Richiede all'utente di inserire username e password 
-	 * @param path
-	 * @param erroreUsername
+	 * @param utente
+	 * @param credenziali
 	 * @return TRUE se il login e' avvenuto con successo FALSE se ho avuto qualche problema (es passwrod errata)
 	 * @throws IOException 
 	 * @throws IllegalArgumentException 
@@ -77,10 +77,9 @@ public class GestioneAutenticazione {
 	 * Precondizione: credenzaliDaControllare != null AND utente != null
 	 * 
 	 * Controlla se username e password esistono nel file .json
+	 * @param utente
 	 * @param path
-	 * @param username
-	 * @param password
-	 * @param erroreUsername
+	 * @param credenzaliDaControllare
 	 * @return TRUE se le credenziali sono valide FALSE altrimenti
 	 * @throws IOException 
 	 * @throws IllegalArgumentException 
@@ -122,7 +121,6 @@ public class GestioneAutenticazione {
 	/**
 	 * 
 	 * @param username
-	 * @param pathDefault
 	 * @return TRUE se lo username passato e' uguale a quello utilizzato nelle credenziali di default
 	 * @throws IOException 
 	 */

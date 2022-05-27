@@ -76,7 +76,7 @@ public class GestioneBaratto {
 	}
 	
 	/**
-	 * Precondizione: listaBarattiScaduti != null && listaOfferteScadute != null
+	 * Precondizione: listaBarattiScaduti != null AND listaOfferteScadute != null
 	 * Postcondizione: 	listaBarattiScaduti'.size() = listaBarattiScaduti + n,
 	 * 					listaOfferteScadute'.size() = listaBarattiScaduti + 2*n | n numero di baratti scaduti
 	 * Inserisce nelle liste i baratti scaduti e le relative offerte 
