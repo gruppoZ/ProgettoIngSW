@@ -52,6 +52,8 @@ public class ViewArticolo {
 				gestoreOfferte.manageAggiuntaOfferta(gestoreArticolo.getArticolo(), gestoreFruitore.getUsername());
 			} catch(IOException e) {
 				throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
+			} catch(Exception e) {
+				System.out.println(MSG_ERROR_COMPILAZIONE_CAMPO);
 			}
 		}
 
@@ -89,11 +91,11 @@ public class ViewArticolo {
 		}
 	}
 	
-	private void inserisciValoriCampi() throws RuntimeException {		
+	private void inserisciValoriCampi() throws Exception {		
 		if(compilaCampiObbligatori()) {
 			compilaCampiFacoltativi();
 		}  else {
-			throw new RuntimeException(MSG_ERROR_COMPILAZIONE_CAMPO);
+			throw new Exception(MSG_ERROR_COMPILAZIONE_CAMPO);
 		}
 	}
 	
