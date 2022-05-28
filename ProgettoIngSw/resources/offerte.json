@@ -1,1 +1,57 @@
-[ ]
+[ {
+  "id" : 1,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "asd",
+      "descrizione" : "n",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "1"
+    }
+  },
+  "username" : "f",
+  "statoOfferta" : {
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
+  }
+}, {
+  "id" : 2,
+  "articolo" : {
+    "foglia" : {
+      "nome" : "asd",
+      "descrizione" : "n",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "1"
+    }
+  },
+  "username" : "wewe",
+  "statoOfferta" : {
+    "type" : "OffertaInScambio",
+    "stato" : "OffertaInScambio"
+  }
+} ]

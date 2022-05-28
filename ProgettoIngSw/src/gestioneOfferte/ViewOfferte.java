@@ -152,13 +152,13 @@ public class ViewOfferte {
 		
 	}
 	
-	public void showOfferte(List<Offerta> listaOfferte) {
+	private void showOfferte(List<Offerta> listaOfferte) throws Exception{
 		if(listaOfferte.size() > 0) {
 			for (Offerta offerta : listaOfferte) {
 				showOfferta(offerta);
 			}
 		} else
-			System.out.println(MSG_OFFERTE_INESISTENTI);
+			throw new Exception();
 	}
 	
 	/**
