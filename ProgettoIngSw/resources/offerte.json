@@ -14,11 +14,11 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "radice" : true,
-      "valida" : true
+      "valida" : true,
+      "radice" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "1"
+      "Stato di conservazione" : "g"
     }
   },
   "username" : "f",
@@ -42,16 +42,16 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "radice" : true,
-      "valida" : true
+      "valida" : true,
+      "radice" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "1"
+      "Stato di conservazione" : "d"
     }
   },
   "username" : "wewe",
   "statoOfferta" : {
-    "type" : "OffertaInScambio",
-    "stato" : "OffertaInScambio"
+    "type" : "OffertaChiusa",
+    "stato" : "OffertaChiusa"
   }
 } ]
