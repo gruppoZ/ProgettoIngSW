@@ -8,7 +8,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
 
-	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile. Creane prima una.";
+	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile.";
 	
 	//costanti per menu
 	private static final String TXT_TITOLO = "Benvenuto Fruitore";
