@@ -163,8 +163,10 @@ public class GestioneBaratto {
 	
 	protected void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) {
 		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
+		Baratto barattoTerminato = new Baratto(offertaA, offertaB, baratto.getScadenza(), baratto.getAppuntamento());
+		aggiungiBarattoTerminato(barattoTerminato);
+		
 		rimuoviBaratto(baratto);
-		aggiungiBarattoTerminato(baratto);
 	}
 
 	protected void creaBaratto(Offerta offertaA, Offerta offertaB, int scadenzaInGiorni) {

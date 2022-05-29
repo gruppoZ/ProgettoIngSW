@@ -186,7 +186,7 @@ public class ViewBaratto {
 				
 				if(!usernameCorrente.equals(autoreAppuntamento)) {
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaAltroFruitore, offertaAltroFruitore, baratto);
+						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore, baratto);
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
 					} else {
