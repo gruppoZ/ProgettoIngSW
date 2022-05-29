@@ -19,7 +19,7 @@ public class GestioneParametri {
 		this.piazza = leggiPiazza();
 	}
 	
-	private static final String PATH_PIAZZA = "src/gestioneParametri/parametri.json";
+	private static final String PATH_PIAZZA = "resources/parametri.json";
 
  	public void creaPiazza(String citta, List<String> listaLuoghi, List<GiorniDellaSettimana> giorni, List<IntervalloOrario> intervalliOrari,
  			int scadenza) {

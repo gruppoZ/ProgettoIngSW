@@ -14,8 +14,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "buono"
@@ -42,8 +42,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -70,8 +70,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -98,8 +98,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ok"
@@ -126,8 +126,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "otti"

@@ -8,8 +8,8 @@ import main.JsonIO;
 
 public class GestioneAutenticazione {
 
-	private static final String PATH_CREDENZIALI_DEFAULT = "src/gestioneLogin/credenzialiDefault.json";
-	protected static final String PATH_CREDENZIALI = "src/gestioneLogin/credenziali.json";	
+	private static final String PATH_CREDENZIALI_DEFAULT = "resources/credenzialiDefault.json";
+	protected static final String PATH_CREDENZIALI = "resources/credenziali.json";	
 	
 	//Login  e check appositi per default
 	/**

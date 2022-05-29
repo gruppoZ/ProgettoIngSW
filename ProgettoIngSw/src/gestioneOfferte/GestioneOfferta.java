@@ -11,8 +11,8 @@ import main.JsonIO;
 
 public class GestioneOfferta {
 
-	private static final String PATH_OFFERTE = "src/gestioneOfferte/offerte.json";
-	private static final String PATH_STORICO_CAMBIO_STATI = "src/gestioneOfferte/storico_cambio_stati.json";
+	private static final String PATH_OFFERTE = "resources/offerte.json";
+	private static final String PATH_STORICO_CAMBIO_STATI = "resources/storico_cambio_stati.json";
 	
 	private List<Offerta> listaOfferte = new ArrayList<Offerta>(); 
 	

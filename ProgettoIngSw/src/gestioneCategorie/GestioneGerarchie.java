@@ -8,7 +8,7 @@ public class GestioneGerarchie {
 	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
 	
-	private static final String PATH_GERARCHIE = "src/gestioneCategorie/gerarchie.json";
+	private static final String PATH_GERARCHIE = "resources/gerarchie.json";
 		
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
 	private HashMap<String, Gerarchia> gerarchie; 
