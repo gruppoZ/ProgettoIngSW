@@ -6,7 +6,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewFruitore extends ViewUtente{
 
-	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile. Creane prima una.";
+	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile.";
 	private static final String MSG_ASSENZA_GERARCHIE = "NESSUNA GERARCHIA PRESENTE";
 	
 	//costanti per menu
@@ -58,7 +58,6 @@ public class ViewFruitore extends ViewUtente{
 				ViewArticolo viewArticolo = new ViewArticolo(gestoreFruitore);
 				viewArticolo.aggiungiArticolo();
 				break;
-			//TODO: possibile raggrupare case 4,5,6 in un unico menu(?)
 			case 4:
 				viewOfferte = new ViewOfferte();
 				viewOfferte.ritiraOfferta(gestoreFruitore);
