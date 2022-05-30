@@ -30,12 +30,12 @@ public class GestioneOfferta {
 	 */
 	protected void gestisciCambiamentoStatoOfferta(Offerta offerta) {
 		int id = offerta.getId();
-		StatoOfferta oldState, newState;
-		oldState = offerta.getTipoOfferta();
+		String oldState, newState;
+		oldState = offerta.getTipoOfferta().getStato();
 		
 		offerta.getTipoOfferta().changeState(offerta);
 		
-		newState = offerta.getTipoOfferta();
+		newState = offerta.getTipoOfferta().getStato();
 		
 		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
 		

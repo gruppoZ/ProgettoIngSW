@@ -2,31 +2,31 @@ package gestioneOfferte;
 
 public class PassaggioTraStati {
 	
-	StatoOfferta oldState;
-	StatoOfferta newState;
+	String oldState;
+	String newState;
 	
 	public PassaggioTraStati() {
 		
 	}
 	
-	public PassaggioTraStati(StatoOfferta oldState, StatoOfferta newState) {
+	public PassaggioTraStati(String oldState, String newState) {
 		this.oldState = oldState;
 		this.newState = newState;
 	}
 	
-	public StatoOfferta getOldState() {
+	public String getOldState() {
 		return oldState;
 	}
 
-	public void setOldState(StatoOfferta oldState) {
+	public void setOldState(String oldState) {
 		this.oldState = oldState;
 	}
 
-	public StatoOfferta getNewState() {
+	public String getNewState() {
 		return newState;
 	}
 
-	public void setNewState(StatoOfferta newState) {
+	public void setNewState(String newState) {
 		this.newState = newState;
 	}
 }
