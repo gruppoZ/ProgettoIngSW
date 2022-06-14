@@ -27,7 +27,7 @@ public class ViewOfferte {
 	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti %s per la categoria selezionata. \n";
 	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
 	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
-	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
+	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte con ID selezionato";
 	
 	//costanti per menu
 	protected static final String TXT_ERROR = "ERRORE";
@@ -133,19 +133,24 @@ public class ViewOfferte {
 		ArrayList<Offerta> listaOfferteAttiveByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername());
 		
 		if(listaOfferteAttiveByUtente.size() > 0) {
-			
-			Offerta offerta = this.getOffertaById(listaOfferteAttiveByUtente);
-			
-			if(offerta != null) {
-				try {
-					gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
-				} catch (IOException e) {
-					throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
+			try {
+				Offerta offerta = this.getOffertaById(listaOfferteAttiveByUtente);
+				
+				if(offerta != null) {
+					try {
+						gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+					} catch (IOException e) {
+						throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
+					}
+					
+					System.out.println(MSG_OFFERTA_RITIRATA);
+				} else {
+					System.out.println(MSG_ID_NON_VALIDO);
 				}
-				System.out.println(MSG_OFFERTA_RITIRATA);
-			} else {
-				System.out.println(MSG_ID_NON_VALIDO);
-			}
+				
+			} catch (NullPointerException e) {
+				System.out.println(e.getMessage());
+			}	
 		} else {
 			System.out.println(MSG_OFFERTE_RITIRABILI_INESISTENTI);
 		}
