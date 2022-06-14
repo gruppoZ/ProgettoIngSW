@@ -14,7 +14,8 @@ public class ViewGerarchia {
 	private static final String MSG_ERROR_CATEGORIA_FOGLIA_INESISTENTE = "Attenzione! Il nome della foglia inserito non e' presente";
 	
 	private static final String MSG_GERARCHIA_RIMOSSA_SUCCESSO = "\nGerarchia eliminata con successo";
-
+	private static final String MSG_GERARCHIA_CREATA_CORRETTAMENTE = "*** Gerarchia creata correttamente ***";
+	
 	private static final String ASK_CONFERNA_RIMOZIONE_GERARCHIA = "Sei sicuro di eliminare la gerarchia?";
 
 	private static final String GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE = "La categoria: %s e' stata eliminata correttamente.\n";
@@ -210,7 +211,7 @@ public class ViewGerarchia {
 		
 		do {
 			descrizione = InputDati.leggiStringaNonVuota(ASK_CAMPO_NATIVO_DESCRIZIONE);
-			while(!(gestoreGerarchia.checkUnicitaCampo(campiEreditati, descrizione) && 						gestoreGerarchia.checkUnicitaCampo(campi, descrizione))) {
+			while(!(gestoreGerarchia.checkUnicitaCampo(campiEreditati, descrizione) && gestoreGerarchia.checkUnicitaCampo(campi, descrizione))) {
 				descrizione = InputDati.leggiStringaNonVuota(MSG_CAMPO_GIA_ESISTENTE_ASK_DESCRIZIONE_DIVERSA
 						+ ASK_CAMPO_NATIVO_DESCRIZIONE);
 			}
@@ -233,7 +234,7 @@ public class ViewGerarchia {
 				System.out.println(MSG_ATTENZIONE_TENTATIVO_RIMOZIONE_ROOT);
 			} else {
 				if(gestoreGerarchia.checkCategoriaDaEliminare(nomeDaEliminare)) {
-					System.out.printf(MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT, 							gestoreGerarchia.getNumMinSottoCategorie());
+					System.out.printf(MSG_ATTENZIONE_RIMOZIONE_CATEGORIA_DI_CATPADRE_CON_MIN_NUM_SOTCAT, gestoreGerarchia.getNumMinSottoCategorie());
 				} else {
 					gestoreGerarchia.eliminaCategoria(nomeDaEliminare);
 					System.out.printf(GIVE_NOME_CATEGORIA_ELIMINATA_CORRETTAMENTE, nomeDaEliminare);
@@ -324,6 +325,7 @@ public class ViewGerarchia {
 		if(!gerarchiaEliminata) {
 			try {
 				gestoreGerarchia.fineCreazioneGerarchia();
+				System.out.println(MSG_GERARCHIA_CREATA_CORRETTAMENTE);
 			} catch (IOException e) {
 				System.out.println(MSG_ERROR_SALVATAGGIO_GERARCHIA_APPENA_CREATA);
 			}
