@@ -200,7 +200,7 @@ public class ViewBaratto {
 				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offertaInScambioFruitoreCorrente);
 				Appuntamento appuntamento = baratto.getAppuntamento(); 
 				
-				int idOfferta2;
+				String idOfferta2;
 				
 				if(baratto.getOffertaFruitorePromotore().getId() != offertaInScambioFruitoreCorrente.getId()) 
 					idOfferta2 = baratto.getOffertaFruitorePromotore().getId();	
@@ -216,7 +216,7 @@ public class ViewBaratto {
 				
 				if(!usernameCorrente.equals(autoreAppuntamento)) {
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaAltroFruitore, offertaAltroFruitore, baratto);
+						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore, baratto);
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
 					} else {

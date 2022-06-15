@@ -12,7 +12,7 @@ public class ViewFruitore extends ViewUtente{
 
 	private static final String MSG_ERROR_INIT = "\n*** ERRORE inizializzazione dati Fruitore ***";
 
-	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile. Creane prima una.";
+	private static final String MSG_NESSUNA_PIAZZA = "Nessuna piazza disponibile.";
 	
 	//costanti per menu
 	private static final String TXT_TITOLO = "Benvenuto Fruitore";

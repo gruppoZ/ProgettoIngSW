@@ -1,13 +1,1 @@
-{
-  "citta" : "milano",
-  "luoghi" : [ "centro", "sud" ],
-  "giorni" : [ "DOMENICA" ],
-  "intervalliOrari" : [ {
-    "orarioMin" : [ 6, 0 ],
-    "orarioMax" : [ 7, 30 ]
-  }, {
-    "orarioMin" : [ 14, 0 ],
-    "orarioMax" : [ 15, 0 ]
-  } ],
-  "scadenza" : 2
-}
+{}
