@@ -14,7 +14,7 @@ public class GestioneOfferta {
 	private static final String PATH_STORICO_CAMBIO_STATI = "resources/storico_cambio_stati.json";
 	
 	private List<Offerta> listaOfferte = new ArrayList<Offerta>(); 
-	private Map<Integer, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
+	private Map<String, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
 	
 	public GestioneOfferta() throws FileNotFoundException, IOException {
 		this.storicoMovimentazioni = leggiStoricoCambioStati();
@@ -53,7 +53,7 @@ public class GestioneOfferta {
 	 * @throws IOException 
 	 */
 	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) throws IOException {
-		int id = offerta.getId();
+		String id = offerta.getId();
 		String oldState, newState;
 		oldState = offerta.getStatoOfferta().getStato();
 		
@@ -139,9 +139,9 @@ public class GestioneOfferta {
 	 * @return
 	 * @throws NullPointerException
 	 */
-	public Offerta getOffertaById(int id, List<Offerta> listaOfferte) throws NullPointerException {
+	public Offerta getOffertaById(String id, List<Offerta> listaOfferte) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
-			if(offerta.getId() == id) return offerta;
+			if(offerta.getId().equals(id)) return offerta;
 		}
 		throw new NullPointerException();
 	}
@@ -153,9 +153,9 @@ public class GestioneOfferta {
 	 * @return
 	 * @throws NullPointerException
 	 */
-	public Offerta getOffertaById(int id) throws NullPointerException {
+	public Offerta getOffertaById(String id) throws NullPointerException {
 		for (Offerta offerta : listaOfferte) {
-			if(offerta.getId() == id) return offerta;
+			if(offerta.getId().equals(id)) return offerta;
 		}
 		throw new NullPointerException();
 	}
@@ -274,7 +274,7 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() throws FileNotFoundException, IOException {
+	protected HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() throws FileNotFoundException, IOException {
 		return JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
 	}
 	
@@ -296,14 +296,6 @@ public class GestioneOfferta {
 		return n;
 	}
 	
-	protected int getIdMax() {
-		int idMax = 0;
-		for (Offerta offerta : listaOfferte) {
-			if(offerta.getId() > idMax) idMax = offerta.getId();
-		}
-		return idMax;
-	}
-	
 	/**
 	 * Precondizione: articolo != null
 	 * 
@@ -312,7 +304,7 @@ public class GestioneOfferta {
 	 * @throws IOException 
 	 */
 	protected void manageAggiuntaOfferta(Articolo articolo, String username) throws IOException {
-		int id = getIdMax() + 1;
+		String id = UUID.randomUUID().toString();	
 		Offerta offerta = creaOfferta(id, articolo, username);
 		aggiungiOfferta(offerta);
 		salvaOfferte();
@@ -326,7 +318,7 @@ public class GestioneOfferta {
 	 * @param username
 	 * @return
 	 */
-	private Offerta creaOfferta(int id, Articolo articolo, String username) {
+	private Offerta creaOfferta(String id, Articolo articolo, String username) {
 		return new Offerta(id, articolo, username, new OffertaAperta());
 	}
 	

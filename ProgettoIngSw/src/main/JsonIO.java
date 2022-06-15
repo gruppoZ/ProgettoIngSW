@@ -61,8 +61,8 @@ public class JsonIO {
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
 	
-	public static HashMap<Integer, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(Integer.class.getName()),
+	public static HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
 	}
 	

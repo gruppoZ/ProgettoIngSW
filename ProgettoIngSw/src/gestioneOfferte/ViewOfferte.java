@@ -117,7 +117,7 @@ public class ViewOfferte {
 		try {
 			showOfferte(listaOfferte); 
 			
-			int id = InputDati.leggiInteroNonNegativo(MSG_RICHIESTA_ID);
+			String id = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_ID);
 			
 			return gestoreOfferte.getOffertaById(id, listaOfferte);
 		} catch (Exception e) {

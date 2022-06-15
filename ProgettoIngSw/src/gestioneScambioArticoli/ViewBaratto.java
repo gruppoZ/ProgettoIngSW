@@ -200,7 +200,7 @@ public class ViewBaratto {
 				Baratto baratto = gestoreBaratto.getBarattoByOfferta(offertaInScambioFruitoreCorrente);
 				Appuntamento appuntamento = baratto.getAppuntamento(); 
 				
-				int idOfferta2;
+				String idOfferta2;
 				
 				if(baratto.getOffertaFruitorePromotore().getId() != offertaInScambioFruitoreCorrente.getId()) 
 					idOfferta2 = baratto.getOffertaFruitorePromotore().getId();	

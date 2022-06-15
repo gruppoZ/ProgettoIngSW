@@ -2,7 +2,7 @@ package gestioneOfferte;
 
 public class Offerta {
 	
-	private int id;
+	private String id;
 	private Articolo articolo;
 	private String username; 
 	private StatoOfferta statoOfferta;
@@ -20,14 +20,14 @@ public class Offerta {
 	 * @param username
 	 * @param tipoOfferta
 	 */
-	public Offerta(int id, Articolo articolo, String username, StatoOfferta tipoOfferta) {
+	public Offerta(String id, Articolo articolo, String username, StatoOfferta tipoOfferta) {
 		this.id = id;
 		this.articolo = articolo;
 		this.username = username;
 		this.statoOfferta = tipoOfferta;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
