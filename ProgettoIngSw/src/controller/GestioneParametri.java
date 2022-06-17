@@ -12,7 +12,7 @@ import java.util.Locale;
 import application.GiorniDellaSettimana;
 import application.IntervalloOrario;
 import application.Piazza;
-import main.JsonIO;
+import utils.JsonIO;
 
 public class GestioneParametri {
 	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";

@@ -12,7 +12,7 @@ import application.OffertaAperta;
 import application.PassaggioTraStati;
 import application.StatiOfferta;
 import application.StatoOfferta;
-import main.JsonIO;
+import utils.JsonIO;
 
 public class GestioneOfferta {
 	private static final String PATH_OFFERTE = "resources/offerte.json";

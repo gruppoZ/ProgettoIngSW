@@ -24,6 +24,9 @@ public class ViewAuthConfiguratore extends ViewAuth{
 	public void login() throws FileNotFoundException, IOException {
 		System.out.printf(INTESTAZIONE_LOGIN, TIPOLOGIA_UTENTE);
 		super.checkLogin(configuratore);
+		
+		ViewConfiguratore view = new ViewConfiguratore();
+		view.menu(configuratore.getCredenziali().getUsername());
 	}
 
 	@Override

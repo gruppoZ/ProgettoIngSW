@@ -25,5 +25,5 @@ public abstract class Utente {
 		this.credenziali = credenziali;
 	}	
 	
-	public abstract void menu(String username) throws IOException;
+	//public abstract void menu(String username) throws IOException;
 }

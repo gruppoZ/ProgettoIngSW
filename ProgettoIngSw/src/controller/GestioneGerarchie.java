@@ -6,7 +6,7 @@ import java.util.*;
 import application.CampoCategoria;
 import application.Categoria;
 import application.Gerarchia;
-import main.JsonIO;
+import utils.JsonIO;
 
 public class GestioneGerarchie {
 	

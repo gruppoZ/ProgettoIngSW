@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import application.Credenziali;
 import application.Utente;
-import main.JsonIO;
+import utils.JsonIO;
 
 public class GestioneAutenticazione {
 

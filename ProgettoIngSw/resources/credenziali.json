@@ -1,5 +1,8 @@
 {
-  "Configuratore" : [ ],
+  "Configuratore" : [ {
+    "username" : "c1",
+    "password" : "c1"
+  } ],
   "Fruitore" : [ {
     "username" : "a",
     "password" : "b"

@@ -12,7 +12,7 @@ import application.OffertaAccoppiata;
 import application.OffertaChiusa;
 import application.OffertaInScambio;
 import application.OffertaSelezionata;
-import main.JsonIO;
+import utils.JsonIO;
 
 public class GestioneBaratto {
 

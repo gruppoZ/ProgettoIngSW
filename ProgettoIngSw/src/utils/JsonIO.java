@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import application.Credenziali;
 import application.Gerarchia;
 import application.PassaggioTraStati;
-import application.Piazza;
 
 /**
  * La libreria JACKSON prende i dati da salvare di un oggetto attraverso i metodi get

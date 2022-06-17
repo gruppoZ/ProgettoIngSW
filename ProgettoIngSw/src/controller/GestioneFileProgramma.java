@@ -2,8 +2,8 @@ package controller;
 
 import java.io.IOException;
 
-import application.FileDiSistema;
-import main.JsonIO;
+import utils.FileDiSistema;
+import utils.JsonIO;
 
 public class GestioneFileProgramma {
 	private static final String PATH_INFO_SISTEMA= "resources/system-info.json";
