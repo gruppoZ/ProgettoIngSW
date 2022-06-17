@@ -53,6 +53,6 @@ public class Offerta {
 	 * @return
 	 */
 	public boolean equals(Offerta offerta) {
-		return this.id == offerta.id;
+		return this.id.equals(offerta.getId());
 	}
 }
