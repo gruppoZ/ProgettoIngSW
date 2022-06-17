@@ -12,14 +12,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import gestioneCategorie.CampoCategoria;
-import gestioneCategorie.Categoria;
-import gestioneOfferte.Articolo;
-import gestioneOfferte.GestioneOfferta;
-import gestioneOfferte.Offerta;
-import gestioneOfferte.OffertaAperta;
-import gestioneScambioArticoli.Appuntamento;
-import gestioneScambioArticoli.GestioneBaratto;
+import application.Appuntamento;
+import application.Articolo;
+import application.CampoCategoria;
+import application.Categoria;
+import application.Offerta;
+import application.OffertaAperta;
+import controller.GestioneBaratto;
+import controller.GestioneOfferta;
 
 class testGestioneScambioArticoli {
 

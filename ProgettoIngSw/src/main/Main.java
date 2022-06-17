@@ -2,6 +2,8 @@ package main;
 
 import java.io.IOException;
 
+import view.SchermataPrincipale;
+
 /**
  * versione 5
  * @author Giorgio Bonardi, Youssef El fadi, Raul Iosif Cocis

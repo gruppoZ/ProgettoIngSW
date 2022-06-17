@@ -4,15 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
+import application.IntervalloOrario;
+import application.Piazza;
+import controller.GestioneParametri;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import gestioneParametri.GestioneParametri;
-import gestioneParametri.Piazza;
-import gestioneParametri.IntervalloOrario;
 
 class testParametri {
 

@@ -7,9 +7,10 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import gestioneLogin.Credenziali;
-import gestioneLogin.GestioneAutenticazione;
-import gestioneUtenti.*;
+import application.Configuratore;
+import application.Credenziali;
+import application.Fruitore;
+import controller.GestioneAutenticazione;
 
 class testAutenticazione {
 

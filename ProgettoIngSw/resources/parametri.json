@@ -1,1 +1,7 @@
-{}
+{
+  "citta" : null,
+  "luoghi" : [ ],
+  "giorni" : [ ],
+  "intervalliOrari" : [ ],
+  "scadenza" : 1
+}

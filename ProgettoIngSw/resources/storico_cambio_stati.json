@@ -1,1 +1,10 @@
-{}
+{
+  "1" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaInScambio"
+  } ],
+  "2" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaInScambio"
+  } ]
+}
