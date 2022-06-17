@@ -43,8 +43,8 @@ class testGestioneScambioArticoli {
 		
 		Articolo articolo = new Articolo(foglia, valoreCampi);
 		
-		Offerta offertaA = new Offerta(1, articolo, "username1", new OffertaAperta());
-		Offerta offertaB = new Offerta(2, articolo, "username2", new OffertaAperta());
+		Offerta offertaA = new Offerta("1", articolo, "username1", new OffertaAperta());
+		Offerta offertaB = new Offerta("2", articolo, "username2", new OffertaAperta());
 		
 		GestioneBaratto gestoreBaratti = new GestioneBaratto();
 		GestioneOfferta gestoreOfferte = new GestioneOfferta();
