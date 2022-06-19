@@ -6,17 +6,17 @@ import java.util.HashMap;
 import application.Gerarchia;
 
 public abstract class GestioneUtente {
-	private GestioneGerarchie gestoreGerarchie;
+	private GerarchieFacade gestoreGerarchie;
 	
 	/**
 	 * Postcondizione: gestoreGerarchie != null
 	 * @throws IOException 
 	 */
 	public GestioneUtente() throws IOException {
-		gestoreGerarchie = new GestioneGerarchie();
+		gestoreGerarchie = new GerarchieFacade();
 	}
 	
-	protected GestioneGerarchie getGestoreGerarchie() {
+	protected GerarchieFacade getGestoreGerarchie() {
 		return this.gestoreGerarchie;
 	}
 	

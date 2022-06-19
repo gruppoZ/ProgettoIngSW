@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import application.GiorniDellaSettimana;
-import application.IntervalloOrario;
-import application.Piazza;
+import application.parametriPiazza.GiorniDellaSettimana;
+import application.parametriPiazza.IntervalloOrario;
+import application.parametriPiazza.Piazza;
+import utils.FileSystemOperations;
 import utils.JsonIO;
 
 public class GestioneParametri {
@@ -22,12 +23,14 @@ public class GestioneParametri {
 	
 	private Piazza piazza;
 	private String pathParametri;	
+	private FileSystemOperations fs;
 	
 	/**
 	 * Postcondizione: pathParametri.length() > 0, this.piazza != null
 	 * @throws IOException 
 	 */
 	public GestioneParametri() throws IOException {
+		fs = new JsonIO();
 		GestioneFileProgramma info = new GestioneFileProgramma();
 		pathParametri = info.getInfoSistema().getUrlParametri(); 
 
@@ -346,11 +349,11 @@ public class GestioneParametri {
 	}
 	
 	public void salvaPiazza() throws IOException {
-		JsonIO.salvaOggettoSuJson(pathParametri, this.piazza);
+		fs.salvaOggetto(pathParametri, this.piazza);
 	}
 	
 	public Piazza leggiPiazza(String path) throws IOException {
-		return (Piazza) JsonIO.leggiOggettoDaJson(path, Piazza.class);
+		return (Piazza) fs.leggiOggetto(path, Piazza.class);
 	}
 
 	/**

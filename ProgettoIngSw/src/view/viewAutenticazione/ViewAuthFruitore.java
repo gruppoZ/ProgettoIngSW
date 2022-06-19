@@ -1,9 +1,10 @@
-package view;
+package view.viewAutenticazione;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.Fruitore;
+import view.ViewFruitore;
 
 public class ViewAuthFruitore extends ViewAuth {	
 	

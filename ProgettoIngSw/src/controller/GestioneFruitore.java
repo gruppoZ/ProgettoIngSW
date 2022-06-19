@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 
-import application.Piazza;
+import application.parametriPiazza.Piazza;
 
 public class GestioneFruitore extends GestioneUtente{
 	

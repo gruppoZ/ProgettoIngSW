@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
-import application.IntervalloOrario;
-import application.Piazza;
+import application.parametriPiazza.IntervalloOrario;
+import application.parametriPiazza.Piazza;
 import controller.GestioneParametri;
 
 import java.io.IOException;

@@ -2,7 +2,7 @@ package view;
 
 import java.time.format.DateTimeFormatter;
 
-import application.Appuntamento;
+import application.baratto.Appuntamento;
 
 public class ViewAppuntamento {
 	

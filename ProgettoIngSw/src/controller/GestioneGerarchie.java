@@ -1,62 +1,95 @@
 package controller;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import application.CampoCategoria;
 import application.Categoria;
 import application.Gerarchia;
+import utils.FileSystemOperations;
 import utils.JsonIO;
 
-public class GestioneGerarchie {
-	
-	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
-	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
-
-	String pathGerarchie;
-	
+public class GestioneGerarchie implements GerarchiaRepository {
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
 	private HashMap<String, Gerarchia> gerarchie; 
+	private String pathGerarchie;
+	private FileSystemOperations fs;
 	
 	public GestioneGerarchie() throws IOException {
-		updateGerarchie();	
+		fs = new JsonIO();
+		aggiorna();
 	}
 	
-	public void updateGerarchie() throws IOException {
+	public void aggiorna() throws IOException {
 		GestioneFileProgramma info = new GestioneFileProgramma();
 		pathGerarchie = info.getInfoSistema().getUrlGerarchie(); 
 		
 		popolaGerarchie();
 	}
 	
-	public void leggiDaFileGerarchie() throws IOException {
-		this.gerarchie = JsonIO.leggiGerarchieDaJson(pathGerarchie);
-	}
-	
-	public void salvaGerarchie() throws IOException {
-        JsonIO.salvaOggettoSuJson(pathGerarchie, this.getGerarchie());
-	}
-	
-	public boolean isGerarchiePresenti() throws IOException {
-		if(this.getGerarchie().size() == 0)
-			return false;
-		else
-			return true;
-	}
-	
-	public HashMap<String, Gerarchia> getGerarchie() throws IOException {
+	public Map<String, Gerarchia> getItems() throws IOException {
 		if(gerarchie == null)
-			leggiDaFileGerarchie();
+			leggiDaFile();
 		return this.gerarchie;
 	}
 	
-	public void importaGerarchie(String path) throws IOException {
-		HashMap<String, Gerarchia> gerarchieImportate = JsonIO.leggiGerarchieDaJson(path);
-		
-		this.gerarchie = gerarchieImportate;
-		salvaGerarchie();
+	public void leggiDaFile() throws IOException {
+		this.gerarchie = (HashMap<String, Gerarchia>) fs.leggiGerarchiehMap(pathGerarchie);
 	}
 	
+	public void salva() throws IOException {
+        fs.salvaOggetto(pathGerarchie, this.getItems());
+	}
+	
+	public void importa(String path) throws IOException {
+		HashMap<String, Gerarchia> gerarchieImportate = (HashMap<String, Gerarchia>) fs.leggiGerarchiehMap(path);
+		
+		this.gerarchie = gerarchieImportate;
+		salva();
+	}
+	
+	/**
+	 * Permette di ricreare la hashmap ElencoCategoria di ogni Gerarchia salvata su JSON
+	 * @throws IOException 
+	 */
+	public void popolaGerarchie() throws IOException {
+		for (Gerarchia gerarchia : getItems().values()) {
+			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
+		}
+	}
+	
+	public Gerarchia getItemByName(String nomeRoot) throws IOException {
+		return this.getItems().get(this.formattaNome(nomeRoot));
+	} 
+	
+	public boolean checkItemPresente(String nome) throws IOException {
+		return this.getItems().containsKey(this.formattaNome(nome));
+	}
+	
+	/**
+	 * 
+	 * @param campi
+	 * @param descrizione
+	 * @return TRUE se descrizione non e' gia' presente in campi FALSE altrimenti
+	 */
+	public static boolean checkUnicitaCampo(List<CampoCategoria> campi, String descrizione) {
+		if(campi == null)
+			return true;
+		
+		for (CampoCategoria campo : campi) {
+			if(campo.getDescrizione().equalsIgnoreCase(descrizione)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private String formattaNome(String nome) {
+		return nome.toUpperCase();
+	}
 	//-----------------------------------------------------------------
 	private Gerarchia currentGerarchia;
 	
@@ -72,7 +105,7 @@ public class GestioneGerarchie {
 		currentGerarchia.addCategoriaInElenco(root.getNome(), root);	
 	}
 	
-	public Gerarchia getGerarchiaInLavorazione() throws NullPointerException{
+	public Gerarchia getCurrentItem() throws NullPointerException{
 		if (currentGerarchia != null)
 			return currentGerarchia;
 		throw new NullPointerException();
@@ -89,7 +122,7 @@ public class GestioneGerarchie {
 		int depth = categoriaPadre.getProfondita() + 1;
 
 		categoriaFiglia.setProfondita(depth);
-		this.currentGerarchia.addCategoriaInElenco(categoriaFiglia.getNome(),categoriaFiglia);
+		this.getCurrentItem().addCategoriaInElenco(categoriaFiglia.getNome(),categoriaFiglia);
 	}
 	
 	public void addCampiDefaultRoot(List<CampoCategoria> campiNativi) {
@@ -98,89 +131,23 @@ public class GestioneGerarchie {
 	}
 	
 	public void fineCreazioneGerarchia() throws IOException {
-		this.getGerarchie().put(this.currentGerarchia.getNomeFormattato(), currentGerarchia);
-		salvaGerarchie();
-	}
-	
-	/**
-	 * 
-	 * @param campi
-	 * @param descrizione
-	 * @return TRUE se descrizione non e' gia' presente in campi FALSE altrimenti
-	 */
-	public boolean checkUnicitaCampo(List<CampoCategoria> campi, String descrizione) {
-		if(campi == null)
-			return true;
-		
-		for (CampoCategoria campo : campi) {
-			if(campo.getDescrizione().equalsIgnoreCase(descrizione)) {
-				return false;
-			}
-		}
-		return true;
+		this.getItems().put(this.getCurrentItem().getNomeFormattato(), this.getCurrentItem());
+		this.salva();
 	}
 	
 	public boolean checkNomeCategoriaEsiste(String nomeCategoria) {
-		return this.getGerarchiaInLavorazione().checkNomeCategoriaEsiste(nomeCategoria);
+		return this.getCurrentItem().checkNomeCategoriaEsiste(nomeCategoria);
 	}
 	
 	public Categoria getCategoriaByName(String nome) {
-		return this.getGerarchiaInLavorazione().getCategoriaByName(nome);
+		return this.getCurrentItem().getCategoriaByName(nome);
 	}
-	
-	protected boolean checkNumMinimoSottoCategorie(int nSottoCategorie) {
-		return nSottoCategorie >= NUM_MIN_SOTTOCATEGORIE;
-	}
-	
-	/**
-	 * Precondizione: categoriaDaRamificare != null
-	 * 
-	 * @param categoriaDaRamificare
-	 * @return
-	 */
-	public int getNumSottoCatDaInserire(Categoria categoriaDaRamificare) {
-		if(checkNumMinimoSottoCategorie(categoriaDaRamificare.getSottoCategorie().size()) )
-			return NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO;
-		else
-			return NUM_MIN_SOTTOCATEGORIE;
-	}
-	
-	public int getNumMinSottoCategorie() {
-		return NUM_MIN_SOTTOCATEGORIE;
-	}
-	
-	public boolean checkCategoriaDaEliminare(String nomeCategoriaDaEliminare) {
-		Categoria categoriaDaEliminare = this.currentGerarchia.getCategoriaByName(nomeCategoriaDaEliminare);
-		return this.currentGerarchia.cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
-	}
-	
+		
 	public void eliminaCategoria(String nome) {
-		this.currentGerarchia.eliminaCategoria(nome);
+		this.getCurrentItem().eliminaCategoria(nome);
 	}
 	
 	public boolean checkNomeIsNomeRoot(String nomeDaEliminare) {
-		return this.currentGerarchia.getRoot().getNome().equalsIgnoreCase(nomeDaEliminare);
-	}
-	
-	public boolean checkGerarchiaPresente(String nome) throws IOException {
-		return getGerarchie().containsKey(this.formattaNome(nome));
-	}
-	
-	public Gerarchia getGerarchiaByName(String nomeRoot) throws IOException {
-		return getGerarchie().get(this.formattaNome(nomeRoot));
-	} 
-	
-	private String formattaNome(String nome) {
-		return nome.toUpperCase();
-	}
-	
-	/**
-	 * Permette di ricreare la hashmap ElencoCategoria di ogni Gerarchia salvata su JSON
-	 * @throws IOException 
-	 */
-	public void popolaGerarchie() throws IOException {
-		for (Gerarchia gerarchia : getGerarchie().values()) {
-			gerarchia.popolaElencoCategorie(gerarchia.getRoot());
-		}
+		return this.getCurrentItem().getRoot().getNome().equalsIgnoreCase(nomeDaEliminare);
 	}
 }

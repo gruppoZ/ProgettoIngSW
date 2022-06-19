@@ -5,6 +5,7 @@ import java.io.IOException;
 import controller.GestioneFruitore;
 import controller.GestioneOfferta;
 import it.unibs.fp.mylib.MyMenu;
+import view.viewParametriPiazza.ViewParametroPiazza;
 
 public class ViewFruitore extends ViewUtente{
 

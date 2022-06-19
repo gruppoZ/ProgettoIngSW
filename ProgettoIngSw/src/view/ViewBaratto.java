@@ -7,15 +7,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import application.Appuntamento;
-import application.Baratto;
-import application.Offerta;
+import application.baratto.Appuntamento;
+import application.baratto.Baratto;
+import application.baratto.Offerta;
 import controller.GestioneBaratto;
 import controller.GestioneFruitore;
 import controller.GestioneOfferta;
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
+import view.viewParametriPiazza.ViewParametroGiorno;
+import view.viewParametriPiazza.ViewParametroIntervalloOrario;
+import view.viewParametriPiazza.ViewParametroLuogo;
 
 public class ViewBaratto {
 	private static final String MSG_ERROR_SHOW_OFFERTE = "\nNon è stato possibile mostare le offerte";

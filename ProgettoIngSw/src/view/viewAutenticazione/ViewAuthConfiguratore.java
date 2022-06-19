@@ -1,10 +1,11 @@
-package view;
+package view.viewAutenticazione;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.Configuratore;
 import application.Credenziali;
+import view.ViewConfiguratore;
 
 public class ViewAuthConfiguratore extends ViewAuth{
 

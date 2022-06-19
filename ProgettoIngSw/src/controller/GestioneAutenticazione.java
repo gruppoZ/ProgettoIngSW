@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import application.Credenziali;
 import application.Utente;
+import utils.FileSystemOperations;
 import utils.JsonIO;
 
 public class GestioneAutenticazione {
@@ -14,6 +15,11 @@ public class GestioneAutenticazione {
 	private static final String PATH_CREDENZIALI_DEFAULT = "resources/credenzialiDefault.json";
 	protected static final String PATH_CREDENZIALI = "resources/credenziali.json";	
 	
+	private FileSystemOperations fs;
+	
+	public GestioneAutenticazione() {
+		fs = new JsonIO();
+	}
 	//Login  e check appositi per default
 	/**
 	 * Precondizione: crdenziali != null
@@ -23,7 +29,7 @@ public class GestioneAutenticazione {
 	 * @throws IOException 
 	 */
 	public boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) throws IOException {
-		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
+		Credenziali credenzialiDefault = (Credenziali) fs.leggiOggetto(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		
 		if(credenzialiDefault.checkCredenzialiUguali(credenziali))
 			return true;
@@ -87,7 +93,7 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private boolean checkCredenziali(Utente utente, String path, Credenziali credenzaliDaControllare) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(path);
+		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
 	
 		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
 		for (Credenziali credenziali : listaCredenziali) {
@@ -107,7 +113,7 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private boolean checkUnique(String username, String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(path);
+		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
 		
 		for (ArrayList<Credenziali> listaCredenziali : elencoCredenziali.values()) {
 			for (Credenziali credenziali : listaCredenziali) {
@@ -127,7 +133,7 @@ public class GestioneAutenticazione {
 	 */
 	private boolean checkDefault(String username) throws IOException {
 		
-		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);		
+		Credenziali credenzialiDefault = (Credenziali) fs.leggiOggetto(PATH_CREDENZIALI_DEFAULT, Credenziali.class);		
 		String usernameDefault = credenzialiDefault.getUsername();
 		
 		if(username.equals(usernameDefault)) {
@@ -137,7 +143,7 @@ public class GestioneAutenticazione {
 	}
 	
 	public Credenziali getCredenzialiDefault() throws IOException {
-		Credenziali credenzialiDefault = (Credenziali) JsonIO.leggiOggettoDaJson(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
+		Credenziali credenzialiDefault = (Credenziali) fs.leggiOggetto(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		return credenzialiDefault;
 	}
 	
@@ -151,12 +157,12 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private void aggiornaFileCredenziali(Credenziali credenziali, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = JsonIO.leggiCredenzialiHashMapDaJson(PATH_CREDENZIALI);
+		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(PATH_CREDENZIALI);
 		
 		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
 		listaCredenziali.add(credenziali);
 		elencoCredenziali.put(utente.getClass().getSimpleName(), listaCredenziali);
 
-		JsonIO.salvaOggettoSuJson(PATH_CREDENZIALI, elencoCredenziali);
+		fs.salvaOggetto(PATH_CREDENZIALI, elencoCredenziali);
 	}
 }

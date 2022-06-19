@@ -1,10 +1,10 @@
-package view;
+package view.viewParametriPiazza;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.GiorniDellaSettimana;
+import application.parametriPiazza.GiorniDellaSettimana;
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;

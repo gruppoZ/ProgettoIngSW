@@ -1,6 +1,8 @@
-package application;
+package application.baratto;
 
 import java.util.HashMap;
+
+import application.Categoria;
 
 public class Articolo {
 	private Categoria foglia;

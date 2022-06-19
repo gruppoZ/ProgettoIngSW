@@ -6,6 +6,8 @@ import application.Categoria;
 import application.Gerarchia;
 import controller.GestioneConfiguratore;
 import it.unibs.fp.mylib.MyMenu;
+import view.viewParametriPiazza.ViewParametri;
+import view.viewParametriPiazza.ViewParametroPiazza;
 
 public class ViewConfiguratore extends ViewUtente{
 	

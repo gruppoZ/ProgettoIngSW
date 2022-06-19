@@ -4,14 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-import application.Articolo;
-import application.Baratto;
 import application.Categoria;
-import application.Offerta;
-import application.OffertaAperta;
-import application.PassaggioTraStati;
-import application.StatiOfferta;
-import application.StatoOfferta;
+import application.baratto.Articolo;
+import application.baratto.Baratto;
+import application.baratto.Offerta;
+import application.baratto.OffertaAperta;
+import application.baratto.PassaggioTraStati;
+import application.baratto.StatiOfferta;
+import application.baratto.StatoOfferta;
+import utils.FileSystemOperations;
 import utils.JsonIO;
 
 public class GestioneOfferta {
@@ -20,8 +21,10 @@ public class GestioneOfferta {
 	
 	private List<Offerta> listaOfferte = new ArrayList<Offerta>(); 
 	private Map<String, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
+	private FileSystemOperations fs;
 	
 	public GestioneOfferta() throws FileNotFoundException, IOException {
+		fs = new JsonIO();
 		this.storicoMovimentazioni = leggiStoricoCambioStati();
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
@@ -81,7 +84,7 @@ public class GestioneOfferta {
 	}
 
 	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
-		List<Offerta> listaOfferte = (ArrayList<Offerta>) JsonIO.leggiListaDaJson(PATH_OFFERTE, Offerta.class);
+		List<Offerta> listaOfferte = (ArrayList<Offerta>) fs.leggiLista(PATH_OFFERTE, Offerta.class);
 		if(listaOfferte == null) 
 			listaOfferte = new ArrayList<Offerta>();
 		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
@@ -280,15 +283,15 @@ public class GestioneOfferta {
 	}
 	
 	protected HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() throws FileNotFoundException, IOException {
-		return JsonIO.leggiStoricoCambioStatiOffertaDaJson(PATH_STORICO_CAMBIO_STATI);
+		return (HashMap<String, ArrayList<PassaggioTraStati>>) fs.leggiStoricoCambioStatiOfferta(PATH_STORICO_CAMBIO_STATI);
 	}
 	
 	public void salvaOfferte() throws IOException {
-		JsonIO.salvaOggettoSuJson(PATH_OFFERTE, listaOfferte);
+		fs.salvaOggetto(PATH_OFFERTE, listaOfferte);
 	}
 	
 	protected void salvaStoricoCambioStati() throws IOException {
-		JsonIO.salvaOggettoSuJson(PATH_STORICO_CAMBIO_STATI, storicoMovimentazioni);
+		fs.salvaOggetto(PATH_STORICO_CAMBIO_STATI, storicoMovimentazioni);
 	}
 	
 	protected int numeroOfferteAperte() {

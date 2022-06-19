@@ -1,10 +1,10 @@
-package view;
+package view.viewParametriPiazza;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
 
-import application.IntervalloOrario;
+import application.parametriPiazza.IntervalloOrario;
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;

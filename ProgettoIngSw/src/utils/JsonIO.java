@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import application.Credenziali;
 import application.Gerarchia;
-import application.PassaggioTraStati;
+import application.baratto.PassaggioTraStati;
 
 /**
  * La libreria JACKSON prende i dati da salvare di un oggetto attraverso i metodi get
@@ -30,7 +30,7 @@ import application.PassaggioTraStati;
  * @author 
  *
  */
-public class JsonIO {
+public class JsonIO implements FileSystemOperations {
 	private static ObjectMapper mapper = JsonMapper.builder()
 	        .findAndAddModules()
 	        .build();
@@ -42,26 +42,31 @@ public class JsonIO {
 	 * @param path
 	 * @param oggetto
 	 */
-	public static void salvaOggettoSuJson(String path, Object oggetto) throws IOException {
+	public void salvaOggetto(String path, Object oggetto) throws IOException {
 		writer.writeValue(Paths.get(path).toFile(), oggetto);
 	}
 
+	public <T> Object leggiOggetto(String path, Class<T> classe) throws IOException {
+		return mapper.readValue(new File(path), classe);
+	}
+	
 	/**
 	 * Legge da un file le gerarchie scritte in formato JSON e le salva in una HashMap
+	 * A causa della libreria che utilizziamo, siamo obbligati a restituire HashMap piuttosto che Map
 	 * @param path
 	 * @return
 	 */
-	public static HashMap<String, Gerarchia> leggiGerarchieDaJson(String path) throws IOException, FileNotFoundException {
+	public HashMap<String, Gerarchia> leggiGerarchiehMap(String path) throws IOException, FileNotFoundException {
 		return mapper.readValue(new File(path), new TypeReference<HashMap<String, Gerarchia>>() {});
 	}
 	
-	public static HashMap<String, ArrayList<Credenziali>> leggiCredenzialiHashMapDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
+	public HashMap<String, ArrayList<Credenziali>> leggiCredenzialiMap(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		return JsonIO.leggiHashMap(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
 	}
 	
-	public static HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOffertaDaJson(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		return JsonIO.leggiHashMapDaJson(path, typeFactory.constructFromCanonical(String.class.getName()),
+	public HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOfferta(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		return JsonIO.leggiHashMap(path, typeFactory.constructFromCanonical(String.class.getName()),
 				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
 	}
 	
@@ -74,7 +79,7 @@ public class JsonIO {
 	 * @param elementClassValue
 	 * @return
 	 */
-	private static <K, V> HashMap<K, V> leggiHashMapDaJson(String path, JavaType elementClassKey, JavaType elementClassValue) throws IOException, FileNotFoundException{
+	private static <K, V> HashMap<K, V> leggiHashMap(String path, JavaType elementClassKey, JavaType elementClassValue) throws IOException, FileNotFoundException{
 		HashMap<K, V> mappa = null;
 		
 		MapType listType = typeFactory.constructMapType(HashMap.class, elementClassKey, elementClassValue);	
@@ -83,16 +88,12 @@ public class JsonIO {
 		return mappa;
 	}
 		
-	public static <T> List<T> leggiListaDaJson(String path, Class<T> elementClass) throws IOException, FileNotFoundException {
+	public <T> List<T> leggiLista(String path, Class<T> elementClass) throws IOException, FileNotFoundException {
 		List<T> lista = null;
 		CollectionType listType = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
 
 		lista = mapper.readValue(new File(path), listType);	
 		
 		return lista;
-	}
-		
-	public static <T> Object leggiOggettoDaJson(String path, Class<T> classe) throws IOException {
-		return mapper.readValue(new File(path), classe);
 	}
 }

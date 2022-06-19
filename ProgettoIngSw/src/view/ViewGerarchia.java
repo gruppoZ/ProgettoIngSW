@@ -7,7 +7,7 @@ import java.util.List;
 import application.CampoCategoria;
 import application.Categoria;
 import application.Gerarchia;
-import controller.GestioneGerarchie;
+import controller.GerarchieFacade;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -58,11 +58,11 @@ public class ViewGerarchia {
 			MSG_VISUALIZZA_GERARCHIA,
 	};
 	
-	private GestioneGerarchie gestoreGerarchia;
+	private GerarchieFacade gestoreGerarchia;
 	
 	public ViewGerarchia() throws IOException {
 		try {
-			gestoreGerarchia = new GestioneGerarchie();
+			gestoreGerarchia = new GerarchieFacade();
 		} catch (IOException e) {
 			throw new IOException(MSG_ERROR_INIT_GERARCHIE);
 		}

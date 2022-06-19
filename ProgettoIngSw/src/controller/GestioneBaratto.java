@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import application.Appuntamento;
-import application.Baratto;
-import application.Offerta;
-import application.OffertaAccoppiata;
-import application.OffertaChiusa;
-import application.OffertaInScambio;
-import application.OffertaSelezionata;
+import application.baratto.Appuntamento;
+import application.baratto.Baratto;
+import application.baratto.Offerta;
+import application.baratto.OffertaAccoppiata;
+import application.baratto.OffertaChiusa;
+import application.baratto.OffertaInScambio;
+import application.baratto.OffertaSelezionata;
+import utils.FileSystemOperations;
 import utils.JsonIO;
 
 public class GestioneBaratto {
@@ -21,6 +22,7 @@ public class GestioneBaratto {
 
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
+	private FileSystemOperations fs;
 	
 	/**
 	 * Postcondizione: listaBaratti != null, baratto != null
@@ -28,6 +30,7 @@ public class GestioneBaratto {
 	 * @throws FileNotFoundException 
 	 */
 	public GestioneBaratto() throws FileNotFoundException, IOException {
+		fs = new JsonIO();
 		this.listaBaratti = leggiBaratti();
 		this.baratto = new Baratto();
 	}
@@ -122,19 +125,19 @@ public class GestioneBaratto {
 	}
 	
 	private List<Baratto> leggiBaratti() throws FileNotFoundException, IOException{
-		return JsonIO.leggiListaDaJson(PATH_BARATTI, Baratto.class);
+		return fs.leggiLista(PATH_BARATTI, Baratto.class);
 	}
 	
 	private void salvaBaratti() throws IOException {
-		JsonIO.salvaOggettoSuJson(PATH_BARATTI, listaBaratti);
+		fs.salvaOggetto(PATH_BARATTI, listaBaratti);
 	}
 	
 	private List<Baratto> leggiBarattiTerminati() throws FileNotFoundException, IOException{
-		return JsonIO.leggiListaDaJson(PATH_BARATTI_TERMINATI, Baratto.class);
+		return fs.leggiLista(PATH_BARATTI_TERMINATI, Baratto.class);
 	}
 	
 	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) throws IOException {
-		JsonIO.salvaOggettoSuJson(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
+		fs.salvaOggetto(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
 	}
 	
 	/**

@@ -12,12 +12,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import application.Appuntamento;
-import application.Articolo;
 import application.CampoCategoria;
 import application.Categoria;
-import application.Offerta;
-import application.OffertaAperta;
+import application.baratto.Appuntamento;
+import application.baratto.Articolo;
+import application.baratto.Offerta;
+import application.baratto.OffertaAperta;
 import controller.GestioneBaratto;
 import controller.GestioneOfferta;
 

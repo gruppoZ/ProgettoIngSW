@@ -1,4 +1,4 @@
-package application;
+package application.baratto;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;

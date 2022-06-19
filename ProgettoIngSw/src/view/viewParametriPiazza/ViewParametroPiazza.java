@@ -1,11 +1,11 @@
-package view;
+package view.viewParametriPiazza;
 
 import java.io.IOException;
 import java.util.List;
 
-import application.GiorniDellaSettimana;
-import application.IntervalloOrario;
-import application.Piazza;
+import application.parametriPiazza.GiorniDellaSettimana;
+import application.parametriPiazza.IntervalloOrario;
+import application.parametriPiazza.Piazza;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 

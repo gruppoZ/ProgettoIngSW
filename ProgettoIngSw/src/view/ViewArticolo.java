@@ -2,9 +2,9 @@ package view;
 import java.io.IOException;
 import java.util.List;
 
-import application.Articolo;
 import application.CampoCategoria;
 import application.Categoria;
+import application.baratto.Articolo;
 import controller.GestioneArticolo;
 import controller.GestioneFruitore;
 import controller.GestioneOfferta;

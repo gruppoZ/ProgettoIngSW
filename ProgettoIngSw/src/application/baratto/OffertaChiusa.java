@@ -1,18 +1,18 @@
-package application;
+package application.baratto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class OffertaAccoppiata implements StatoOfferta {
+public class OffertaChiusa implements StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
-	
+
 	@JsonCreator
-	public OffertaAccoppiata() {
-		stato = StatiOfferta.OFFERTA_ACCOPPIATA.getNome();
+	public OffertaChiusa() {
+		stato = StatiOfferta.OFFERTA_CHIUSA.getNome();
 	}
 	
 	@Override
 	public String getStato() {
-		return stato;
+		return this.stato;
 	}
 
 	@Override

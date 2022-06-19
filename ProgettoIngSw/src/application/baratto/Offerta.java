@@ -1,4 +1,4 @@
-package application;
+package application.baratto;
 
 public class Offerta {
 	

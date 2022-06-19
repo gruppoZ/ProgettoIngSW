@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import application.Articolo;
 import application.CampoCategoria;
 import application.Categoria;
+import application.baratto.Articolo;
 
 public class GestioneArticolo {
 	

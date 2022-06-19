@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Categoria;
-import application.Offerta;
-import application.OffertaRitirata;
+import application.baratto.Offerta;
+import application.baratto.OffertaRitirata;
 import controller.GestioneFruitore;
 import controller.GestioneOfferta;
 import it.unibs.fp.mylib.InputDati;

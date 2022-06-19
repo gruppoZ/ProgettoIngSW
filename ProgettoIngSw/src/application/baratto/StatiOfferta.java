@@ -1,4 +1,4 @@
-package application;
+package application.baratto;
 
 public enum StatiOfferta {
 	OFFERTA_APERTA("OffertaAperta"),

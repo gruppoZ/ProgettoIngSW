@@ -1,4 +1,4 @@
-package view;
+package view.viewParametriPiazza;
 
 import java.io.IOException;
 
