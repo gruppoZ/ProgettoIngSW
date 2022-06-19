@@ -139,7 +139,7 @@ public class ViewOfferte {
 				
 				if(offerta != null) {
 					try {
-						gestoreOfferte.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+						gestoreOfferte.ritiraOfferta(offerta);;
 					} catch (IOException e) {
 						throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
 					}

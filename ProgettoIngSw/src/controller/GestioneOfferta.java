@@ -9,6 +9,7 @@ import application.baratto.Articolo;
 import application.baratto.Baratto;
 import application.baratto.Offerta;
 import application.baratto.OffertaAperta;
+import application.baratto.OffertaRitirata;
 import application.baratto.PassaggioTraStati;
 import application.baratto.StatiOfferta;
 import application.baratto.StatoOfferta;
@@ -83,6 +84,10 @@ public class GestioneOfferta {
 		salvaOfferte();
 	}
 
+	public void ritiraOfferta(Offerta offerta) throws IOException {
+		this.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
+	}
+		
 	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
 		List<Offerta> listaOfferte = (ArrayList<Offerta>) fs.leggiLista(PATH_OFFERTE, Offerta.class);
 		if(listaOfferte == null) 
