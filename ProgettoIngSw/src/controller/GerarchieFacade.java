@@ -5,6 +5,7 @@ import java.util.*;
 
 import application.CampoCategoria;
 import application.Categoria;
+import application.Configuratore;
 import application.Gerarchia;
 
 public class GerarchieFacade {
@@ -12,8 +13,10 @@ public class GerarchieFacade {
 	private static final int NUM_SOTTOCATEGORIE_AGGIUNGERE_CON_MINIMO_RISPETTATO = 1;
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
 	private GerarchiaRepository repo;
+	private Configuratore configuratore;
 	
 	public GerarchieFacade() throws IOException {
+		configuratore = new Configuratore();
 		repo = new GestioneGerarchie();
 		updateGerarchie();	
 	}
@@ -91,47 +94,49 @@ public class GerarchieFacade {
 	 * @return TRUE se descrizione non e' gia' presente in campi FALSE altrimenti
 	 */
 	public boolean checkUnicitaCampo(List<CampoCategoria> campi, String descrizione) {
-		return GestioneGerarchie.checkUnicitaCampo(campi, descrizione);
+		return Categoria.checkUnicitaCampo(campi, descrizione);
 	}	
 	
 	public Gerarchia getGerarchiaInLavorazione() {
-		return repo.getCurrentItem();
+		return configuratore.getGerarchiaInLavorazione();
 	}
 	
 	public void eliminaCategoria(String nome) {
-		repo.eliminaCategoria(nome);
+		configuratore.eliminaCategoria(nome);
 	}
 	
 	public boolean checkNomeIsNomeRoot(String nomeDaEliminare) {
-		return repo.checkNomeIsNomeRoot(nomeDaEliminare);
+		return configuratore.checkNomeIsNomeRoot(nomeDaEliminare);
 	}
 	
 	public boolean checkNomeCategoriaEsiste(String nomeCategoria) {
-		return repo.checkNomeCategoriaEsiste(nomeCategoria);
+		return configuratore.checkNomeCategoriaEsiste(nomeCategoria);
 	}
 	
 	public void fineCreazioneGerarchia() throws IOException {
-		repo.fineCreazioneGerarchia();
+		repo.fineCreazioneGerarchia(configuratore.getGerarchiaInLavorazione());
 	}
 	
 	public Categoria getCategoriaByName(String nome) {
-		return repo.getCategoriaByName(nome);
+		return configuratore.getCategoriaByName(nome);
 	}
 	
 	public void creaSottoCategoria(Categoria categoriaPadre, Categoria categoriaFiglia) {
-		repo.creaSottoCategoria(categoriaPadre, categoriaFiglia);
+		configuratore.creaSottoCategoria(categoriaPadre, categoriaFiglia);
 	}
 	
 	public void creaRoot(Categoria root) {
-		repo.creaRoot(root);
+		configuratore.creaRoot(root);
 	}
 	
 	public void addCampiDefaultRoot(List<CampoCategoria> campiNativi) {
-		repo.addCampiDefaultRoot(campiNativi);
+		configuratore.addCampiDefaultRoot(campiNativi);
 	}
 	
 	public boolean checkCategoriaDaEliminare(String nomeCategoriaDaEliminare) {
-		Categoria categoriaDaEliminare = ((Gerarchia) repo.getCurrentItem()).getCategoriaByName(nomeCategoriaDaEliminare);
-		return ((Gerarchia) repo.getCurrentItem()).cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
+		Gerarchia gerarchiaInLavorazione = configuratore.getGerarchiaInLavorazione();
+		Categoria categoriaDaEliminare = ((Gerarchia) gerarchiaInLavorazione).getCategoriaByName(nomeCategoriaDaEliminare);
+		
+		return ((Gerarchia) gerarchiaInLavorazione).cercaPadre(categoriaDaEliminare).numeriDiSottocategorie() == NUM_MIN_SOTTOCATEGORIE;
 	}
 }

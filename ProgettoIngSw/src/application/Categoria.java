@@ -182,6 +182,25 @@ public class Categoria {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param campi
+	 * @param descrizione
+	 * @return TRUE se descrizione non e' gia' presente in campi FALSE altrimenti
+	 */
+	public static boolean checkUnicitaCampo(List<CampoCategoria> campi, String descrizione) {
+		if(campi == null)
+			return true;
+		
+		for (CampoCategoria campo : campi) {
+			if(campo.getDescrizione().equalsIgnoreCase(descrizione)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 	/**
 	 * Precondizione: categoria != null

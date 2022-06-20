@@ -132,7 +132,7 @@ public class Gerarchia {
 		
 	}
 
-	private String formattaNome(String nome) {
+	public static String formattaNome(String nome) {
 		return nome.toUpperCase();
 	}
 }

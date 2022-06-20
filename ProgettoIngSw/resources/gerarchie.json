@@ -1,1 +1,128 @@
-{}
+{
+  "R2" : {
+    "root" : {
+      "nome" : "r2",
+      "descrizione" : "root2",
+      "sottoCategorie" : [ {
+        "nome" : "f1-r2",
+        "descrizione" : "f1 r2",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "A colori",
+          "obbligatorio" : true
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      }, {
+        "nome" : "f2-r2",
+        "descrizione" : "f2 r2",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "A colori",
+          "obbligatorio" : true
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      }, {
+        "nome" : "f3-f2",
+        "descrizione" : "f3 r2",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "A colori",
+          "obbligatorio" : true
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      } ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      }, {
+        "descrizione" : "A colori",
+        "obbligatorio" : true
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    }
+  },
+  "R1" : {
+    "root" : {
+      "nome" : "r1",
+      "descrizione" : "root1",
+      "sottoCategorie" : [ {
+        "nome" : "f-r1",
+        "descrizione" : "figlio1 r1",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ {
+          "descrizione" : "originale",
+          "obbligatorio" : false
+        } ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      }, {
+        "nome" : "f-r2",
+        "descrizione" : "figlio2 r1",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ ],
+        "campiEreditati" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        } ],
+        "profondita" : 1,
+        "radice" : false,
+        "valida" : true
+      } ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    }
+  }
+}
