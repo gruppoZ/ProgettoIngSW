@@ -11,7 +11,6 @@ import application.baratto.Appuntamento;
 import application.baratto.Baratto;
 import application.baratto.Offerta;
 import controller.GestioneBaratto;
-import controller.GestioneFruitore;
 import controller.GestioneOfferta;
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
@@ -70,16 +69,16 @@ public class ViewBaratto {
 	
 	private GestioneBaratto gestoreBaratto;
 	private GestioneOfferta gestoreOfferte;
-	private GestioneFruitore gestoreFruitore;
+	private String username;
 	private GestioneParametri gestorePiazza;
-	private ViewOfferte viewOfferta;
+	private ViewOfferta viewOfferta;
 	
 	public ViewBaratto() {
 	}
 	
-	public ViewBaratto(GestioneOfferta gestoreOfferte, GestioneFruitore gestoreFruitore) throws IOException {
+	public ViewBaratto(GestioneOfferta gestoreOfferte, String username) throws IOException {
 		this.gestoreOfferte = gestoreOfferte;
-		this.gestoreFruitore = gestoreFruitore;
+		this.username = username;
 		
 		try {
 			this.gestoreBaratto = new GestioneBaratto();
@@ -92,7 +91,7 @@ public class ViewBaratto {
 			throw new IOException(e.getMessage() + MSG_ERROR_INIT_PARAMETRI);
 		}
 		
-		this.viewOfferta = new ViewOfferte(gestoreFruitore, gestoreOfferte);	
+		this.viewOfferta = new ViewOfferta(username, gestoreOfferte);	
 	}
 	
 	public void menu() {	
@@ -132,16 +131,16 @@ public class ViewBaratto {
 		Offerta offertaA = new Offerta(), offertaB = new Offerta();
 		try {
 			System.out.println(MSG_SCEGLI_TUA_OFFERTA);
-			offertaA = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByUtente(gestoreFruitore.getUsername()));
+			offertaA = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByUtente(username));
 			
 			System.out.println("---------------------------------");
 			System.out.println(MSG_SCEGLI_OFFERTA_ALTRO_FRUITORE);
 			
 			offertaB = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
-			gestoreBaratto.switchToOfferteAccoppiate(gestoreOfferte, offertaA, offertaB);
-			
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
+			
+			gestoreOfferte.barattoCreato(offertaA, offertaB);
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -154,7 +153,7 @@ public class ViewBaratto {
 	 * di creare un appuntamento che andrà salvato nel baratto relativo all'offerta selezionata
 	 */
 	private void gestioneOfferteSelezionate() {
-		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(gestoreFruitore.getUsername());
+		List<Offerta> listaOfferteSelezionate =  gestoreOfferte.getOfferteSelezionateByUtente(username);
 		
 		if(listaOfferteSelezionate.size() > 0) {
 			try {
@@ -170,14 +169,14 @@ public class ViewBaratto {
 					Appuntamento appuntamento = creaAppuntamento();
 					LocalDate dataScadenza = gestoreBaratto.getDataScadenza(gestorePiazza, appuntamento);
 					
-					gestoreBaratto.switchToOfferteInScambio(gestoreOfferte, offertaAccoppiata, offertaSelezionata);
+					gestoreOfferte.switchToOfferteInScambio(offertaAccoppiata, offertaSelezionata);
+					
 					gestoreBaratto.aggiornaBaratto(baratto, offertaAccoppiata, offertaSelezionata, dataScadenza, appuntamento);
 
 					System.out.println(MSG_SUCCESS_DATI_INSERITI);
 				} else {
 					System.out.printf(MSG_WARNING_FISSARE_APPUNTAMENTO_ENTRO_SCADENZA, baratto.getScadenza());
-				}
-				
+				}		
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}	
@@ -192,7 +191,7 @@ public class ViewBaratto {
 	 * di accettare un appuntamento o rifiutarlo e proporne un altro
 	 */
 	private void gestioneOfferteInScambio() {
-		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(gestoreFruitore.getUsername());
+		List<Offerta> listaOfferteInScambio =  gestoreOfferte.getOfferteInScambioByUtente(username);
 		
 		if(listaOfferteInScambio.size() > 0) {
 			try {				
@@ -218,7 +217,9 @@ public class ViewBaratto {
 				
 				if(!usernameCorrente.equals(autoreAppuntamento)) {
 					if(InputDati.yesOrNo(MSG_ASK_ACCETTARE_APPUNTAMENTO)) {
-						gestoreBaratto.gestisciChiusuraBaratto(gestoreOfferte, offertaInScambioFruitoreCorrente, offertaAltroFruitore, baratto);
+						
+						gestoreOfferte.switchToOfferteChiuse(offertaInScambioFruitoreCorrente, offertaAltroFruitore);
+						gestoreBaratto.gestisciChiusuraBaratto(offertaInScambioFruitoreCorrente, offertaAltroFruitore, baratto);
 						
 						System.out.println(MSG_SUCCESS_BARATTO_CONCLUSO);
 					} else {
@@ -242,7 +243,6 @@ public class ViewBaratto {
 		} else {
 			System.out.println(MSG_OFFERTE_IN_SCAMBIO_ASSENTI);
 		}
-		
 	}
 	
 	private LocalDate richiestaData(String msg) {
@@ -285,14 +285,13 @@ public class ViewBaratto {
 
 		LocalTime orario = viewParametroIntervalloOrario.scegliOrarioAppuntamento();
 
-		Appuntamento appuntamento = new Appuntamento(luogo, date, orario, gestoreFruitore.getUsername());
+		Appuntamento appuntamento = new Appuntamento(luogo, date, orario, username);
 		
 		return appuntamento;
 	}
 	
 	private void showAppuntamentoByOfferta() {
 		ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
-		String username = gestoreFruitore.getUsername();
 		List<Offerta> listaOfferteScambio = gestoreOfferte.getOfferteInScambioByUtente(username);
 		Offerta offerta = new Offerta();
 		
@@ -321,7 +320,7 @@ public class ViewBaratto {
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			ViewOfferte viewOfferta = new ViewOfferte();
+			ViewOfferta viewOfferta = new ViewOfferta(username, gestoreOfferte);
 			ViewAppuntamento viewAppuntamento = new ViewAppuntamento();
 			
 			sb.append("**************************************\n");
@@ -336,7 +335,7 @@ public class ViewBaratto {
 			viewOfferta.showOfferta(offertaB);
 			
 			viewAppuntamento.showAppuntamento(baratto.getAppuntamento());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new IOException(e.getMessage() + MSG_ERROR_SHOW_OFFERTE);
 		}
 		

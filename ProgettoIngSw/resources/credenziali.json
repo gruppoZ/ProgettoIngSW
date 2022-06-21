@@ -6,5 +6,11 @@
   "Fruitore" : [ {
     "username" : "a",
     "password" : "b"
+  }, {
+    "username" : "f2",
+    "password" : "f2"
+  }, {
+    "username" : "f1",
+    "password" : "f1"
   } ]
 }

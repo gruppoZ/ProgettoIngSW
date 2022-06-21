@@ -2,7 +2,7 @@ package view;
 
 import java.io.IOException;
 
-import controller.GerarchieFacade;
+import controller.GestioneGerarchie;
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
@@ -61,11 +61,11 @@ public class ViewFileProgramma {
 
 	private void importaGerarchie() {
 		try {
-			GerarchieFacade gestoreGerarchie = new GerarchieFacade();
+			GestioneGerarchie gestoreGerarchie = new GestioneGerarchie();
 			
 			String path = InputDati.leggiStringaNonVuota(MSG_ASK_PATH_GERARCHIE);
 			
-			gestoreGerarchie.importaGerarchie(path);
+			gestoreGerarchie.importa(path);
 			
 			System.out.println(MSG_SUCCESS_IMPORT_COMPLETATO);			
 		} catch (IOException e) {

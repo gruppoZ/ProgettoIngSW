@@ -19,20 +19,21 @@ class testAutenticazione {
 		String username = "Pippo";
 		String password = "Pluto";
 		
-		Credenziali credenziali = new Credenziali(username, password);
 		GestioneAutenticazione gestoreAuth = new GestioneAutenticazione();
 		
-		assertFalse(gestoreAuth.login(new Fruitore(), credenziali));
-		assertFalse(gestoreAuth.login(new Configuratore(), credenziali));
+		assertFalse(gestoreAuth.login(new Fruitore(), username, password));
+		assertFalse(gestoreAuth.login(new Configuratore(), username, password));
 	}
 
 	@Test
 	void canObtainDefaultCredentialsFromFile() throws IOException {	
 		GestioneAutenticazione gestoreAuth = new GestioneAutenticazione();
 		Credenziali credenzialiDefault = gestoreAuth.getCredenzialiDefault();
-		Credenziali credenziali = new Credenziali("root", "root");
+		String username = "root";
+		String password = "root";
+		Credenziali credenziali = new Credenziali(username, password);
 		
-		assertTrue(gestoreAuth.checkCredenzialiPrimoAccesso(credenzialiDefault));
+		assertTrue(gestoreAuth.checkCredenzialiPrimoAccesso(username, password));
 		assertTrue(credenziali.checkCredenzialiUguali(credenzialiDefault));
 	}
 	

@@ -8,25 +8,18 @@ import application.Categoria;
 import application.baratto.Articolo;
 import application.baratto.Baratto;
 import application.baratto.Offerta;
-import application.baratto.OffertaAperta;
-import application.baratto.OffertaRitirata;
-import application.baratto.PassaggioTraStati;
 import application.baratto.StatiOfferta;
-import application.baratto.StatoOfferta;
-import utils.FileSystemOperations;
-import utils.JsonIO;
 
 public class GestioneOfferta {
-	private static final String PATH_OFFERTE = "resources/offerte.json";
-	private static final String PATH_STORICO_CAMBIO_STATI = "resources/storico_cambio_stati.json";
+	//TODO: ricordarsi di salvare le offerte dopo che si cambia lo stato
+	private List<Offerta> listaOfferte; 
 	
-	private List<Offerta> listaOfferte = new ArrayList<Offerta>(); 
-	private Map<String, ArrayList<PassaggioTraStati>> storicoMovimentazioni;
-	private FileSystemOperations fs;
+	private OffertaRepository repo;
+	
 	
 	public GestioneOfferta() throws FileNotFoundException, IOException {
-		fs = new JsonIO();
-		this.storicoMovimentazioni = leggiStoricoCambioStati();
+		repo = new OffertaRepository();
+		
 		listaOfferte = (ArrayList<Offerta>) leggiListaOfferte(); 
 	}
 	
@@ -34,14 +27,18 @@ public class GestioneOfferta {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_APERTA.getNome());
 	}
 	
-	private boolean isOffertaChiusa(Offerta offerta) {
+	public boolean isOffertaChiusa(Offerta offerta) {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_CHIUSA.getNome());
 	}
 	
-	private boolean isOffertaSelezionata(Offerta offerta) {
+	public boolean isOffertaSelezionata(Offerta offerta) {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_SELEZIONATA.getNome());
 	}
-		
+	
+	public boolean isOffertaAccoppiata(Offerta offerta) {
+		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_ACCOPPIATA.getNome());
+	}
+	
 	public boolean isOffertaInScambio(Offerta offerta) {
 		return offerta.getStatoOfferta().getStato().equalsIgnoreCase(StatiOfferta.OFFERTA_IN_SCAMBIO.getNome());
 	}
@@ -55,82 +52,48 @@ public class GestioneOfferta {
 	}
 	
 	/**
-	 * Precondizione: offerta != null, stato != null
+	 * Precondizione: offertaA != null, offertaB != null
 	 * 
-	 * Permette di cambiare lo stato di un offerta, dopodichè salva il passaggio di stato nello storico
-	 * @param offerta
+	 * Cambia lo stato dell'offertaA in "OffertaAccoppiata" e quello dell'offertaB in "OffertaSelezionata"
+	 * @param offertaA
+	 * @param offertaB
 	 * @throws IOException 
 	 */
-	public void gestisciCambiamentoStatoOfferta(Offerta offerta, StatoOfferta stato) throws IOException {
-		String id = offerta.getId();
-		String oldState, newState;
-		oldState = offerta.getStatoOfferta().getStato();
+	public void barattoCreato(Offerta offertaA, Offerta offertaB) throws IOException {	
+		offertaA.setAutore(true);
 		
-		offerta.getStatoOfferta().changeState(offerta, stato);
-		
-		newState = offerta.getStatoOfferta().getStato();
-		
-		PassaggioTraStati cambio = new PassaggioTraStati(oldState, newState);
-		
-		if(storicoMovimentazioni.containsKey(id)) {
-			storicoMovimentazioni.get(id).add(cambio);
-		} else {
-			ArrayList<PassaggioTraStati> passaggi = new ArrayList<PassaggioTraStati>();
-			passaggi.add(cambio);
-			storicoMovimentazioni.put(id, passaggi);
-		}
-		
-		salvaStoricoCambioStati();
-		salvaOfferte();
+		offertaA.accoppiaOfferta();
+		offertaB.accoppiaOfferta();
 	}
-
+	
+	/**
+	 * Precondizione: offertaA != null, offertaB != null
+	 * 
+	 * Cambia lo stato delle offerte in "OffertaInScambio"
+	 * @param offertaA
+	 * @param offertaB
+	 * @throws IOException 
+	 */
+	public void switchToOfferteInScambio(Offerta offertaA, Offerta offertaB) throws IOException {
+		offertaA.inScambioOfferta();
+		offertaB.inScambioOfferta();
+	}
+	
+	/**
+	 * Precondizione: offertaA != null, offertaB != null
+	 * 
+	 * Cambia lo stato delle offerte in "OffertaChiusa"
+	 * @param offertaA
+	 * @param offertaB
+	 * @throws IOException 
+	 */
+	public void switchToOfferteChiuse(Offerta offertaA, Offerta offertaB) throws IOException {
+		offertaA.chiudiOfferta();
+		offertaB.chiudiOfferta();
+	}	
+	
 	public void ritiraOfferta(Offerta offerta) throws IOException {
-		this.gestisciCambiamentoStatoOfferta(offerta, new OffertaRitirata());
-	}
-		
-	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
-		List<Offerta> listaOfferte = (ArrayList<Offerta>) fs.leggiLista(PATH_OFFERTE, Offerta.class);
-		if(listaOfferte == null) 
-			listaOfferte = new ArrayList<Offerta>();
-		setListaOfferte(aggiornaListaOfferte(new GestioneBaratto(), listaOfferte));
-		
-		salvaOfferte();		
-		return listaOfferte;
-	}
-	
-	/**
-	 * Precondizione: gestoreBaratto != null, listaOfferte != null
-	 * 
-	 * @param gestoreBaratto
-	 * @param listaOfferte
-	 * @return
-	 * @throws IOException 
-	 */
-	private List<Offerta> aggiornaListaOfferte(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) throws IOException {
-		gestisciBarattiScaduti(gestoreBaratto, listaOfferte);
-		return listaOfferte;
-	}
-	
-	
-	/**
-	 * Precondizione: gestoreBaratto != null, listaOfferte != null
-	 * 
-	 * @param gestoreBaratto
-	 * @param listaOfferte
-	 * @throws IOException 
-	 */
-	private void gestisciBarattiScaduti(GestioneBaratto gestoreBaratto, List<Offerta> listaOfferte) throws IOException {
-		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
-		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
-		gestoreBaratto.caricaBarattiScadutiEOfferteScadute(listaBarattiScaduti, listaOfferteScadute);
-		
-		gestoreBaratto.rimuoviListaBaratti(listaBarattiScaduti);
-		
-		for (Offerta offertaScaduta : listaOfferteScadute) {
-			Offerta offerta = getOffertaById(offertaScaduta.getId(), listaOfferte);
-			cambioOffertaScaduta(offerta);
-		}	
-		
+		offerta.ritiraOfferta();
 	}
 	
 	/**
@@ -140,9 +103,57 @@ public class GestioneOfferta {
 	 * @throws IOException 
 	 */
 	private void cambioOffertaScaduta(Offerta offerta) throws IOException {
-		gestisciCambiamentoStatoOfferta(offerta, new OffertaAperta());
+		offerta.apriOfferta();
 	}
 	
+	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {
+		List<Offerta> listaOfferte = (ArrayList<Offerta>) repo.getItems();
+		
+		if(listaOfferte == null) 
+			listaOfferte = new ArrayList<Offerta>();
+		
+		setListaOfferte(aggiornaListaOfferte(listaOfferte));
+		
+		salvaOfferte();		
+		return listaOfferte;
+	}
+	
+	/**
+	 * Precondizione: listaOfferte != null
+	 * 
+	 * @param gestoreBaratto
+	 * @param listaOfferte
+	 * @return
+	 * @throws IOException 
+	 */
+	private List<Offerta> aggiornaListaOfferte(List<Offerta> listaOfferte) throws IOException {
+		gestisciBarattiScaduti(listaOfferte);
+		return listaOfferte;
+	}
+	
+	
+	/**
+	 * Precondizione: listaOfferte != null
+	 * 
+	 * @param gestoreBaratto
+	 * @param listaOfferte
+	 * @throws IOException 
+	 */
+	private void gestisciBarattiScaduti(List<Offerta> listaOfferte) throws IOException {
+		GestioneBaratto gestoreBaratto = new GestioneBaratto();
+		
+		List<Baratto> listaBarattiScaduti = new ArrayList<Baratto>();
+		List<Offerta> listaOfferteScadute = new ArrayList<Offerta>();
+		
+		gestoreBaratto.caricaBarattiScadutiEOfferteScadute(listaBarattiScaduti, listaOfferteScadute);
+		
+		gestoreBaratto.rimuoviListaBaratti(listaBarattiScaduti);
+		
+		for (Offerta offertaScaduta : listaOfferteScadute) {
+			Offerta offerta = getOffertaById(offertaScaduta.getId(), listaOfferte);
+			cambioOffertaScaduta(offerta);
+		}	
+	}
 	
 	/**
 	 * Precondizione: id >= 1, listaOfferte != null
@@ -287,18 +298,12 @@ public class GestioneOfferta {
 		return result;
 	}
 	
-	protected HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStati() throws FileNotFoundException, IOException {
-		return (HashMap<String, ArrayList<PassaggioTraStati>>) fs.leggiStoricoCambioStatiOfferta(PATH_STORICO_CAMBIO_STATI);
-	}
 	
 	public void salvaOfferte() throws IOException {
-		fs.salvaOggetto(PATH_OFFERTE, listaOfferte);
+		repo.setOfferte(listaOfferte);
+		repo.salva();
 	}
-	
-	protected void salvaStoricoCambioStati() throws IOException {
-		fs.salvaOggetto(PATH_STORICO_CAMBIO_STATI, storicoMovimentazioni);
-	}
-	
+		
 	protected int numeroOfferteAperte() {
 		int n = 0;
 		
@@ -332,24 +337,28 @@ public class GestioneOfferta {
 	 * @return
 	 */
 	private Offerta creaOfferta(String id, Articolo articolo, String username) {
-		return new Offerta(id, articolo, username, new OffertaAperta());
+		return new Offerta(id, articolo, username);
 	}
 	
 	/**
 	 * Precondizione: offerta != null
 	 * Postcondizione: listaOfferte'.size() = listaOfferte.size() + 1 
 	 * @param offerta
+	 * @throws IOException 
 	 */
-	protected void aggiungiOfferta(Offerta offerta) {
+	protected void aggiungiOfferta(Offerta offerta) throws IOException {
 		this.listaOfferte.add(offerta);
+		this.salvaOfferte();
 	}
 	
 	/**
 	 * Precondizione: offerta != null
 	 * Postcondizione: listaOfferte'.size() = listaOfferte.size() - 1 
 	 * @param offerta
+	 * @throws IOException 
 	 */
-	protected void rimuoviOfferta(Offerta offerta) {
+	protected void rimuoviOfferta(Offerta offerta) throws IOException {
 		this.listaOfferte.remove(offerta);
+		this.salvaOfferte();
 	}
 }

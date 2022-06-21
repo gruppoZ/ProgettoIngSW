@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.Configuratore;
-import application.Credenziali;
+import application.Utente;
 import view.ViewConfiguratore;
 
 public class ViewAuthConfiguratore extends ViewAuth{
@@ -14,7 +14,7 @@ public class ViewAuthConfiguratore extends ViewAuth{
 	private static final String MSG_PRE_REGISTRAZIONE = "Le credenziali da utilizzare per il primo accesso sono:";
 	private static final String TIPOLOGIA_UTENTE = "CONFIGURATORE\n";
 	
-	private Configuratore configuratore;
+	private Utente configuratore;
 	
 	public ViewAuthConfiguratore() {
 		super();
@@ -27,7 +27,7 @@ public class ViewAuthConfiguratore extends ViewAuth{
 		super.checkLogin(configuratore);
 		
 		ViewConfiguratore view = new ViewConfiguratore();
-		view.menu(configuratore.getCredenziali().getUsername());
+		view.menu(configuratore.getUsername());
 	}
 
 	@Override
@@ -49,10 +49,8 @@ public class ViewAuthConfiguratore extends ViewAuth{
 		String username = chiediUsername(MSG_USERNAME_LOGIN);
 		String password = chiediPassword(MSG_PASSWORD_LOGIN);
 		
-		Credenziali credenziali = new Credenziali(username, password);
-		
 		try {
-			if(getGestoreAuth().checkCredenzialiPrimoAccesso(credenziali)) {
+			if(getGestoreAuth().checkCredenzialiPrimoAccesso(username, password)) {
 				System.out.println(MSG_LOGIN_EFFETTUATO);
 				return true;
 			} else {
@@ -69,8 +67,8 @@ public class ViewAuthConfiguratore extends ViewAuth{
 		String usernameDefault, passwordDefault;
 		
 		try {
-			usernameDefault = getGestoreAuth().getCredenzialiDefault().getUsername();
-			passwordDefault = getGestoreAuth().getCredenzialiDefault().getPassword();
+			usernameDefault = getGestoreAuth().getUsernameDefault();
+			passwordDefault = getGestoreAuth().getPasswordDefault();
 			
 			System.out.printf(MSG_GIVE_CREDENZIALI_DEFAULT, usernameDefault, passwordDefault);
 		} catch (IOException e) {

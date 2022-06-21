@@ -1,7 +1,5 @@
 package application;
 
-import java.io.IOException;
-
 public abstract class Utente {
 
 	private Credenziali credenziali;
@@ -25,5 +23,11 @@ public abstract class Utente {
 		this.credenziali = credenziali;
 	}	
 	
-	//public abstract void menu(String username) throws IOException;
+	public String getUsername() {
+		return this.credenziali.getUsername();
+	}
+	
+	public String getPassword() {
+		return this.credenziali.getPassword();
+	}
 }

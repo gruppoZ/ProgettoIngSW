@@ -8,21 +8,12 @@ import java.util.List;
 import application.baratto.Appuntamento;
 import application.baratto.Baratto;
 import application.baratto.Offerta;
-import application.baratto.OffertaAccoppiata;
-import application.baratto.OffertaChiusa;
-import application.baratto.OffertaInScambio;
-import application.baratto.OffertaSelezionata;
-import utils.FileSystemOperations;
-import utils.JsonIO;
 
 public class GestioneBaratto {
 
-	private static final String PATH_BARATTI = "resources/baratti.json";
-	private static final String PATH_BARATTI_TERMINATI = "resources/barattiTerminati.json";
-
 	private List<Baratto> listaBaratti;
 	private Baratto baratto;
-	private FileSystemOperations fs;
+	private BarattoRepository repo;
 	
 	/**
 	 * Postcondizione: listaBaratti != null, baratto != null
@@ -30,7 +21,8 @@ public class GestioneBaratto {
 	 * @throws FileNotFoundException 
 	 */
 	public GestioneBaratto() throws FileNotFoundException, IOException {
-		fs = new JsonIO();
+		repo = new BarattoRepository();
+		
 		this.listaBaratti = leggiBaratti();
 		this.baratto = new Baratto();
 	}
@@ -47,7 +39,8 @@ public class GestioneBaratto {
 	 */
 	public boolean isOffertaInBaratto(Offerta offerta) {
 		for (Baratto baratto : listaBaratti) {
-			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) return true;
+			if(baratto.getOffertaFruitorePromotore().equals(offerta) || baratto.getOffertaFruitoreRichiesta().equals(offerta)) 
+				return true;
 		}
 		return false;
 	}
@@ -125,19 +118,21 @@ public class GestioneBaratto {
 	}
 	
 	private List<Baratto> leggiBaratti() throws FileNotFoundException, IOException{
-		return fs.leggiLista(PATH_BARATTI, Baratto.class);
+		return (List<Baratto>) repo.getItems();
 	}
 	
 	private void salvaBaratti() throws IOException {
-		fs.salvaOggetto(PATH_BARATTI, listaBaratti);
+		repo.setBaratti(listaBaratti);
+		repo.salva();
 	}
 	
 	private List<Baratto> leggiBarattiTerminati() throws FileNotFoundException, IOException{
-		return fs.leggiLista(PATH_BARATTI_TERMINATI, Baratto.class);
+		return repo.getBarattiTerminati();
 	}
 	
 	private void salvaBarattiTerminati(List<Baratto> listaBarattiTerminati) throws IOException {
-		fs.salvaOggetto(PATH_BARATTI_TERMINATI, listaBarattiTerminati);
+		repo.setBarattiTerminati(listaBarattiTerminati);
+		repo.salvaBarattiTerminati();
 	}
 	
 	/**
@@ -211,49 +206,7 @@ public class GestioneBaratto {
 		
 		salvaBaratti();
 	}
-	
-	/**
-	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
-	 * 
-	 * Cambia lo stato dell'offertaA in "OffertaAccoppiata" e quello dell'offertaB in "OffertaSelezionata"
-	 * @param gestoreOfferta
-	 * @param offertaA
-	 * @param offertaB
-	 * @throws IOException 
-	 */
-	public void switchToOfferteAccoppiate(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaAccoppiata());
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaSelezionata());
-	}
-	
-	/**
-	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
-	 * 
-	 * Cambia lo stato delle offerte in "OffertaInScambio"
-	 * @param gestoreOfferta
-	 * @param offertaA
-	 * @param offertaB
-	 * @throws IOException 
-	 */
-	public void switchToOfferteInScambio(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaInScambio());
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaInScambio());
-	}
-	
-	/**
-	 * Precondizione: gestoreOfferta != null, offertaA != null, offertaB != null
-	 * 
-	 * Cambia lo stato delle offerte in "OffertaChiusa"
-	 * @param gestoreOfferta
-	 * @param offertaA
-	 * @param offertaB
-	 * @throws IOException 
-	 */
-	protected void switchToOfferteChiuse(GestioneOfferta gestoreOfferta, Offerta offertaA, Offerta offertaB) throws IOException {
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaA, new OffertaChiusa());
-		gestoreOfferta.gestisciCambiamentoStatoOfferta(offertaB, new OffertaChiusa());
-	}
-	
+			
 	/**
 	 * Precondizione: baratto != null, appuntamento != null
 	 * 
@@ -275,8 +228,7 @@ public class GestioneBaratto {
 	 * @param baratto
 	 * @throws IOException 
 	 */
-	public void gestisciChiusuraBaratto(GestioneOfferta gestoreOfferte, Offerta offertaA, Offerta offertaB, Baratto baratto) throws IOException {
-		switchToOfferteChiuse(gestoreOfferte, offertaA, offertaB);
+	public void gestisciChiusuraBaratto(Offerta offertaA, Offerta offertaB, Baratto baratto) throws IOException {
 		Baratto barattoTerminato = new Baratto(offertaA, offertaB, baratto.getScadenza(), baratto.getAppuntamento());
 		aggiungiBarattoTerminato(barattoTerminato);
 		

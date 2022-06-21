@@ -17,7 +17,6 @@ import application.Categoria;
 import application.baratto.Appuntamento;
 import application.baratto.Articolo;
 import application.baratto.Offerta;
-import application.baratto.OffertaAperta;
 import controller.GestioneBaratto;
 import controller.GestioneOfferta;
 
@@ -43,15 +42,14 @@ class testGestioneScambioArticoli {
 		
 		Articolo articolo = new Articolo(foglia, valoreCampi);
 		
-		Offerta offertaA = new Offerta("1", articolo, "username1", new OffertaAperta());
-		Offerta offertaB = new Offerta("2", articolo, "username2", new OffertaAperta());
+		Offerta offertaA = new Offerta("1", articolo, "username1", true);
+		Offerta offertaB = new Offerta("2", articolo, "username2", false);
 		
-		GestioneBaratto gestoreBaratti = new GestioneBaratto();
 		GestioneOfferta gestoreOfferte = new GestioneOfferta();
-		gestoreBaratti.switchToOfferteInScambio(gestoreOfferte, offertaA, offertaB);
+		gestoreOfferte.barattoCreato(offertaA, offertaB); //suppongo di aver creato un baratto
 		
-		assertTrue(gestoreOfferte.isOffertaInScambio(offertaA));
-		assertTrue(gestoreOfferte.isOffertaInScambio(offertaB));
+		assertTrue(gestoreOfferte.isOffertaAccoppiata(offertaA));
+		assertTrue(gestoreOfferte.isOffertaSelezionata(offertaB));
 		assertFalse(gestoreOfferte.isOffertaAperta(offertaA));
 		assertFalse(gestoreOfferte.isOffertaAperta(offertaB));
 	}

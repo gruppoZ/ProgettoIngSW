@@ -3,12 +3,10 @@ package controller;
 import java.io.IOException;
 import java.util.Map;
 
-import application.Gerarchia;
-
 public interface GerarchiaRepository extends Repository{
 	
-	public Map<?, ?> getItems() throws IOException;
-	public Object getItemByName(String nome) throws IOException;
-	public boolean checkItemPresente(String nome) throws IOException;
-	public void fineCreazioneGerarchia(Gerarchia gerarchiaDaSalvare) throws IOException;
+	public Map<?, ?> getGerarchie() throws IOException;
+	public Object getGerarchiaByName(String nome) throws IOException;
+	public boolean checkGerarchiaPresente(String nome) throws IOException;
+	public void fineCreazioneGerarchia() throws IOException;
 }

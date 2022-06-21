@@ -3,12 +3,14 @@ package application;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Gerarchia {
 	
 	private Categoria root;
-	private HashMap<String, Categoria> elencoCategorie;
+	private Map<String, Categoria> elencoCategorie;
 	
 	public Gerarchia() {
 		elencoCategorie = new HashMap<>();
@@ -20,11 +22,11 @@ public class Gerarchia {
 	}
 
 	@JsonIgnore
-	public HashMap<String, Categoria> getElencoCategorie() {
+	public Map<String, Categoria> getElencoCategorie() {
 		return elencoCategorie;
 	}
 
-	public void setElencoCategorie(HashMap<String, Categoria> elencoCategorie) {
+	public void setElencoCategorie(Map<String, Categoria> elencoCategorie) {
 		this.elencoCategorie = elencoCategorie;
 	}
 

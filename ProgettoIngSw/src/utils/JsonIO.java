@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -51,23 +51,21 @@ public class JsonIO implements FileSystemOperations {
 	}
 	
 	/**
-	 * Legge da un file le gerarchie scritte in formato JSON e le salva in una HashMap
-	 * A causa della libreria che utilizziamo, siamo obbligati a restituire HashMap piuttosto che Map
 	 * @param path
 	 * @return
 	 */
-	public HashMap<String, Gerarchia> leggiGerarchiehMap(String path) throws IOException, FileNotFoundException {
-		return mapper.readValue(new File(path), new TypeReference<HashMap<String, Gerarchia>>() {});
+	public Map<String, Gerarchia> leggiGerarchiehMap(String path) throws IOException, FileNotFoundException {
+		return mapper.readValue(new File(path), new TypeReference<Map<String, Gerarchia>>() {});
 	}
 	
-	public HashMap<String, ArrayList<Credenziali>> leggiCredenzialiMap(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+	public Map<String, ArrayList<Credenziali>> leggiCredenzialiMap(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		return JsonIO.leggiHashMap(path, typeFactory.constructFromCanonical(String.class.getName()),
-				typeFactory.constructCollectionType(ArrayList.class, Credenziali.class));
+				typeFactory.constructCollectionType(List.class, Credenziali.class));
 	}
-	
-	public HashMap<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOfferta(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		
+	public Map<String, ArrayList<PassaggioTraStati>> leggiStoricoCambioStatiOfferta(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		return JsonIO.leggiHashMap(path, typeFactory.constructFromCanonical(String.class.getName()),
-				typeFactory.constructCollectionType(ArrayList.class, PassaggioTraStati.class));
+				typeFactory.constructCollectionType(List.class, PassaggioTraStati.class));
 	}
 	
 	/**
@@ -79,10 +77,10 @@ public class JsonIO implements FileSystemOperations {
 	 * @param elementClassValue
 	 * @return
 	 */
-	private static <K, V> HashMap<K, V> leggiHashMap(String path, JavaType elementClassKey, JavaType elementClassValue) throws IOException, FileNotFoundException{
-		HashMap<K, V> mappa = null;
+	private static <K, V> Map<K, V> leggiHashMap(String path, JavaType elementClassKey, JavaType elementClassValue) throws IOException, FileNotFoundException{
+		Map<K, V> mappa = null;
 		
-		MapType listType = typeFactory.constructMapType(HashMap.class, elementClassKey, elementClassValue);	
+		MapType listType = typeFactory.constructMapType(Map.class, elementClassKey, elementClassValue);	
 		mappa = mapper.readValue(new File(path), listType);		
 		
 		return mappa;
@@ -90,7 +88,7 @@ public class JsonIO implements FileSystemOperations {
 		
 	public <T> List<T> leggiLista(String path, Class<T> elementClass) throws IOException, FileNotFoundException {
 		List<T> lista = null;
-		CollectionType listType = typeFactory.constructCollectionType(ArrayList.class, elementClass);	
+		CollectionType listType = typeFactory.constructCollectionType(List.class, elementClass);	
 
 		lista = mapper.readValue(new File(path), listType);	
 		

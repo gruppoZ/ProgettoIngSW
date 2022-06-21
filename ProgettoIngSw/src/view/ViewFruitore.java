@@ -59,7 +59,7 @@ public class ViewFruitore extends ViewUtente{
 					}
 					break;
 				case 3:
-					ViewOfferte viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);
+					ViewMenuOfferte viewOfferte = new ViewMenuOfferte(username, gestoreOfferta);
 					viewOfferte.menu();
 					break;
 				default:

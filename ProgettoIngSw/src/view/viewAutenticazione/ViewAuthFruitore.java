@@ -4,13 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.Fruitore;
+import application.Utente;
 import view.ViewFruitore;
 
 public class ViewAuthFruitore extends ViewAuth {	
 	
 	private static final String TIPOLOGIA_UTENTE = "FRUITORE\n";
 	
-	private Fruitore fruitore;
+	private Utente fruitore;
 	
 	public ViewAuthFruitore() {
 		super();
@@ -23,7 +24,7 @@ public class ViewAuthFruitore extends ViewAuth {
 		super.checkLogin(fruitore);
 		
 		ViewFruitore view = new ViewFruitore();
-		view.menu(fruitore.getCredenziali().getUsername());
+		view.menu(fruitore.getUsername());
 	}
 
 	@Override

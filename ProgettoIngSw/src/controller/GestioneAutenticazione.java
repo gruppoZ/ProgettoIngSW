@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import application.Credenziali;
 import application.Utente;
@@ -28,10 +30,10 @@ public class GestioneAutenticazione {
 	 * @return TRUE se le credenziali corrispondono a quelli di default
 	 * @throws IOException 
 	 */
-	public boolean checkCredenzialiPrimoAccesso(Credenziali credenziali) throws IOException {
+	public boolean checkCredenzialiPrimoAccesso(String username, String password) throws IOException {
 		Credenziali credenzialiDefault = (Credenziali) fs.leggiOggetto(PATH_CREDENZIALI_DEFAULT, Credenziali.class);
 		
-		if(credenzialiDefault.checkCredenzialiUguali(credenziali))
+		if(credenzialiDefault.checkCredenzialiUguali(new Credenziali(username, password)))
 			return true;
 		else
 			return false;	
@@ -42,13 +44,16 @@ public class GestioneAutenticazione {
 	 * 
 	 * Richiede all'utente di inserire username e password 
 	 * @param utente
-	 * @param credenziali
+	 * @param username
+	 * @param password
 	 * @return TRUE se il login e' avvenuto con successo FALSE se ho avuto qualche problema (es passwrod errata)
 	 * @throws IOException 
 	 * @throws IllegalArgumentException 
 	 * @throws FileNotFoundException 
 	 */	
-	public boolean login(Utente utente, Credenziali credenziali) throws FileNotFoundException, IllegalArgumentException, IOException {		
+	public boolean login(Utente utente, String username, String password) throws FileNotFoundException, IllegalArgumentException, IOException {		
+		Credenziali credenziali = new Credenziali(username, password);
+		
 		if(checkCredenziali(utente, PATH_CREDENZIALI, credenziali)) {
 			utente.setCredenziali(credenziali);
 			return true;
@@ -66,8 +71,8 @@ public class GestioneAutenticazione {
 	 * @throws IllegalArgumentException 
 	 * @throws FileNotFoundException 
 	 */
-	public void effettuaRegistrazione(Credenziali credenziali, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
-		aggiornaFileCredenziali(credenziali, utente);
+	public void effettuaRegistrazione(String username, String password, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
+		aggiornaFileCredenziali(new Credenziali(username, password), utente);
 	}
 	
 	/**
@@ -93,9 +98,10 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private boolean checkCredenziali(Utente utente, String path, Credenziali credenzaliDaControllare) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
+		Map<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
 	
-		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
+		List<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
+		
 		for (Credenziali credenziali : listaCredenziali) {
 			if(credenziali.checkCredenzialiUguali(credenzaliDaControllare))
 				return true;
@@ -113,9 +119,9 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private boolean checkUnique(String username, String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
+		Map<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(path);
 		
-		for (ArrayList<Credenziali> listaCredenziali : elencoCredenziali.values()) {
+		for (List<Credenziali> listaCredenziali : elencoCredenziali.values()) {
 			for (Credenziali credenziali : listaCredenziali) {
 				if(credenziali.getUsername().equals(username)) {
 					return false;
@@ -131,8 +137,7 @@ public class GestioneAutenticazione {
 	 * @return TRUE se lo username passato e' uguale a quello utilizzato nelle credenziali di default
 	 * @throws IOException 
 	 */
-	private boolean checkDefault(String username) throws IOException {
-		
+	private boolean checkDefault(String username) throws IOException {	
 		Credenziali credenzialiDefault = (Credenziali) fs.leggiOggetto(PATH_CREDENZIALI_DEFAULT, Credenziali.class);		
 		String usernameDefault = credenzialiDefault.getUsername();
 		
@@ -147,6 +152,14 @@ public class GestioneAutenticazione {
 		return credenzialiDefault;
 	}
 	
+	public String getUsernameDefault() throws IOException {
+		return this.getCredenzialiDefault().getUsername();
+	}
+	
+	public String getPasswordDefault() throws IOException {
+		return this.getCredenzialiDefault().getPassword();
+	}
+	
 	/**
 	 * Precondizione: crdenziali != null AND utente != null
 	 * 
@@ -157,7 +170,7 @@ public class GestioneAutenticazione {
 	 * @throws FileNotFoundException 
 	 */
 	private void aggiornaFileCredenziali(Credenziali credenziali, Utente utente) throws FileNotFoundException, IllegalArgumentException, IOException {
-		HashMap<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(PATH_CREDENZIALI);
+		Map<String, ArrayList<Credenziali>> elencoCredenziali = (HashMap<String, ArrayList<Credenziali>>) fs.leggiCredenzialiMap(PATH_CREDENZIALI);
 		
 		ArrayList<Credenziali> listaCredenziali = elencoCredenziali.get(utente.getClass().getSimpleName());
 		listaCredenziali.add(credenziali);

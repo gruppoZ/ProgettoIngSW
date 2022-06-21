@@ -6,7 +6,6 @@ import application.CampoCategoria;
 import application.Categoria;
 import application.baratto.Articolo;
 import controller.GestioneArticolo;
-import controller.GestioneFruitore;
 import controller.GestioneOfferta;
 import it.unibs.fp.mylib.InputDati;
 
@@ -21,7 +20,7 @@ public class ViewArticolo {
 	private static final String MSG_ERROR_COMPILAZIONE_CAMPO = "\nLa compilazione dell'articolo non e' andata a buon fine!\n";
 	private static final String MSG_ERROR_FILE_INERENTI_IL_BARATTO = "Impossibile interagire con i file inerenti il baratto.";
 	
-	private GestioneFruitore gestoreFruitore;
+	private String username;
 	private GestioneArticolo gestoreArticolo;
 	private GestioneOfferta gestoreOfferte;
 	
@@ -35,8 +34,8 @@ public class ViewArticolo {
 	 * @param gestoreFruitore
 	 * @param gestoreOfferte
 	 */
-	public ViewArticolo(GestioneFruitore gestoreFruitore, GestioneOfferta gestoreOfferte) {
-		this.gestoreFruitore = gestoreFruitore;
+	public ViewArticolo(String username, GestioneOfferta gestoreOfferte) {
+		this.username = username;
 		this.gestoreOfferte = gestoreOfferte;
 		gestoreArticolo = new GestioneArticolo();
 	}
@@ -51,7 +50,7 @@ public class ViewArticolo {
 			try {
 				inserisciValoriCampi();
 				System.out.println(MSG_PUBBLICAZIONE_ACCETTATA);
-				gestoreOfferte.manageAggiuntaOfferta(gestoreArticolo.getArticolo(), gestoreFruitore.getUsername());
+				gestoreOfferte.manageAggiuntaOfferta(gestoreArticolo.getArticolo(), username);
 			} catch(IOException e) {
 				throw new IOException(MSG_ERROR_FILE_INERENTI_IL_BARATTO);
 			} catch(Exception e) {

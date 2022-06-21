@@ -1,32 +1,80 @@
 package application.baratto;
 
+import java.io.IOException;
+
 public class Offerta {
 	
 	private String id;
 	private Articolo articolo;
 	private String username; 
 	private StatoOfferta statoOfferta;
+	private boolean autore;
 	
-
 	public Offerta() {		
 	}
 	
 	/**
-	 * Precondizione: id >= 1, articolo != null, tipoOfferta != null
-	 * Postcondizione: this.id >= 1, this.articolo != null, this.statoOfferta != null
+	 * Precondizione: id >= 1, articolo != null
+	 * Postcondizione: this.id >= 1, this.articolo != null
+	 * 
+	 * @param id
+	 * @param articolo
+	 * @param username
+	 * @param autore
+	 * @param tipoOfferta
+	 */
+	public Offerta(String id, Articolo articolo, String username, boolean autore) {
+		this.id = id;
+		this.articolo = articolo;
+		this.username = username;
+		this.autore = autore;
+		this.statoOfferta = new OffertaAperta(this);
+	}
+	
+	/**
+	 * Precondizione: id >= 1, articolo != null
+	 * Postcondizione: this.id >= 1, this.articolo != null
 	 * 
 	 * @param id
 	 * @param articolo
 	 * @param username
 	 * @param tipoOfferta
 	 */
-	public Offerta(String id, Articolo articolo, String username, StatoOfferta tipoOfferta) {
+	public Offerta(String id, Articolo articolo, String username) {
 		this.id = id;
 		this.articolo = articolo;
 		this.username = username;
-		this.statoOfferta = tipoOfferta;
+		this.statoOfferta = new OffertaAperta(this);
 	}
 	
+	public void accoppiaOfferta() throws IOException {
+		this.statoOfferta.accoppiaOfferta();
+	}
+	
+	public void inScambioOfferta() throws IOException {
+		this.statoOfferta.inScambio();
+	}
+	
+	public void ritiraOfferta() throws IOException {
+		this.statoOfferta.ritiraOfferta();
+	}
+	
+	public void chiudiOfferta() throws IOException {
+		this.statoOfferta.chiudiOfferta();
+	}
+	
+	public void apriOfferta() throws IOException {
+		this.statoOfferta.apriOfferta();
+	}
+	
+	public boolean isAutore() {
+		return autore;
+	}
+
+	public void setAutore(boolean autore) {
+		this.autore = autore;
+	}
+
 	public String getId() {
 		return id;
 	}

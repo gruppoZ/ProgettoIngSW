@@ -1,27 +1,27 @@
 package controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 import application.Gerarchia;
 
 public abstract class GestioneUtente {
-	private GerarchieFacade gestoreGerarchie;
+	private GestioneGerarchie gestoreGerarchie;
 	
 	/**
 	 * Postcondizione: gestoreGerarchie != null
 	 * @throws IOException 
 	 */
 	public GestioneUtente() throws IOException {
-		gestoreGerarchie = new GerarchieFacade();
+		gestoreGerarchie = new GestioneGerarchie();
 	}
 	
-	protected GerarchieFacade getGestoreGerarchie() {
+	protected GestioneGerarchie getGestoreGerarchie() {
 		return this.gestoreGerarchie;
 	}
 	
-	public HashMap<String, Gerarchia> getGerarchie() throws IOException {
-		return gestoreGerarchie.getGerarchie();
+	public Map<String, Gerarchia> getGerarchie() throws IOException {
+		return (Map<String, Gerarchia>) gestoreGerarchie.getGerarchie();
 	}
 
 	public boolean isGerarchieCreate() throws IOException {
@@ -29,6 +29,6 @@ public abstract class GestioneUtente {
 	}	
 	
 	public void aggiornaGerarchie() throws IOException {
-		gestoreGerarchie.leggiDaFileGerarchie();
+		gestoreGerarchie.leggiDaFile();
 	}
 }

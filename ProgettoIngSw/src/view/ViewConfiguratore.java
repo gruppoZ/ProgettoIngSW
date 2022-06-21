@@ -2,7 +2,6 @@ package view;
 
 import java.io.IOException;
 
-import application.Categoria;
 import application.Gerarchia;
 import controller.GestioneConfiguratore;
 import it.unibs.fp.mylib.MyMenu;
@@ -27,14 +26,17 @@ public class ViewConfiguratore extends ViewUtente{
 			MSG_IMPORTA_DATI
 	};
 	
+	private GestioneConfiguratore gestoreConfiguratore;
+	private ViewOfferta viewOfferte;
+	private ViewGerarchia viewGerarchia;
+	
 	@Override
 	public void menu(String username) throws IOException {
 		try {
-			GestioneConfiguratore gestoreConfiguratore = new GestioneConfiguratore();
-			ViewOfferte viewOfferte = new ViewOfferte();
-			ViewGerarchia viewGerarchia = new ViewGerarchia();
-			Categoria foglia;
-			
+			gestoreConfiguratore = new GestioneConfiguratore();
+			viewOfferte = new ViewOfferta();
+			viewGerarchia = new ViewGerarchia();
+					
 			MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 			int scelta = 0;
 			boolean fine = false;
@@ -45,49 +47,22 @@ public class ViewConfiguratore extends ViewUtente{
 					fine = true;
 					break;
 				case 1:
-					viewGerarchia.update();
-					viewGerarchia.menu();
-					
-					gestoreConfiguratore.aggiornaGerarchie();				
+					creaGerarchia();			
 					break;
 				case 2:
-					viewGerarchia.update();
-					
-					if(!gestoreConfiguratore.isGerarchieCreate())
-						System.out.println(MSG_ASSENZA_GERARCHIE);
-					else {				
-						for (Gerarchia gerarchia : gestoreConfiguratore.getGerarchie().values()) {
-							viewGerarchia.showGerarchia(gerarchia);
-						}
-					}
+					showGerarchie();
 					break;
 				case 3:
-					ViewParametri viewPiazza = new ViewParametroPiazza();
-					viewPiazza.menu();
+					viewPiazza();
 					break;
 				case 4:
-					viewGerarchia.update();
-					viewOfferte = new ViewOfferte();
-					
-					foglia = viewGerarchia.scegliFoglia();
-					
-					viewOfferte.showOfferteAperteByCategoria(foglia);
+					showOfferteAperteByCategoria();
 					break;
 				case 5:
-					viewGerarchia.update();
-					viewOfferte = new ViewOfferte();
-					
-					foglia = viewGerarchia.scegliFoglia();
-					
-					viewOfferte.showOfferteInScambioByCategoria(foglia);
-					viewOfferte.showOfferteChiuseByCategoria(foglia);
+					showOfferteInScambioEChiusebyCategoria();
 					break;
 				case 6:
-					ViewFileProgramma viewInfo = new ViewFileProgramma();
-					
-					viewInfo.menu();
-					
-					gestoreConfiguratore.aggiornaGerarchie();
+					importaDati();
 					break;
 				default:
 					System.out.println(TXT_ERROR);	
@@ -96,5 +71,52 @@ public class ViewConfiguratore extends ViewUtente{
 		} catch (IOException e) {
 			throw new IOException(e.getMessage());
 		}	
-	}	
+	}
+	
+	private void creaGerarchia() throws IOException {
+		viewGerarchia.update();
+		viewGerarchia.menu();
+		
+		gestoreConfiguratore.aggiornaGerarchie();	
+	}
+	
+	private void viewPiazza() throws IOException {
+		ViewParametri viewPiazza = new ViewParametroPiazza();
+		viewPiazza.menu();
+	}
+	
+	private void showGerarchie() throws IOException {
+		viewGerarchia.update();
+		
+		if(!gestoreConfiguratore.isGerarchieCreate())
+			System.out.println(MSG_ASSENZA_GERARCHIE);
+		else {				
+			for (Gerarchia gerarchia : gestoreConfiguratore.getGerarchie().values()) {
+				viewGerarchia.showGerarchia(gerarchia);
+			}
+		}
+	}
+	
+	private void showOfferteInScambioEChiusebyCategoria() throws IOException {
+		viewGerarchia.update();
+		viewOfferte = new ViewOfferta();
+		
+		viewOfferte.showOfferteInScambioByCategoria();
+		viewOfferte.showOfferteChiuseByCategoria();
+	}
+	
+	private void showOfferteAperteByCategoria() throws IOException {
+		viewGerarchia.update();
+		viewOfferte = new ViewOfferta();
+		
+		viewOfferte.showOfferteAperteByCategoria();
+	}
+	
+	private void importaDati() throws IOException {
+		ViewFileProgramma viewInfo = new ViewFileProgramma();
+		
+		viewInfo.menu();
+		
+		gestoreConfiguratore.aggiornaGerarchie();
+	}
 }

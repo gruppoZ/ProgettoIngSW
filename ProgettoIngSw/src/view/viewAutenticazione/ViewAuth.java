@@ -3,7 +3,6 @@ package view.viewAutenticazione;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import application.Credenziali;
 import application.Utente;
 import controller.GestioneAutenticazione;
 import it.unibs.fp.mylib.InputDati;
@@ -46,7 +45,7 @@ public abstract class ViewAuth {
 		String password = chiediPassword(MSG_PASSWORD_LOGIN);
 		
 		try {
-			if(this.gestoreAuth.login(utente, new Credenziali(username, password))) {
+			if(this.gestoreAuth.login(utente, username, password)) {
 				System.out.println(MSG_LOGIN_EFFETTUATO);
 				return true;
 			}
@@ -70,7 +69,6 @@ public abstract class ViewAuth {
 	public void registrati(Utente utente) throws IOException {
 		String username;
 		String password;
-		Credenziali credenziali;
 				
 		username = chiediUsername(MSG_USERNAME);
 		
@@ -82,11 +80,9 @@ public abstract class ViewAuth {
 			
 			password = chiediPassword(MSG_PASSWORD);
 			
-			credenziali = new Credenziali(username, password);
-			
 			System.out.printf(MSG_RESISTRAZIONE_SUCCESSO_GIVE_CREDENZIALI, username, password);
 
-			this.gestoreAuth.effettuaRegistrazione(credenziali, utente);
+			this.gestoreAuth.effettuaRegistrazione(username, password, utente);
 		} catch (IOException e) {
 			throw new IOException(MSG_ERROR_LETTURA_CREDENZIALI);
 		}
