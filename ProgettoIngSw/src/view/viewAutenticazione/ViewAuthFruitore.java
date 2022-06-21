@@ -20,11 +20,16 @@ public class ViewAuthFruitore extends ViewAuth {
 
 	@Override
 	public void login() throws FileNotFoundException, IOException {
-		System.out.printf(INTESTAZIONE_LOGIN, TIPOLOGIA_UTENTE);
-		super.checkLogin(fruitore);
+		try {
+			System.out.printf(INTESTAZIONE_LOGIN, TIPOLOGIA_UTENTE);
+			super.checkLogin(fruitore);
+			
+			ViewFruitore view = new ViewFruitore();
+			view.menu(fruitore.getUsername());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
-		ViewFruitore view = new ViewFruitore();
-		view.menu(fruitore.getUsername());
 	}
 
 	@Override

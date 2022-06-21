@@ -9,6 +9,7 @@ import it.unibs.fp.mylib.InputDati;
 
 public abstract class ViewAuth {
 
+	private static final String MSG_LOGIN_NON_EFFETTUATO = "*** Login non effettuato ***";
 	protected static final String INTESTAZIONE_LOGIN = "\nLogin %s";
 	protected static final String INTESTAZIONE_REGISTRAZIONE = "Registrazione %s";
 	protected static final String MSG_ERROR_CREDENZIALI_DEFAULT = "ATTENZIONE: CREDENZIALI ERRATE";
@@ -93,16 +94,18 @@ public abstract class ViewAuth {
 	 * Verifica se l'utente si è loggatto correttaente, in tal caso mostra il relativo menu
 	 * Altrimenti viene chiesto se si vuole ripetere il login
 	 * @param utente
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * @throws Exception 
 	 */
-	public void checkLogin(Utente utente) throws FileNotFoundException, IOException {
+	public void checkLogin(Utente utente) throws Exception {
 		boolean ritenta;
 		do {
 			if(login(utente)) {
 				ritenta = false;
 			} else {
 				ritenta = InputDati.yesOrNo(MSG_RIPETI_LOGIN);
+				
+				if(!ritenta)
+					throw new Exception(MSG_LOGIN_NON_EFFETTUATO);
 			}
 		} while(ritenta);
 	}

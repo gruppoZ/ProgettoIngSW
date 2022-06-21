@@ -1,6 +1,7 @@
 package application.baratto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class OffertaChiusa extends StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
@@ -11,6 +12,7 @@ public class OffertaChiusa extends StatoOfferta {
 		stato = StatiOfferta.OFFERTA_CHIUSA.getNome();
 	}
 
+	@JsonIgnore
 	@Override
 	public String getStato() {
 		return this.stato;

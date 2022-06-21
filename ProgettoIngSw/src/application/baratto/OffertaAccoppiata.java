@@ -3,6 +3,7 @@ package application.baratto;
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class OffertaAccoppiata extends StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
@@ -13,6 +14,7 @@ public class OffertaAccoppiata extends StatoOfferta {
 		stato = StatiOfferta.OFFERTA_ACCOPPIATA.getNome();
 	}
 	
+	@JsonIgnore
 	@Override
 	public String getStato() {
 		return stato;
