@@ -9,8 +9,7 @@ public class OffertaAperta extends StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
 	
 	@JsonCreator
-	public OffertaAperta(Offerta offerta) {
-		super(offerta);
+	public OffertaAperta() {
 		stato = StatiOfferta.OFFERTA_APERTA.getNome();
 	}
 	
@@ -21,38 +20,38 @@ public class OffertaAperta extends StatoOfferta {
 	}
 
 	@Override
-	public void ritiraOfferta() throws IOException {
+	public void ritiraOfferta(Offerta offerta) throws IOException {
 		StatoOfferta oldState = this;
-		offerta.setStatoOfferta(new OffertaRitirata(offerta));
+		offerta.setStatoOfferta(new OffertaRitirata());
 		
 		gestisciCambiamentoStatoOfferta(offerta, oldState);
 	}
 
 
 	@Override
-	public void accoppiaOfferta() throws IOException {
+	public void accoppiaOfferta(Offerta offerta) throws IOException {
 		StatoOfferta oldState = this;
 		
 		if(offerta.isAutore())
-			offerta.setStatoOfferta(new OffertaAccoppiata(offerta));
+			offerta.setStatoOfferta(new OffertaAccoppiata());
 		else 
-			offerta.setStatoOfferta(new OffertaSelezionata(offerta));
+			offerta.setStatoOfferta(new OffertaSelezionata());
 		
 		gestisciCambiamentoStatoOfferta(offerta, oldState);
 	}
 	
 	@Override
-	public void chiudiOfferta() {
+	public void chiudiOfferta(Offerta offerta) {
 		// no op
 	}
 
 	@Override
-	public void inScambio() {
+	public void inScambio(Offerta offerta) {
 		//no op
 	}
 
 	@Override
-	public void apriOfferta() {
+	public void apriOfferta(Offerta offerta) {
 		// no op
 	}
 }

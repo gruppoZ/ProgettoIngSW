@@ -21,7 +21,7 @@ public class ViewOfferta {
 	private static final String MSG_OFFERTE_BY_CATEGORIA_INESISTENTI = "\nNon sono presenti %s per la categoria selezionata. \n";
 	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
 	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
-	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte con ID selezionato";
+	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
 	
 	private GestioneOfferta gestoreOfferte;
 	private String username;

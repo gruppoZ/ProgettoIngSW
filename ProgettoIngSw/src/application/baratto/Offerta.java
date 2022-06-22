@@ -28,7 +28,7 @@ public class Offerta {
 		this.articolo = articolo;
 		this.username = username;
 		this.autore = autore;
-		this.statoOfferta = new OffertaAperta(this);
+		this.statoOfferta = new OffertaAperta();
 	}
 	
 	/**
@@ -44,27 +44,27 @@ public class Offerta {
 		this.id = id;
 		this.articolo = articolo;
 		this.username = username;
-		this.statoOfferta = new OffertaAperta(this);
+		this.statoOfferta = new OffertaAperta();
 	}
 	
 	public void accoppiaOfferta() throws IOException {
-		this.statoOfferta.accoppiaOfferta();
+		this.statoOfferta.accoppiaOfferta(this);
 	}
 	
 	public void inScambioOfferta() throws IOException {
-		this.statoOfferta.inScambio();
+		this.statoOfferta.inScambio(this);
 	}
 	
 	public void ritiraOfferta() throws IOException {
-		this.statoOfferta.ritiraOfferta();
+		this.statoOfferta.ritiraOfferta(this);
 	}
 	
 	public void chiudiOfferta() throws IOException {
-		this.statoOfferta.chiudiOfferta();
+		this.statoOfferta.chiudiOfferta(this);
 	}
 	
 	public void apriOfferta() throws IOException {
-		this.statoOfferta.apriOfferta();
+		this.statoOfferta.apriOfferta(this);
 	}
 	
 	public boolean isAutore() {

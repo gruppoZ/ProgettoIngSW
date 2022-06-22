@@ -20,6 +20,7 @@ import view.viewParametriPiazza.ViewParametroIntervalloOrario;
 import view.viewParametriPiazza.ViewParametroLuogo;
 
 public class ViewBaratto {
+	private static final String MSG_PIAZZA_NON_IMPOSTATA = "*** Voce non selezionabile. Il configuratore non ha impostato i parametri per il baratto ***";
 	private static final String MSG_ERROR_SHOW_OFFERTE = "\nNon è stato possibile mostare le offerte";
 	private static final String MSG_ERROR_INIT_GESTIONE_BARATTO = "*** ERRORE inizializzazione Gestione Baratto ***";
 	private static final String MSG_ERROR_INIT_PARAMETRI = "*** ERRORE inizializzazione Parametri ***";
@@ -94,10 +95,14 @@ public class ViewBaratto {
 		this.viewOfferta = new ViewOfferta(username, gestoreOfferte);	
 	}
 	
-	public void menu() {	
+	public void menu() throws Exception {	
 		MyMenu menu = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		int scelta = 0;
 		boolean fine = false;
+		
+		if(!gestorePiazza.isPiazzaCreata())
+			throw new Exception(MSG_PIAZZA_NON_IMPOSTATA);
+		
 		do {
 			scelta = menu.scegli();
 			switch(scelta) {
@@ -337,7 +342,6 @@ public class ViewBaratto {
 			viewAppuntamento.showAppuntamento(baratto.getAppuntamento());
 		} catch (Exception e) {
 			throw new IOException(e.getMessage() + MSG_ERROR_SHOW_OFFERTE);
-		}
-		
+		}	
 	}
 }

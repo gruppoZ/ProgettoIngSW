@@ -11,7 +11,7 @@ import application.baratto.Offerta;
 import application.baratto.StatiOfferta;
 
 public class GestioneOfferta {
-	//TODO: ricordarsi di salvare le offerte dopo che si cambia lo stato
+	
 	private List<Offerta> listaOfferte; 
 	
 	private OffertaRepository repo;
@@ -64,6 +64,8 @@ public class GestioneOfferta {
 		
 		offertaA.accoppiaOfferta();
 		offertaB.accoppiaOfferta();
+		
+		salvaOfferte();
 	}
 	
 	/**
@@ -77,6 +79,8 @@ public class GestioneOfferta {
 	public void switchToOfferteInScambio(Offerta offertaA, Offerta offertaB) throws IOException {
 		offertaA.inScambioOfferta();
 		offertaB.inScambioOfferta();
+		
+		salvaOfferte();
 	}
 	
 	/**
@@ -90,10 +94,14 @@ public class GestioneOfferta {
 	public void switchToOfferteChiuse(Offerta offertaA, Offerta offertaB) throws IOException {
 		offertaA.chiudiOfferta();
 		offertaB.chiudiOfferta();
+		
+		salvaOfferte();
 	}	
 	
 	public void ritiraOfferta(Offerta offerta) throws IOException {
 		offerta.ritiraOfferta();
+		
+		salvaOfferte();
 	}
 	
 	/**
@@ -104,6 +112,8 @@ public class GestioneOfferta {
 	 */
 	private void cambioOffertaScaduta(Offerta offerta) throws IOException {
 		offerta.apriOfferta();
+		
+		salvaOfferte();
 	}
 	
 	protected List<Offerta> leggiListaOfferte() throws FileNotFoundException, IOException {

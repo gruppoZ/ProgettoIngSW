@@ -9,8 +9,7 @@ public class OffertaInScambio extends StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
 	
 	@JsonCreator
-	public OffertaInScambio(Offerta offerta) {
-		super(offerta);
+	public OffertaInScambio() {
 		stato = StatiOfferta.OFFERTA_IN_SCAMBIO.getNome();
 	}
 	
@@ -21,33 +20,33 @@ public class OffertaInScambio extends StatoOfferta {
 	}
 	
 	@Override
-	public void chiudiOfferta() throws IOException {
+	public void chiudiOfferta(Offerta offerta) throws IOException {
 		StatoOfferta oldState = this;
-		offerta.setStatoOfferta(new OffertaChiusa(offerta));	
+		offerta.setStatoOfferta(new OffertaChiusa());	
 		
 		gestisciCambiamentoStatoOfferta(offerta, oldState);
 	}
 
 	@Override
-	public void apriOfferta() throws IOException {
+	public void apriOfferta(Offerta offerta) throws IOException {
 		StatoOfferta oldState = this;
-		offerta.setStatoOfferta(new OffertaAperta(offerta));
+		offerta.setStatoOfferta(new OffertaAperta());
 		
 		gestisciCambiamentoStatoOfferta(offerta, oldState);
 	}
 	
 	@Override
-	public void accoppiaOfferta() {
+	public void accoppiaOfferta(Offerta offerta) {
 		// no op
 	}	
 
 	@Override
-	public void ritiraOfferta() {
+	public void ritiraOfferta(Offerta offerta) {
 		// no op
 	}
 	
 	@Override
-	public void inScambio() {
+	public void inScambio(Offerta offerta) {
 		// no op
 	}
 }

@@ -1,7 +1,10 @@
 {
-  "citta" : null,
-  "luoghi" : [ ],
-  "giorni" : [ ],
-  "intervalliOrari" : [ ],
+  "citta" : "milano",
+  "luoghi" : [ "nord" ],
+  "giorni" : [ "LUNEDI" ],
+  "intervalliOrari" : [ {
+    "orarioMin" : [ 6, 30 ],
+    "orarioMax" : [ 8, 0 ]
+  } ],
   "scadenza" : 1
 }

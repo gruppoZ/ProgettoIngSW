@@ -1,2 +1,10 @@
 {
+  "073f211f-8f64-4590-aa0e-a3c8f8002d12" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaAccoppiata"
+  } ],
+  "02c081f3-5786-4564-a521-ff1e4b1921c2" : [ {
+    "oldState" : "OffertaAperta",
+    "newState" : "OffertaSelezionata"
+  } ]
 }

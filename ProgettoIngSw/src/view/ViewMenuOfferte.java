@@ -88,7 +88,11 @@ public class ViewMenuOfferte {
 				break;
 			case 5:
 				viewBaratto = new ViewBaratto(gestoreOfferte, username);	
-				viewBaratto.menu();
+				try {
+					viewBaratto.menu();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			default:
 				System.out.println(TXT_ERROR);

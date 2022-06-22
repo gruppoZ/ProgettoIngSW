@@ -24,19 +24,17 @@ property = "type")
 public abstract class StatoOfferta {
 	
 	private StatoTransizioniRepository repoTransizioniStato;
-	Offerta offerta;
 	
-	public StatoOfferta(Offerta offerta) {
-		this.offerta = offerta;
+	public StatoOfferta() {
 		repoTransizioniStato = new StatoTransizioniRepository();
 	}
 	
 	public abstract String getStato();
-	abstract void accoppiaOfferta() throws IOException;
-	abstract void apriOfferta() throws IOException;
-	abstract void ritiraOfferta() throws IOException;
-	abstract void chiudiOfferta() throws IOException;
-	abstract void inScambio() throws IOException;
+	abstract void accoppiaOfferta(Offerta offerta) throws IOException;
+	abstract void apriOfferta(Offerta offerta) throws IOException;
+	abstract void ritiraOfferta(Offerta offerta) throws IOException;
+	abstract void chiudiOfferta(Offerta offerta) throws IOException;
+	abstract void inScambio(Offerta offerta) throws IOException;
 	
 	/**
 	 * Precondizione: offerta != null, stato != null

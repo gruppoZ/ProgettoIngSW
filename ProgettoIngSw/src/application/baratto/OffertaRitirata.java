@@ -7,8 +7,7 @@ public class OffertaRitirata extends StatoOfferta {
 	String stato; //serve esplicitarlo per jackson
 
 	@JsonCreator
-	public OffertaRitirata(Offerta offerta) {
-		super(offerta);
+	public OffertaRitirata() {
 		stato = StatiOfferta.OFFERTA_RITIRATA.getNome();
 	}
 	
@@ -19,27 +18,27 @@ public class OffertaRitirata extends StatoOfferta {
 	}
 
 	@Override
-	public void accoppiaOfferta() {
+	public void accoppiaOfferta(Offerta offerta) {
 		// no op
 	}
 
 	@Override
-	public void apriOfferta() {
+	public void apriOfferta(Offerta offerta) {
 		// no op
 	}
 
 	@Override
-	public void ritiraOfferta() {
+	public void ritiraOfferta(Offerta offerta) {
 		// no op
 	}
 
 	@Override
-	public void chiudiOfferta() {
+	public void chiudiOfferta(Offerta offerta) {
 		// no op
 	}
 
 	@Override
-	public void inScambio() {
+	public void inScambio(Offerta offerta) {
 		// no op
 	}
 }

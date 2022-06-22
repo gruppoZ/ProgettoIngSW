@@ -12,5 +12,8 @@
   }, {
     "username" : "f1",
     "password" : "f1"
+  }, {
+    "username" : "f3",
+    "password" : "f3"
   } ]
 }
