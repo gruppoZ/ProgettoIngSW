@@ -23,7 +23,7 @@ public class GestioneGerarchie implements GerarchiaRepository {
 	
 	public GestioneGerarchie() throws IOException {
 		fs = new JsonIO();
-		
+		gerarchiaFacade = new GerarchieFacade();
 		aggiorna();
 	}
 	

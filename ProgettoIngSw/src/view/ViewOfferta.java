@@ -1,5 +1,6 @@
 package view;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,13 @@ public class ViewOfferta {
 	private static final String MSG_OFFERTE_RITIRABILI_INESISTENTI = "\nNon ci sono offerte da ritirare";
 	private static final String MSG_OFFERTA_RITIRATA = "\nL'offerta e' stata ritirata con successo";
 	private static final String MSG_OFFERTE_INESISTENTI = "\nNon sono presenti offerte";
+	private static final String MSG_OFFERTE_INESISTENTI_BY_ID = "\nNon sono presenti offerte con id selezionato";
 	
 	private GestioneOfferta gestoreOfferte;
 	private String username;
 	
-	public ViewOfferta() {
+	public ViewOfferta() throws FileNotFoundException, IOException {
+		this.gestoreOfferte = new GestioneOfferta();
 	}
 	
 	public ViewOfferta(String username, GestioneOfferta gestoreOfferta) {
@@ -34,7 +37,10 @@ public class ViewOfferta {
 		this.gestoreOfferte = gestoreOfferta;
 	}
 	
-	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException {
+	public Offerta getOffertaById(List<Offerta> listaOfferte) throws NullPointerException, Exception {
+		if(listaOfferte.size() == 0)
+			throw new Exception(MSG_OFFERTE_INESISTENTI);
+		
 		try {
 			showOfferte(listaOfferte); 
 			
@@ -42,7 +48,7 @@ public class ViewOfferta {
 			
 			return gestoreOfferte.getOffertaById(id, listaOfferte);
 		} catch (Exception e) {
-			throw new NullPointerException(MSG_OFFERTE_INESISTENTI);
+			throw new NullPointerException(MSG_OFFERTE_INESISTENTI_BY_ID);
 		}
 	}
 	
@@ -71,7 +77,9 @@ public class ViewOfferta {
 				
 			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
-			}	
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		} else {
 			System.out.println(MSG_OFFERTE_RITIRABILI_INESISTENTI);
 		}

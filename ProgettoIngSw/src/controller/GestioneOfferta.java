@@ -16,7 +16,6 @@ public class GestioneOfferta {
 	
 	private OffertaRepository repo;
 	
-	
 	public GestioneOfferta() throws FileNotFoundException, IOException {
 		repo = new OffertaRepository();
 		
