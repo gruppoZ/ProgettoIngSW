@@ -37,10 +37,10 @@ public class ViewArticolo {
 	public ViewArticolo(String username, GestioneOfferta gestoreOfferte) {
 		this.username = username;
 		this.gestoreOfferte = gestoreOfferte;
-		gestoreArticolo = new GestioneArticolo();
+		this.gestoreArticolo = new GestioneArticolo();
 	}
 	
-	public void aggiungiArticolo() throws IOException {
+	public void aggiungiArticolo() throws IOException, Exception {
 		ViewGerarchia viewGerarchia = new ViewGerarchia();
 		Categoria foglia = viewGerarchia.scegliFoglia();
 		

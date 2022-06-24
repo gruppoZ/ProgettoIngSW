@@ -59,7 +59,7 @@ public class ViewMenuOfferte {
 		this.gestoreOfferte = gestoreOfferte;
 	}
 	
-	public void menu() throws IOException {
+	public void menu() throws IOException, Exception {
 		MyMenu menuOfferte = new MyMenu(TXT_TITOLO, TXT_VOCI);
 		ViewBaratto viewBaratto;
 		ViewOfferta viewOfferta;

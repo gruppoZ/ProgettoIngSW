@@ -57,10 +57,18 @@ public class ViewConfiguratore extends ViewUtente{
 					viewPiazza();
 					break;
 				case 4:
-					showOfferteAperteByCategoria();
+					try {
+						showOfferteAperteByCategoria();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				case 5:
-					showOfferteInScambioEChiusebyCategoria();
+					try {
+						showOfferteInScambioEChiusebyCategoria();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				case 6:
 					importaDati();
@@ -98,7 +106,7 @@ public class ViewConfiguratore extends ViewUtente{
 		}
 	}
 	
-	private void showOfferteInScambioEChiusebyCategoria() throws IOException {
+	private void showOfferteInScambioEChiusebyCategoria() throws IOException, Exception {
 		viewGerarchia.update();
 		viewOfferte = new ViewOfferta();
 		
@@ -108,7 +116,7 @@ public class ViewConfiguratore extends ViewUtente{
 		viewOfferte.showOfferteChiuseByCategoria(foglia);
 	}
 	
-	private void showOfferteAperteByCategoria() throws IOException {
+	private void showOfferteAperteByCategoria() throws IOException, Exception {
 		viewGerarchia.update();
 		viewOfferte = new ViewOfferta();
 		
