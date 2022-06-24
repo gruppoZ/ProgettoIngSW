@@ -298,6 +298,8 @@ public class ViewBaratto {
 			offerta = viewOfferta.getOffertaById(listaOfferteScambio);			
 		} catch (NullPointerException e) {
 			System.out.println(MSG_OFFERTE_IN_SCAMBIO_ASSENTI);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		
 		try {
