@@ -2,6 +2,8 @@ package view;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import application.Categoria;
 import controller.GestioneOfferta;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -79,8 +81,11 @@ public class ViewMenuOfferte {
 				viewOfferta.ritiraOfferta();				
 				break;
 			case 3:
+				ViewGerarchia viewGerarchia = new ViewGerarchia();
+				Categoria foglia = viewGerarchia.scegliFoglia();
+				
 				viewOfferta = new ViewOfferta(username, gestoreOfferte);
-				viewOfferta.showOfferteAperteByCategoria();		
+				viewOfferta.showOfferteAperteByCategoria(foglia);		
 				break;
 			case 4:
 				viewOfferta = new ViewOfferta(username, gestoreOfferte);

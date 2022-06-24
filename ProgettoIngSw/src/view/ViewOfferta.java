@@ -101,10 +101,7 @@ public class ViewOfferta {
 	 * @param foglia
 	 * @throws IOException 
 	 */
-	public void showOfferteAperteByCategoria() throws IOException { 
-		ViewGerarchia viewGerarchia = new ViewGerarchia();
-		Categoria foglia = viewGerarchia.scegliFoglia();
-		
+	public void showOfferteAperteByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
 			
 			ArrayList<Offerta> listaOfferteAperteByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByCategoria(foglia);
@@ -119,10 +116,7 @@ public class ViewOfferta {
 		}
 	}
 	
-	public void showOfferteChiuseByCategoria() throws IOException { 
-		ViewGerarchia viewGerarchia = new ViewGerarchia();
-		Categoria foglia = viewGerarchia.scegliFoglia();
-		
+	public void showOfferteChiuseByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
 			
 			ArrayList<Offerta> listaOfferteChiuseByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteChiuseByCategoria(foglia);
@@ -137,10 +131,7 @@ public class ViewOfferta {
 		}
 	}
 	
-	public void showOfferteInScambioByCategoria() throws IOException { 
-		ViewGerarchia viewGerarchia = new ViewGerarchia();
-		Categoria foglia = viewGerarchia.scegliFoglia();
-		
+	public void showOfferteInScambioByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
 			
 			ArrayList<Offerta> listaOfferteInScambioByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteInScambioByCategoria(foglia);

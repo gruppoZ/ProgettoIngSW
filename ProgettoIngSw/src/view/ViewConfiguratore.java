@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import application.Categoria;
 import application.Gerarchia;
 import controller.GestioneConfiguratore;
 import it.unibs.fp.mylib.MyMenu;
@@ -101,15 +102,19 @@ public class ViewConfiguratore extends ViewUtente{
 		viewGerarchia.update();
 		viewOfferte = new ViewOfferta();
 		
-		viewOfferte.showOfferteInScambioByCategoria();
-		viewOfferte.showOfferteChiuseByCategoria();
+		Categoria foglia = viewGerarchia.scegliFoglia();
+		
+		viewOfferte.showOfferteInScambioByCategoria(foglia);
+		viewOfferte.showOfferteChiuseByCategoria(foglia);
 	}
 	
 	private void showOfferteAperteByCategoria() throws IOException {
 		viewGerarchia.update();
 		viewOfferte = new ViewOfferta();
 		
-		viewOfferte.showOfferteAperteByCategoria();
+		Categoria foglia = viewGerarchia.scegliFoglia();
+		
+		viewOfferte.showOfferteAperteByCategoria(foglia);
 	}
 	
 	private void importaDati() throws IOException {
