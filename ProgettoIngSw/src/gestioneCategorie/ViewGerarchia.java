@@ -8,6 +8,7 @@ import it.unibs.fp.mylib.MyMenu;
 
 public class ViewGerarchia {
 	
+	private static final String MSG_NESSUNA_GERARCHIA_PRESENTE = "Nessuna Gerarchia presente. Devi aspettare che un configuratore ne definisca almeno una...";
 	private static final String MSG_ERROR_SALVATAGGIO_GERARCHIA_APPENA_CREATA = "*** ERRORE salvataggio gerarchia appena creata ***";
 	private static final String MSG_ERROR_INIT_GERARCHIE = "*** ERRORE Inizializzazione Gerarchie ***";
 	private static final String MSG_ERROR_NOME_ROOT_INESISTENTE = "Attenzione! Il nome della root non fa riferimento a nessuna gerarchia";
@@ -255,8 +256,12 @@ public class ViewGerarchia {
 		}
 	}
 	
-	public Categoria scegliFoglia() throws IOException {
+	public Categoria scegliFoglia() throws IOException, Exception {
 		ViewCategoria viewCategoria = new ViewCategoria();
+		
+		if(!gestoreGerarchia.isGerarchiePresenti())
+			throw new Exception(MSG_NESSUNA_GERARCHIA_PRESENTE);
+		
 		try {
 			gestoreGerarchia.getGerarchie().forEach((k, v) -> showGerarchiaSintetica(v));
 			

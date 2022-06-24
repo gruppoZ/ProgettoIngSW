@@ -39,7 +39,7 @@ public class ViewArticolo {
 		gestoreArticolo = new GestioneArticolo();
 	}
 	
-	public void aggiungiArticolo() throws IOException {
+	public void aggiungiArticolo() throws IOException, Exception {
 		ViewGerarchia viewGerarchia = new ViewGerarchia();
 		Categoria foglia = viewGerarchia.scegliFoglia();
 		

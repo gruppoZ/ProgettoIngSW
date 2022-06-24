@@ -61,7 +61,11 @@ public class ViewFruitore extends ViewUtente{
 					break;
 				case 3:
 					ViewOfferte viewOfferte = new ViewOfferte(gestoreFruitore, gestoreOfferta);
-					viewOfferte.menu();
+					try {
+						viewOfferte.menu();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				default:
 					System.out.println(TXT_ERROR);

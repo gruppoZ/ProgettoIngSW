@@ -71,18 +71,27 @@ public class ViewConfiguratore extends ViewUtente{
 					viewGerarchia.update();
 					viewOfferte = new ViewOfferte();
 					
-					foglia = viewGerarchia.scegliFoglia();
+					try {
+						foglia = viewGerarchia.scegliFoglia();
+						viewOfferte.showOfferteAperteByCategoria(foglia);
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 					
-					viewOfferte.showOfferteAperteByCategoria(foglia);
+					
 					break;
 				case 5:
 					viewGerarchia.update();
 					viewOfferte = new ViewOfferte();
 					
-					foglia = viewGerarchia.scegliFoglia();
-					
-					viewOfferte.showOfferteInScambioByCategoria(foglia);
-					viewOfferte.showOfferteChiuseByCategoria(foglia);
+					try {
+						foglia = viewGerarchia.scegliFoglia();
+						viewOfferte.showOfferteInScambioByCategoria(foglia);
+						viewOfferte.showOfferteChiuseByCategoria(foglia);
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+				
 					break;
 				case 6:
 					ViewFileProgramma viewInfo = new ViewFileProgramma();
