@@ -33,7 +33,10 @@ public class ViewConfiguratore extends ViewUtente{
 				gestoreConfiguratore.creaGerarchia();		       
 				break;
 			case 2:
-				System.out.println(gestoreConfiguratore.getGerarchie());
+				if(!gestoreConfiguratore.isGerarchieCreate())
+					System.out.println(MSG_ASSENZA_GERARCHIE);
+				else
+					System.out.println(gestoreConfiguratore.getGerarchie());
 				break;
 			case 3:
 				ViewParametri viewPiazza = new ViewParametroPiazza();
