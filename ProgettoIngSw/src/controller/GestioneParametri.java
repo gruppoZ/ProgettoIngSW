@@ -18,6 +18,7 @@ import utils.JsonIO;
 public class GestioneParametri {
 	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
 	private static final int NUM_MINIMO_GIORNI = 1;
+	private static final int NUM_MASSIMO_GIORNI = 7;
 	private static final int NUM_MINIMO_INTERVALLI = 1;
 	private static final int NUM_MINIMO_LUOGHI = 1;
 	
@@ -149,6 +150,10 @@ public class GestioneParametri {
  	 */
  	public boolean checkVincoloGiorniMinimi() {
  		return getGiorni().size() > NUM_MINIMO_GIORNI;
+ 	}
+ 	
+ 	public boolean checkListaGiorniPiena() {
+ 		return getGiorni().size() == NUM_MASSIMO_GIORNI;
  	}
  	
  	/**

@@ -21,7 +21,7 @@ public class ViewParametroGiorno extends ViewParametri{
 	private static final String ASK_INSERIRE_ALTRI_GIORNI = "Vuoi inserire altri giorni? ";
 	private static final String TIPOLOGIA_PARAMETRO = "Giorni";
 	private static final String MSG_GIORNO_RIMOSSO = "\nGiorno rimosso!\n";
-	
+	private static final String MSG_LISTA_GIORNI_PIENA = "\nHai gia' selezionato tutti i giorni della settimana!\n";
 	/**
 	 * Precondizione: gestoreParametri != null
 	 * 
@@ -45,7 +45,10 @@ public class ViewParametroGiorno extends ViewParametri{
 				fine = true;
 				break;
 			case 1:
-				aggiungi();
+				if(!getGestoreParametri().checkListaGiorniPiena())
+					aggiungi();
+				else
+					System.out.println(MSG_LISTA_GIORNI_PIENA);
 				break;
 			case 2:
 				rimuovi();			
@@ -76,7 +79,7 @@ public class ViewParametroGiorno extends ViewParametri{
 				presente = true;
 			}
 			
-		} while(presente || InputDati.yesOrNo(ASK_INSERIRE_ALTRI_GIORNI));	
+		} while(!getGestoreParametri().checkListaGiorniPiena() && (presente || InputDati.yesOrNo(ASK_INSERIRE_ALTRI_GIORNI)));	
 	}
 
 	@Override
