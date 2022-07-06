@@ -51,7 +51,6 @@ public class ViewMenuOfferte {
 	 * Precondizione: gestoreFruitore != null, gestoreOfferte != null
 	 * Postcondizione: this.gestoreFruitore != null, this.gestoreOfferte != null
 	 * 
-	 * @param gestoreFruitore
 	 * @param gestoreOfferte
 	 */
 	public ViewMenuOfferte(String username, GestioneOfferta gestoreOfferte) {

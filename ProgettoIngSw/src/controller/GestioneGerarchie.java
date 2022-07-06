@@ -16,7 +16,7 @@ public class GestioneGerarchie implements GerarchiaRepository {
 	private static final int NUM_MIN_SOTTOCATEGORIE = 2;
 	
 	//NOTA: i nomi usati come KEY vengono formattati attraverso il metodo "formattaNome"
-	private HashMap<String, Gerarchia> gerarchie; 
+	private Map<String, Gerarchia> gerarchie; 
 	private String pathGerarchie;
 	private FileSystemOperations fs;
 	private GerarchieFacade gerarchiaFacade;	

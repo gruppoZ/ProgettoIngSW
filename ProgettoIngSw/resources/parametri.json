@@ -1,7 +1,7 @@
 {
   "citta" : "milano",
   "luoghi" : [ "nord" ],
-  "giorni" : [ "LUNEDI" ],
+  "giorni" : [ "LUNEDI", "MARTEDI", "MERCOLEDI", "GIOVEDI", "VENERDI", "SABATO", "DOMENICA" ],
   "intervalliOrari" : [ {
     "orarioMin" : [ 6, 30 ],
     "orarioMax" : [ 8, 0 ]

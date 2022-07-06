@@ -19,8 +19,8 @@
           "obbligatorio" : true
         } ],
         "profondita" : 1,
-        "radice" : false,
-        "valida" : true
+        "valida" : true,
+        "radice" : false
       }, {
         "nome" : "f2-r2",
         "descrizione" : "f2 r2",
@@ -37,8 +37,8 @@
           "obbligatorio" : true
         } ],
         "profondita" : 1,
-        "radice" : false,
-        "valida" : true
+        "valida" : true,
+        "radice" : false
       }, {
         "nome" : "f3-f2",
         "descrizione" : "f3 r2",
@@ -55,8 +55,8 @@
           "obbligatorio" : true
         } ],
         "profondita" : 1,
-        "radice" : false,
-        "valida" : true
+        "valida" : true,
+        "radice" : false
       } ],
       "campiNativi" : [ {
         "descrizione" : "Stato di conservazione",
@@ -70,8 +70,8 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "radice" : true,
-      "valida" : true
+      "valida" : true,
+      "radice" : true
     }
   },
   "R1" : {
@@ -94,8 +94,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "radice" : false,
-        "valida" : true
+        "valida" : true,
+        "radice" : false
       }, {
         "nome" : "f-r2",
         "descrizione" : "figlio2 r1",
@@ -109,8 +109,8 @@
           "obbligatorio" : false
         } ],
         "profondita" : 1,
-        "radice" : false,
-        "valida" : true
+        "valida" : true,
+        "radice" : false
       } ],
       "campiNativi" : [ {
         "descrizione" : "Stato di conservazione",
@@ -121,8 +121,29 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "radice" : true,
-      "valida" : true
+      "valida" : true,
+      "radice" : true
+    }
+  },
+  "ROOT1" : {
+    "root" : {
+      "nome" : "root1",
+      "descrizione" : "as",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      }, {
+        "descrizione" : "s",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "valida" : true,
+      "radice" : true
     }
   }
 }

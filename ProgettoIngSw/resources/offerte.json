@@ -17,8 +17,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "decente"
@@ -48,8 +48,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "dd"
@@ -79,8 +79,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -110,8 +110,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ddss"
@@ -141,14 +141,45 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "valida" : true,
-      "radice" : false
+      "radice" : false,
+      "valida" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "dds"
     }
   },
   "username" : "f1",
+  "statoOfferta" : {
+    "type" : "OffertaAperta"
+  },
+  "autore" : false
+}, {
+  "id" : "9fe50b85-2854-4ae5-89cc-9d8b1a7f8bcd",
+  "articolo" : {
+    "foglia" : {
+      "nome" : "root1",
+      "descrizione" : "as",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      }, {
+        "descrizione" : "s",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "s"
+    }
+  },
+  "username" : "f",
   "statoOfferta" : {
     "type" : "OffertaAperta"
   },

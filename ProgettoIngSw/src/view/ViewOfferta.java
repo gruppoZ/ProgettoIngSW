@@ -95,6 +95,16 @@ public class ViewOfferta {
 			throw new Exception();
 	}
 	
+	private void showOfferte(List<Offerta> listaOfferte, String msg) throws Exception{
+		if(listaOfferte.size() > 0) {
+			System.out.println(msg);
+			for (Offerta offerta : listaOfferte) {
+				showOfferta(offerta);
+			}
+		} else
+			throw new Exception();
+	}
+	
 	/**
 	 * Mostra se disponibili le offerte attive dopo aver scelto una Categoria Foglia.
 	 * Se non presenti lo viene detto a video
@@ -103,83 +113,68 @@ public class ViewOfferta {
 	 */
 	public void showOfferteAperteByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
-			
 			ArrayList<Offerta> listaOfferteAperteByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByCategoria(foglia);
 			
-			if(listaOfferteAperteByCategoria.size() > 0) {
-				System.out.println(MSG_SHOW_OFFERTE_APERTE);
-				for (Offerta offerta : listaOfferteAperteByCategoria) {
-					showOfferta(offerta);
-				}
-			} else
+			try {
+				showOfferte(listaOfferteAperteByCategoria, MSG_SHOW_OFFERTE_APERTE);
+			} catch (Exception e) {
 				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_APERTE);
+			}
+				
 		}
 	}
 	
 	public void showOfferteChiuseByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
-			
 			ArrayList<Offerta> listaOfferteChiuseByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteChiuseByCategoria(foglia);
 			
-			if(listaOfferteChiuseByCategoria.size() > 0) {
-				System.out.println(MSG_SHOW_OFFERTE_CHIUSE);
-				for (Offerta offerta : listaOfferteChiuseByCategoria) {
-					showOfferta(offerta);
-				}
-			} else
+			try {
+				showOfferte(listaOfferteChiuseByCategoria, MSG_SHOW_OFFERTE_CHIUSE);
+			} catch (Exception e) {
 				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_CHIUSE);
+			}
+				
 		}
 	}
 	
 	public void showOfferteInScambioByCategoria(Categoria foglia) throws IOException { 
 		if(foglia != null) {
-			
 			ArrayList<Offerta> listaOfferteInScambioByCategoria = (ArrayList<Offerta>) gestoreOfferte.getOfferteInScambioByCategoria(foglia);
 			
-			if(listaOfferteInScambioByCategoria.size() > 0) {
-				System.out.println(MSG_SHOW_OFFERTE_IN_SCAMBIO);
-				for (Offerta offerta : listaOfferteInScambioByCategoria) {
-					showOfferta(offerta);
-				}
-			} else
+			try {
+				showOfferte(listaOfferteInScambioByCategoria, MSG_SHOW_OFFERTE_IN_SCAMBIO);
+			} catch (Exception e) {
 				System.out.printf(MSG_OFFERTE_BY_CATEGORIA_INESISTENTI, MSG_SHOW_OFFERTE_IN_SCAMBIO);
+			}
 		}
 	}
 	
+	private void showOfferteByName(List<Offerta> listaOfferte) {
+		try {
+			showOfferte(listaOfferte);
+		} catch (Exception e) {
+			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+		}
+	}
 	/**
 	 * Un fruitore può vedere tutte le sue offerte
 	 */
 	public void showOfferteByName() { 		
 		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteByUtente(username);
-				
-		if(listaOfferteByUtente.size() > 0) {
-			for (Offerta offerta : listaOfferteByUtente) {
-				showOfferta(offerta);
-			}
-		} else
-			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+			
+		showOfferteByName(listaOfferteByUtente);
 	}
 	
 	public void showOfferteAperteByName() {		
 		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteAperteByUtente(username);
-				
-		if(listaOfferteByUtente.size() > 0) {
-			for (Offerta offerta : listaOfferteByUtente) {
-				showOfferta(offerta);
-			}
-		} else
-			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+			
+		showOfferteByName(listaOfferteByUtente);
 	}
 	
 	public void showOfferteSelezionateByName() {		
 		ArrayList<Offerta> listaSelezionateByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteSelezionateByUtente(username);
-				
-		if(listaSelezionateByUtente.size() > 0) {
-			for (Offerta offerta : listaSelezionateByUtente) {
-				showOfferta(offerta);
-			}
-		} else
-			System.out.println(MSG_OFFERTE_BY_UTENTE_INESISTENTI + username);
+			
+		showOfferteByName(listaSelezionateByUtente);
 	}
 	
 	public void showOfferta(Offerta offerta) {
