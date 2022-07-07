@@ -153,7 +153,7 @@ public class Categoria {
 	 * 
 	 * @param sottoCategoria
 	 */
-	private void eliminaSottoCategoria(Categoria sottoCategoria) {
+	public void eliminaSottoCategoria(Categoria sottoCategoria) {
 		this.sottoCategorie.remove(sottoCategoria);
 	}
 	

@@ -99,4 +99,10 @@ public class PiazzaUtils {
 		
 		return false;
 	}
+	
+	public static boolean checkValiditaMinuti(IntervalloOrario intervallo) {
+		return ((intervallo.getOrarioMax().getMinute() != 0 && intervallo.getOrarioMax().getMinute() != 30) ||
+				((intervallo.getOrarioMin().getMinute() != 0 && intervallo.getOrarioMin().getMinute() != 30)));
+	}
+	
 }

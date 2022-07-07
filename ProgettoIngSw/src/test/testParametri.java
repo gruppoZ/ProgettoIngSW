@@ -26,16 +26,16 @@ class testParametri {
 		
 		int numLuoghiPreModifiche = piazza.getLuoghi().size();
 		
-		gestroreParametri.aggiungiLuogo(piazza.getLuoghi(), "Test");
+		gestroreParametri.aggiungiLuogo("Test");
 		assertEquals(numLuoghiPreModifiche, gestroreParametri.getLuoghi().size()-1);
 		
-		gestroreParametri.rimuoviLuogo(piazza.getLuoghi(), "Test");
+		gestroreParametri.rimuoviLuogo("Test");
 		assertEquals(numLuoghiPreModifiche, gestroreParametri.getLuoghi().size());
 	}
 	
 	@Test
-	void canAddIntervvalloOrarioInListIntervalli() throws IOException {
-		GestioneParametri gestoreParametri = new GestioneParametri();
+	void canAddIntervvalloOrarioInListIntervalli() {
+		Piazza piazza = new Piazza();
 		List<IntervalloOrario> intervalli = new ArrayList<>();
 		
 		IntervalloOrario intervalloNonValido = new IntervalloOrario(LocalTime.of(6, 30), LocalTime.of(8, 30));
@@ -45,8 +45,10 @@ class testParametri {
 		intervalli.add(new IntervalloOrario(LocalTime.of(2, 30), LocalTime.of(4, 00)));
 		intervalli.add(new IntervalloOrario(LocalTime.of(5, 30), LocalTime.of(7, 30)));
 		
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloNonValido));
-		assertTrue(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloValido));
+		piazza.setIntervalliOrari(intervalli);
+		
+		assertFalse(piazza.checkValiditaIntervallo(intervalloNonValido));
+		assertTrue(piazza.checkValiditaIntervallo(intervalloValido));
 	}
 	
 	//forse da eliminare
@@ -59,47 +61,46 @@ class testParametri {
 	}
 	
 	@Test
-	void checkIncorrectMinute() throws IOException {
-		GestioneParametri gestoreParametri = new GestioneParametri();
-		List<IntervalloOrario> intervalli = new ArrayList<>();
-		
+	void checkIncorrectMinute() {
+		Piazza piazza = new Piazza();
+
 		IntervalloOrario intervalloCorretto1 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(01, 00));
 		IntervalloOrario intervalloCorretto2 = new IntervalloOrario(LocalTime.of(00, 30), LocalTime.of(01, 30));
-		assertTrue(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloCorretto1));
-		assertTrue(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloCorretto2));
+		assertTrue(piazza.checkValiditaIntervallo(intervalloCorretto1));
+		assertTrue(piazza.checkValiditaIntervallo(intervalloCorretto2));
 		
 		IntervalloOrario intervalloSbagliato1 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 59));
 		IntervalloOrario intervalloSbagliato2 = new IntervalloOrario(LocalTime.of(00, 59), LocalTime.of(00, 00));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato1));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato2));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato1));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato2));
 		
 		IntervalloOrario intervalloSbagliato3 = new IntervalloOrario(LocalTime.of(00, 01), LocalTime.of(00, 00));
 		IntervalloOrario intervalloSbagliato4 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 01));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato3));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato4));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato3));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato4));
 		
 		IntervalloOrario intervalloSbagliato5 = new IntervalloOrario(LocalTime.of(00, 29), LocalTime.of(01, 00));
 		IntervalloOrario intervalloSbagliato6 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 29));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato5));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato6));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato5));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato6));
 		
 		IntervalloOrario intervalloSbagliato7 = new IntervalloOrario(LocalTime.of(00, 31), LocalTime.of(01, 00));
 		IntervalloOrario intervalloSbagliato8 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 31));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato7));
-		assertFalse(gestoreParametri.checkValiditaIntervallo(intervalli, intervalloSbagliato8));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato7));
+		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato8));
 
 	}
 	
 	@Test
 	void checkSizeWhenAddIntervallo() throws Exception {
-		GestioneParametri gestoreParametri = new GestioneParametri();
+		Piazza piazza = new Piazza();
 		List<IntervalloOrario> intervalli = new ArrayList<>();
 		
 		IntervalloOrario intervallo1 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 30));
-		
-		int initialListaSize = intervalli.size();
-		gestoreParametri.aggiungiIntervalloOrario(intervalli, intervallo1);
-		assertTrue(intervalli.size() == initialListaSize + 1);
+
+		int initialListaSize = piazza.getIntervalliOrari().size();
+		piazza.aggiungiIntervalloOrario(intervallo1);
+		assertTrue(piazza.getIntervalliOrari().size() == initialListaSize + 1);
 	}
 	
 	

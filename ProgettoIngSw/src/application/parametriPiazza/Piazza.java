@@ -5,6 +5,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import utils.PiazzaUtils;
+
 public class Piazza {
 	private String citta;
 	private List<String> luoghi;
@@ -75,6 +79,7 @@ public class Piazza {
 		this.scadenza = scadenza;
 	}
 
+	@JsonIgnore
 	public int getNumeroIntervalliOrari() {
  		return this.getIntervalliOrari().size();
  	}
@@ -210,14 +215,12 @@ public class Piazza {
  	 * @return TRUE se intervallo è valido e può essere inserito in intervalliOrari, FALSE altrimenti
  	 */
 	public boolean checkValiditaIntervallo(IntervalloOrario intervallo) {
-		if((intervallo.getOrarioMax().getMinute() != 0 && intervallo.getOrarioMax().getMinute() != 30) ||
-				((intervallo.getOrarioMin().getMinute() != 0 && intervallo.getOrarioMin().getMinute() != 30))) 
-			return false;
+		if(PiazzaUtils.checkValiditaMinuti(intervallo)) return false;
 		
 		if(intervalliOrari.size() == 0) return true;
 		
 		for (IntervalloOrario intervalloOrario : intervalliOrari) {
-			if(intervalloOrario.checkValiditàSovrapposizioneTraIntervalli(intervallo))
+			if(intervalloOrario.checkValiditaSovrapposizioneTraIntervalli(intervallo))
 				return false;
 		}
 		

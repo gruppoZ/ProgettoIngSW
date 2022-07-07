@@ -89,7 +89,7 @@ public class IntervalloOrario {
 	 * @param intervalloB
 	 * @return
 	 */
-	public boolean checkValidit‡SovrapposizioneTraIntervalli(IntervalloOrario intervalloB) {
+	public boolean checkValiditaSovrapposizioneTraIntervalli(IntervalloOrario intervalloB) {
 		return this.parzialmenteInclude(intervalloB) || intervalloB.parzialmenteInclude(this);
 	}
 }
