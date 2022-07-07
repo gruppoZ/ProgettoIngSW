@@ -260,7 +260,7 @@ public class ViewBaratto {
 			try {
 				viewParametroGiorno.showGiorniPresenti();
 				dateTesto = InputDati.leggiStringaNonVuota(msg);
-				date = gestorePiazza.dateInput(dateTesto);
+				date = gestorePiazza.getDataFromText(dateTesto);
 				formatoDateValido = false;
 			} catch (DateTimeException e) {
 				System.out.println(MSG_WARNING_FORMATO_GIORNO_NON_VALIDO);

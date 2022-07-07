@@ -14,7 +14,7 @@ import view.SchermataPrincipale;
  */
 public class Main {
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {	
 		SchermataPrincipale mainView = new SchermataPrincipale();
 		
 		try {

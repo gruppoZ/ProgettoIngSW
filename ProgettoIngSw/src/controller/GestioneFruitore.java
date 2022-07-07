@@ -20,7 +20,7 @@ public class GestioneFruitore extends GestioneUtente{
 		this.username = username;
 	}
 	
-	public boolean isPiazzaCreata() {
+	public boolean isPiazzaCreata() throws IOException {
 		return gestoreParametri.isPiazzaCreata();
 	}
 	

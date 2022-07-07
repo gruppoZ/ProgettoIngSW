@@ -12,6 +12,7 @@ import it.unibs.fp.mylib.MyMenu;
 public class ViewParametroPiazza extends ViewParametri {
 	private static final String MSG_ERROR_SALVATAGGIO_PIAZZA_FALLITA_NO_INTERAZIONE_CON_FILE = "Impossibile salvare Piazza. Fallita interazione con il file.";
 	private static final String MSG_ERROR_LETTURA_PARAMETRI_FILE = "*** ERRORE lettura parametri da file ***";
+	private static final String MSG_ERROR_CREAZIONE_PIAZZA = "*** ERRORE creazione della piazza ***";
 	private static final String MSG_PIAZZA_CREATA_CON_SUCCESSO = "*** Piazza creata con successo ***";	
 	private static final String MSG_ASK_CITTA = "Inserisci il nome della citta': ";
 	private static final String MSG_PIAZZA_INESISTENTE = "\nNessuna Piazza presente!\n";
@@ -126,7 +127,9 @@ public class ViewParametroPiazza extends ViewParametri {
 			System.out.println(MSG_PIAZZA_CREATA_CON_SUCCESSO);
 		} catch (IOException e) {
 			throw new IOException(MSG_ERROR_SALVATAGGIO_PIAZZA_FALLITA_NO_INTERAZIONE_CON_FILE);
-		}	
+		} catch (NullPointerException e) {
+			throw new IOException(MSG_ERROR_CREAZIONE_PIAZZA);
+		}		
 	}
 
 	@Override

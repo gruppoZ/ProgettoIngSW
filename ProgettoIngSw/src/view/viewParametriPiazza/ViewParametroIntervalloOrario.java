@@ -2,7 +2,6 @@ package view.viewParametriPiazza;
 
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.List;
 
 import application.parametriPiazza.IntervalloOrario;
 import controller.GestioneParametri;
@@ -72,11 +71,10 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	@Override
 	public void aggiungi() throws IOException {
 		do {
-			List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
 			IntervalloOrario daAggiungere = creaIntervalloOrario();
 			
 			try {
-				getGestoreParametri().aggiungiIntervalloOrario(listaIntervalli, daAggiungere);
+				getGestoreParametri().aggiungiIntervalloOrario(daAggiungere);
 				System.out.println(MSG_INTERVALLO_AGGIUNTO_CORRETTAMENTE);
 				
 			} catch (IOException e) {
@@ -90,7 +88,6 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 
 	@Override
 	public void rimuovi() throws IOException {
-		List<IntervalloOrario> listaIntervalli = getGestoreParametri().getIntervalli();
 		
 		if(!getGestoreParametri().checkVincolIntervalliMinimi())
 			System.out.println(MSG_ERROR_RIMOZIONE_INTERVALLI_INSUFFICIENTI);
@@ -100,7 +97,7 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 			System.out.printf(GIVE_ORA_INIZIALE_INTERVALLO_RIMUOVERE,orarioMinDaEliminare.toString());
 				
 			try {
-				getGestoreParametri().rimuoviIntervalloOrario(listaIntervalli, orarioMinDaEliminare);
+				getGestoreParametri().rimuoviIntervalloOrario(orarioMinDaEliminare);
 				System.out.println(MSG_INTERVALLO_RIMOSSO);
 			} catch (IOException e) {
 				throw new IOException(MSG_ERROR_RIMOZIONE_INTERVALLO_ORARIO_FALLITA_NO_INTERAZIONE_CON_FILE);

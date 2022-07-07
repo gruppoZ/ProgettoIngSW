@@ -1,8 +1,6 @@
 package view.viewParametriPiazza;
 
 import java.io.IOException;
-import java.util.List;
-
 import controller.GestioneParametri;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
@@ -55,12 +53,11 @@ public class ViewParametroLuogo extends ViewParametri{
 
 	@Override
 	public void aggiungi() throws IOException {
-		List<String> listaLuoghi = getGestoreParametri().getLuoghi();
 		do {
 			String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO);
 			
 			try {
-				getGestoreParametri().aggiungiLuogo(listaLuoghi, luogo);
+				getGestoreParametri().aggiungiLuogo(luogo);
 			} catch(IOException e) {
 				throw new IOException(MSG_ERROR_AGGIUNGERE_LUOGO_FALLITA_INTERAZIONE_CON_FILE);
 			} catch(Exception e) {
@@ -71,7 +68,6 @@ public class ViewParametroLuogo extends ViewParametri{
 
 	@Override
 	public void rimuovi() throws IOException {
-		List<String> listaLuoghi = getGestoreParametri().getLuoghi();
 
 		if(!getGestoreParametri().checkVincoloLuoghiMinimi())
 			System.out.println(MSG_ERROR_RIMOZIONE_LUOGHI_INSUFFICIENTI);
@@ -79,7 +75,7 @@ public class ViewParametroLuogo extends ViewParametri{
 			
 			String luogoDaEliminare = InputDati.leggiStringaNonVuota(ASK_LUOGO_RIMOZIONE);
 			try {
-				getGestoreParametri().rimuoviLuogo(listaLuoghi, luogoDaEliminare);
+				getGestoreParametri().rimuoviLuogo(luogoDaEliminare);
 				System.out.println(MSG_LUOGO_RIMOSSO);
 			} catch (IOException e) {
 				throw new IOException(MSG_ERROR_RIMOZIONE_LUOGO_FALLITA_INTERAZIONE_CON_FILE);
@@ -94,7 +90,7 @@ public class ViewParametroLuogo extends ViewParametri{
 		
 		String luogo = InputDati.leggiStringaNonVuota(ASK_LUOGO);
 	
-		while(!getGestoreParametri().checkPresenzaLuogo(getGestoreParametri().getLuoghi(), luogo)) {
+		while(!getGestoreParametri().checkPresenzaLuogo(luogo)) {
 			luogo = InputDati.leggiStringaNonVuota(MSG_LUOGO_NON_PRESENTE);
 		}
 		

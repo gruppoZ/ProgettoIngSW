@@ -62,7 +62,6 @@ public class ViewParametroGiorno extends ViewParametri{
 	@Override
 	public void aggiungi() throws IOException {
 		boolean presente = false;
-		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 		
 		showTuttiGiorniDellaSettimana();
 		
@@ -70,7 +69,7 @@ public class ViewParametroGiorno extends ViewParametri{
 			GiorniDellaSettimana giorno = leggiGiorno();
 			
 			try {
-				getGestoreParametri().aggiungiGiorno(giorni, giorno);
+				getGestoreParametri().aggiungiGiorno(giorno);
 				presente = false;
 			} catch (IOException e) {
 				throw new IOException(MSG_ERROR_AGGIORNARE_PIAZZA_FALLITA_INTERAZIONE_CON_FILE);
@@ -84,7 +83,6 @@ public class ViewParametroGiorno extends ViewParametri{
 
 	@Override
 	public void rimuovi() throws IOException {
-		List<GiorniDellaSettimana> giorni = getGestoreParametri().getGiorni();
 		
 		if(!getGestoreParametri().checkVincoloGiorniMinimi()) {
 			 System.out.println(MSG_ERROR_RIMOZIONE_GIORNI_INSUFFICIENTI);
@@ -94,7 +92,7 @@ public class ViewParametroGiorno extends ViewParametri{
 			GiorniDellaSettimana giornoDaEliminare = leggiGiorno();
 			
 			try {
-				getGestoreParametri().rimuoviGiorno(giorni, giornoDaEliminare);
+				getGestoreParametri().rimuoviGiorno(giornoDaEliminare);
 				System.out.println(MSG_GIORNO_RIMOSSO);
 			} catch (IOException e) {
 				throw new IOException(MSG_ERROR_RIMUZIONE_GIORNO_NO_INTERAZIONE_CON_IL_FILE);
@@ -109,7 +107,7 @@ public class ViewParametroGiorno extends ViewParametri{
 		
 		GiorniDellaSettimana giorno = leggiGiorno();
 		
-		while(!getGestoreParametri().checkPresenzaGiorno(getGestoreParametri().getGiorni(), giorno)) {
+		while(!getGestoreParametri().checkPresenzaGiorno(giorno)) {
 			System.out.println(MSG_GIORNO_NON_VALIDO);
 			giorno = leggiGiorno();
 		}

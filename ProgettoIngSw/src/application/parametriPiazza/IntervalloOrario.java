@@ -83,4 +83,13 @@ public class IntervalloOrario {
 	public boolean includeOrario(LocalTime orario) {
 		return (orario.isAfter(this.orarioMin) && orario.isBefore(this.orarioMax)) || (orario.equals(this.orarioMin)) || (orario.equals(this.orarioMax));
 	}
+	
+	/**
+	 * Precondizione: intervalloB != null
+	 * @param intervalloB
+	 * @return
+	 */
+	public boolean checkValidit‡SovrapposizioneTraIntervalli(IntervalloOrario intervalloB) {
+		return this.parzialmenteInclude(intervalloB) || intervalloB.parzialmenteInclude(this);
+	}
 }

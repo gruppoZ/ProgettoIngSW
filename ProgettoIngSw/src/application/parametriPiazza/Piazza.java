@@ -1,5 +1,7 @@
 package application.parametriPiazza;
 
+import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,33 +75,152 @@ public class Piazza {
 		this.scadenza = scadenza;
 	}
 
+	public int getNumeroIntervalliOrari() {
+ 		return this.getIntervalliOrari().size();
+ 	}
+	
 	/**
 	 * Precondizione: luogoDaRimuovere != null
 	 * Postcondizione: luoghi'.size() = luoghi.size() - 1
 	 * 
 	 * @param luogoDaRimuovere
+	 * @throws Exception 
 	 */
-	public void rimuoviLuogo(String luogoDaRimuovere) {
-		this.luoghi.remove(luogoDaRimuovere);
+	public void rimuoviLuogo(String luogoDaRimuovere) throws Exception {
+		if(checkPresenzaLuogo(luogoDaRimuovere)) {
+			this.luoghi.remove(luogoDaRimuovere);
+		} else {
+			throw new Exception();
+		}
 	}
-		
+	
 	/**
-	 * Precondizione: giornoDaRimuovere != null
-	 * Postcondizione: giorni'.size() = giorni.size() - 1
+ 	 * Precondizione: luoghi != null
+ 	 * Postcondizione: luoghi'.size() = luoghi.size() + 1 se checkPresenzaLuogo == false
+ 	 * 
+ 	 * Aggiunge luogo alla lista dei luoghi della piazza se non e' gia' presente
+ 	 * @param luogo
+ 	 * @throws Exception nel caso in cui il luogo sia già presente in listaLuoghi della piazza
+ 	 */
+ 	public void aggiungiLuogo(String luogoDaAggiungere) throws Exception {
+ 		if(checkPresenzaLuogo(luogoDaAggiungere)) {
+ 			throw new Exception();
+ 		} else {
+ 			this.luoghi.add(luogoDaAggiungere);	
+ 		}		
+ 	}	
+		
+ 	/**
+ 	 * Precondizione: giorni != null, giornoDaEliminare != null
+ 	 * Postcondizione: giorni'.size() = giorni.size() - 1 se checkPresenzaGiorno == true 
+ 	 * 
+ 	 * @param giornoDaEliminare
+ 	 * @throws Exception se giorno non è presente in giorni
+ 	 */
+ 	public void rimuoviGiorno(GiorniDellaSettimana giornoDaEliminare) throws Exception {
+ 		if(checkPresenzaGiorno( giornoDaEliminare)) {
+			this.giorni.remove(giornoDaEliminare);
+		} else {
+ 			throw new Exception();
+		}
+ 	}
+	
+	/**
+ 	 * Precondizione: giorni != null, giorno != null
+ 	 * Postcondizione: giorni'.size() = giorni.size() + 1 se checkPresenzaGiorno == false
+ 	 * 
+ 	 * @param giorno
+ 	 * @throws Exception se giorno è già presente in giorni
+ 	 */
+ 	public void aggiungiGiorno(GiorniDellaSettimana giorno) throws Exception {
+ 		if(checkPresenzaGiorno(giorno)) {
+ 			throw new Exception();
+ 		} else {
+ 			giorni.add(giorno);
+ 		}		
+ 	}
+		
+ 	/**
+ 	 * Precondizione: intervalliOrari != null, orarioDaAggiungere != null
+ 	 * Postcondizione: intervalliOrari'.size() = intervalliOrari.size() + 1 se checkValiditaIntervallo == false
+ 	 * 
+ 	 * @param orarioDaAggiungere
+ 	 * @throws Exception se orarioDaAggiungere non è valido per essere inserito tra gli orari già presenti
+ 	 */
+ 	public void aggiungiIntervalloOrario(IntervalloOrario orarioDaAggiungere) throws IOException, Exception {
+ 		if(checkValiditaIntervallo(orarioDaAggiungere)) {
+ 			this.intervalliOrari.add(orarioDaAggiungere);
+ 		} else {
+ 			throw new Exception();
+ 		}		
+ 	}
+ 	
+ 	/**
+ 	 * Precondizione: orari != null, orarioDaAggiungere != null
+ 	 * Postcondizione: orari'.size() = orari.size() - 1 se intervalloTrovato != null
+ 	 * 
+ 	 * @param orarioMinDaEliminare
+ 	 * @throws Exception se l'intervallo da eliminare con orarioMinDaEliminare non è presente fra gli orari
+ 	 */
+ 	public void rimuoviIntervalloOrario(LocalTime orarioMinDaEliminare) throws IOException, Exception {
+ 		IntervalloOrario intervalloTrovato = null;
+ 		
+ 		for (IntervalloOrario intervallo : this.intervalliOrari) {
+			if(orarioMinDaEliminare.equals(intervallo.getOrarioMin())) {
+				intervalloTrovato = intervallo;
+			}
+		}
+ 		if(intervalloTrovato != null)
+ 			this.intervalliOrari.remove(intervalloTrovato);
+ 		else 
+ 			throw new Exception();
+ 	} 
+	
+	/**
+	 * Precondizione: luogoDaIndividuare != null
 	 * 
-	 * @param giornoDaRimuovere
+	 * @param listaLuoghi
+	 * @param luogoDaRimuovere
+	 * @return
 	 */
-	public void rimuoviGiorno(GiorniDellaSettimana giornoDaRimuovere) {
-		this.giorni.remove(giornoDaRimuovere);
+	public boolean checkPresenzaLuogo(String luogoDaRimuovere) {
+		for (String luogo : this.luoghi) {
+			if(luogo.equalsIgnoreCase(luogoDaRimuovere))
+				return true;
+		}
+		return false;
 	}
-		
+	
 	/**
-	 * Precondizione: intervalloDaRimuovere != null
-	 * Postcondizione: intervalliOrari'.size() = intervalliOrari.size() - 1
+	 * Precondizione: giorni != null
 	 * 
-	 * @param intervalloDaRimuovere
+	 * @param giorni
+	 * @param giorno
+	 * @return
 	 */
-	public void rimuoviIntervallo(IntervalloOrario intervalloDaRimuovere) {
-		this.intervalliOrari.remove(intervalloDaRimuovere);
+	public boolean checkPresenzaGiorno(GiorniDellaSettimana giorno) {
+		return this.giorni.contains(giorno);
+	}
+	
+	/**
+ 	 * Precondizione: intervalliOrari != null, intervallo != null
+ 	 * 
+ 	 * @param intervalliOrari
+ 	 * @param intervallo
+ 	 * @return TRUE se intervallo è valido e può essere inserito in intervalliOrari, FALSE altrimenti
+ 	 */
+	public boolean checkValiditaIntervallo(IntervalloOrario intervallo) {
+		if((intervallo.getOrarioMax().getMinute() != 0 && intervallo.getOrarioMax().getMinute() != 30) ||
+				((intervallo.getOrarioMin().getMinute() != 0 && intervallo.getOrarioMin().getMinute() != 30))) 
+			return false;
+		
+		if(intervalliOrari.size() == 0) return true;
+		
+		for (IntervalloOrario intervalloOrario : intervalliOrari) {
+			if(intervalloOrario.checkValiditàSovrapposizioneTraIntervalli(intervallo))
+				return false;
+		}
+		
+		return true;		
 	}
 }

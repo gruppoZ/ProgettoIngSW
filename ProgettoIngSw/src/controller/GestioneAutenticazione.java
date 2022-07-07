@@ -1,4 +1,4 @@
-	package controller;
+package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class GestioneAutenticazione {
 	private FileSystemOperations fs;
 	
 	public GestioneAutenticazione() {
-		fs = new JsonIO();
+		this.fs = new JsonIO();
 	}
 	//Login  e check appositi per default
 	/**

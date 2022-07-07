@@ -36,8 +36,7 @@ public class Configuratore extends Utente {
 	
 	/**
 	 * Precondizione: categotiaPadre != null, categoriaFiglia != null
-	 * Postcondizione: categoriaPadre'.getSottoCategorie().size() = categoriaPadre.getSottoCategorie().size() + 1
-	 * 					currentGerarchia'.getElencoCategorie().size() = currentGerarchia.getElencoCategorie().size() + 1
+	 * Postcondizione: currentGerarchia'.getElencoCategorie().size() = currentGerarchia.getElencoCategorie().size() + 1
 	 * @param categoriaPadre
 	 * @param categoriaFiglia
 	 */

@@ -1,13 +1,9 @@
 package controller;
 
 import java.io.IOException;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import application.parametriPiazza.GiorniDellaSettimana;
 import application.parametriPiazza.IntervalloOrario;
@@ -16,15 +12,15 @@ import utils.FileSystemOperations;
 import utils.JsonIO;
 
 public class GestioneParametri {
-	private static final String FORMATO_GIORNO_D_M_YYYY = "d/M/yyyy";
+	
 	private static final int NUM_MINIMO_GIORNI = 1;
 	private static final int NUM_MASSIMO_GIORNI = 7;
 	private static final int NUM_MINIMO_INTERVALLI = 1;
 	private static final int NUM_MINIMO_LUOGHI = 1;
 	
-	private Piazza piazza;
 	private String pathParametri;	
 	private FileSystemOperations fs;
+	private PiazzaFacade piazzaFacade;
 	
 	/**
 	 * Postcondizione: pathParametri.length() > 0, this.piazza != null
@@ -34,8 +30,10 @@ public class GestioneParametri {
 		fs = new JsonIO();
 		GestioneFileProgramma info = new GestioneFileProgramma();
 		pathParametri = info.getInfoSistema().getUrlParametri(); 
-
-		this.piazza = leggiPiazza(pathParametri);
+		
+		Piazza piazza = leggiPiazza(pathParametri);
+		this.piazzaFacade = new PiazzaFacade();
+		this.piazzaFacade.setPiazza(piazza);
 	}
 	
 	/**
@@ -49,55 +47,65 @@ public class GestioneParametri {
 	 * @throws IOException 
 	 */
  	public void creaPiazza(String citta, List<String> listaLuoghi, List<GiorniDellaSettimana> giorni, List<IntervalloOrario> intervalliOrari,
- 			int scadenza) throws IOException {
+ 			int scadenza) throws IOException, NullPointerException {
  		
-		piazza =  new Piazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);
+		piazzaFacade.creaPiazza(citta, listaLuoghi, giorni, intervalliOrari, scadenza);
 		salvaPiazza();
 	}
 	
  	public Piazza getPiazza() throws IOException {
- 		if(piazza != null)
- 			return this.piazza;
- 		else
- 			return leggiPiazza(pathParametri);
+ 		try {
+ 			return this.piazzaFacade.getPiazza();
+ 		} catch (NullPointerException e) {
+ 			this.piazzaFacade.setPiazza(leggiPiazza(pathParametri));
+ 			
+ 			return this.piazzaFacade.getPiazza();
+ 		}
  	}
  	
  	public void setCitta(String citta) {
- 		this.piazza.setCitta(citta);
+ 		this.piazzaFacade.setCitta(citta);
  	}
  	
  	public List<String> getLuoghi(){
- 		return piazza.getLuoghi();
+ 		return piazzaFacade.getLuoghi();
  	}
  	
  	public List<GiorniDellaSettimana> getGiorni(){
- 		return piazza.getGiorni();
+ 		return piazzaFacade.getGiorni();
  	}
  	
  	public List<IntervalloOrario> getIntervalli(){
- 		return piazza.getIntervalliOrari();
+ 		return piazzaFacade.getIntervalli();
  	}
  	
  	protected void setIntervalli(List<IntervalloOrario> intervalli) {
- 		this.piazza.setIntervalliOrari(intervalli);
+ 		this.piazzaFacade.setIntervalli(intervalli);
  	}
  	
  	protected int getNumeroIntervalliOrari() {
- 		return piazza.getIntervalliOrari().size();
+ 		return piazzaFacade.getNumeroIntervalliOrari();
  	}
  	
  	public int getScadenza() {
- 		return piazza.getScadenza();
+ 		return piazzaFacade.getScadenzaPiazza();
  	}
  	
- 	public void importaParametri(String path) throws IOException {
- 		this.piazza = leggiPiazza(path);
- 		salvaPiazza();
- 		
+ 	public void salvaPiazza() throws IOException, NullPointerException {
+		fs.salvaOggetto(pathParametri, piazzaFacade.getPiazza());
+	}
+	
+	public Piazza leggiPiazza(String path) throws IOException {
+		return (Piazza) fs.leggiOggetto(path, Piazza.class);
+	}
+ 	
+ 	public void importaParametri(String path) throws IOException, NullPointerException {
+ 		piazzaFacade.setPiazza(leggiPiazza(path));
+ 		salvaPiazza();	
  	}
 
  	/**
- 	 * Precondizione: listaLuoghi != null
+ 	 * Precondizione: luogo != null
  	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() + 1 se checkPresenzaLuogo == false
  	 * 
  	 * Aggiunge luogo alla lista se non e' gia' presente inoltre salva su Json
@@ -107,14 +115,9 @@ public class GestioneParametri {
  	 * @throws IOException se la scrittura su file fallisce
  	 * @throws Exception nel caso in cui il luogo sia già presente in listaLuoghi
  	 */
-
- 	public void aggiungiLuogo(List<String> listaLuoghi, String luogo) throws Exception, IOException {
- 		if(checkPresenzaLuogo(listaLuoghi, luogo)) {
- 			throw new Exception();
- 		} else {
- 			listaLuoghi.add(luogo);	
- 			salvaPiazza();
- 		}		
+ 	public void aggiungiLuogo(String luogo) throws Exception, IOException {
+ 		piazzaFacade.aggiungiLuogo(luogo);
+ 		salvaPiazza();	
  	}
  	
  	/**
@@ -125,16 +128,121 @@ public class GestioneParametri {
  	 * @throws IOException se la scrittura su file fallisce
  	 * @throws Exception se luogoDaEliminare non fa parte dei listaLuoghi
  	 */
- 	public void rimuoviLuogo(List<String> listaLuoghi, String luogoDaEliminare) throws IOException, Exception {
- 		if(checkPresenzaLuogo(listaLuoghi, luogoDaEliminare)) {
-			piazza.rimuoviLuogo(luogoDaEliminare);
-			salvaPiazza();
-		} else {
-			throw new Exception();
-		}
+ 	public void rimuoviLuogo(String luogoDaEliminare) throws IOException, Exception {
+ 		piazzaFacade.rimuoviLuogo(luogoDaEliminare);
+ 		salvaPiazza();
+ 	}
+ 	 	
+ 	/**
+ 	 * Precondizione: giorno != null
+ 	 * 
+ 	 * @param giorno
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se giorno è già presente tra i giorni della piazza
+ 	 */
+ 	public void aggiungiGiorno(GiorniDellaSettimana giorno) throws IOException, Exception {
+ 		piazzaFacade.aggiungiGiorno(giorno);
+ 		salvaPiazza();		
  	}
  	
  	/**
+ 	 * Precondizione: giornoDaEliminare != null
+ 	 * 
+ 	 * @param giornoDaEliminare
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se giorno non è presente tra i giorni della piazza
+ 	 */
+ 	public void rimuoviGiorno(GiorniDellaSettimana giornoDaEliminare) throws IOException, Exception {
+ 		piazzaFacade.rimuoviGiorno(giornoDaEliminare);
+ 		salvaPiazza();
+ 	}
+
+ 	/**
+ 	 * Precondizione: orarioDaAggiungere != null
+ 	 * 
+ 	 * @param orarioDaAggiungere
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se orarioDaAggiungere non è valido per essere inserito tra gli orari già presenti
+ 	 */
+ 	public void aggiungiIntervalloOrario(IntervalloOrario orarioDaAggiungere) throws IOException, Exception {
+ 		piazzaFacade.aggiungiIntervalloOrario(orarioDaAggiungere); 		
+ 		salvaPiazza();	
+ 	}
+ 	
+ 	/**
+ 	 * Precondizione: orarioDaAggiungere != null
+ 	 * 
+ 	 * @param orarioMinDaEliminare
+ 	 * @throws IOException se la scrittura su file fallisce
+ 	 * @throws Exception se l'intervallo da eliminare con orarioMinDaEliminare non è presente fra gli orari
+ 	 */
+ 	public void rimuoviIntervalloOrario(LocalTime orarioMinDaEliminare) throws IOException, Exception {
+ 		piazzaFacade.rimuoviIntervalloOrario(orarioMinDaEliminare);
+ 		salvaPiazza();
+ 	} 	
+ 	
+	/**
+	 * Precondizione: intervalliOrari != null, orario != null
+	 * 
+	 * @param intervalliOrari
+	 * @param orario
+	 * @return True se orario è compreso in uno degli intervalli in intervalliOrari
+	 */
+	public boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
+		return piazzaFacade.checkValiditaOrario(intervalliOrari, orario);
+	}	
+	
+	/**
+	 * Precondizione: date != null
+	 * 
+	 * Prende il parametro LocalDate, e verifica che il relativo giorno della settimana sia fra quelli messi a 
+	 * dispozione della Piazza 
+	 * @param date
+	 * @return
+	 */
+	public boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date) {
+		return piazzaFacade.checkValiditaGiornoSettimanaPiazzaFromLocalDate(date, getGiorni());
+	}
+	
+	public boolean checkPresenzaGiorno(GiorniDellaSettimana giorno) {
+		return piazzaFacade.checkPresenzaGiorno(giorno);
+	}
+	
+	public boolean checkPresenzaLuogo(String luogo) {
+		return piazzaFacade.checkPresenzaLuogo(luogo);
+	}
+	
+	/**
+	 * Precondizione: giorni != null
+	 * Postcondizione: giorni'.size() = giorni.size()
+	 * 
+	 * @param giorni
+	 * @return
+	 */
+	public List<GiorniDellaSettimana> ordinaListaGiorni(List<GiorniDellaSettimana> giorni) {
+		return piazzaFacade.ordinaListaGiorni(giorni); //ordinare la lista dei giorni presenti in piazza
+	}
+	
+	/**
+	 * Precondizione: scadenza > 0
+	 * 
+	 * @param scadenza
+	 * @throws IOException 
+	 */
+	public void modificaScadenza(int scadenza) throws IOException {
+		piazzaFacade.modificaScadenza(scadenza);
+		salvaPiazza();
+	}
+	
+	public boolean isPiazzaCreata() throws IOException {
+		return getPiazza().getCitta() != null;
+	}
+	
+	public LocalDate getDataFromText(String data) {
+		return piazzaFacade.getDataFromText(data);
+	}
+	
+	/**
  	 * 
  	 * @return True se è soddisfatto il requisiti sulla quantità minima di luoghi nel caso venga svolto un'operazione di rimozione
  	 * 		   False altrimenti
@@ -157,122 +265,6 @@ public class GestioneParametri {
  	}
  	
  	/**
- 	 * Precondizione: giorni != null, giorno != null
- 	 * Postcondizione: giorni'.size() = giorni.size() + 1 se checkPresenzaGiorno == false
- 	 * 
- 	 * @param giorni
- 	 * @param giorno
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception se giorno è già presente in giorni
- 	 */
- 	public void aggiungiGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) throws IOException, Exception {
- 		if(checkPresenzaGiorno(giorni, giorno)) {
- 			throw new Exception();
- 		} else {
- 			giorni.add(giorno);
- 			piazza.setGiorni(ordinaListaGiorni(giorni));
- 			
- 			salvaPiazza();
- 		}		
- 	}
- 	
- 	/**
- 	 * Precondizione: giorni != null, giornoDaEliminare != null
- 	 * Postcondizione: giorni'.size() = giorni.size() - 1 se checkPresenzaGiorno == true 
- 	 * 
- 	 * @param giorni
- 	 * @param giornoDaEliminare
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception se giorno non è presente in giorni
- 	 */
- 	public void rimuoviGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giornoDaEliminare) throws IOException, Exception {
- 		if(checkPresenzaGiorno(giorni, giornoDaEliminare)) {
-			piazza.rimuoviGiorno(giornoDaEliminare);
-			piazza.setGiorni(ordinaListaGiorni(giorni));
-			
-			salvaPiazza();
-		} else {
- 			throw new Exception();
-		}
- 	}
- 	
- 	/**
- 	 * Precondizione: orari != null
- 	 * @param orari
- 	 * @return
- 	 */
- 	private IntervalloOrario estraiIntervalloMin(List<IntervalloOrario> orari) {
- 		IntervalloOrario intervalloMin = orari.get(0);
- 		
- 		for (IntervalloOrario intervallo : orari) {
-			if(intervallo.minIsBefore(intervalloMin.getOrarioMin())) intervalloMin = intervallo;
-		}
- 		
- 		return intervalloMin;
- 	}
- 	
- 	/**
- 	 * Precondizione: orari != null
- 	 * @param orari
- 	 * @return
- 	 */
- 	private List<IntervalloOrario> ordinaListaIntervalliOrari(List<IntervalloOrario> orari) {
- 		List<IntervalloOrario> ordinata = new ArrayList<IntervalloOrario>();
- 		
- 		do {
-	 		IntervalloOrario intervalloMin = estraiIntervalloMin(orari);
-	 		orari.remove(intervalloMin);
-	 		ordinata.add(intervalloMin);
- 		} while(orari.size() > 0);
- 		
- 		return ordinata;
- 	}
- 	
- 	/**
- 	 * Precondizione: orari != null, orarioDaAggiungere != null
- 	 * Postcondizione: orari'.size() = orari.size() + 1 se checkValiditaIntervallo == false
- 	 * 
- 	 * @param orari
- 	 * @param orarioDaAggiungere
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception se orarioDaAggiungere non è valido per essere inserito tra gli orari già presenti
- 	 */
- 	public void aggiungiIntervalloOrario(List<IntervalloOrario> orari, IntervalloOrario orarioDaAggiungere) throws IOException, Exception {
- 		if(checkValiditaIntervallo(orari, orarioDaAggiungere)) {
- 			orari.add(orarioDaAggiungere);
- 			if(orari.size() > 1)
- 				setIntervalli(ordinaListaIntervalliOrari(orari));
- 			salvaPiazza();
- 		} else {
- 			throw new Exception();
- 		}		
- 	}
- 	
- 	/**
- 	 * Precondizione: orari != null, orarioDaAggiungere != null
- 	 * Postcondizione: orari'.size() = orari.size() - 1 se intervalloTrovato != null
- 	 * 
- 	 * @param orari
- 	 * @param orarioMinDaEliminare
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception se l'intervallo da eliminare con orarioMinDaEliminare non è presente fra gli orari
- 	 */
- 	public void rimuoviIntervalloOrario(List<IntervalloOrario> orari, LocalTime orarioMinDaEliminare) throws IOException, Exception {
- 		IntervalloOrario intervalloTrovato = null;
- 		
- 		for (IntervalloOrario intervallo : orari) {
-			if(orarioMinDaEliminare.equals(intervallo.getOrarioMin())) {
-				intervalloTrovato = intervallo;
-				salvaPiazza();
-			}
-		}
- 		if(intervalloTrovato != null)
- 			piazza.rimuoviIntervallo(intervalloTrovato);
- 		else 
- 			throw new Exception();
- 	} 	
- 	
- 	/**
  	 * 
  	 * @return True se è soddisfatto il requisiti sulla quantità minima di Interavalli Orari nel caso venga svolto un'operazione di rimozione
  	 *		   False altrimenti         
@@ -280,136 +272,4 @@ public class GestioneParametri {
  	public boolean checkVincolIntervalliMinimi() {
  		return getIntervalli().size() > NUM_MINIMO_INTERVALLI;
  	}
- 	
- 	/**
- 	 * Precondizione: intervalliOrari != null, intervallo != null
- 	 * 
- 	 * @param intervalliOrari
- 	 * @param intervallo
- 	 * @return TRUE se intervallo è valido e può essere inserito in intervalliOrari, FALSE altrimenti
- 	 */
-	public boolean checkValiditaIntervallo(List<IntervalloOrario> intervalliOrari, IntervalloOrario intervallo) {
-		if(intervalliOrari.size() == 0) return true;
-		
-		for (IntervalloOrario intervalloOrario : intervalliOrari) {
-			if(intervalloOrario.parzialmenteInclude(intervallo) || 
-					intervallo.parzialmenteInclude(intervalloOrario))
-				return false;
-		}
-		
-		return true;
-	}
-	
-	/**
-	 * Precondizione: intervalliOrari != null, orario != null
-	 * 
-	 * @param intervalliOrari
-	 * @param orario
-	 * @return True se orario è compreso in uno degli intervalli in intervalliOrari
-	 */
-	public boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
-		if(intervalliOrari.size() == 0) return false;
-		
-		for (IntervalloOrario intervalloOrario : intervalliOrari) {
-			if(intervalloOrario.includeOrario(orario))
-				return true;
-		}
-		
-		return false;
-	}
-
-	/**
-	 * Prende il parametro di tipo String nel formato d/M/yyyy e restituisce il relativo LocalDate
-	 * @param userInput
-	 * @return
-	 */
-	public LocalDate dateInput(String userInput) throws DateTimeException {
-
-	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(FORMATO_GIORNO_D_M_YYYY);
-	    try {
-	    	LocalDate date = LocalDate.parse(userInput, dateFormat);
-	    	return date;
-	    } catch (Exception e) {
-			throw new DateTimeException(e.getMessage());
-		}
-	}
-	
-	/**
-	 * Precondizione: date != null
-	 * 
-	 * Prende il parametro LocalDate, e verifica che il relativo giorno della settimana sia fra quelli messi a 
-	 * dispozione della Piazza 
-	 * @param date
-	 * @return
-	 */
-	public boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date) {
-		String dateItalianoDayOfWeek = date.format(DateTimeFormatter.ofPattern("EEEE", Locale.ITALY));	
-
-		for (GiorniDellaSettimana giornoSettimana : getGiorni()) {
-			if(giornoSettimana.getNome().equalsIgnoreCase(dateItalianoDayOfWeek))
-				return true;
-		}
-	 
-		return false;
-	}
-	
-	public void salvaPiazza() throws IOException {
-		fs.salvaOggetto(pathParametri, this.piazza);
-	}
-	
-	public Piazza leggiPiazza(String path) throws IOException {
-		return (Piazza) fs.leggiOggetto(path, Piazza.class);
-	}
-
-	/**
-	 * Precondizione: listaLuoghi != null
-	 * 
-	 * @param listaLuoghi
-	 * @param luogoDaIndividuare
-	 * @return
-	 */
-	public boolean checkPresenzaLuogo(List<String> listaLuoghi, String luogoDaIndividuare) {
-		for (String luogo : listaLuoghi) {
-			if(luogo.equalsIgnoreCase(luogoDaIndividuare))
-				return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Precondizione: giorni != null
-	 * 
-	 * @param giorni
-	 * @param giorno
-	 * @return
-	 */
-	public boolean checkPresenzaGiorno(List<GiorniDellaSettimana> giorni, GiorniDellaSettimana giorno) {
-		return giorni.contains(giorno);
-	}
-	
-	/**
-	 * Precondizione: giorni != null
-	 * Postcondizione: giorni'.size() = giorni.size()
-	 * 
-	 * @param giorni
-	 * @return
-	 */
-	public List<GiorniDellaSettimana> ordinaListaGiorni(List<GiorniDellaSettimana> giorni) {
-		return GiorniDellaSettimana.ordinaLista(giorni); //ordinare la lista dei giorni presenti in piazza
-	}
-
-	/**
-	 * Precondizione: scadenza > 0
-	 * 
-	 * @param scadenza
-	 * @throws IOException 
-	 */
-	public void modificaScadenza(int scadenza) throws IOException {
-		piazza.setScadenza(scadenza);
-		salvaPiazza();
-	}
-	
-	public boolean isPiazzaCreata() {
-		return this.piazza.getCitta() != null;
-	}
 }
