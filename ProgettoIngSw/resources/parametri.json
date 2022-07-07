@@ -1,7 +1,16 @@
 {
-  "citta" : "milano",
-  "luoghi" : [ "nord" ],
-  "giorni" : [ "LUNEDI", "MARTEDI", "MERCOLEDI", "GIOVEDI", "VENERDI", "SABATO", "DOMENICA" ],
-  "intervalliOrari" : [ ],
-  "scadenza" : 1
+  "citta" : "bs",
+  "luoghi" : [ "s" ],
+  "giorni" : [ "LUNEDI", "MARTEDI", "MERCOLEDI" ],
+  "intervalliOrari" : [ {
+    "orarioMin" : [ 0, 0 ],
+    "orarioMax" : [ 0, 30 ]
+  }, {
+    "orarioMin" : [ 1, 30 ],
+    "orarioMax" : [ 2, 30 ]
+  }, {
+    "orarioMin" : [ 23, 0 ],
+    "orarioMax" : [ 23, 30 ]
+  } ],
+  "scadenza" : 22
 }

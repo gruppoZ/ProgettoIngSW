@@ -17,8 +17,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "decente"
@@ -48,8 +48,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "dd"
@@ -79,8 +79,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ottimo"
@@ -110,8 +110,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "ddss"
@@ -141,8 +141,8 @@
         "obbligatorio" : false
       } ],
       "profondita" : 1,
-      "radice" : false,
-      "valida" : true
+      "valida" : true,
+      "radice" : false
     },
     "valoreCampi" : {
       "Stato di conservazione" : "dds"
@@ -172,8 +172,8 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "radice" : true,
-      "valida" : true
+      "valida" : true,
+      "radice" : true
     },
     "valoreCampi" : {
       "Stato di conservazione" : "s"

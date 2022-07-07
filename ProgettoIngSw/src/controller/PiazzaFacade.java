@@ -78,8 +78,8 @@ public class PiazzaFacade {
  	}
  	
  	public void aggiungiGiorno(GiorniDellaSettimana giorno) throws IOException, Exception {
- 		this.piazza.aggiungiGiorno(giorno);
- 		ordinaListaGiorni(piazza.getGiorni());	
+ 		piazza.aggiungiGiorno(giorno);
+ 		piazza.setGiorni(ordinaListaGiorni(piazza.getGiorni()));	
  	}
  	
  	public void rimuoviGiorno(GiorniDellaSettimana giornoDaEliminare) throws Exception {
@@ -89,7 +89,7 @@ public class PiazzaFacade {
  	
  	public void aggiungiIntervalloOrario(IntervalloOrario orarioDaAggiungere) throws Exception {
  		piazza.aggiungiIntervalloOrario(orarioDaAggiungere);
- 		ordinaListaIntervalliOrari(piazza.getIntervalliOrari());
+ 		piazza.setIntervalliOrari(ordinaListaIntervalliOrari(piazza.getIntervalliOrari()));
  	}
  	
  	public void rimuoviIntervalloOrario(LocalTime orarioMinDaEliminare) throws Exception {
