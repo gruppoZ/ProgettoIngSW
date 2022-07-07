@@ -1,1 +1,73 @@
-[ ]
+[ {
+  "offertaFruitorePromotore" : {
+    "id" : "5e2d3c76-576e-4592-a143-3bac96d1a26d",
+    "articolo" : {
+      "foglia" : {
+        "nome" : "root1",
+        "descrizione" : "as",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "s",
+          "obbligatorio" : false
+        } ],
+        "campiEreditati" : [ ],
+        "profondita" : 0,
+        "radice" : true,
+        "valida" : true
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "ok"
+      }
+    },
+    "username" : "f1",
+    "statoOfferta" : {
+      "type" : "OffertaAperta"
+    },
+    "autore" : false
+  },
+  "offertaFruitoreRichiesta" : {
+    "id" : "225cd971-3032-42e5-bb5e-e7b89b090cc8",
+    "articolo" : {
+      "foglia" : {
+        "nome" : "root1",
+        "descrizione" : "as",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "s",
+          "obbligatorio" : false
+        } ],
+        "campiEreditati" : [ ],
+        "profondita" : 0,
+        "radice" : true,
+        "valida" : true
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "b"
+      }
+    },
+    "username" : "f",
+    "statoOfferta" : {
+      "type" : "OffertaAperta"
+    },
+    "autore" : false
+  },
+  "scadenza" : [ 2022, 7, 29 ],
+  "appuntamento" : {
+    "luogo" : null,
+    "data" : null,
+    "ora" : null,
+    "username" : null
+  }
+} ]

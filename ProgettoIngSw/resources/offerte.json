@@ -1,160 +1,5 @@
 [ {
-  "id" : "02c081f3-5786-4564-a521-ff1e4b1921c2",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "f-r1",
-      "descrizione" : "figlio1 r1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "originale",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "decente"
-    }
-  },
-  "username" : "f1",
-  "statoOfferta" : {
-    "type" : "OffertaAperta"
-  },
-  "autore" : false
-}, {
-  "id" : "d9b47ba0-f838-4235-b251-ff9c8e979760",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "f-r1",
-      "descrizione" : "figlio1 r1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "originale",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "dd"
-    }
-  },
-  "username" : "f1",
-  "statoOfferta" : {
-    "type" : "OffertaRitirata"
-  },
-  "autore" : false
-}, {
-  "id" : "073f211f-8f64-4590-aa0e-a3c8f8002d12",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "f-r1",
-      "descrizione" : "figlio1 r1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "originale",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "ottimo"
-    }
-  },
-  "username" : "f2",
-  "statoOfferta" : {
-    "type" : "OffertaAperta"
-  },
-  "autore" : true
-}, {
-  "id" : "73e42e4e-ad3d-4093-819e-74cc2d9168cf",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "f-r1",
-      "descrizione" : "figlio1 r1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "originale",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "ddss"
-    }
-  },
-  "username" : "f2",
-  "statoOfferta" : {
-    "type" : "OffertaAperta"
-  },
-  "autore" : false
-}, {
-  "id" : "892fe466-1581-41d1-8125-d0757b6454f3",
-  "articolo" : {
-    "foglia" : {
-      "nome" : "f-r1",
-      "descrizione" : "figlio1 r1",
-      "sottoCategorie" : [ ],
-      "campiNativi" : [ {
-        "descrizione" : "originale",
-        "obbligatorio" : false
-      } ],
-      "campiEreditati" : [ {
-        "descrizione" : "Stato di conservazione",
-        "obbligatorio" : true
-      }, {
-        "descrizione" : "Descrizione libera",
-        "obbligatorio" : false
-      } ],
-      "profondita" : 1,
-      "valida" : true,
-      "radice" : false
-    },
-    "valoreCampi" : {
-      "Stato di conservazione" : "dds"
-    }
-  },
-  "username" : "f1",
-  "statoOfferta" : {
-    "type" : "OffertaAperta"
-  },
-  "autore" : false
-}, {
-  "id" : "9fe50b85-2854-4ae5-89cc-9d8b1a7f8bcd",
+  "id" : "225cd971-3032-42e5-bb5e-e7b89b090cc8",
   "articolo" : {
     "foglia" : {
       "nome" : "root1",
@@ -172,16 +17,47 @@
       } ],
       "campiEreditati" : [ ],
       "profondita" : 0,
-      "valida" : true,
-      "radice" : true
+      "radice" : true,
+      "valida" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "s"
+      "Stato di conservazione" : "b"
     }
   },
   "username" : "f",
   "statoOfferta" : {
-    "type" : "OffertaAperta"
+    "type" : "OffertaSelezionata"
   },
   "autore" : false
+}, {
+  "id" : "5e2d3c76-576e-4592-a143-3bac96d1a26d",
+  "articolo" : {
+    "foglia" : {
+      "nome" : "root1",
+      "descrizione" : "as",
+      "sottoCategorie" : [ ],
+      "campiNativi" : [ {
+        "descrizione" : "Stato di conservazione",
+        "obbligatorio" : true
+      }, {
+        "descrizione" : "Descrizione libera",
+        "obbligatorio" : false
+      }, {
+        "descrizione" : "s",
+        "obbligatorio" : false
+      } ],
+      "campiEreditati" : [ ],
+      "profondita" : 0,
+      "radice" : true,
+      "valida" : true
+    },
+    "valoreCampi" : {
+      "Stato di conservazione" : "ok"
+    }
+  },
+  "username" : "f1",
+  "statoOfferta" : {
+    "type" : "OffertaAccoppiata"
+  },
+  "autore" : true
 } ]

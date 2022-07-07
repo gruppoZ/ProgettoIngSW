@@ -34,7 +34,7 @@ class testParametri {
 	}
 	
 	@Test
-	void canAddIntervvalloOrarioInListIntervalli() {
+	void canAddIntervalloOrarioInListIntervalli() {
 		Piazza piazza = new Piazza();
 		List<IntervalloOrario> intervalli = new ArrayList<>();
 		
@@ -88,13 +88,11 @@ class testParametri {
 		IntervalloOrario intervalloSbagliato8 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 31));
 		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato7));
 		assertFalse(piazza.checkValiditaIntervallo(intervalloSbagliato8));
-
 	}
 	
 	@Test
 	void checkSizeWhenAddIntervallo() throws Exception {
 		Piazza piazza = new Piazza();
-		List<IntervalloOrario> intervalli = new ArrayList<>();
 		
 		IntervalloOrario intervallo1 = new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 30));
 

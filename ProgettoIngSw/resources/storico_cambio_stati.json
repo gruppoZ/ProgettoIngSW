@@ -1,31 +1,13 @@
 {
-  "073f211f-8f64-4590-aa0e-a3c8f8002d12" : [ {
+  "5e2d3c76-576e-4592-a143-3bac96d1a26d" : [ {
     "oldState" : "OffertaAperta",
     "newState" : "OffertaAccoppiata"
-  }, {
-    "oldState" : "OffertaAccoppiata",
-    "newState" : "OffertaAperta"
   } ],
-  "02c081f3-5786-4564-a521-ff1e4b1921c2" : [ {
+  "225cd971-3032-42e5-bb5e-e7b89b090cc8" : [ {
     "oldState" : "OffertaAperta",
     "newState" : "OffertaSelezionata"
-  }, {
-    "oldState" : "OffertaSelezionata",
-    "newState" : "OffertaAperta"
   } ],
   "1" : [ {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaAccoppiata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaAccoppiata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaAccoppiata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaAccoppiata"
-  }, {
     "oldState" : "OffertaAperta",
     "newState" : "OffertaAccoppiata"
   }, {
@@ -38,21 +20,5 @@
   }, {
     "oldState" : "OffertaAperta",
     "newState" : "OffertaSelezionata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaSelezionata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaSelezionata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaSelezionata"
-  }, {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaSelezionata"
-  } ],
-  "d9b47ba0-f838-4235-b251-ff9c8e979760" : [ {
-    "oldState" : "OffertaAperta",
-    "newState" : "OffertaRitirata"
   } ]
 }
