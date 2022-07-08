@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,27 +41,11 @@ public class GestioneArticolo {
 	}	
 	
 	public List<CampoCategoria> getListaCampiObbligatori(){
-		List<CampoCategoria> campiObbligatori = new ArrayList<>();
-		
-		for (CampoCategoria campo : getListaCampi()) {
-			if(campo.isObbligatorio()) {
-				campiObbligatori.add(campo);
-			}
-		}
-		
-		return campiObbligatori;
+		return this.articolo.getFoglia().getCampiObbligatori();
 	}
 	
 	public List<CampoCategoria> getListaCampiFacoltativi(){
-		List<CampoCategoria> campiFacoltativi = new ArrayList<>();
-		
-		for (CampoCategoria campo : getListaCampi()) {
-			if(!campo.isObbligatorio()) {
-				campiFacoltativi.add(campo);
-			}
-		}
-		
-		return campiFacoltativi;
+		return this.articolo.getFoglia().getCampiFacoltativi();
 	}
 	
 	/**

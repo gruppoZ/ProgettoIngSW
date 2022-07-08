@@ -131,6 +131,32 @@ public class Categoria {
 		}
 	}
 		
+	@JsonIgnore
+	public List<CampoCategoria> getCampiObbligatori() {
+		List<CampoCategoria> campiObbligatori = new ArrayList<>();
+		
+		for (CampoCategoria campo : this.getCampiNativiEreditati()) {
+			if(campo.isObbligatorio()) {
+				campiObbligatori.add(campo);
+			}
+		}
+		
+		return campiObbligatori;
+	}
+	
+	@JsonIgnore
+	public List<CampoCategoria> getCampiFacoltativi() {
+		List<CampoCategoria> campiFacoltativi = new ArrayList<>();
+		
+		for (CampoCategoria campo : this.getCampiNativiEreditati()) {
+			if(!campo.isObbligatorio()) {
+				campiFacoltativi.add(campo);
+			}
+		}
+		
+		return campiFacoltativi;
+	}
+	
 	public int numeriDiSottocategorie() {
 		return this.sottoCategorie.size();
 	}
