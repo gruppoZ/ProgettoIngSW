@@ -17,6 +17,8 @@ public class GestioneParametri {
 	private static final int NUM_MASSIMO_GIORNI = 7;
 	private static final int NUM_MINIMO_INTERVALLI = 1;
 	private static final int NUM_MINIMO_LUOGHI = 1;
+	public static final int MINUTI_MIN = 0;
+	public static final int MINUTI_MAX = 30;
 	
 	private String pathParametri;	
 	private FileSystemOperations fs;

@@ -222,14 +222,15 @@ public class ViewParametroIntervalloOrario extends ViewParametri {
 	private int scegliMinuti(int ora) {
 		int minuti = 0;
 		System.out.printf(GIVE_ALTERNATIVE_ORARIO, ora, ora);
-		int scelta = InputDati.leggiIntero("(0) " + ora + ":00\n(1) " + ora + ":30" + ASK_OPERAZIONE_DESIDERATA, 0, 1);
+
+		int scelta = InputDati.leggiIntero("(0) " + ora + ":"+ String.format("%02d", GestioneParametri.MINUTI_MIN) +"\n(1) " + ora + ":"+ String.format("%02d", GestioneParametri.MINUTI_MAX) + ASK_OPERAZIONE_DESIDERATA, 0, 1);
 		
 		switch (scelta) {
 		case 0:
-			minuti = 0;
+			minuti = GestioneParametri.MINUTI_MIN;
 			break;
 		case 1:
-			minuti = 30;
+			minuti = GestioneParametri.MINUTI_MAX;
 			break;
 		default:
 			break;
