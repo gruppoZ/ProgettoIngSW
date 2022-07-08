@@ -33,6 +33,7 @@ public class OffertaAccoppiata extends StatoOfferta {
 		offerta.setStatoOfferta(new OffertaAperta());
 		
 		gestisciCambiamentoStatoOfferta(offerta, oldState);
+		offerta.setAutore(false);
 	}
 	
 	@Override

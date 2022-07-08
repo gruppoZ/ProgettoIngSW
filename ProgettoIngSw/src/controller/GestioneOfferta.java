@@ -60,6 +60,7 @@ public class GestioneOfferta {
 	 */
 	public void barattoCreato(Offerta offertaA, Offerta offertaB) throws IOException {	
 		offertaA.setAutore(true);
+		offertaB.setAutore(false);
 		
 		offertaA.accoppiaOfferta();
 		offertaB.accoppiaOfferta();
