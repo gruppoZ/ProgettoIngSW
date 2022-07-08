@@ -71,13 +71,5 @@ class testCategoria {
 		assertTrue(Categoria.checkUnicitaCampo(listaCampi, "Prova"));
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

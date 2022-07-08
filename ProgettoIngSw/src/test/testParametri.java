@@ -18,20 +18,6 @@ import java.util.List;
 class testParametri {
 
 	private static final String INVALIDE_DATE = "300/10/2021";
-
-	@Test
-	void canAddAndRemovePlacesFromPiazzaAlreadyCreated() throws IOException, Exception {
-		GestioneParametri gestroreParametri = new GestioneParametri();
-		Piazza piazza = gestroreParametri.getPiazza();
-		
-		int numLuoghiPreModifiche = piazza.getLuoghi().size();
-		
-		gestroreParametri.aggiungiLuogo("Test");
-		assertEquals(numLuoghiPreModifiche, gestroreParametri.getLuoghi().size()-1);
-		
-		gestroreParametri.rimuoviLuogo("Test");
-		assertEquals(numLuoghiPreModifiche, gestroreParametri.getLuoghi().size());
-	}
 	
 	@Test
 	void canAddIntervalloOrarioInListIntervalli() {
@@ -51,7 +37,6 @@ class testParametri {
 		assertTrue(piazza.checkValiditaIntervallo(intervalloValido));
 	}
 	
-	//forse da eliminare
 	@Test
 	void checkIncorrectHour() {
 		assertDoesNotThrow(() -> {new IntervalloOrario(LocalTime.of(00, 00), LocalTime.of(00, 30));});
@@ -100,8 +85,6 @@ class testParametri {
 		piazza.aggiungiIntervalloOrario(intervallo1);
 		assertTrue(piazza.getIntervalliOrari().size() == initialListaSize + 1);
 	}
-	
-	
 	
 	@Test
 	void canNotConvertFromStringToLocalDate() throws IOException {

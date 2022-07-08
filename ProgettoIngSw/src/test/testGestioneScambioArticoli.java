@@ -19,6 +19,7 @@ import application.baratto.Articolo;
 import application.baratto.Offerta;
 import controller.GestioneBaratto;
 import controller.GestioneOfferta;
+import controller.GestioneParametri;
 
 class testGestioneScambioArticoli {
 
@@ -52,13 +53,5 @@ class testGestioneScambioArticoli {
 		assertTrue(gestoreOfferte.isOffertaSelezionata(offertaB));
 		assertFalse(gestoreOfferte.isOffertaAperta(offertaA));
 		assertFalse(gestoreOfferte.isOffertaAperta(offertaB));
-	}
-	
-	@Test
-	void dataScadenzaCalcolataCorrettamente() throws FileNotFoundException, IOException {
-		GestioneBaratto gestoreBaratti = new GestioneBaratto();
-		LocalDate dataScadenzaCalcolata = gestoreBaratti.calcolaDataScadenza(5);
-		LocalDate dataScadenza = LocalDate.now().plusDays(5);
-		assertTrue(dataScadenza.compareTo(dataScadenzaCalcolata) == 0);
 	}
 }

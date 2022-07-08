@@ -22,9 +22,8 @@ class testGerarchia {
 		listaCampi.add(campo);
 		Categoria root = new Categoria("root", "sono root", true, listaCampi, null);
 		
-		assertThrows(NullPointerException.class, () -> configuratore.getGerarchiaInLavorazione());
 		configuratore.creaRoot(root);
-		assertTrue(configuratore.getGerarchiaInLavorazione() != null);
+		assertDoesNotThrow(() -> configuratore.getGerarchiaInLavorazione());
 	}
 	
 	@Test

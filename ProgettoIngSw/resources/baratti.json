@@ -18,8 +18,8 @@
         } ],
         "campiEreditati" : [ ],
         "profondita" : 0,
-        "valida" : true,
-        "radice" : true
+        "radice" : true,
+        "valida" : true
       },
       "valoreCampi" : {
         "Stato di conservazione" : "qwerty",
@@ -51,8 +51,8 @@
         } ],
         "campiEreditati" : [ ],
         "profondita" : 0,
-        "valida" : true,
-        "radice" : true
+        "radice" : true,
+        "valida" : true
       },
       "valoreCampi" : {
         "Stato di conservazione" : "er"
