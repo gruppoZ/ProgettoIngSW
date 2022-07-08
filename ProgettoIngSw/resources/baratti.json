@@ -1,6 +1,6 @@
 [ {
   "offertaFruitorePromotore" : {
-    "id" : "65f38ef5-d8bb-405d-9bc0-653fd2ad7d32",
+    "id" : "43115a6e-5c7c-407c-8214-c147236c1c53",
     "articolo" : {
       "foglia" : {
         "nome" : "root1",
@@ -22,46 +22,47 @@
         "radice" : true
       },
       "valoreCampi" : {
-        "Stato di conservazione" : "d"
-      }
-    },
-    "username" : "f",
-    "statoOfferta" : {
-      "type" : "OffertaAperta"
-    },
-    "autore" : false
-  },
-  "offertaFruitoreRichiesta" : {
-    "id" : "50823167-e597-4e6a-8087-5de3e53ea1c7",
-    "articolo" : {
-      "foglia" : {
-        "nome" : "root1",
-        "descrizione" : "as",
-        "sottoCategorie" : [ ],
-        "campiNativi" : [ {
-          "descrizione" : "Stato di conservazione",
-          "obbligatorio" : true
-        }, {
-          "descrizione" : "Descrizione libera",
-          "obbligatorio" : false
-        }, {
-          "descrizione" : "s",
-          "obbligatorio" : false
-        } ],
-        "campiEreditati" : [ ],
-        "profondita" : 0,
-        "valida" : true,
-        "radice" : true
-      },
-      "valoreCampi" : {
-        "Stato di conservazione" : "d"
+        "Stato di conservazione" : "qwerty",
+        "Descrizione libera" : "sd"
       }
     },
     "username" : "f1",
     "statoOfferta" : {
-      "type" : "OffertaAperta"
+      "type" : "OffertaAccoppiata"
     },
     "autore" : true
+  },
+  "offertaFruitoreRichiesta" : {
+    "id" : "e932997f-21c3-41cf-b5b4-d009e432475c",
+    "articolo" : {
+      "foglia" : {
+        "nome" : "root1",
+        "descrizione" : "as",
+        "sottoCategorie" : [ ],
+        "campiNativi" : [ {
+          "descrizione" : "Stato di conservazione",
+          "obbligatorio" : true
+        }, {
+          "descrizione" : "Descrizione libera",
+          "obbligatorio" : false
+        }, {
+          "descrizione" : "s",
+          "obbligatorio" : false
+        } ],
+        "campiEreditati" : [ ],
+        "profondita" : 0,
+        "valida" : true,
+        "radice" : true
+      },
+      "valoreCampi" : {
+        "Stato di conservazione" : "er"
+      }
+    },
+    "username" : "f",
+    "statoOfferta" : {
+      "type" : "OffertaSelezionata"
+    },
+    "autore" : false
   },
   "scadenza" : [ 2022, 7, 18 ],
   "appuntamento" : {

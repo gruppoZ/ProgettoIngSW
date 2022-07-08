@@ -46,7 +46,7 @@ class testGestioneScambioArticoli {
 		Offerta offertaB = new Offerta("2", articolo, "username2", false);
 		
 		GestioneOfferta gestoreOfferte = new GestioneOfferta();
-		gestoreOfferte.barattoCreato(offertaA, offertaB); //suppongo di aver creato un baratto
+		gestoreOfferte.initCreazioneBaratto(offertaA, offertaB); //suppongo di aver creato un baratto
 		
 		assertTrue(gestoreOfferte.isOffertaAccoppiata(offertaA));
 		assertTrue(gestoreOfferte.isOffertaSelezionata(offertaB));

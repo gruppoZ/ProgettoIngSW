@@ -58,9 +58,8 @@ public class GestioneOfferta {
 	 * @param offertaB
 	 * @throws IOException 
 	 */
-	public void barattoCreato(Offerta offertaA, Offerta offertaB) throws IOException {	
+	public void initCreazioneBaratto(Offerta offertaA, Offerta offertaB) throws IOException {	
 		offertaA.setAutore(true);
-		offertaB.setAutore(false);
 		
 		offertaA.accoppiaOfferta();
 		offertaB.accoppiaOfferta();

@@ -143,9 +143,8 @@ public class ViewBaratto {
 			
 			offertaB = viewOfferta.getOffertaById(gestoreOfferte.getOfferteAperteByCategoriaNonDiPoprietaDiUsername(offertaA.getArticolo().getFoglia(), offertaA.getUsername()));
 
+			gestoreOfferte.initCreazioneBaratto(offertaA, offertaB);
 			gestoreBaratto.creaBaratto(offertaA, offertaB, gestorePiazza.getScadenza());
-			
-			gestoreOfferte.barattoCreato(offertaA, offertaB);
 			
 			showBaratto(gestoreBaratto.getBaratto());
 		} catch (Exception e) {
@@ -208,7 +207,7 @@ public class ViewBaratto {
 				
 				String idOfferta2;
 				
-				if(baratto.getOffertaFruitorePromotore().getId() != offertaInScambioFruitoreCorrente.getId()) 
+				if(!baratto.getOffertaFruitorePromotore().equals(offertaInScambioFruitoreCorrente)) 
 					idOfferta2 = baratto.getOffertaFruitorePromotore().getId();	
 				else
 					idOfferta2 = baratto.getOffertaFruitoreRichiesta().getId();	

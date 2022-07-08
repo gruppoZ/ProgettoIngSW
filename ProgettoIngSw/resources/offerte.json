@@ -1,5 +1,5 @@
 [ {
-  "id" : "65f38ef5-d8bb-405d-9bc0-653fd2ad7d32",
+  "id" : "e932997f-21c3-41cf-b5b4-d009e432475c",
   "articolo" : {
     "foglia" : {
       "nome" : "root1",
@@ -21,16 +21,16 @@
       "radice" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "d"
+      "Stato di conservazione" : "er"
     }
   },
   "username" : "f",
   "statoOfferta" : {
-    "type" : "OffertaAccoppiata"
+    "type" : "OffertaSelezionata"
   },
-  "autore" : true
+  "autore" : false
 }, {
-  "id" : "50823167-e597-4e6a-8087-5de3e53ea1c7",
+  "id" : "43115a6e-5c7c-407c-8214-c147236c1c53",
   "articolo" : {
     "foglia" : {
       "nome" : "root1",
@@ -52,7 +52,8 @@
       "radice" : true
     },
     "valoreCampi" : {
-      "Stato di conservazione" : "d"
+      "Stato di conservazione" : "qwerty",
+      "Descrizione libera" : "sd"
     }
   },
   "username" : "f1",
