@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,7 +56,7 @@ public class PiazzaUtils {
 	 * @param giorni
 	 * @return
 	 */
-	public static boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date, List<GiorniDellaSettimana> giorni) {
+	public static boolean checkValiditaGiornoSettimanaPiazzaFromLocalDate(LocalDate date, Iterable<GiorniDellaSettimana> giorni) {
 		String dateItalianoDayOfWeek = date.format(DateTimeFormatter.ofPattern("EEEE", Locale.ITALY));	
 
 		for (GiorniDellaSettimana giornoSettimana : giorni) {
@@ -89,7 +90,7 @@ public class PiazzaUtils {
 	 * @param orario
 	 * @return True se orario è compreso in uno degli intervalli in intervalliOrari
 	 */
-	public static boolean checkValiditaOrario(List<IntervalloOrario> intervalliOrari, LocalTime orario) {
+	public static boolean checkValiditaOrario(Collection<IntervalloOrario> intervalliOrari, LocalTime orario) {
 		if(intervalliOrari.size() == 0) return false;
 		
 		for (IntervalloOrario intervalloOrario : intervalliOrari) {
