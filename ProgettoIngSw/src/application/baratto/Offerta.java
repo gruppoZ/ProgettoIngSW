@@ -14,14 +14,13 @@ public class Offerta {
 	}
 	
 	/**
-	 * Precondizione: id >= 1, articolo != null
-	 * Postcondizione: this.id >= 1, this.articolo != null
+	 * Precondizione: articolo != null
+	 * Postcondizione: this.articolo != null
 	 * 
 	 * @param id
 	 * @param articolo
 	 * @param username
 	 * @param autore
-	 * @param tipoOfferta
 	 */
 	public Offerta(String id, Articolo articolo, String username, boolean autore) {
 		this.id = id;
@@ -32,13 +31,12 @@ public class Offerta {
 	}
 	
 	/**
-	 * Precondizione: id >= 1, articolo != null
-	 * Postcondizione: this.id >= 1, this.articolo != null
+	 * Precondizione: articolo != null
+	 * Postcondizione: this.articolo != null
 	 * 
 	 * @param id
 	 * @param articolo
 	 * @param username
-	 * @param tipoOfferta
 	 */
 	public Offerta(String id, Articolo articolo, String username) {
 		this.id = id;

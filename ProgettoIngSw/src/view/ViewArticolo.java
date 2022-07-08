@@ -26,14 +26,7 @@ public class ViewArticolo {
 	
 	public ViewArticolo() {
 	}
-	
-	/**
-	 * Precondizione: gestoreFruitore != null, gestoreOfferte != null
-	 * Postcondizione: this.gestoreFruitore != null, this.gestoreOfferte != null, gestoreArticolo != null
-	 * 
-	 * @param gestoreFruitore
-	 * @param gestoreOfferte
-	 */
+
 	public ViewArticolo(String username, GestioneOfferta gestoreOfferte) {
 		this.username = username;
 		this.gestoreOfferte = gestoreOfferte;

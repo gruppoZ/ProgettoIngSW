@@ -130,7 +130,6 @@ public class GestioneOfferta {
 	/**
 	 * Precondizione: listaOfferte != null
 	 * 
-	 * @param gestoreBaratto
 	 * @param listaOfferte
 	 * @return
 	 * @throws IOException 
@@ -144,7 +143,6 @@ public class GestioneOfferta {
 	/**
 	 * Precondizione: listaOfferte != null
 	 * 
-	 * @param gestoreBaratto
 	 * @param listaOfferte
 	 * @throws IOException 
 	 */

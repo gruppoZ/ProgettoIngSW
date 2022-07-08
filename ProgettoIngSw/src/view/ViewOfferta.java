@@ -86,7 +86,7 @@ public class ViewOfferta {
 		
 	}
 	
-	private void showOfferte(List<Offerta> listaOfferte) throws Exception{
+	private void showOfferte(List<Offerta> listaOfferte) throws Exception {
 		if(listaOfferte.size() > 0) {
 			for (Offerta offerta : listaOfferte) {
 				showOfferta(offerta);
@@ -159,7 +159,7 @@ public class ViewOfferta {
 	/**
 	 * Un fruitore può vedere tutte le sue offerte
 	 */
-	public void showOfferteByName() { 		
+	public void showAllOfferteByName() { 		
 		ArrayList<Offerta> listaOfferteByUtente = (ArrayList<Offerta>) gestoreOfferte.getOfferteByUtente(username);
 			
 		showOfferteByName(listaOfferteByUtente);

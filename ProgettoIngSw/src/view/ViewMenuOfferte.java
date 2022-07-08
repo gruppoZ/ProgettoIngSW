@@ -88,7 +88,7 @@ public class ViewMenuOfferte {
 				break;
 			case 4:
 				viewOfferta = new ViewOfferta(username, gestoreOfferte);
-				viewOfferta.showOfferteByName();			
+				viewOfferta.showAllOfferteByName();			
 				break;
 			case 5:
 				viewBaratto = new ViewBaratto(gestoreOfferte, username);	

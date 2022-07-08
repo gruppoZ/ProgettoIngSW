@@ -106,30 +106,11 @@ public class GestioneParametri {
  		salvaPiazza();	
  	}
 
- 	/**
- 	 * Precondizione: luogo != null
- 	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() + 1 se checkPresenzaLuogo == false
- 	 * 
- 	 * Aggiunge luogo alla lista se non e' gia' presente inoltre salva su Json
- 	 * Se luogo e' gia' presente throw new RuntimeException()
- 	 * @param listaLuoghi
- 	 * @param luogo
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception nel caso in cui il luogo sia già presente in listaLuoghi
- 	 */
  	public void aggiungiLuogo(String luogo) throws Exception, IOException {
  		piazzaFacade.aggiungiLuogo(luogo);
  		salvaPiazza();	
  	}
- 	
- 	/**
- 	 * Precondizione: listaLuoghi != null
- 	 * Postcondizione: listaLuoghi'.size() = listaLuoghi.size() - 1 se checkPresenzaLuogo == true
- 	 * @param listaLuoghi
- 	 * @param luogoDaEliminare
- 	 * @throws IOException se la scrittura su file fallisce
- 	 * @throws Exception se luogoDaEliminare non fa parte dei listaLuoghi
- 	 */
+
  	public void rimuoviLuogo(String luogoDaEliminare) throws IOException, Exception {
  		piazzaFacade.rimuoviLuogo(luogoDaEliminare);
  		salvaPiazza();

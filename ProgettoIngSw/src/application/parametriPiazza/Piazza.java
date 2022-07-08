@@ -104,7 +104,7 @@ public class Piazza {
  	 * Postcondizione: luoghi'.size() = luoghi.size() + 1 se checkPresenzaLuogo == false
  	 * 
  	 * Aggiunge luogo alla lista dei luoghi della piazza se non e' gia' presente
- 	 * @param luogo
+ 	 * @param luogoDaAggiungere
  	 * @throws Exception nel caso in cui il luogo sia già presente in listaLuoghi della piazza
  	 */
  	public void aggiungiLuogo(String luogoDaAggiungere) throws Exception {
@@ -184,7 +184,6 @@ public class Piazza {
 	/**
 	 * Precondizione: luogoDaIndividuare != null
 	 * 
-	 * @param listaLuoghi
 	 * @param luogoDaRimuovere
 	 * @return
 	 */
@@ -199,7 +198,6 @@ public class Piazza {
 	/**
 	 * Precondizione: giorni != null
 	 * 
-	 * @param giorni
 	 * @param giorno
 	 * @return
 	 */
@@ -210,7 +208,6 @@ public class Piazza {
 	/**
  	 * Precondizione: intervalliOrari != null, intervallo != null
  	 * 
- 	 * @param intervalliOrari
  	 * @param intervallo
  	 * @return TRUE se intervallo è valido e può essere inserito in intervalliOrari, FALSE altrimenti
  	 */

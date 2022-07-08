@@ -9,6 +9,9 @@
     "orarioMin" : [ 1, 30 ],
     "orarioMax" : [ 2, 30 ]
   }, {
+    "orarioMin" : [ 5, 30 ],
+    "orarioMax" : [ 6, 30 ]
+  }, {
     "orarioMin" : [ 23, 0 ],
     "orarioMax" : [ 23, 30 ]
   } ],
